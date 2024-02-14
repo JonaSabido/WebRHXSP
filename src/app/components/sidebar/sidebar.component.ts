@@ -46,6 +46,12 @@ export class SidebarComponent {
         },
         {
           icon: 'home',
+          title: 'Números de emergencia',
+          path: '',
+          isActive: false
+        },
+        {
+          icon: 'home',
           title: 'Contratos',
           path: '',
           isActive: false
@@ -59,12 +65,6 @@ export class SidebarComponent {
         {
           icon: 'home',
           title: 'Capacitaciones',
-          path: '',
-          isActive: false
-        },
-        {
-          icon: 'home',
-          title: 'Registros',
           path: '',
           isActive: false
         },
