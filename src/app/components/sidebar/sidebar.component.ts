@@ -123,7 +123,7 @@ export class SidebarComponent {
           isActive: false
         },
         {
-          icon: 'chart-bar',
+          icon: 'dollar',
           title: 'Pagos',
           path: '',
           isActive: false
