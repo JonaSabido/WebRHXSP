@@ -1,0 +1,194 @@
+<p-steps [model]="stepItems" [readonly]="false" [activeIndex]="activeIndex"
+    (activeIndexChange)="onActiveIndexChange($event)" styleClass="clickeable"></p-steps>
+
+@if(activeIndex == 0){
+<form class="my-5 p-3">
+    <span class="roboto-bold fs-medium text-secondary">Datos personales</span>
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Nombre</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Apellido Paterno</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Apellido Materno</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Fecha de nacimiento</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Genero</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">¿Tiene hijos?</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Talla de camisa</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Talla de pantalón</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Talla de zapatos</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+        </div>
+    </div>
+</form>
+}
+@else if(activeIndex == 1){
+<form class="my-5 p-3">
+    <span class="roboto-bold fs-medium text-secondary">Datos de contacto y fiscales</span>
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Teléfono</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Email</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Domicilio</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Código Postal</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">RFC</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">CURP</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">NSS</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">¿Dado de alta en SSP?</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+        </div>
+    </div>
+</form>
+}
+@else if(activeIndex == 2){
+<form class="my-5 p-3">
+    <span class="roboto-bold fs-medium text-secondary">Datos de empresa</span>
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Código</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Departamento</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Trabajo</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <label for="user" class="robotobold fs-small">Fecha de ingreso</label>
+                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+            </div>
+            <div class="col-12 col-lg-12 mt-3">
+                <label for="user" class="robotobold fs-small">Imagen QR</label>
+                <p-fileUpload mode="advanced" chooseLabel="Choose" name="demo[]" accept="image/*"
+                    [maxFileSize]="1000000" chooseIcon="pi pi-upload" styleClass="custom-file-upload"
+                    [showUploadButton]="false"></p-fileUpload>
+            </div>
+        </div>
+    </div>
+</form>
+}
+@else if(activeIndex == 3){
+<form class="my-5 p-3">
+    <span class="roboto-bold fs-medium text-secondary">Archivos</span>
+    <div class="container-fluid p-0 mb-5">
+        <div class="row">
+            <div class="col-12 col-lg-4 mt-3">
+                <p-splitButton label="Acta de nacimiento" [model]="menuItems"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <p-splitButton label="Identificación Oficial" [model]="menuItems"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <p-splitButton label="CURP" [model]="menuItems"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <p-splitButton label="NSS" [model]="menuItems"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <p-splitButton label="Comprobante domiciliario" [model]="menuItems"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <p-splitButton label="Comprobante de estudios" [model]="menuItems"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <p-splitButton label="Comprobante fiscal" [model]="menuItems"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <p-splitButton label="Cartilla militar" [model]="menuItems"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <p-splitButton label="Antecedentes penales" [model]="menuItems"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <p-splitButton label="Certificado médico" [model]="menuItems"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+            </div>
+            <div class="col-12 col-lg-4 mt-3 mb-3">
+                <p-splitButton label="Seguro de vida" [model]="menuItems"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+            </div>
+        </div>
+    </div>
+</form>
+}
+
+<div class="d-flex justify-content-end">
+    <div class="footer-dialog">
+        <p-button icon="pi pi-times" label="Cancelar" [text]="true" severity="secondary"
+            (click)="closeDialog()"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" [text]="true"></p-button>
+        <!-- <p-button icon="pi pi-times" label="Cancelar" severity="secondary" size="small" (click)="closeDialog()"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" size="small" styleClass="ms-2"></p-button> -->
+    </div>
+</div>

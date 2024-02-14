@@ -29,9 +29,18 @@ th {
     font-family: RobotoBold
 }
 
+ul, li{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 td {
     font-family: Roboto;
     border-bottom: 1px #e7e7e7 solid !important;
+}
+
+*{
+    text-decoration: none !important;
 }
 
 @layer reset, primeng;
@@ -45,6 +54,11 @@ td {
 .fs-small {
     font-size: .9em;
 }
+
+.fs-medium {
+    font-size: 1.1em;
+}
+
 
 .bg-primary-color {
     background-color: var(--primary-color);
@@ -72,4 +86,14 @@ td {
 
 .clickeable {
     cursor: pointer;
+}
+
+.footer-dialog {
+    padding: 10px 0px 10px 0px;
+    width: 90%;
+    display: flex;
+    justify-content: end;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
 }

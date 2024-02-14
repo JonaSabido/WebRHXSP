@@ -7,6 +7,10 @@ import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AreaDialogComponent } from '../../dialogs/area-dialog/area-dialog.component';
+import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { LoginComponent } from '../login/login.component';
+import { TopbarComponent } from '../../components/topbar/topbar.component';
+import { EmployeeDialogComponent } from '../../dialogs/employee-dialog/employee-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -89,10 +93,12 @@ export class DashboardComponent extends View {
   }
 
   show() {
-    this.ref = this.dialogService.open(AreaDialogComponent,
+    this.ref = this.dialogService.open(EmployeeDialogComponent,
       {
-        header: 'Select a Product',
-        width: '50vw',
+        header: 'Nuevo empleado',
+        closeOnEscape: false,
+        closable: false,
+        width: '90%',
         modal: true,
         breakpoints: {
           '960px': '75vw',
