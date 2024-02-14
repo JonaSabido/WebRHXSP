@@ -1,0 +1,15 @@
+<div id="breadcrumb" class="d-flex align-items-center p-4">
+    <div class="bg-primary-color rounded p-2">
+        <i [class]="icon" class="pi fs-2 text-white"></i>
+    </div>
+    <div class="ms-3">
+        <span class="roboto-bold fs-4">{{module}}</span>
+        <div class="d-flex align-items-center">
+            @for(prevLink of prevLinks; track prevLink){
+            <span class="roboto fs-small text-secondary me-2">{{prevLink}}</span>
+            <i class="pi pi-chevron-right fs-small text-secondary me-2"></i>
+            }
+            <span class="roboto-bold fs-small text-primary-color">{{activeLink}}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<p-sidebar #sidebarRef [(visible)]="sidebarVisible" [blockScroll]="true" [modal]="false" [dismissible]="false"
+    [visible]="true" styleClass="bg-secondary-color">
+    <ng-template pTemplate="header">
+        <img class="img-fluid" src="assets/images/logo-negativo-small.png">
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="overflow-y-auto text-white" id="sidebar-content">
+            @for(sidebarModuleItem of sidebarModuleItems; track sidebarModuleItem.title){
+            <ul class="list-none m-0 p-0 mt-2">
+                <li>
+                    <div pRipple pStyleClass="@next" enterClass="hidden" enterActiveClass="slidedown"
+                        leaveToClass="hidden" leaveActiveClass="slideup"
+                        class="p-2 d-flex align-items-center justify-content-between p-ripple clickeable"
+                        (click)="changeVisibilityToModuleItem(sidebarModuleItem)">
+                        <span class="text-primary-color roboto-bold fs-small">{{sidebarModuleItem.title}}</span>
+                        <i class="pi pi-chevron-down"></i>
+                    </div>
+                    @if(sidebarModuleItem.visible){
+                    <ul class="list-none p-0 m-0 overflow-hidden">
+                        @for(sidebarModuleSubitem of sidebarModuleItem.subitems; track sidebarModuleSubitem.title){
+                        <li>
+                            <a pRipple class="d-flex align-items-center p-3 sidebar-item p-ripple">
+                                <i [class]="'pi pi-' + sidebarModuleSubitem.icon + ' me-2'"></i>
+                                <span>{{sidebarModuleSubitem.title}}</span>
+                            </a>
+                        </li>
+                        }
+                    </ul>
+                    }
+                </li>
+            </ul>
+            }
+        </div>
+    </ng-template>
+    <!-- <ng-template pTemplate="footer">
+        <hr class="border-top-1 border-none surface-border" />
+    }
+    </ng-template> -->
+</p-sidebar>
+<div id="container-button" class="d-flex align-items-center">
+    <p-button (click)="sidebarVisible = true" icon="pi pi-align-justify" styleClass="ms-2" [text]="true"
+        severity="secondary"></p-button>
+</div>

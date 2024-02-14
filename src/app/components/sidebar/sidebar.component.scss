@@ -1,0 +1,24 @@
+
+$seondary-color: #1a1d2c;
+$seondary-color-hover: #222639;
+
+#container-button{
+    position: fixed;
+    height: 80px;
+    z-index: 2;
+}
+
+.sidebar-item{
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: Roboto;
+    cursor: pointer;
+    font-size: .9em;
+    z-index: 2;
+
+    &:hover{
+        background-color: $seondary-color-hover;
+    }
+}
+

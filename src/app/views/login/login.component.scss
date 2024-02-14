@@ -1,0 +1,44 @@
+#card-login {
+    border-radius: 15px;
+    background: linear-gradient(180deg, var(--primary-color) 30%, rgba(33, 150, 243, 0) 40%);
+    padding: 3px;
+}
+
+#content-login {
+    border-radius: 15px;
+}
+
+/* Large screen */
+@media only screen and (min-width: 1025px) {
+    #card-login {
+        width: 40%;
+    }
+
+    #content-login {
+        padding: 40px 50px 40px 50px;
+    }
+}
+
+/* Medium screen */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    #card-login {
+        width: 60%;
+    }
+
+    #content-login {
+        padding: 40px 30px 40px 30px;
+    }
+
+}
+
+/* Small screen */
+@media only screen and (max-width: 767px) {
+    #card-login {
+        width: 90%;
+    }
+
+    #content-login {
+        padding: 40px 25px 40px 25px;
+    }
+
+}
