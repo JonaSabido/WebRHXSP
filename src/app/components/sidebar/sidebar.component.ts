@@ -39,37 +39,37 @@ export class SidebarComponent {
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'heart',
           title: 'Enfermedades',
           path: 'Núm. de Emergencia',
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'phone',
           title: 'Números de emergencia',
           path: '',
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'book',
           title: 'Contratos',
           path: '',
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'ticket',
           title: 'Antidopings',
           path: '',
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'tablet',
           title: 'Capacitaciones',
           path: '',
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'clock',
           title: 'Tiempos Extra',
           path: '',
           isActive: false
@@ -81,13 +81,13 @@ export class SidebarComponent {
       visible: true,
       subitems: [
         {
-          icon: 'home',
+          icon: 'list',
           title: 'Registros',
           path: '',
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'chart-bar',
           title: 'Estadística',
           path: '',
           isActive: false
@@ -99,13 +99,13 @@ export class SidebarComponent {
       visible: true,
       subitems: [
         {
-          icon: 'home',
+          icon: 'list',
           title: 'Registros',
           path: '',
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'chart-bar',
           title: 'Estadística',
           path: '',
           isActive: false
@@ -117,13 +117,13 @@ export class SidebarComponent {
       visible: true,
       subitems: [
         {
-          icon: 'home',
+          icon: 'list',
           title: 'Registros',
           path: '',
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'chart-bar',
           title: 'Pagos',
           path: '',
           isActive: false
@@ -141,25 +141,25 @@ export class SidebarComponent {
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'briefcase',
           title: 'Trabajos',
           path: '',
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'building',
           title: 'Departamentos',
           path: '',
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'stopwatch',
           title: 'Tipos de faltas',
           path: '',
           isActive: false
         },
         {
-          icon: 'home',
+          icon: 'heart',
           title: 'Enfermedades',
           path: '',
           isActive: false
