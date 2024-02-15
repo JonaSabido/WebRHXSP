@@ -4,12 +4,13 @@ import { SidebarModule } from 'primeng/sidebar';
 import { AvatarModule } from 'primeng/avatar';
 import { RippleModule } from 'primeng/ripple';
 import { SidebarModuleItem } from '../../interfaces/sidebar';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [SidebarModule, ButtonModule, AvatarModule, RippleModule],
+  imports: [SidebarModule, ButtonModule, AvatarModule, RippleModule, RouterModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
@@ -23,7 +24,7 @@ export class SidebarComponent {
         {
           icon: 'list',
           title: 'Registros',
-          path: '',
+          path: 'empleados',
           isActive: false
         },
         {
@@ -41,13 +42,13 @@ export class SidebarComponent {
         {
           icon: 'heart',
           title: 'Enfermedades',
-          path: 'Núm. de Emergencia',
+          path: 'empleadosenfermedades',
           isActive: false
         },
         {
           icon: 'phone',
           title: 'Números de emergencia',
-          path: '',
+          path: 'emergencias',
           isActive: false
         },
         {
@@ -137,19 +138,19 @@ export class SidebarComponent {
         {
           icon: 'home',
           title: 'Areas',
-          path: '',
+          path: 'areas',
           isActive: false
         },
         {
           icon: 'briefcase',
           title: 'Trabajos',
-          path: '',
+          path: 'trabajos',
           isActive: false
         },
         {
           icon: 'building',
           title: 'Departamentos',
-          path: '',
+          path: 'departamentos',
           isActive: false
         },
         {
@@ -161,7 +162,7 @@ export class SidebarComponent {
         {
           icon: 'heart',
           title: 'Enfermedades',
-          path: '',
+          path: 'enfermedades',
           isActive: false
         },
       ]

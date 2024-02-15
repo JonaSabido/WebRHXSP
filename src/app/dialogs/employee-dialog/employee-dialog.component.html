@@ -20,27 +20,33 @@
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Fecha de nacimiento</label>
-                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+                <input pInputText type="date" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Genero</label>
-                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+                <br>
+                <p-dropdown [options]="[{name: 'Masculino'}, {name: 'Femenino'}, {name: 'Otro'}]" optionLabel="name"
+                    [showClear]="true" placeholder="Selecciona el género" styleClass="w-100 roboto fs-small"></p-dropdown>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">¿Tiene hijos?</label>
-                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+                <p-dropdown [options]="[{name: 'Si'}, {name: 'No'}]" optionLabel="name" [showClear]="true"
+                    placeholder="Selecciona la ocpión" styleClass="w-100 roboto"></p-dropdown>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Talla de camisa</label>
-                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+                <p-dropdown
+                    [options]="[{name: 'CH'}, {name: 'M'},  {name: 'G'},  {name: 'EG'},  {name: '2EG'},  {name: '3EG'}]"
+                    optionLabel="name" [showClear]="true" placeholder="Selecciona la ocpión"
+                    styleClass="w-100 roboto"></p-dropdown>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Talla de pantalón</label>
-                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+                <input pInputText type="number" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Talla de zapatos</label>
-                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+                <input pInputText type="number" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
             </div>
         </div>
     </div>
@@ -81,7 +87,8 @@
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">¿Dado de alta en SSP?</label>
-                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+                <p-dropdown [options]="[{name: 'Si'}, {name: 'No'}]" optionLabel="name" [showClear]="true"
+                    placeholder="Selecciona la ocpión" styleClass="w-100 roboto"></p-dropdown>
             </div>
         </div>
     </div>
@@ -98,15 +105,20 @@
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Departamento</label>
-                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+                <p-dropdown [options]="[{name: 'IKA'}, {name: 'YCC'}, {name: 'TULUM'}, {name: 'XSP'}]"
+                    optionLabel="name" [showClear]="true" placeholder="Selecciona la ocpión"
+                    styleClass="w-100 roboto"></p-dropdown>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Trabajo</label>
-                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+                <p-dropdown
+                    [options]="[{name: 'Guardia de seguridad'}, {name: 'Auxiliar de Recursos Humanos'}, {name: 'Monitorista'},  {name: 'Auxiliar de Finanzas'}, {name: 'Coordinadora de Recursos Humanos'}]"
+                    optionLabel="name" [showClear]="true" placeholder="Selecciona la ocpión"
+                    styleClass="w-100 roboto"></p-dropdown>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Fecha de ingreso</label>
-                <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+                <input pInputText type="date" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
             </div>
             <div class="col-12 col-lg-12 mt-3">
                 <label for="user" class="robotobold fs-small">Imagen QR</label>
@@ -154,27 +166,27 @@
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Comprobante fiscal" [model]="menuItems"
+                <p-splitButton label="Comprobante fiscal" [model]="menuItemsForNull"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Cartilla militar" [model]="menuItems"
+                <p-splitButton label="Cartilla militar" [model]="menuItemsForNull"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Antecedentes penales" [model]="menuItems"
+                <p-splitButton label="Antecedentes penales" [model]="menuItemsForNull"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Certificado médico" [model]="menuItems"
+                <p-splitButton label="Certificado médico" [model]="menuItemsForNull"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3 mb-3">
-                <p-splitButton label="Seguro de vida" [model]="menuItems"
+                <p-splitButton label="Seguro de vida" [model]="menuItemsForNull"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>

@@ -1,5 +1,5 @@
 <p-sidebar #sidebarRef [(visible)]="sidebarVisible" [blockScroll]="true" [modal]="false" [dismissible]="false"
-    [visible]="true" styleClass="bg-secondary-color">
+    [visible]="true" styleClass="bg-secondary-color" [closeOnEscape]="false" [style]="{width: '280px'}">
     <ng-template pTemplate="header">
         <img class="img-fluid" src="assets/images/logo-negativo-small.png">
     </ng-template>
@@ -19,7 +19,7 @@
                     <ul class="list-none p-0 m-0 overflow-hidden">
                         @for(sidebarModuleSubitem of sidebarModuleItem.subitems; track sidebarModuleSubitem.title){
                         <li>
-                            <a pRipple class="d-flex align-items-center p-3 sidebar-item p-ripple">
+                            <a pRipple class="d-flex align-items-center p-3 sidebar-item p-ripple" [routerLink]="sidebarModuleSubitem.path">
                                 <i [class]="'pi pi-' + sidebarModuleSubitem.icon + ' me-3'"></i>
                                 <span>{{sidebarModuleSubitem.title}}</span>
                             </a>

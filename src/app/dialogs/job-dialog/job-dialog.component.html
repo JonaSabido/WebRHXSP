@@ -1,0 +1,22 @@
+<form class="mb-5">
+    <div>
+        <label for="user" class="roboto fs-small">Nombre</label>
+        <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100"
+            placeholder="Escriba el nombre del trabajo" />
+    </div>
+    <div class="mt-3">
+        <label for="user" class="roboto fs-small">Area</label>
+        <br>
+        <p-dropdown [options]="areas" optionLabel="name" [showClear]="true"
+            placeholder="Selecciona el area a la que pertenece" styleClass="w-100 roboto"></p-dropdown>
+    </div>
+</form>
+<div class="d-flex justify-content-end">
+    <div class="footer-dialog">
+        <p-button icon="pi pi-times" label="Cancelar" [text]="true" severity="secondary"
+            (click)="closeDialog()"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" [text]="true"></p-button>
+        <!-- <p-button icon="pi pi-times" label="Cancelar" severity="secondary" size="small" (click)="closeDialog()"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" size="small" styleClass="ms-2"></p-button> -->
+    </div>
+</div>

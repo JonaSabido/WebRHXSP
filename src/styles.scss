@@ -26,7 +26,8 @@ body {
 }
 
 th {
-    font-family: RobotoBold
+    font-family: RobotoBold;
+    font-size: 1em;
 }
 
 ul, li{
@@ -37,6 +38,8 @@ ul, li{
 td {
     font-family: Roboto;
     border-bottom: 1px #e7e7e7 solid !important;
+    font-size: .9em;
+
 }
 
 *{

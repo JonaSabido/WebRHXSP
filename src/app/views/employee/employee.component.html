@@ -1,0 +1,65 @@
+<app-breadcrumb [icon]="icon" [module]="module" [prevLinks]="prevLinks" [activeLink]="activeLink"></app-breadcrumb>
+<div class="bg-white rounded mt-4 p-4">
+    <div class="d-flex align-items-center justify-content-between">
+        <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
+        <p-button icon="pi pi-plus" label="Nuevo" (click)="show()" [rounded]="true" size="small"></p-button>
+    </div>
+    <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
+        [scrollable]="true" scrollHeight="800px"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        styleClass="p-datatable-striped mt-3">
+        <ng-template pTemplate="caption">
+            <div class="d-flex">
+                <!-- <p-button icon="pi pi-file" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
+                    tooltipPosition="bottom" class="me-2"></p-button>
+                <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
+                    tooltipPosition="bottom" class="me-2" severity="success"></p-button>
+                <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
+                    tooltipPosition="bottom" class="" severity="warning"></p-button> -->
+
+                <button type="button" pButton pRipple icon="pi pi-file" class="p-button-secondary me-2" pTooltip="CSV"
+                    tooltipPosition="bottom"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success me-2"
+                    pTooltip="XLS" tooltipPosition="bottom"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning" pTooltip="PDF"
+                    tooltipPosition="bottom"></button>
+                <!-- <button type="button" pButton pRipple icon="pi pi-filter" class="p-button-info ms-auto"
+                    pTooltip="Selection Only" tooltipPosition="bottom"></button> -->
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th pSortableColumn="code">Código <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="fullname">Nombre <p-sortIcon field="fullname"></p-sortIcon></th>
+                <th pSortableColumn="area">Area <p-sortIcon field="area"></p-sortIcon></th>
+                <th pSortableColumn="job">Puesto <p-sortIcon field="job"></p-sortIcon></th>
+                <th pSortableColumn="department">Dpto. <p-sortIcon field="department"></p-sortIcon></th>
+                <th pSortableColumn="entry_date">Fecha alta <p-sortIcon field="entry_date"></p-sortIcon></th>
+                <th pSortableColumn="entry_month">Mes alta <p-sortIcon field="entry_month"></p-sortIcon></th>
+                <th pSortableColumn="entry_year">Año alta <p-sortIcon field="entry_year"></p-sortIcon></th>
+                <th pSortableColumn="status">Estatus <p-sortIcon field="status"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-entitie let-columns>
+            <tr>
+                <td>{{entitie.code}}</td>
+                <td>{{entitie.fullname}}</td>
+                <td>{{entitie.area}}</td>
+                <td>{{entitie.job}}</td>
+                <td>{{entitie.department}}</td>
+                <td>{{entitie.entry_date}}</td>
+                <td>{{entitie.entry_month}}</td>
+                <td>{{entitie.entry_year}}</td>
+                <td>
+                    @if(entitie.status === 'Alta'){
+                    <p-tag [value]="entitie.status" severity="success"></p-tag>
+                    }
+                    @else if(entitie.status === 'Baja'){
+                    <p-tag [value]="entitie.status" severity="danger"></p-tag>
+                    }
+                </td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

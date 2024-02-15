@@ -5,18 +5,22 @@ import { StepsModule } from 'primeng/steps';
 import { FileUploadModule } from 'primeng/fileupload';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @Component({
   selector: 'app-employee-dialog',
   standalone: true,
-  imports: [StepsModule, InputTextModule, FileUploadModule, SplitButtonModule],
+  imports: [StepsModule, InputTextModule, FileUploadModule, SplitButtonModule, DropdownModule, CalendarModule],
   templateUrl: './employee-dialog.component.html',
   styleUrl: './employee-dialog.component.scss'
 })
 export class EmployeeDialogComponent {
   stepItems: MenuItem[] = [];
   menuItems: MenuItem[] = [];
+  menuItemsForNull: MenuItem[] = [];
+
 
   activeIndex: number = 0;
 
@@ -74,6 +78,16 @@ export class EmployeeDialogComponent {
           // this.delete();
         }
       },
+    ];
+
+    this.menuItemsForNull = [
+      {
+        label: 'Subir',
+        icon: 'pi pi-upload',
+        command: () => {
+          // this.update();
+        }
+      }
     ];
   }
 
