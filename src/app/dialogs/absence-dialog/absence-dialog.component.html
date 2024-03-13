@@ -1,0 +1,33 @@
+<form class="mb-5">
+    <div>
+        <label for="user" class="roboto fs-small">Empleado</label>
+        <br>
+        <p-dropdown [options]="employees" optionLabel="fullname" [showClear]="true" placeholder="Selecciona el empleado"
+            styleClass="w-100 roboto"></p-dropdown>
+    </div>
+    <div class="mt-3">
+        <label for="user" class="roboto fs-small">Fecha</label>
+        <br>
+        <input pInputText type="date" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+    </div>
+    <div class="mt-3">
+        <label for="user" class="roboto fs-small">Tipo de falta</label>
+        <br>
+        <p-dropdown [options]="types" optionLabel="name" [showClear]="true" placeholder="Selecciona el tipo de falta"
+            styleClass="w-100 roboto"></p-dropdown>
+    </div>
+    <div class="mt-3 pb-5">
+        <label for="user" class="roboto fs-small">Descripción</label>
+        <br>
+        <textarea pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small"></textarea>
+    </div>
+</form>
+<div class="d-flex justify-content-end mt-5">
+    <div class="footer-dialog">
+        <p-button icon="pi pi-times" label="Cancelar" [text]="true" severity="secondary"
+            (click)="closeDialog()"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" [text]="true"></p-button>
+        <!-- <p-button icon="pi pi-times" label="Cancelar" severity="secondary" size="small" (click)="closeDialog()"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" size="small" styleClass="ms-2"></p-button> -->
+    </div>
+</div>

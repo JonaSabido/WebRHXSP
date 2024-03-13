@@ -3,24 +3,25 @@ import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.comp
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { View } from '../../../../shared/helpers/view';
 import { EmployeeDiseaseDialogComponent } from '../../dialogs/employee-disease-dialog/employee-disease-dialog.component';
+import { Crud } from '../../../../shared/helpers/crud';
 
 @Component({
   selector: 'app-employee-disease',
   standalone: true,
   imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule],
-  providers: [DialogService],
+  providers: [DialogService, DynamicDialogRef,],
   templateUrl: './employee-disease.component.html',
   styleUrl: './employee-disease.component.scss'
 })
-export class EmployeeDiseaseComponent extends View {
-  ref: DynamicDialogRef | undefined;
+export class EmployeeDiseaseComponent extends Crud {
   module = 'Enfermedades'
   icon = 'pi-heart'
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Enfermedades'
+  dialogConfig: DynamicDialogConfig;
   entities = [
     {
       employee: 'Juan Olmo',
@@ -45,23 +46,24 @@ export class EmployeeDiseaseComponent extends View {
   ]
 
   constructor(
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    public refDialog: DynamicDialogRef,
   ) {
-    super()
+    super(dialogService, refDialog)
+    this.dialogConfig = {
+      header: 'Nuevo enfermedad de empleado',
+      closeOnEscape: false,
+      closable: false,
+      width: '50%',
+      modal: true,
+      breakpoints: {
+        '960px': '75vw',
+        '640px': '90vw'
+      },
+    }
   }
 
-  show() {
-    this.ref = this.dialogService.open(EmployeeDiseaseDialogComponent,
-      {
-        header: 'Nuevo enfermedad para empleado',
-        closeOnEscape: false,
-        closable: false,
-        width: '50%',
-        modal: true,
-        breakpoints: {
-          '960px': '75vw',
-          '640px': '90vw'
-        },
-      });
+  protected getRefDialog() {
+    return this.dialogService.open(EmployeeDiseaseDialogComponent, this.dialogConfig)
   }
 }

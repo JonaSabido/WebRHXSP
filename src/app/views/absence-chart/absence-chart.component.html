@@ -1,0 +1,49 @@
+<app-breadcrumb [icon]="icon" [module]="module" [prevLinks]="prevLinks" [activeLink]="activeLink"></app-breadcrumb>
+<div class="bg-white rounded mt-4 p-4">
+    <div class="d-flex align-items-center justify-content-between">
+        <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
+        
+    </div>
+    <p-table [value]="entities" [tableStyle]="{ 'min-width': '50rem' }"
+        [scrollable]="true" scrollHeight="800px"
+        styleClass="p-datatable-striped mt-3">
+        <ng-template pTemplate="caption">
+            <div class="d-flex">
+                <!-- <p-button icon="pi pi-file" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
+                    tooltipPosition="bottom" class="me-2"></p-button>
+                <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
+                    tooltipPosition="bottom" class="me-2" severity="info"></p-button>
+                <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
+                    tooltipPosition="bottom" class="" severity="warning"></p-button> -->
+
+                <button type="button" pButton pRipple icon="pi pi-file" class="p-button-secondary me-2" pTooltip="CSV"
+                    tooltipPosition="bottom"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success me-2"
+                    pTooltip="XLS" tooltipPosition="bottom"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning" pTooltip="PDF"
+                    tooltipPosition="bottom"></button>
+                <!-- <button type="button" pButton pRipple icon="pi pi-filter" class="p-button-info ms-auto"
+                    pTooltip="Selection Only" tooltipPosition="bottom"></button> -->
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th pSortableColumn="employee">Empleado <p-sortIcon field="employee"></p-sortIcon></th>
+                <th pSortableColumn="total">Total de faltas<p-sortIcon field="total"></p-sortIcon></th>
+                <th>Opciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-entity let-columns>
+            <tr>
+                <td>{{entity.employee}}</td>
+                <td>{{entity.total}}</td>
+                <td>
+                    <div class="d-flex align-items-center justify-content-start">
+                        <p-button styleClass="ms-2" icon="pi pi-list" [rounded]="true" [text]="true"
+                            severity="info" (click)="openDetail()"></p-button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

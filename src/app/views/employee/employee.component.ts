@@ -1,27 +1,27 @@
 import { Component } from '@angular/core';
-import { View } from '../../../../shared/helpers/view';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { EmployeeDialogComponent } from '../../dialogs/employee-dialog/employee-dialog.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { TagModule } from 'primeng/tag';
+import { Crud } from '../../../../shared/helpers/crud';
 
 @Component({
   selector: 'app-employee',
   standalone: true,
   imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule],
-  providers: [DialogService],
+  providers: [DialogService, DynamicDialogRef],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss'
 })
-export class EmployeeComponent extends View {
-  ref: DynamicDialogRef | undefined;
+export class EmployeeComponent extends Crud {
   module = 'Registros'
   icon = 'pi-list'
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Registros'
+  dialogConfig: DynamicDialogConfig;
   entities = [
     {
       code: '1',
@@ -192,23 +192,24 @@ export class EmployeeComponent extends View {
 
 
   constructor(
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    public refDialog: DynamicDialogRef,
   ) {
-    super()
+    super(dialogService, refDialog)
+    this.dialogConfig = {
+      header: 'Nuevo empleado',
+      closeOnEscape: false,
+      closable: false,
+      width: '90%',
+      modal: true,
+      breakpoints: {
+        '960px': '75vw',
+        '640px': '90vw'
+      },
+    }
   }
 
-  show() {
-    this.ref = this.dialogService.open(EmployeeDialogComponent,
-      {
-        header: 'Nuevo empleado',
-        closeOnEscape: false,
-        closable: false,
-        width: '90%',
-        modal: true,
-        breakpoints: {
-          '960px': '75vw',
-          '640px': '90vw'
-        },
-      });
+  protected getRefDialog() {
+    return this.dialogService.open(EmployeeDialogComponent, this.dialogConfig)
   }
 }

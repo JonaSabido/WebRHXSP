@@ -30,13 +30,13 @@ export class SidebarComponent {
         {
           icon: 'angle-double-up',
           title: 'Reingresos',
-          path: '',
+          path: 'reingresos',
           isActive: false
         },
         {
           icon: 'angle-double-down',
           title: 'Bajas',
-          path: '',
+          path: 'bajas',
           isActive: false
         },
         {
@@ -54,7 +54,7 @@ export class SidebarComponent {
         {
           icon: 'book',
           title: 'Contratos',
-          path: '',
+          path: 'contratos',
           isActive: false
         },
         {
@@ -84,13 +84,13 @@ export class SidebarComponent {
         {
           icon: 'list',
           title: 'Registros',
-          path: '',
+          path: 'faltas',
           isActive: false
         },
         {
           icon: 'chart-bar',
           title: 'Estadística',
-          path: '',
+          path: 'faltas-estadistica',
           isActive: false
         },
       ]
@@ -154,15 +154,15 @@ export class SidebarComponent {
           isActive: false
         },
         {
-          icon: 'stopwatch',
-          title: 'Tipos de faltas',
-          path: '',
-          isActive: false
-        },
-        {
           icon: 'heart',
           title: 'Enfermedades',
           path: 'enfermedades',
+          isActive: false
+        },
+        {
+          icon: 'stopwatch',
+          title: 'Tipos de faltas',
+          path: 'tipos-de-faltas',
           isActive: false
         },
       ]

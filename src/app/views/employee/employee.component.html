@@ -2,7 +2,7 @@
 <div class="bg-white rounded mt-4 p-4">
     <div class="d-flex align-items-center justify-content-between">
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
-        <p-button icon="pi pi-plus" label="Nuevo" (click)="show()" [rounded]="true" size="small"></p-button>
+        <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog('Create')" [rounded]="true" size="small"></p-button>
     </div>
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" scrollHeight="800px"
@@ -13,7 +13,7 @@
                 <!-- <p-button icon="pi pi-file" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
                     tooltipPosition="bottom" class="me-2"></p-button>
                 <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
-                    tooltipPosition="bottom" class="me-2" severity="success"></p-button>
+                    tooltipPosition="bottom" class="me-2" severity="info"></p-button>
                 <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
                     tooltipPosition="bottom" class="" severity="warning"></p-button> -->
 
@@ -40,22 +40,22 @@
                 <th pSortableColumn="status">Estatus <p-sortIcon field="status"></p-sortIcon></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-entitie let-columns>
+        <ng-template pTemplate="body" let-entity let-columns>
             <tr>
-                <td>{{entitie.code}}</td>
-                <td>{{entitie.fullname}}</td>
-                <td>{{entitie.area}}</td>
-                <td>{{entitie.job}}</td>
-                <td>{{entitie.department}}</td>
-                <td>{{entitie.entry_date}}</td>
-                <td>{{entitie.entry_month}}</td>
-                <td>{{entitie.entry_year}}</td>
+                <td>{{entity.code}}</td>
+                <td>{{entity.fullname}}</td>
+                <td>{{entity.area}}</td>
+                <td>{{entity.job}}</td>
+                <td>{{entity.department}}</td>
+                <td>{{entity.entry_date}}</td>
+                <td>{{entity.entry_month}}</td>
+                <td>{{entity.entry_year}}</td>
                 <td>
-                    @if(entitie.status === 'Alta'){
-                    <p-tag [value]="entitie.status" severity="success"></p-tag>
+                    @if(entity.status === 'Alta'){
+                    <p-tag [value]="entity.status" severity="success"></p-tag>
                     }
-                    @else if(entitie.status === 'Baja'){
-                    <p-tag [value]="entitie.status" severity="danger"></p-tag>
+                    @else if(entity.status === 'Baja'){
+                    <p-tag [value]="entity.status" severity="danger"></p-tag>
                     }
                 </td>
 

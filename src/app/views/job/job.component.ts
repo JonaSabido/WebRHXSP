@@ -3,24 +3,25 @@ import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.comp
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { View } from '../../../../shared/helpers/view';
 import { JobDialogComponent } from '../../dialogs/job-dialog/job-dialog.component';
+import { Crud } from '../../../../shared/helpers/crud';
 
 @Component({
   selector: 'app-job',
   standalone: true,
   imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule],
-  providers: [DialogService],
+  providers: [DialogService, DynamicDialogRef,],
   templateUrl: './job.component.html',
   styleUrl: './job.component.scss'
 })
-export class JobComponent extends View {
-  ref: DynamicDialogRef | undefined;
+export class JobComponent extends Crud {
   module = 'Trabajos'
   icon = 'pi-briefcase'
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Trabajos'
+  dialogConfig: DynamicDialogConfig;
   entities = [
     {
       name: 'Guardia de seguridad',
@@ -45,23 +46,24 @@ export class JobComponent extends View {
   ]
 
   constructor(
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    public refDialog: DynamicDialogRef,
   ) {
-    super()
+    super(dialogService, refDialog)
+    this.dialogConfig = {
+      header: 'Nuevo trabajo',
+      closeOnEscape: false,
+      closable: false,
+      width: '50%',
+      modal: true,
+      breakpoints: {
+        '960px': '75vw',
+        '640px': '90vw'
+      },
+    }
   }
 
-  show() {
-    this.ref = this.dialogService.open(JobDialogComponent,
-      {
-        header: 'Nuevo trabajo',
-        closeOnEscape: false,
-        closable: false,
-        width: '50%',
-        modal: true,
-        breakpoints: {
-          '960px': '75vw',
-          '640px': '90vw'
-        },
-      });
+  protected getRefDialog() {
+    return this.dialogService.open(JobDialogComponent, this.dialogConfig)
   }
 }

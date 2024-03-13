@@ -8,7 +8,6 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
   selector: 'app-disease-dialog',
   standalone: true,
   imports: [DialogModule, InputTextModule, ButtonModule],
-  
   templateUrl: './disease-dialog.component.html',
   styleUrl: './disease-dialog.component.scss'
 })

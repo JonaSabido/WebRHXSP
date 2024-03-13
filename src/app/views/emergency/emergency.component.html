@@ -2,7 +2,7 @@
 <div class="bg-white rounded mt-4 p-4">
     <div class="d-flex align-items-center justify-content-between">
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
-        <p-button icon="pi pi-plus" label="Nuevo" (click)="show()" [rounded]="true" size="small"></p-button>
+        <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog('Create')" [rounded]="true" size="small"></p-button>
     </div>
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" scrollHeight="800px"
@@ -11,7 +11,7 @@
 
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th pSortableColumn="employee">Nombre <p-sortIcon field="employee"></p-sortIcon></th>
+                <th pSortableColumn="employee">Empleado <p-sortIcon field="employee"></p-sortIcon></th>
                 <th pSortableColumn="reference_name">Familiar <p-sortIcon field="reference_name"></p-sortIcon></th>
                 <th pSortableColumn="type">Parentezco <p-sortIcon field="type"></p-sortIcon></th>
                 <th pSortableColumn="phone">Número telefónico <p-sortIcon field="phone"></p-sortIcon></th>
@@ -20,18 +20,18 @@
 
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-entitie let-columns>
+        <ng-template pTemplate="body" let-entity let-columns>
             <tr>
-                <td>{{entitie.employee}}</td>
-                <td>{{entitie.reference_name}}</td>
-                <td>{{entitie.type}}</td>
-                <td>{{entitie.phone}}</td>
+                <td>{{entity.employee}}</td>
+                <td>{{entity.reference_name}}</td>
+                <td>{{entity.type}}</td>
+                <td>{{entity.phone}}</td>
 
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
-                        <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" [raised]="true"
-                            severity="success"></p-button>
-                        <p-button styleClass="ms-2" icon="pi pi-trash" [rounded]="true" [text]="true" [raised]="true"
+                        <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" 
+                            severity="info"></p-button>
+                        <p-button styleClass="ms-2" icon="pi pi-trash" [rounded]="true" [text]="true" 
                             severity="danger"></p-button>
                     </div>
                 </td>

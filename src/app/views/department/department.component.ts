@@ -4,24 +4,25 @@ import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.comp
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DepartmentDialogComponent } from '../../dialogs/department-dialog/department-dialog.component';
+import { Crud } from '../../../../shared/helpers/crud';
 
 
 @Component({
   selector: 'app-department',
   standalone: true,
   imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule],
-  providers: [DialogService],
+  providers: [DialogService, DynamicDialogRef,],
   templateUrl: './department.component.html',
   styleUrl: './department.component.scss'
 })
-export class DepartmentComponent extends View {
-  ref: DynamicDialogRef | undefined;
+export class DepartmentComponent extends Crud {
   module = 'Departamentos'
   icon = 'pi-building'
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Departamentos'
+  dialogConfig: DynamicDialogConfig;
   entities = [
     {
       name: 'IKA'
@@ -38,23 +39,24 @@ export class DepartmentComponent extends View {
   ]
 
   constructor(
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    public refDialog: DynamicDialogRef,
   ) {
-    super()
+    super(dialogService, refDialog)
+    this.dialogConfig = {
+      header: 'Nuevo departamento',
+      closeOnEscape: false,
+      closable: false,
+      width: '50%',
+      modal: true,
+      breakpoints: {
+        '960px': '75vw',
+        '640px': '90vw'
+      },
+    }
   }
 
-  show() {
-    this.ref = this.dialogService.open(DepartmentDialogComponent,
-      {
-        header: 'Nuevo departamento',
-        closeOnEscape: false,
-        closable: false,
-        width: '50%',
-        modal: true,
-        breakpoints: {
-          '960px': '75vw',
-          '640px': '90vw'
-        },
-      });
+  protected getRefDialog() {
+    return this.dialogService.open(DepartmentDialogComponent, this.dialogConfig)
   }
 }

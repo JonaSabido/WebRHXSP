@@ -16,7 +16,7 @@ import { EmployeeDialogComponent } from '../../dialogs/employee-dialog/employee-
   selector: 'app-dashboard',
   standalone: true,
   imports: [BreadcrumbComponent, TableModule, ButtonModule, RippleModule, TooltipModule, AreaDialogComponent],
-  providers: [DialogService],
+  providers: [DialogService, DynamicDialogRef,],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
