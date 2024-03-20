@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { View } from '../../../../shared/helpers/view';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { TableModule } from 'primeng/table';
@@ -7,6 +7,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DepartmentDialogComponent } from '../../dialogs/department-dialog/department-dialog.component';
 import { Crud } from '../../../../shared/helpers/crud';
+import { DepartmentRequest, DepartmentResponse } from '../../interfaces/department';
+import { DepartmentService } from '../../core/services/department.service';
 
 
 @Component({
@@ -17,32 +19,19 @@ import { Crud } from '../../../../shared/helpers/crud';
   templateUrl: './department.component.html',
   styleUrl: './department.component.scss'
 })
-export class DepartmentComponent extends Crud {
+export class DepartmentComponent extends Crud<DepartmentRequest, DepartmentResponse> implements OnInit {
   module = 'Departamentos'
   icon = 'pi-building'
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Departamentos'
   dialogConfig: DynamicDialogConfig;
-  data = [
-    {
-      name: 'IKA'
-    },
-    {
-      name: 'YCC'
-    },
-    {
-      name: 'TULUM'
-    },
-    {
-      name: 'XSP'
-    },
-  ]
 
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
+    public service: DepartmentService
   ) {
-    super(dialogService, refDialog)
+    super(dialogService, refDialog, service)
     this.dialogConfig = {
       header: 'Nuevo departamento',
       closeOnEscape: false,
@@ -60,7 +49,12 @@ export class DepartmentComponent extends Crud {
     return this.dialogService.open(DepartmentDialogComponent, this.dialogConfig)
   }
 
-  protected restore(){
-    
+  protected restore() {
+    this.entity = {
+      name: "",
+    }
+  }
+
+  ngOnInit(): void {
   }
 }

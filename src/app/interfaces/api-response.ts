@@ -3,12 +3,12 @@ interface ResponseBase{
     message: string
 }
 
-export interface List<T> extends ResponseBase {
-    data: T[],
+export interface List<U> extends ResponseBase {
+    data: U[],
 }
 
-export interface SingleEntity<T> extends ResponseBase {
-    data: T
+export interface SingleEntity<U> extends ResponseBase {
+    data: U
 }
 
 export interface RowsDeleted extends ResponseBase{

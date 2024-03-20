@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { View } from '../../../../shared/helpers/view';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { TableModule } from 'primeng/table';
@@ -7,6 +7,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AreaDialogComponent } from '../../dialogs/area-dialog/area-dialog.component';
 import { Crud } from '../../../../shared/helpers/crud';
+import { AreaRequest, AreaResponse } from '../../interfaces/area';
+import { AreaService } from '../../core/services/area.service';
 
 @Component({
   selector: 'app-area',
@@ -16,26 +18,19 @@ import { Crud } from '../../../../shared/helpers/crud';
   templateUrl: './area.component.html',
   styleUrl: './area.component.scss'
 })
-export class AreaComponent extends Crud {
+export class AreaComponent extends Crud<AreaRequest, AreaResponse> implements OnInit {
   module = 'Areas'
   icon = 'pi-home'
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Areas'
   dialogConfig: DynamicDialogConfig;
-  data = [
-    {
-      name: 'Administrativo'
-    },
-    {
-      name: 'Operativo'
-    },
-  ]
 
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
+    public service: AreaService
   ) {
-    super(dialogService, refDialog)
+    super(dialogService, refDialog, service)
     this.dialogConfig = {
       header: 'Nueva area',
       closeOnEscape: false,
@@ -53,7 +48,12 @@ export class AreaComponent extends Crud {
     return this.dialogService.open(AreaDialogComponent, this.dialogConfig)
   }
 
-  protected restore(){
-    
+  protected restore() {
+    this.entity = {
+      name: "",
+    }
+  }
+
+  ngOnInit(): void {
   }
 }

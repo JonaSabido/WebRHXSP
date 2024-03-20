@@ -1,21 +1,24 @@
-<form class="mb-5">
+<form role="form" #form="ngForm" class="mb-5">
     <div>
         <label for="user" class="roboto fs-small">Nombre</label>
-        <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100"
-            placeholder="Escriba el nombre del trabajo" />
+        <input pInputText type="text" id="name" name="name" class="p-inputtext-sm roboto w-100"
+            placeholder="Escriba el nombre del trabajo" [(ngModel)]="config.data.entity.name" required
+            #name="ngModel" />
     </div>
     <div class="mt-3">
         <label for="user" class="roboto fs-small">Area</label>
         <br>
-        <p-dropdown [options]="areas" optionLabel="name" [showClear]="true"
-            placeholder="Selecciona el area a la que pertenece" styleClass="w-100 roboto"></p-dropdown>
+        <p-dropdown id="id_area" name="id_area" [options]="areas" optionLabel="name" optionValue="id" [showClear]="true"
+            placeholder="Selecciona el area a la que pertenece" styleClass="w-100 roboto"
+            [(ngModel)]="config.data.entity.id_area" #id_area="ngModel" [required]="true"></p-dropdown>
     </div>
 </form>
 <div class="d-flex justify-content-end">
     <div class="footer-dialog">
         <p-button icon="pi pi-times" label="Cancelar" [text]="true" severity="secondary"
             (click)="closeDialog()"></p-button>
-        <p-button icon="pi pi-save" label="Guardar" [text]="true"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" [text]="true" [disabled]="form.invalid ?? false"
+            (click)="save(config.data.entity)"></p-button>
         <!-- <p-button icon="pi pi-times" label="Cancelar" severity="secondary" size="small" (click)="closeDialog()"></p-button>
         <p-button icon="pi pi-save" label="Guardar" size="small" styleClass="ms-2"></p-button> -->
     </div>

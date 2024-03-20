@@ -26,9 +26,9 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse> i
   dialogConfig: DynamicDialogConfig;
 
   constructor(
-    public service: EmployeeService,
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
+    public service: EmployeeService,
   ) {
     super(dialogService, refDialog, service)
     this.dialogConfig = {
@@ -44,10 +44,6 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse> i
     }
   }
 
-  ngOnInit(): void {
-    this.service.all().subscribe(response => this.entities = response.data)
-  }
-
   protected getRefDialog() {
     return this.dialogService.open(EmployeeDialogComponent, this.dialogConfig)
   }
@@ -57,7 +53,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse> i
       id_department: 0,
       id_job: 0,
       code: 0,
-      name: null,
+      name: "",
       sure_name: "",
       last_name: "",
       entry_date: "",
@@ -78,5 +74,8 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse> i
       qr_image: "",
       status: true
     }
+  }
+
+  ngOnInit(): void {
   }
 }

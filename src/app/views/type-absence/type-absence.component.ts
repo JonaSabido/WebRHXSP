@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { View } from '../../../../shared/helpers/view';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { TableModule } from 'primeng/table';
@@ -7,6 +7,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TypeAbsenceDialogComponent } from '../../dialogs/type-absence-dialog/type-absence-dialog.component';
 import { Crud } from '../../../../shared/helpers/crud';
+import { TypeAbsenceRequest, TypeAbsenceResponse } from '../../interfaces/type-absence';
+import { TypeAbsenceService } from '../../core/services/type-absence.service';
 
 @Component({
   selector: 'app-type-absence',
@@ -16,26 +18,19 @@ import { Crud } from '../../../../shared/helpers/crud';
   templateUrl: './type-absence.component.html',
   styleUrl: './type-absence.component.scss'
 })
-export class TypeAbsenceComponent extends Crud {
+export class TypeAbsenceComponent extends Crud<TypeAbsenceRequest, TypeAbsenceResponse> implements OnInit {
   module = 'Tipos de faltas'
   icon = 'pi-stopwatch'
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Tipos de faltas'
   dialogConfig: DynamicDialogConfig;
-  data = [
-    {
-      name: 'Permiso sin goze de sueldo',
-    },
-    {
-      name: 'Permiso con goze de sueldo'
-    },
-  ]
 
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
+    public service: TypeAbsenceService
   ) {
-    super(dialogService, refDialog)
+    super(dialogService, refDialog, service)
     this.dialogConfig = {
       header: 'Nuevo tipo de falta',
       closeOnEscape: false,
@@ -53,8 +48,13 @@ export class TypeAbsenceComponent extends Crud {
     return this.dialogService.open(TypeAbsenceDialogComponent, this.dialogConfig)
   }
 
-  protected restore(){
-    
+  protected restore() {
+    this.entity = {
+      name: "",
+    }
+  }
+
+  ngOnInit(): void {
   }
 
 }

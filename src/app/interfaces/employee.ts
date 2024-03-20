@@ -6,7 +6,7 @@ export interface EmployeeRequest {
     id_department: number
     id_job: number
     code: number
-    name: string | null
+    name: string
     sure_name: string
     last_name: string
     entry_date: string

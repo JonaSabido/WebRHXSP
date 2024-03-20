@@ -18,7 +18,7 @@ export abstract class ApiCrudService<T, U> {
     }
 
     public single(id: number,): Observable<SingleEntity<U>> {
-        return this.http.get<SingleEntity<U>>(`${this.uri}{id}`);
+        return this.http.get<SingleEntity<U>>(`${this.uri}${id}`);
     }
 
     public store(e: T): Observable<SingleEntity<U>> {
@@ -26,10 +26,10 @@ export abstract class ApiCrudService<T, U> {
     }
 
     public update(id: number, e: T): Observable<SingleEntity<T>> {
-        return this.http.put<SingleEntity<T>>(`${this.uri}/{id}`, e);
+        return this.http.put<SingleEntity<T>>(`${this.uri}${id}`, e);
     }
 
     public destroy(id: number): Observable<RowsDeleted> {
-        return this.http.delete<RowsDeleted>(`${this.uri}/{id}`);
+        return this.http.delete<RowsDeleted>(`${this.uri}${id}`);
     }
 }

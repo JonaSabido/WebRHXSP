@@ -211,9 +211,9 @@
     <div class="footer-dialog">
         <p-button icon="pi pi-times" label="Cancelar" [text]="true" severity="secondary"
             (click)="closeDialog()"></p-button>
-        <p-button icon="pi pi-save" label="Guardar" [text]="true" [disabled]="(this.formPersonal.invalid ?? false) || 
-        (this.formContact.invalid ?? false) || 
-        (this.formEnterprise.invalid ?? false)" (click)="save(config.data.entity)"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" [text]="true" [disabled]="(formPersonal.invalid ?? false) || 
+        (formContact.invalid ?? false) || 
+        (formEnterprise.invalid ?? false)" (click)="save(config.data.entity)"></p-button>
         <!-- <p-button icon="pi pi-times" label="Cancelar" severity="secondary" size="small" (click)="closeDialog()"></p-button>
         <p-button icon="pi pi-save" label="Guardar" size="small" styleClass="ms-2"></p-button> -->
     </div>
