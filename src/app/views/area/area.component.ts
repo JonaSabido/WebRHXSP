@@ -22,7 +22,7 @@ export class AreaComponent extends Crud {
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Areas'
   dialogConfig: DynamicDialogConfig;
-  entities = [
+  data = [
     {
       name: 'Administrativo'
     },
@@ -51,5 +51,9 @@ export class AreaComponent extends Crud {
 
   protected getRefDialog() {
     return this.dialogService.open(AreaDialogComponent, this.dialogConfig)
+  }
+
+  protected restore(){
+    
   }
 }

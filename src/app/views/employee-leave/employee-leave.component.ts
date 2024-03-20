@@ -22,7 +22,7 @@ export class EmployeeLeaveComponent extends Crud {
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Bajas'
   dialogConfig: DynamicDialogConfig;
-  entities = [
+  data = [
     {
       employee: 'Juan Olmo',
       date: '24 Febrero 2024'
@@ -65,5 +65,9 @@ export class EmployeeLeaveComponent extends Crud {
 
   protected getRefDialog() {
     return this.dialogService.open(EmployeeLeaveDialogComponent, this.dialogConfig)
+  }
+
+  protected restore(){
+    
   }
 }

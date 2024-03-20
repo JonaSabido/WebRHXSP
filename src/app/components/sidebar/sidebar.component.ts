@@ -102,7 +102,7 @@ export class SidebarComponent {
         {
           icon: 'list',
           title: 'Registros',
-          path: '',
+          path: 'vacaciones',
           isActive: false
         },
         {
@@ -120,13 +120,13 @@ export class SidebarComponent {
         {
           icon: 'list',
           title: 'Registros',
-          path: '',
+          path: 'recomendaciones',
           isActive: false
         },
         {
           icon: 'dollar',
           title: 'Pagos',
-          path: '',
+          path: 'recomendaciones-pagos',
           isActive: false
         },
       ]

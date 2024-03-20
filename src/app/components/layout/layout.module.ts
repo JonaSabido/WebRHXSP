@@ -17,6 +17,9 @@ import { EmployeeLeaveComponent } from '../../views/employee-leave/employee-leav
 import { ContractComponent } from '../../views/contract/contract.component';
 import { AbsenceComponent } from '../../views/absence/absence.component';
 import { AbsenceChartComponent } from '../../views/absence-chart/absence-chart.component';
+import { EmployeeVacationComponent } from '../../views/employee-vacation/employee-vacation.component';
+import { RecomendationComponent } from '../../views/recomendation/recomendation.component';
+import { RecomendationPaymentComponent } from '../../views/recomendation-payment/recomendation-payment.component';
 
 const routes: Routes = [
     {
@@ -79,6 +82,19 @@ const routes: Routes = [
                 path: 'faltas-estadistica',
                 component: AbsenceChartComponent
             },
+            {
+                path: 'vacaciones',
+                component: EmployeeVacationComponent
+            },
+            {
+                path: 'recomendaciones',
+                component: RecomendationComponent
+            },
+            {
+                path: 'recomendaciones-pagos',
+                component: RecomendationPaymentComponent
+            }
+
         ]
     }
 ]

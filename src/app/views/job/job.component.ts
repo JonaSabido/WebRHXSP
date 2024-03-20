@@ -22,7 +22,7 @@ export class JobComponent extends Crud {
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Trabajos'
   dialogConfig: DynamicDialogConfig;
-  entities = [
+  data = [
     {
       name: 'Guardia de seguridad',
       area: 'Operativo'
@@ -65,5 +65,9 @@ export class JobComponent extends Crud {
 
   protected getRefDialog() {
     return this.dialogService.open(JobDialogComponent, this.dialogConfig)
+  }
+
+  protected restore(){
+    
   }
 }

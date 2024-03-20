@@ -22,7 +22,7 @@ export class EmergencyComponent extends Crud {
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Números de emergencia'
   dialogConfig: DynamicDialogConfig;
-  entities = [
+  data = [
     {
       employee: 'Juan Olmo',
       reference_name: 'Maria Chuc',
@@ -75,5 +75,9 @@ export class EmergencyComponent extends Crud {
 
   protected getRefDialog() {
     return this.dialogService.open(EmergencyDialogComponent, this.dialogConfig)
+  }
+
+  protected restore(){
+    
   }
 }

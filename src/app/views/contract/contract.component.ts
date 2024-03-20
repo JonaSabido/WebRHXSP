@@ -22,7 +22,7 @@ export class ContractComponent extends Crud {
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Contratos'
   dialogConfig: DynamicDialogConfig;
-  entities = [
+  data = [
     {
       employee: 'Juan Olmo',
       start_date: '24 Febrero 2024',
@@ -75,5 +75,9 @@ export class ContractComponent extends Crud {
 
   protected getRefDialog() {
     return this.dialogService.open(ContractDialogComponent, this.dialogConfig)
+  }
+
+  protected restore(){
+    
   }
 }

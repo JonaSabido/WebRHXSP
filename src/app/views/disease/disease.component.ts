@@ -22,7 +22,7 @@ export class DiseaseComponent extends Crud {
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Enfermedades'
   dialogConfig: DynamicDialogConfig;
-  entities = [
+  data = [
     {
       name: 'Ansiedad'
     },
@@ -57,5 +57,9 @@ export class DiseaseComponent extends Crud {
 
   protected getRefDialog() {
     return this.dialogService.open(DiseaseDialogComponent, this.dialogConfig)
+  }
+
+  protected restore(){
+    
   }
 }

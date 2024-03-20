@@ -4,7 +4,7 @@
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
         
     </div>
-    <p-table [value]="entities" [tableStyle]="{ 'min-width': '50rem' }"
+    <p-table [value]="data" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" scrollHeight="800px"
         styleClass="p-datatable-striped mt-3">
         <ng-template pTemplate="caption">
@@ -36,7 +36,9 @@
         <ng-template pTemplate="body" let-entity let-columns>
             <tr>
                 <td>{{entity.employee}}</td>
-                <td>{{entity.total}}</td>
+                <td>
+                    <p-tag [value]="entity.total" severity="info"></p-tag>
+                </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
                         <p-button styleClass="ms-2" icon="pi pi-list" [rounded]="true" [text]="true"

@@ -11,5 +11,9 @@ export abstract class DialogCrud {
     closeDialog() {
         this.ref$.close()
     }
+    
+    save(entity: any){
+        this.ref$.close(entity)
+    }
 
 }

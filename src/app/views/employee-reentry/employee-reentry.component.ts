@@ -22,7 +22,7 @@ export class EmployeeReentryComponent extends Crud {
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Reingresos'
   dialogConfig: DynamicDialogConfig;
-  entities = [
+  data = [
     {
       employee: 'Juan Olmo',
       date: '24 Febrero 2024'
@@ -65,6 +65,10 @@ export class EmployeeReentryComponent extends Crud {
 
   protected getRefDialog(){
     return this.dialogService.open(EmployeeReentryDialogComponent, this.dialogConfig)
+  }
+
+  protected restore(){
+    
   }
 
 }

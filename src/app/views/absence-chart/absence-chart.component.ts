@@ -6,11 +6,12 @@ import { TooltipModule } from 'primeng/tooltip';
 import { View } from '../../../../shared/helpers/view';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AbsenceChartDialogComponent } from '../../dialogs/absence-chart-dialog/absence-chart-dialog.component';
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-absence-chart',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule],
   providers: [DialogService, DynamicDialogRef],
   templateUrl: './absence-chart.component.html',
   styleUrl: './absence-chart.component.scss'
@@ -20,7 +21,7 @@ export class AbsenceChartComponent extends View {
   icon = 'pi-chart-bar'
   prevLinks = ['Home', 'Faltas']
   activeLink = 'Estadistica'
-  entities = [
+  data = [
     {
       employee: 'Juan Olmo',
       total: 20,

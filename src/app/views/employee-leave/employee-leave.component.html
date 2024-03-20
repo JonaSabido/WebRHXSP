@@ -2,10 +2,10 @@
 <div class="bg-white rounded mt-4 p-4">
     <div class="d-flex align-items-center justify-content-between">
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
-        <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog('Create')" [rounded]="true"
+        <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true"
             size="small"></p-button>
     </div>
-    <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
+    <p-table [value]="data" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" scrollHeight="800px"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-3">

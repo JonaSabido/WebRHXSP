@@ -2,7 +2,7 @@
 <div class="bg-white rounded mt-4 p-4">
     <div class="d-flex align-items-center justify-content-between">
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
-        <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog('Create')" [rounded]="true" size="small"></p-button>
+        <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"></p-button>
     </div>
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" scrollHeight="800px"
@@ -31,7 +31,7 @@
             <tr>
                 <th pSortableColumn="code">Código <p-sortIcon field="code"></p-sortIcon></th>
                 <th pSortableColumn="fullname">Nombre <p-sortIcon field="fullname"></p-sortIcon></th>
-                <th pSortableColumn="area">Area <p-sortIcon field="area"></p-sortIcon></th>
+                <!-- <th pSortableColumn="area">Area <p-sortIcon field="area"></p-sortIcon></th> -->
                 <th pSortableColumn="job">Puesto <p-sortIcon field="job"></p-sortIcon></th>
                 <th pSortableColumn="department">Dpto. <p-sortIcon field="department"></p-sortIcon></th>
                 <th pSortableColumn="entry_date">Fecha alta <p-sortIcon field="entry_date"></p-sortIcon></th>
@@ -41,21 +41,21 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-entity let-columns>
-            <tr>
+            <tr class="clickeable" (click)="openDialog(entity)">
                 <td>{{entity.code}}</td>
-                <td>{{entity.fullname}}</td>
-                <td>{{entity.area}}</td>
-                <td>{{entity.job}}</td>
-                <td>{{entity.department}}</td>
+                <td>{{entity.name}} {{entity.sure_name}} {{entity.last_name}}</td>
+                <!-- <td>{{entity.area.name}}</td> -->
+                <td>{{entity.job.name}}</td>
+                <td>{{entity.department.name}}</td>
                 <td>{{entity.entry_date}}</td>
                 <td>{{entity.entry_month}}</td>
                 <td>{{entity.entry_year}}</td>
                 <td>
-                    @if(entity.status === 'Alta'){
-                    <p-tag [value]="entity.status" severity="success"></p-tag>
+                    @if(entity.status){
+                    <p-tag [value]="'Alta'" severity="success"></p-tag>
                     }
                     @else if(entity.status === 'Baja'){
-                    <p-tag [value]="entity.status" severity="danger"></p-tag>
+                    <p-tag [value]="'Baja'" severity="danger"></p-tag>
                     }
                 </td>
 

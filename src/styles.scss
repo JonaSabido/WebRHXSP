@@ -63,6 +63,7 @@ td {
 }
 
 
+
 .bg-primary-color {
     background-color: var(--primary-color);
 }
@@ -99,4 +100,12 @@ td {
     background-color: white;
     position: fixed;
     bottom: 0;
+}
+
+.text-gray{
+    color: #ababab;
+}
+
+.letter-spacing-large{
+    letter-spacing: 3px;
 }

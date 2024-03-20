@@ -22,7 +22,7 @@ export class TypeAbsenceComponent extends Crud {
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Tipos de faltas'
   dialogConfig: DynamicDialogConfig;
-  entities = [
+  data = [
     {
       name: 'Permiso sin goze de sueldo',
     },
@@ -51,6 +51,10 @@ export class TypeAbsenceComponent extends Crud {
 
   protected getRefDialog() {
     return this.dialogService.open(TypeAbsenceDialogComponent, this.dialogConfig)
+  }
+
+  protected restore(){
+    
   }
 
 }

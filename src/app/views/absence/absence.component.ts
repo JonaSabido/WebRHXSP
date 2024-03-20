@@ -22,7 +22,7 @@ export class AbsenceComponent extends Crud {
   prevLinks = ['Home', 'Faltas']
   activeLink = 'Registros'
   dialogConfig: DynamicDialogConfig;
-  entities = [
+  data = [
     {
       employee: 'Juan Olmo',
       date: '24 Febrero 2024',
@@ -55,6 +55,7 @@ export class AbsenceComponent extends Crud {
     public refDialog: DynamicDialogRef,
   ) {
     super(dialogService, refDialog)
+    
     this.dialogConfig = {
       header: 'Nueva falta',
       closeOnEscape: false,
@@ -70,5 +71,9 @@ export class AbsenceComponent extends Crud {
 
   protected getRefDialog() {
     return this.dialogService.open(AbsenceDialogComponent, this.dialogConfig)
+  }
+
+  protected restore(){
+    
   }
 }

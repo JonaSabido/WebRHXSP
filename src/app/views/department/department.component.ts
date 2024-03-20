@@ -23,7 +23,7 @@ export class DepartmentComponent extends Crud {
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Departamentos'
   dialogConfig: DynamicDialogConfig;
-  entities = [
+  data = [
     {
       name: 'IKA'
     },
@@ -58,5 +58,9 @@ export class DepartmentComponent extends Crud {
 
   protected getRefDialog() {
     return this.dialogService.open(DepartmentDialogComponent, this.dialogConfig)
+  }
+
+  protected restore(){
+    
   }
 }
