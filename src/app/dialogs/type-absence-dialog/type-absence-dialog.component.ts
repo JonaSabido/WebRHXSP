@@ -15,7 +15,7 @@ import { DialogCrud } from '../../../../shared/helpers/dialog';
   styleUrl: './type-absence-dialog.component.scss'
 })
 export class TypeAbsenceDialogComponent extends DialogCrud {
-  @ViewChild('form') formPersonal: NgForm = {} as NgForm;
+  @ViewChild('form') form: NgForm = {} as NgForm;
 
   constructor(
     public ref: DynamicDialogRef,

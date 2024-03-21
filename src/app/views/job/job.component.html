@@ -26,8 +26,8 @@
                     <div class="d-flex align-items-center justify-content-start">
                         <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info"
                             (click)="openDialog(entity)"></p-button>
-                        <p-button styleClass="ms-2" icon="pi pi-trash" [rounded]="true" [text]="true"
-                            severity="danger"></p-button>
+                        <p-button styleClass="ms-2" icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"
+                            (click)="delete(entity.id)"></p-button>
                     </div>
                 </td>
             </tr>

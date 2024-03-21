@@ -9,6 +9,10 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { DialogCrud } from '../../../../shared/helpers/dialog';
+import { DepartmentResponse } from '../../interfaces/department';
+import { JobResponse } from '../../interfaces/job';
+import { DepartmentService } from '../../core/services/department.service';
+import { JobService } from '../../core/services/job.service';
 
 
 @Component({
@@ -26,13 +30,19 @@ export class EmployeeDialogComponent extends DialogCrud {
   stepItems: MenuItem[] = [];
   menuItems: MenuItem[] = [];
   menuItemsForNull: MenuItem[] = [];
+  departments: DepartmentResponse[];
+  jobs: JobResponse[]
   activeIndex: number = 0;
 
   constructor(
     public ref: DynamicDialogRef,
-    public config: DynamicDialogConfig
+    public config: DynamicDialogConfig,
+    private departmentService: DepartmentService,
+    private jobService: JobService,
   ) {
     super(ref, config)
+    this.departments = []
+    this.jobs = []
   }
 
   onActiveIndexChange(event: number) {
@@ -40,7 +50,8 @@ export class EmployeeDialogComponent extends DialogCrud {
   }
 
   ngOnInit() {
-
+    this.departmentService.all().subscribe(response => this.departments = response.data)
+    this.jobService.all().subscribe(response => this.jobs = response.data)
     this.stepItems = [
       {
         label: 'Personal',

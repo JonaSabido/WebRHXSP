@@ -119,16 +119,15 @@
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Departamento</label>
-                <p-dropdown id="id_department" name="id_department"
-                    [options]="[{id: 1, name: 'IKA'}, { id: 1, name: 'YCC'}]" optionLabel="name" optionValue="id"
-                    [showClear]="true" placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
+                <p-dropdown id="id_department" name="id_department" [options]="departments" optionLabel="name"
+                    optionValue="id" [showClear]="true" placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
                     [(ngModel)]="config.data.entity.id_department"></p-dropdown>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Trabajo</label>
-                <p-dropdown id="id_job" name="id_job" [options]="[{id: 8, name: 'Guardia de seguridad'}]"
-                    optionLabel="name" optionValue="id" [showClear]="true" placeholder="Selecciona la ocpión"
-                    styleClass="w-100 roboto" [(ngModel)]="config.data.entity.id_job"></p-dropdown>
+                <p-dropdown id="id_job" name="id_job" [options]="jobs" optionLabel="name" optionValue="id"
+                    [showClear]="true" placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
+                    [(ngModel)]="config.data.entity.id_job"></p-dropdown>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Fecha de ingreso</label>

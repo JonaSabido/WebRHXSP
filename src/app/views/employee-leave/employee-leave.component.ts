@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -7,49 +7,31 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
 import { View } from '../../../../shared/helpers/view';
 import { EmployeeLeaveDialogComponent } from '../../dialogs/employee-leave-dialog/employee-leave-dialog.component';
 import { Crud } from '../../../../shared/helpers/crud';
+import { TagModule } from 'primeng/tag';
+import { EmployeeLeaveRequest, EmployeeLeaveResponse } from '../../interfaces/employee-leave';
+import { EmployeeLeaveService } from '../../core/services/employee-leave.service';
 
 @Component({
   selector: 'app-employee-leave',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule],
   providers: [DialogService, DynamicDialogRef,],
   templateUrl: './employee-leave.component.html',
   styleUrl: './employee-leave.component.scss'
 })
-export class EmployeeLeaveComponent extends Crud {
+export class EmployeeLeaveComponent extends Crud<EmployeeLeaveRequest, EmployeeLeaveResponse> implements OnInit {
   module = 'Bajas'
   icon = 'pi-angle-double-down'
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Bajas'
   dialogConfig: DynamicDialogConfig;
-  data = [
-    {
-      employee: 'Juan Olmo',
-      date: '24 Febrero 2024'
-    },
-    {
-      employee: 'Maria Rodriguez',
-      date: '14 Febrero 2024'
-    },
-    {
-      employee: 'Maria Rodriguez',
-      date: '04 Enero 2022'
-    },
-    {
-      employee: 'Luis Martinez',
-      date: '30 Marzo 2022'
-    },
-    {
-      employee: 'Luis Martinez',
-      date: '31 Agosto 2020'
-    }
-  ]
 
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
+    public service: EmployeeLeaveService
   ) {
-    super(dialogService, refDialog)
+    super(dialogService, refDialog, service)
     this.dialogConfig = {
       header: 'Nueva baja',
       closeOnEscape: false,
@@ -67,7 +49,16 @@ export class EmployeeLeaveComponent extends Crud {
     return this.dialogService.open(EmployeeLeaveDialogComponent, this.dialogConfig)
   }
 
-  protected restore(){
-    
+  protected restore() {
+    this.entity = {
+      id_employee: 0,
+      leave_date: '',
+      description: ''
+    }
   }
+
+  ngOnInit(): void {
+
+  }
+  
 }

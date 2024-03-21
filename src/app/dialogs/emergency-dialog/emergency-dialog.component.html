@@ -1,31 +1,36 @@
-<form class="mb-5">
+<form role="form" #form="ngForm" class="mb-5">
     <div>
         <label for="user" class="roboto fs-small">Empleado</label>
         <br>
-        <p-dropdown [options]="employees" optionLabel="fullname" [showClear]="true" placeholder="Selecciona el empleado"
-            styleClass="w-100 roboto"></p-dropdown>
+        <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name" optionValue="id"
+            [showClear]="true" placeholder="Selecciona el empleado" styleClass="w-100 roboto"
+            [(ngModel)]="config.data.entity.id_employee" [required]="true" #id_employee="ngModel"></p-dropdown>
     </div>
     <div class="mt-3">
         <label for="user" class="roboto fs-small">Nombre del familiar</label>
-        <input pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100"
-            placeholder="Escriba el nombre del familiar" />
+        <input pInputText type="text" id="reference_name" name="reference_name" class="p-inputtext-sm roboto w-100"
+            placeholder="Escriba el nombre del familiar" [(ngModel)]="config.data.entity.reference_name" required
+            #reference_name="ngModel" />
     </div>
     <div class="mt-3">
         <label for="user" class="roboto fs-small">Parentezco</label>
-        <p-dropdown [options]="[{name: 'Padre'}, {name: 'Madre'}, {name: 'Hijo'}, {name: 'Esposa'}]" optionLabel="name"
-            [showClear]="true" placeholder="Selecciona el parentezco" styleClass="w-100 roboto"></p-dropdown>
+        <p-dropdown id="type" name="type" [options]="[{name: 'Padre'}, {name: 'Madre'}, {name: 'Hijo'}, {name: 'Esposa'}]" optionLabel="name"
+            optionValue="name" [showClear]="true" placeholder="Selecciona el parentezco" styleClass="w-100 roboto"
+            [(ngModel)]="config.data.entity.type" [required]="true" #type="ngModel"></p-dropdown>
     </div>
     <div class="mt-3">
         <label for="user" class="roboto fs-small">Número telefónico</label>
-        <input pInputText type="number" id="user" name="user" class="p-inputtext-sm roboto w-100"
-            placeholder="Escriba el número telefónico" />
+        <input pInputText type="number" id="phone" name="phone" class="p-inputtext-sm roboto w-100"
+            placeholder="Escriba el número telefónico" [(ngModel)]="config.data.entity.phone" required
+            #phone="ngModel" />
     </div>
 </form>
 <div class="d-flex justify-content-end">
     <div class="footer-dialog">
         <p-button icon="pi pi-times" label="Cancelar" [text]="true" severity="secondary"
             (click)="closeDialog()"></p-button>
-        <p-button icon="pi pi-save" label="Guardar" [text]="true"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" [text]="true" [disabled]="form.invalid ?? false"
+            (click)="save(config.data.entity)"></p-button>
         <!-- <p-button icon="pi pi-times" label="Cancelar" severity="secondary" size="small" (click)="closeDialog()"></p-button>
         <p-button icon="pi pi-save" label="Guardar" size="small" styleClass="ms-2"></p-button> -->
     </div>

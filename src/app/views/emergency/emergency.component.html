@@ -4,7 +4,7 @@
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
         <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"></p-button>
     </div>
-    <p-table [value]="data" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
+    <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" scrollHeight="800px"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-3">
@@ -22,17 +22,16 @@
         </ng-template>
         <ng-template pTemplate="body" let-entity let-columns>
             <tr>
-                <td>{{entity.employee}}</td>
+                <td>{{entity.employee.name}} {{entity.employee.sure_name}} {{entity.employee.last_name}}</td>
                 <td>{{entity.reference_name}}</td>
                 <td>{{entity.type}}</td>
                 <td>{{entity.phone}}</td>
-
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
-                        <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" 
-                            severity="info"></p-button>
-                        <p-button styleClass="ms-2" icon="pi pi-trash" [rounded]="true" [text]="true" 
-                            severity="danger"></p-button>
+                        <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info"
+                            (click)="openDialog(entity)"></p-button>
+                        <p-button styleClass="ms-2" icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"
+                            (click)="delete(entity.id)"></p-button>
                     </div>
                 </td>
             </tr>

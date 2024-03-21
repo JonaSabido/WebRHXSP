@@ -32,6 +32,7 @@ export interface EmployeeResponse extends EntityBase {
     id_department: number
     id_job: number
     code: number
+    full_name: string
     name: string
     sure_name: string
     last_name: string

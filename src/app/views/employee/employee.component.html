@@ -43,7 +43,7 @@
         <ng-template pTemplate="body" let-entity let-columns>
             <tr class="clickeable" (click)="openDialog(entity)">
                 <td>{{entity.code}}</td>
-                <td>{{entity.name}} {{entity.sure_name}} {{entity.last_name}}</td>
+                <td>{{entity.full_name}}</td>
                 <!-- <td>{{entity.area.name}}</td> -->
                 <td>{{entity.job.name}}</td>
                 <td>{{entity.department.name}}</td>

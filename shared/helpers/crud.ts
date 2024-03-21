@@ -25,7 +25,7 @@ export abstract class Crud<T = null, U = null> extends View {
         temporal?: U
     ) {
         const dialogData: DialogData<T, U> = {
-            entity: temporal ? { ...temporal as U} : this.entity,
+            entity: temporal ? { ...temporal as U } : this.entity,
             type_action: temporal ? 'Update' : 'Create'
         }
         this.dialogConfig.data = dialogData
@@ -37,6 +37,7 @@ export abstract class Crud<T = null, U = null> extends View {
                         this.service$.store(dialogData.entity as T).subscribe({
                             next: (response) => {
                                 this.reload()
+                                this.restore()
                             },
                             error: (e) => console.log(e)
                         })
@@ -48,6 +49,7 @@ export abstract class Crud<T = null, U = null> extends View {
                         this.service$.update(data['id'], dialogData.entity as T).subscribe({
                             next: (response) => {
                                 this.reload()
+                                this.restore()
                             },
                             error: (e) => console.log(e)
                         })
@@ -66,6 +68,16 @@ export abstract class Crud<T = null, U = null> extends View {
                 }
             )
         }
+    }
+
+    public delete(id: number) {
+        this.service$?.destroy(id).subscribe({
+            next: (response) => {
+                console.log(response)
+                this.reload()
+            },
+            error: (e) => console.log(e)
+        })
     }
 
     protected abstract getRefDialog(): DynamicDialogRef;

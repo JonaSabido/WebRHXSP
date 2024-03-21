@@ -17,7 +17,7 @@ import { AreaService } from '../../core/services/area.service';
   styleUrl: './job-dialog.component.scss'
 })
 export class JobDialogComponent extends DialogCrud {
-  @ViewChild('form') formPersonal: NgForm = {} as NgForm;
+  @ViewChild('form') form: NgForm = {} as NgForm;
   areas: AreaResponse[];
 
   constructor(
