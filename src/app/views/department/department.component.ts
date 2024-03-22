@@ -9,13 +9,15 @@ import { DepartmentDialogComponent } from '../../dialogs/department-dialog/depar
 import { Crud } from '../../../../shared/helpers/crud';
 import { DepartmentRequest, DepartmentResponse } from '../../interfaces/department';
 import { DepartmentService } from '../../core/services/department.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 
 @Component({
   selector: 'app-department',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule],
-  providers: [DialogService, DynamicDialogRef,],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule],
+  providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './department.component.html',
   styleUrl: './department.component.scss'
 })
@@ -29,9 +31,10 @@ export class DepartmentComponent extends Crud<DepartmentRequest, DepartmentRespo
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
-    public service: DepartmentService
+    public service: DepartmentService,
+    public messageService: MessageService,
   ) {
-    super(dialogService, refDialog, service)
+    super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nuevo departamento',
       closeOnEscape: false,

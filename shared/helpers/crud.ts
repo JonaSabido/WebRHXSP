@@ -2,6 +2,7 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from "primeng/dy
 import { View } from "./view";
 import { DialogData } from "../../src/app/interfaces/dialog-data";
 import { ApiCrudService } from "../services/api-crud.service";
+import { MessageService } from "primeng/api";
 
 export abstract class Crud<T = null, U = null> extends View {
     abstract dialogConfig: DynamicDialogConfig;
@@ -14,6 +15,7 @@ export abstract class Crud<T = null, U = null> extends View {
         public dialogService$: DialogService,
         public refDialog$: DynamicDialogRef,
         public service$?: ApiCrudService<T, U>,
+        private messageService$?: MessageService,
     ) {
         super();
         this.entities = []
@@ -36,10 +38,14 @@ export abstract class Crud<T = null, U = null> extends View {
                     if (this.service$) {
                         this.service$.store(dialogData.entity as T).subscribe({
                             next: (response) => {
+                                this.messageService$?.add({ severity: 'success', summary: 'Correcto', detail: 'Datos creados correctamente' });
                                 this.reload()
                                 this.restore()
                             },
-                            error: (e) => console.log(e)
+                            error: (e) => {
+                                this.messageService$?.add({ severity: 'error', summary: 'Error', detail: 'Ocurrió algún error al crear' });
+                                console.log(e)
+                            }
                         })
                     }
                 }
@@ -48,10 +54,14 @@ export abstract class Crud<T = null, U = null> extends View {
                         const data = dialogData.entity as any
                         this.service$.update(data['id'], dialogData.entity as T).subscribe({
                             next: (response) => {
+                                this.messageService$?.add({ severity: 'success', summary: 'Correcto', detail: 'Datos actualizados correctamente' });
                                 this.reload()
                                 this.restore()
                             },
-                            error: (e) => console.log(e)
+                            error: (e) => {
+                                this.messageService$?.add({ severity: 'error', summary: 'Error', detail: 'Ocurrió algún error al actualizar' });
+                                console.log(e)
+                            }
                         })
                     }
                 }
@@ -74,9 +84,13 @@ export abstract class Crud<T = null, U = null> extends View {
         this.service$?.destroy(id).subscribe({
             next: (response) => {
                 console.log(response)
+                this.messageService$?.add({ severity: 'success', summary: 'Correcto', detail: 'Dato eliminado correctamente' });
                 this.reload()
             },
-            error: (e) => console.log(e)
+            error: (e) => {
+                this.messageService$?.add({ severity: 'error', summary: 'Error', detail: 'Ocurrió algún error al eliminar' });
+                console.log(e)
+            }
         })
     }
 

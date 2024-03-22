@@ -9,12 +9,14 @@ import { EmployeeDiseaseDialogComponent } from '../../dialogs/employee-disease-d
 import { Crud } from '../../../../shared/helpers/crud';
 import { EmployeeDiseaseRequest, EmployeeDiseaseResponse } from '../../interfaces/employee-disease';
 import { EmployeeDiseaseService } from '../../core/services/employee-disease.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-employee-disease',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule],
-  providers: [DialogService, DynamicDialogRef,],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule],
+  providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './employee-disease.component.html',
   styleUrl: './employee-disease.component.scss'
 })
@@ -28,9 +30,10 @@ export class EmployeeDiseaseComponent extends Crud<EmployeeDiseaseRequest, Emplo
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
-    public service: EmployeeDiseaseService
+    public service: EmployeeDiseaseService,
+    public messageService: MessageService,
   ) {
-    super(dialogService, refDialog, service)
+    super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nuevo enfermedad de empleado',
       closeOnEscape: false,

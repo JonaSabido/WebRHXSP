@@ -10,12 +10,14 @@ import { Crud } from '../../../../shared/helpers/crud';
 import { TagModule } from 'primeng/tag';
 import { EmployeeLeaveRequest, EmployeeLeaveResponse } from '../../interfaces/employee-leave';
 import { EmployeeLeaveService } from '../../core/services/employee-leave.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-employee-leave',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule],
-  providers: [DialogService, DynamicDialogRef,],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule],
+  providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './employee-leave.component.html',
   styleUrl: './employee-leave.component.scss'
 })
@@ -29,9 +31,10 @@ export class EmployeeLeaveComponent extends Crud<EmployeeLeaveRequest, EmployeeL
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
-    public service: EmployeeLeaveService
+    public service: EmployeeLeaveService,
+    public messageService: MessageService,
   ) {
-    super(dialogService, refDialog, service)
+    super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nueva baja',
       closeOnEscape: false,

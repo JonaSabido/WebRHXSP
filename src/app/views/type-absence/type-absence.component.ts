@@ -9,11 +9,13 @@ import { TypeAbsenceDialogComponent } from '../../dialogs/type-absence-dialog/ty
 import { Crud } from '../../../../shared/helpers/crud';
 import { TypeAbsenceRequest, TypeAbsenceResponse } from '../../interfaces/type-absence';
 import { TypeAbsenceService } from '../../core/services/type-absence.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-type-absence',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule],
   providers: [DialogService, DynamicDialogRef,],
   templateUrl: './type-absence.component.html',
   styleUrl: './type-absence.component.scss'
@@ -28,9 +30,10 @@ export class TypeAbsenceComponent extends Crud<TypeAbsenceRequest, TypeAbsenceRe
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
-    public service: TypeAbsenceService
+    public service: TypeAbsenceService,
+    public messageService: MessageService,
   ) {
-    super(dialogService, refDialog, service)
+    super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nuevo tipo de falta',
       closeOnEscape: false,

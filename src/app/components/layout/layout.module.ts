@@ -39,7 +39,7 @@ const routes: Routes = [
                 component: AreaComponent
             },
             {
-                path: 'trabajos',
+                path: 'puestos',
                 component: JobComponent
             },
             {

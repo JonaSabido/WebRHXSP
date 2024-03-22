@@ -9,28 +9,31 @@ import { JobDialogComponent } from '../../dialogs/job-dialog/job-dialog.componen
 import { Crud } from '../../../../shared/helpers/crud';
 import { JobRequest, JobResponse } from '../../interfaces/job';
 import { JobService } from '../../core/services/job.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-job',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule],
-  providers: [DialogService, DynamicDialogRef,],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule],
+  providers: [DialogService, DynamicDialogRef,MessageService],
   templateUrl: './job.component.html',
   styleUrl: './job.component.scss'
 })
 export class JobComponent extends Crud<JobRequest, JobResponse> implements OnInit {
-  module = 'Trabajos'
+  module = 'Puestos'
   icon = 'pi-briefcase'
   prevLinks = ['Home', 'Empresa']
-  activeLink = 'Trabajos'
+  activeLink = 'Puestos'
   dialogConfig: DynamicDialogConfig;
 
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
-    public service: JobService
+    public service: JobService,
+    public messageService: MessageService,
   ) {
-    super(dialogService, refDialog, service)
+    super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nuevo trabajo',
       closeOnEscape: false,

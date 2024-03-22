@@ -9,11 +9,13 @@ import { TooltipModule } from 'primeng/tooltip';
 import { Crud } from '../../../../shared/helpers/crud';
 import { DiseaseRequest, DiseaseResponse } from '../../interfaces/disease';
 import { DiseaseService } from '../../core/services/disease.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-disease',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule],
   providers: [DialogService, DynamicDialogRef,],
   templateUrl: './disease.component.html',
   styleUrl: './disease.component.scss'
@@ -28,9 +30,10 @@ export class DiseaseComponent extends Crud<DiseaseRequest, DiseaseResponse> impl
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
-    public service: DiseaseService
+    public service: DiseaseService,
+    public messageService: MessageService,
   ) {
-    super(dialogService, refDialog, service)
+    super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nueva enfermedad',
       closeOnEscape: false,

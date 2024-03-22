@@ -9,12 +9,14 @@ import { EmergencyDialogComponent } from '../../dialogs/emergency-dialog/emergen
 import { Crud } from '../../../../shared/helpers/crud';
 import { EmergencyRequest, EmergencyResponse } from '../../interfaces/emergency';
 import { EmergencyService } from '../../core/services/emergency.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-emergency',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule],
-  providers: [DialogService, DynamicDialogRef,],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule],
+  providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './emergency.component.html',
   styleUrl: './emergency.component.scss'
 })
@@ -28,9 +30,10 @@ export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
-    public service: EmergencyService
+    public service: EmergencyService,
+    public messageService: MessageService,
   ) {
-    super(dialogService, refDialog, service)
+    super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nuevo número de emergencia',
       closeOnEscape: false,

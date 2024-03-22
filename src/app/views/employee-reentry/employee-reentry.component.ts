@@ -9,13 +9,15 @@ import { Crud } from '../../../../shared/helpers/crud';
 import { TagModule } from 'primeng/tag';
 import { EmployeeReentryRequest, EmployeeReentryResponse } from '../../interfaces/employee-reentry';
 import { EmployeeReentryService } from '../../core/services/employee-reentry.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 
 @Component({
   selector: 'app-employee-reentry',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule],
-  providers: [DialogService, DynamicDialogRef,],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule],
+  providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './employee-reentry.component.html',
   styleUrl: './employee-reentry.component.scss'
 })
@@ -29,9 +31,10 @@ export class EmployeeReentryComponent extends Crud<EmployeeReentryRequest, Emplo
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
-    public service: EmployeeReentryService
+    public service: EmployeeReentryService,
+    public messageService: MessageService,
   ) {
-    super(dialogService, refDialog, service)
+    super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nuevo reingreso',
       closeOnEscape: false,

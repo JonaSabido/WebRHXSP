@@ -143,8 +143,8 @@ export class SidebarComponent {
         },
         {
           icon: 'briefcase',
-          title: 'Trabajos',
-          path: 'trabajos',
+          title: 'Puestos',
+          path: 'puestos',
           isActive: false
         },
         {

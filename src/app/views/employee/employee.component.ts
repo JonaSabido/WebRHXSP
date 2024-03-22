@@ -9,12 +9,14 @@ import { TagModule } from 'primeng/tag';
 import { Crud } from '../../../../shared/helpers/crud';
 import { EmployeeRequest, EmployeeResponse } from '../../interfaces/employee';
 import { EmployeeService } from '../../core/services/employee.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule],
-  providers: [DialogService, DynamicDialogRef],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule],
+  providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss'
 })
@@ -29,8 +31,9 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse> i
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
     public service: EmployeeService,
+    public messageService: MessageService,
   ) {
-    super(dialogService, refDialog, service)
+    super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nuevo empleado',
       closeOnEscape: false,
