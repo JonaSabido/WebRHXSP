@@ -2,13 +2,11 @@
 <div class="bg-white rounded mt-4 p-4">
     <div class="d-flex align-items-center justify-content-between">
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
-        <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true"
-            size="small"></p-button>
+        <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"></p-button>
     </div>
-    <p-table [value]="data" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
-        [scrollable]="true" scrollHeight="800px"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        styleClass="p-datatable-striped mt-3">
+    <p-table [value]="data" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }" [scrollable]="true"
+        scrollHeight="800px" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        styleClass="p-datatable-striped mt-3 custom-table">
         <ng-template pTemplate="caption">
             <div class="d-flex">
                 <!-- <p-button icon="pi pi-file" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
@@ -45,10 +43,11 @@
                 </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
-                        <p-button styleClass="ms-2" icon="pi pi-list" [rounded]="true" [text]="true"
-                            severity="info"></p-button>
-                        <p-button styleClass="ms-2" icon="pi pi-trash" [rounded]="true" [text]="true"
-                            severity="danger"></p-button>
+                        <p-button icon="pi pi-pencil" severity="info" [rounded]="true" size="small"
+                            (click)="openDialog(entity)"></p-button>
+
+                        <p-button icon="pi pi-trash" severity="danger" [rounded]="true" size="small" styleClass="ms-2"
+                            (click)="delete(entity.id)"></p-button>
                     </div>
                 </td>
             </tr>

@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
+import { SidebarService } from '../../../../shared/helpers/services/sidebar.service';
 
 @Component({
   selector: 'app-login',
@@ -13,4 +14,11 @@ import { CheckboxModule } from 'primeng/checkbox';
 })
 export class LoginComponent {
 
+  constructor(private sidebarService: SidebarService) {
+
+  }
+
+  ngOnInit() {
+    this.sidebarService.setOnStorage(true)
+  }
 }

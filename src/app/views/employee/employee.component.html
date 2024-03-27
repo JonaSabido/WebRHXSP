@@ -7,7 +7,7 @@
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" scrollHeight="800px"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        styleClass="p-datatable-striped mt-3">
+        styleClass="p-datatable-striped mt-3 custom-table">
         <ng-template pTemplate="caption">
             <div class="d-flex">
                 <!-- <p-button icon="pi pi-file" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
@@ -52,10 +52,10 @@
                 <td>{{entity.entry_year}}</td>
                 <td>
                     @if(entity.status){
-                    <p-tag [value]="'Alta'" severity="success"></p-tag>
+                    <p-tag [value]="'Alta'" severity="success" styleClass="big-tag"></p-tag>
                     }
                     @else if(entity.status === 'Baja'){
-                    <p-tag [value]="'Baja'" severity="danger"></p-tag>
+                    <p-tag [value]="'Baja'" severity="danger" styleClass="big-tag"></p-tag>
                     }
                 </td>
 
@@ -63,4 +63,4 @@
         </ng-template>
     </p-table>
 </div>
-<p-toast styleClass="my-toast" ></p-toast>
+<p-toast position="bottom-right" key="br"></p-toast>

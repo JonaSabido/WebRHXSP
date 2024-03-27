@@ -16,7 +16,7 @@ import { ToastModule } from 'primeng/toast';
   selector: 'app-type-absence',
   standalone: true,
   imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule],
-  providers: [DialogService, DynamicDialogRef,],
+  providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './type-absence.component.html',
   styleUrl: './type-absence.component.scss'
 })

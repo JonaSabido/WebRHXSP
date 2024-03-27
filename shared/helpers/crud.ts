@@ -38,12 +38,12 @@ export abstract class Crud<T = null, U = null> extends View {
                     if (this.service$) {
                         this.service$.store(dialogData.entity as T).subscribe({
                             next: (response) => {
-                                this.messageService$?.add({ severity: 'success', summary: 'Correcto', detail: 'Datos creados correctamente' });
+                                this.messageService$?.add({ key: 'br', severity: 'success', summary: 'Correcto', detail: 'Datos creados correctamente' });
                                 this.reload()
                                 this.restore()
                             },
                             error: (e) => {
-                                this.messageService$?.add({ severity: 'error', summary: 'Error', detail: 'Ocurrió algún error al crear' });
+                                this.messageService$?.add({ key: 'br', severity: 'error', summary: 'Error', detail: 'Ocurrió algún error al crear' });
                                 console.log(e)
                             }
                         })
@@ -54,12 +54,12 @@ export abstract class Crud<T = null, U = null> extends View {
                         const data = dialogData.entity as any
                         this.service$.update(data['id'], dialogData.entity as T).subscribe({
                             next: (response) => {
-                                this.messageService$?.add({ severity: 'success', summary: 'Correcto', detail: 'Datos actualizados correctamente' });
+                                this.messageService$?.add({ key: 'br', severity: 'success', summary: 'Correcto', detail: 'Datos actualizados correctamente' });
                                 this.reload()
                                 this.restore()
                             },
                             error: (e) => {
-                                this.messageService$?.add({ severity: 'error', summary: 'Error', detail: 'Ocurrió algún error al actualizar' });
+                                this.messageService$?.add({ key: 'br', severity: 'error', summary: 'Error', detail: 'Ocurrió algún error al actualizar' });
                                 console.log(e)
                             }
                         })
@@ -74,7 +74,11 @@ export abstract class Crud<T = null, U = null> extends View {
             this.service$.all().subscribe(
                 {
                     next: (response) => this.entities = response.data,
-                    error: (e) => console.log(e)
+                    error: (e) => {
+                        if (e.statusCode = 404) {
+                            this.entities = []
+                        }
+                    }
                 }
             )
         }
@@ -84,12 +88,11 @@ export abstract class Crud<T = null, U = null> extends View {
         this.service$?.destroy(id).subscribe({
             next: (response) => {
                 console.log(response)
-                this.messageService$?.add({ severity: 'success', summary: 'Correcto', detail: 'Dato eliminado correctamente' });
+                this.messageService$?.add({ key: 'br', severity: 'success', summary: 'Correcto', detail: 'Dato eliminado correctamente' });
                 this.reload()
             },
             error: (e) => {
-                this.messageService$?.add({ severity: 'error', summary: 'Error', detail: 'Ocurrió algún error al eliminar' });
-                console.log(e)
+                this.messageService$?.add({ key: 'br', severity: 'error', summary: 'Error', detail: 'Ocurrió algún error al eliminar' });
             }
         })
     }

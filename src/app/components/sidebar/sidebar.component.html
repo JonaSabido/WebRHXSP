@@ -1,5 +1,6 @@
-<p-sidebar #sidebarRef [(visible)]="sidebarVisible" [blockScroll]="true" [modal]="false" [dismissible]="false"
-    [visible]="true" styleClass="bg-secondary-color" [closeOnEscape]="false" [style]="{width: '280px'}">
+<p-sidebar #sidebarRef  [blockScroll]="true" [modal]="isMobile"
+    [dismissible]="true" [visible]="sidebarService.sidebarVisible" styleClass="bg-secondary-color" [closeOnEscape]="false"
+    [style]="{width: '280px'}" (onHide)="sidebarService.switchSidebarVisible()">
     <ng-template pTemplate="header">
         <img class="img-fluid" src="assets/images/logo-negativo-small.png">
     </ng-template>
@@ -19,7 +20,8 @@
                     <ul class="list-none p-0 m-0 overflow-hidden">
                         @for(sidebarModuleSubitem of sidebarModuleItem.subitems; track sidebarModuleSubitem.title){
                         <li>
-                            <a pRipple class="d-flex align-items-center p-3 sidebar-item p-ripple" [routerLink]="sidebarModuleSubitem.path">
+                            <a pRipple class="d-flex align-items-center p-3 sidebar-item p-ripple"
+                                [routerLink]="sidebarModuleSubitem.path">
                                 <i [class]="'pi pi-' + sidebarModuleSubitem.icon + ' me-3'"></i>
                                 <span>{{sidebarModuleSubitem.title}}</span>
                             </a>
@@ -38,6 +40,6 @@
     </ng-template> -->
 </p-sidebar>
 <div id="container-button" class="d-flex align-items-center">
-    <p-button (click)="sidebarVisible = true" icon="pi pi-align-justify" styleClass="ms-2" [text]="true"
+    <p-button (click)="sidebarService.switchSidebarVisible()" icon="pi pi-align-justify" styleClass="ms-2" [text]="true"
         severity="secondary"></p-button>
 </div>

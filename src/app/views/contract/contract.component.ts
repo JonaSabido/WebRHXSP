@@ -77,7 +77,7 @@ export class ContractComponent extends Crud {
     return this.dialogService.open(ContractDialogComponent, this.dialogConfig)
   }
 
-  protected restore(){
-    
+  protected restore() {
+
   }
 }

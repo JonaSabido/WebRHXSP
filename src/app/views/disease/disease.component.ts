@@ -16,7 +16,7 @@ import { ToastModule } from 'primeng/toast';
   selector: 'app-disease',
   standalone: true,
   imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule],
-  providers: [DialogService, DynamicDialogRef,],
+  providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './disease.component.html',
   styleUrl: './disease.component.scss'
 })

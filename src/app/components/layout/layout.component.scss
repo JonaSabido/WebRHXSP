@@ -4,7 +4,17 @@
 }
 
 #content {
-    margin: 100px 30px 100px 310px;
+    margin-top: 100px;
+    margin-right: 30px;
+    margin-bottom: 100px;
     position: relative;
     z-index: 1;
+}
+
+.margin-start-with-sidebar {
+    margin-left: 310px;
+}
+
+.margin-start-without-sidebar {
+    margin-left: 30px;
 }

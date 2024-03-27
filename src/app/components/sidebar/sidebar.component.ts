@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
 import { AvatarModule } from 'primeng/avatar';
 import { RippleModule } from 'primeng/ripple';
 import { SidebarModuleItem } from '../../interfaces/sidebar';
 import { RouterModule } from '@angular/router';
+import { SidebarService } from '../../../../shared/helpers/services/sidebar.service';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+
+  @Input() isMobile: boolean = false;
 
   sidebarModuleItems: SidebarModuleItem[] = [
     {
@@ -169,9 +172,9 @@ export class SidebarComponent {
     }
   ]
 
-  sidebarVisible: boolean = false;
-
-  constructor() {
+  constructor(
+    public sidebarService: SidebarService
+  ) {
   }
 
   closeCallback($event: any) {
@@ -181,7 +184,6 @@ export class SidebarComponent {
   changeVisibilityToModuleItem(moduleItem: SidebarModuleItem) {
     moduleItem.visible = !moduleItem.visible
   }
-
 
 
 }

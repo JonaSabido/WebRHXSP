@@ -54,7 +54,7 @@ export class AbsenceChartComponent extends View {
     super()
   }
 
-  openDetail() {
+  openDialog() {
     this.refDialog = this.dialogService.open(AbsenceChartDialogComponent,
       {
         header: 'Desglose de faltas',

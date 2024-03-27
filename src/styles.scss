@@ -25,12 +25,18 @@ body {
     margin: 0px !important
 }
 
+.custom-table {
+    box-shadow: 0px 1px 8px 0px rgba($color: #8c8c8c, $alpha: 0.3);
+}
+
 th {
     font-family: RobotoBold;
     font-size: 1em;
+
 }
 
-ul, li{
+ul,
+li {
     padding: 0 !important;
     margin: 0 !important;
 }
@@ -39,10 +45,17 @@ td {
     font-family: Roboto;
     border-bottom: 1px #e7e7e7 solid !important;
     font-size: .9em;
-
 }
 
-*{
+tr:nth-child(even) {
+    background-color: #f3fdff;
+}
+
+tr:hover{
+    background-color: #daf6fb;
+}
+
+* {
     text-decoration: none !important;
 }
 
@@ -102,16 +115,17 @@ td {
     bottom: 0;
 }
 
-.text-gray{
+.text-gray {
     color: #ababab;
 }
 
-.letter-spacing-large{
+.letter-spacing-large {
     letter-spacing: 3px;
 }
 
-.my-toast{
-    position: absolute;
-    top: 0;
-    right: 0;
+.big-tag {
+    font-size: .9em;
+    min-width: 40px;
+    width: auto;
+    height: 40px;
 }
