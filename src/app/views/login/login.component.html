@@ -20,15 +20,21 @@
                                         <h2 class="roboto-bold fs-3 ">Bienvenido a RH-XSP</h2>
                                         <span class="roboto">Inicia sesión para continuar</span>
                                     </div>
-                                    <form>
+                                    <form #login="ngForm" (ngSubmit)="onSubmit(login)">
                                         <div class="mt-4">
-                                            <label for="user" class="roboto fs-small">Usuario</label>
+                                            <label for="email" class="roboto fs-small">Email</label>
                                             <span class="p-input-icon-left w-100">
                                                 <i class="pi pi-user text-primary-color"></i>
-                                                <input pInputText type="text" id="user" name="user"
+                                                <input pInputText type="email" id="email" name="email"
                                                     class="p-inputtext-sm roboto w-100"
-                                                    placeholder="Escriba su nombre de usuario" />
+                                                    placeholder="Escriba su correo electrónico" [(ngModel)]="body.email"
+                                                    #email="ngModel" required />
                                             </span>
+                                            @if(email.invalid && (email.dirty || email.touched)){
+                                            @if(email.errors && email.errors['required']){
+                                            <span class="text-danger roboto fs-small">Por favor ingrese su correo</span>
+                                            }
+                                            }
                                         </div>
                                         <div class="mt-4">
                                             <label for="password" class="roboto fs-small">Contraseña</label>
@@ -36,8 +42,15 @@
                                                 <i class="pi pi-lock text-primary-color"></i>
                                                 <input pInputText type="password" id="password" name="password"
                                                     class="p-inputtext-sm roboto w-100"
-                                                    placeholder="Escriba su contraseña" />
+                                                    placeholder="Escriba su contraseña" [(ngModel)]="body.password"
+                                                    #password="ngModel" required />
                                             </span>
+                                            @if(password.invalid && (password.dirty || password.touched)){
+                                            @if(password.errors && password.errors['required']){
+                                            <span class="text-danger poppins font-size-small">Por favor ingrese su
+                                                contraseña</span>
+                                            }
+                                            }
                                         </div>
                                         <div class="mt-4">
                                             <div class="flex align-items-center">
@@ -46,10 +59,15 @@
                                                 <label for="rememberme1" class="roboto fs-small">Recuerdame</label>
                                             </div>
                                         </div>
-                                        <div class="mt-4">
+                                        <div class="mt-4 w-100">
                                             <p-button label="Iniciar Sesión" styleClass="w-100 roboto-bold fs-5"
-                                                routerLink="dashboard"></p-button>
+                                                [disabled]="login.invalid||loading" [type]="'submit'"></p-button>
                                         </div>
+                                        @if(alertUnauthorized){
+                                        <p class="roboto-bold fs-small text-danger text-center mt-3">Error al iniciar
+                                            sesión.
+                                            Intentelo de nuevo</p>
+                                        }
                                     </form>
                                 </div>
                             </div>
