@@ -5,13 +5,13 @@ import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.comp
 import { CardPaymentComponent } from '../../components/card-payment/card-payment.component';
 
 @Component({
-  selector: 'app-recomendation-payment',
+  selector: 'app-recommendation-payment',
   standalone: true,
   imports: [BreadcrumbComponent, CardPaymentComponent],
-  templateUrl: './recomendation-payment.component.html',
-  styleUrl: './recomendation-payment.component.scss'
+  templateUrl: './recommendation-payment.component.html',
+  styleUrl: './recommendation-payment.component.scss'
 })
-export class RecomendationPaymentComponent extends View {
+export class RecommendationPaymentComponent extends View {
   module = 'Pagos'
   icon = 'pi-dollar'
   prevLinks = ['Home', 'Recomendaciones']

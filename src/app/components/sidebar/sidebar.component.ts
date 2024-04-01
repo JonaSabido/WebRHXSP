@@ -111,7 +111,7 @@ export class SidebarComponent {
         {
           icon: 'chart-bar',
           title: 'Estadística',
-          path: '',
+          path: 'vacaciones-estadistica',
           isActive: false
         },
       ]

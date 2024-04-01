@@ -4,38 +4,38 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ContractDialogComponent } from '../../dialogs/contract-dialog/contract-dialog.component';
 import { Crud } from '../../../../shared/helpers/crud';
+import { RecommendationDialogComponent } from '../../dialogs/recommendation-dialog/recommendation-dialog.component';
 import { TagModule } from 'primeng/tag';
-import { ContractRequest, ContractResponse } from '../../interfaces/contract';
-import { ContractService } from '../../core/services/contract.service';
+import { RecommendationRequest, RecommendationResponse } from '../../interfaces/recommendation';
+import { RecommendationService } from '../../core/services/recommendation.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 
 @Component({
-  selector: 'app-contract',
+  selector: 'app-recommendation',
   standalone: true,
   imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule],
   providers: [DialogService, DynamicDialogRef, MessageService],
-  templateUrl: './contract.component.html',
-  styleUrl: './contract.component.scss'
+  templateUrl: './recommendation.component.html',
+  styleUrl: './recommendation.component.scss'
 })
-export class ContractComponent extends Crud<ContractRequest, ContractResponse> implements OnInit {
-  module = 'Contratos'
-  icon = 'pi-book'
-  prevLinks = ['Home', 'Empleados']
-  activeLink = 'Contratos'
+export class RecommendationComponent extends Crud<RecommendationRequest, RecommendationResponse> implements OnInit {
+  module = 'Registros'
+  icon = 'pi-list'
+  prevLinks = ['Home', 'Recomendaciones']
+  activeLink = 'Registros'
   dialogConfig: DynamicDialogConfig;
 
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
-    public service: ContractService,
+    public service: RecommendationService,
     public messageService: MessageService,
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nuevo contrato',
+      header: 'Nueva recomendación',
       closeOnEscape: false,
       closable: false,
       width: '50%',
@@ -48,19 +48,19 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse> i
   }
 
   protected getRefDialog() {
-    return this.dialogService.open(ContractDialogComponent, this.dialogConfig)
+    return this.dialogService.open(RecommendationDialogComponent, this.dialogConfig)
   }
 
   protected restore() {
     this.entity = {
       id_employee: 0,
-      start_date: '',
-      end_date: '',
-      status: true
+      id_recommended_employee: 0,
+      amount: 300,
     }
   }
 
   ngOnInit(): void {
 
   }
+
 }

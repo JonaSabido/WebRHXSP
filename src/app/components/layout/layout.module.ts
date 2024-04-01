@@ -18,8 +18,9 @@ import { ContractComponent } from '../../views/contract/contract.component';
 import { AbsenceComponent } from '../../views/absence/absence.component';
 import { AbsenceChartComponent } from '../../views/absence-chart/absence-chart.component';
 import { EmployeeVacationComponent } from '../../views/employee-vacation/employee-vacation.component';
-import { RecomendationComponent } from '../../views/recomendation/recomendation.component';
-import { RecomendationPaymentComponent } from '../../views/recomendation-payment/recomendation-payment.component';
+import { RecommendationComponent } from '../../views/recommendation/recommendation.component';
+import { RecommendationPaymentComponent } from '../../views/recommendation-payment/recommendation-payment.component';
+import { EmployeeVacationChartComponent } from '../../views/employee-vacation-chart/employee-vacation-chart.component';
 
 const routes: Routes = [
     {
@@ -87,12 +88,16 @@ const routes: Routes = [
                 component: EmployeeVacationComponent
             },
             {
+                path: 'vacaciones-estadistica',
+                component: EmployeeVacationChartComponent
+            },
+            {
                 path: 'recomendaciones',
-                component: RecomendationComponent
+                component: RecommendationComponent
             },
             {
                 path: 'recomendaciones-pagos',
-                component: RecomendationPaymentComponent
+                component: RecommendationPaymentComponent
             }
 
         ]

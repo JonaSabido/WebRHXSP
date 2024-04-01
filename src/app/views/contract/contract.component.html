@@ -4,8 +4,9 @@
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
         <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"></p-button>
     </div>
-    <p-table [value]="data" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }" [scrollable]="true"
-        scrollHeight="800px" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
+        [scrollable]="true" scrollHeight="800px"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-3 custom-table">
         <ng-template pTemplate="caption">
             <div class="d-flex">
@@ -38,21 +39,18 @@
         <ng-template pTemplate="body" let-entity let-columns>
             <tr>
                 <td>
-                    @if(entity.status === 'Vigente'){
-                    <p-tag [value]="entity.status" severity="success" styleClass="big-tag"></p-tag>
+                    @if(entity.status){
+                    <p-tag [value]="'Vigente'" severity="success" styleClass="big-tag"></p-tag>
                     }
-                    @else if(entity.status === 'Finalizado'){
-                    <p-tag [value]="entity.status" severity="warning" styleClass="big-tag"></p-tag>
+                    @else{
+                    <p-tag [value]="'Finalizado'" severity="warning" styleClass="big-tag"></p-tag>
                     }
                 </td>
-                <td>{{entity.employee}}</td>
+                <td>{{entity.employee.name}} {{entity.employee.sure_name}} {{entity.employee.last_name}}</td>
                 <td>{{entity.start_date}}</td>
                 <td>{{entity.end_date}}</td>
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
-                        <p-button icon="pi pi-pencil" severity="info" [rounded]="true" size="small"
-                            (click)="openDialog(entity)"></p-button>
-
                         <p-button icon="pi pi-trash" severity="danger" [rounded]="true" size="small" styleClass="ms-2"
                             (click)="delete(entity.id)"></p-button>
                     </div>
@@ -61,3 +59,4 @@
         </ng-template>
     </p-table>
 </div>
+<p-toast position="bottom-right" key="br"></p-toast>

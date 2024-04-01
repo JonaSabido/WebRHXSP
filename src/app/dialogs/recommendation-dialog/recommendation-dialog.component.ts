@@ -1,22 +1,22 @@
 import { Component, ViewChild } from '@angular/core';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogCrud } from '../../../../shared/helpers/dialog';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormsModule, NgForm } from '@angular/forms';
 import { EmployeeResponse } from '../../interfaces/employee';
 import { EmployeeService } from '../../core/services/employee.service';
 
 @Component({
-  selector: 'app-contract-dialog',
+  selector: 'app-recommendation-dialog',
   standalone: true,
   imports: [DialogModule, InputTextModule, ButtonModule, DropdownModule, FormsModule],
-  templateUrl: './contract-dialog.component.html',
-  styleUrl: './contract-dialog.component.scss'
+  templateUrl: './recommendation-dialog.component.html',
+  styleUrl: './recommendation-dialog.component.scss'
 })
-export class ContractDialogComponent extends DialogCrud {
+export class RecommendationDialogComponent extends DialogCrud {
   @ViewChild('form') form: NgForm = {} as NgForm;
   employees: EmployeeResponse[]
 
@@ -32,5 +32,4 @@ export class ContractDialogComponent extends DialogCrud {
   ngOnInit() {
     this.employeeService.all().subscribe(response => this.employees = response.data)
   }
-
 }

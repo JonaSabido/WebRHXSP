@@ -1,0 +1,18 @@
+<app-breadcrumb [icon]="icon" [module]="module" [prevLinks]="prevLinks" [activeLink]="activeLink"></app-breadcrumb>
+<div class="bg-white rounded mt-4 p-5">
+    <div class="calendar">
+        <div class="days-of-week pb-2 border-bottom">
+            @for (day of daysOfWeek; track day) {
+            <div class="day day-active roboto-bold">{{ day }}</div>
+            }
+        </div>
+        <div class="days pt-2 text-center">
+            @for (day of daysInMonth; track day.value) {
+            <div class="day roboto"
+                [ngClass]="{'day-active': day.currentMonth, 'day-inactive': !day.currentMonth, 'text-white': day.isToday, 'bg-secondary-color': day.isToday}">
+                {{ day.value }}
+            </div>
+            }
+        </div>
+    </div>
+</div>
