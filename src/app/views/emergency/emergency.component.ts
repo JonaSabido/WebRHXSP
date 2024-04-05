@@ -60,6 +60,10 @@ export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse
     }
   }
 
+  protected restoreFilters(){
+    
+  }
+
   ngOnInit(): void {
 
   }

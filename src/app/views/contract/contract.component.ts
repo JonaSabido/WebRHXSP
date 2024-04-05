@@ -60,6 +60,10 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse> i
     }
   }
 
+  protected restoreFilters(){
+    
+  }
+
   ngOnInit(): void {
 
   }

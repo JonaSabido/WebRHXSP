@@ -57,6 +57,10 @@ export class TypeAbsenceComponent extends Crud<TypeAbsenceRequest, TypeAbsenceRe
     }
   }
 
+  protected restoreFilters() {
+
+  }
+
   ngOnInit(): void {
   }
 

@@ -79,6 +79,10 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse> i
     }
   }
 
+  protected restoreFilters(){
+    
+  }
+
   ngOnInit(): void {
   }
 }

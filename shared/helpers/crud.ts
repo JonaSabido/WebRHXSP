@@ -3,13 +3,17 @@ import { View } from "./view";
 import { DialogData } from "../../src/app/interfaces/dialog-data";
 import { ApiCrudService } from "../services/api-crud.service";
 import { MessageService } from "primeng/api";
+import { ObjectFilter } from "../interfaces/object-filter";
 
-export abstract class Crud<T = null, U = null> extends View {
+export abstract class Crud<T = null, U = null, V = null> extends View {
     abstract dialogConfig: DynamicDialogConfig;
 
     public entity: T | undefined;
     public temporal: T | undefined;
     public entities: U[];
+    public filters: V | any;
+    public filterOptions: ObjectFilter<V>[];
+    public selectedOption: keyof V | undefined;
 
     constructor(
         public dialogService$: DialogService,
@@ -19,8 +23,11 @@ export abstract class Crud<T = null, U = null> extends View {
     ) {
         super();
         this.entities = []
+        this.filterOptions = []
         this.reload();
-        this.restore()
+        this.restore();
+        this.restoreFilters();
+        this.generateFilterOptions();
     }
 
     public openDialog(
@@ -101,6 +108,11 @@ export abstract class Crud<T = null, U = null> extends View {
 
     protected abstract restore(): void
 
+    protected abstract restoreFilters(): void
 
-
+    protected generateFilterOptions(): void {
+        for (let key in this.filters) {
+            this.filterOptions.push(this.filters[key] as ObjectFilter<V>)
+        }
+    }
 }

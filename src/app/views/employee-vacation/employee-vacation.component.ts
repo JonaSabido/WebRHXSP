@@ -82,4 +82,8 @@ export class EmployeeVacationComponent extends Crud {
     
   }
 
+  protected restoreFilters(){
+    
+  }
+
 }

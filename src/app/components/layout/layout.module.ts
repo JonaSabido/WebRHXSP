@@ -21,11 +21,13 @@ import { EmployeeVacationComponent } from '../../views/employee-vacation/employe
 import { RecommendationComponent } from '../../views/recommendation/recommendation.component';
 import { RecommendationPaymentComponent } from '../../views/recommendation-payment/recommendation-payment.component';
 import { EmployeeVacationChartComponent } from '../../views/employee-vacation-chart/employee-vacation-chart.component';
+import { AuthGuard } from '../../helpers/guards/auth-guard';
 
 const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'dashboard',

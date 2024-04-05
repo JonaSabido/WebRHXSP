@@ -76,4 +76,8 @@ export class AbsenceComponent extends Crud {
   protected restore(){
     
   }
+
+  protected restoreFilters(){
+    
+  }
 }

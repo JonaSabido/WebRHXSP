@@ -4,10 +4,36 @@
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
         <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"></p-button>
     </div>
+    <div class="container-fluid mt-4">
+        <div class="row p-0">
+            <div class="col-md-2 p-0">
+                <p-dropdown [options]="filterOptions" [(ngModel)]="selectedOption" optionLabel="label"
+                    optionValue="property" placeholder="Selecciona" styleClass="w-100">
+                </p-dropdown>
+            </div>
+            <div class="col-md-9 p-0">
+                @switch (selectedOption) {
+                @case ("name") {
+                <input pInputText type="text" id="name" name="name" placeholder="Escriba el nombre" class="w-100"
+                    severity="info" [(ngModel)]="filters[selectedOption].value" />
+                }
+                @case("id_area"){
+                <p-dropdown [options]="areas" [(ngModel)]="filters[selectedOption].value" optionLabel="name"
+                    optionValue="id" [filter]="true" filterBy="name" placeholder="Seleccione un area"
+                    emptyFilterMessage="No se encontraron resultados" styleClass="w-100">
+                </p-dropdown>
+                }
+                }
+            </div>
+            <div class="col-md-1 p-0">
+                <p-button icon="pi pi-search" severity="info" styleClass="w-100"></p-button>
+            </div>
+        </div>
+    </div>
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" scrollHeight="800px"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        styleClass="p-datatable-striped mt-3 custom-table">
+        styleClass="p-datatable-striped mt-5 custom-table">
 
         <ng-template pTemplate="header" let-columns>
             <tr>
@@ -24,11 +50,11 @@
                 <td>{{entity.area.name}}</td>
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
-                        <p-button icon="pi pi-pencil" severity="info" [rounded]="true"  size="small"
+                        <p-button icon="pi pi-pencil" severity="info" [rounded]="true" size="small"
                             (click)="openDialog(entity)"></p-button>
 
-                        <p-button icon="pi pi-trash" severity="danger" [rounded]="true" size="small"
-                            styleClass="ms-2" (click)="delete(entity.id)"></p-button>
+                        <p-button icon="pi pi-trash" severity="danger" [rounded]="true" size="small" styleClass="ms-2"
+                            (click)="delete(entity.id)"></p-button>
                     </div>
                 </td>
             </tr>

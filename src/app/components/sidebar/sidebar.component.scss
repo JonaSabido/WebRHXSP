@@ -1,6 +1,6 @@
 
-$seondary-color: #1a1d2c;
-$seondary-color-hover: #222639;
+$secondary-color: #1a1d2c;
+$secondary-color-hover: #222639;
 
 #container-button{
     position: fixed;
@@ -18,7 +18,7 @@ $seondary-color-hover: #222639;
     z-index: 2;
 
     &:hover{
-        background-color: $seondary-color-hover;
+        background-color: $secondary-color-hover;
     }
 }
 

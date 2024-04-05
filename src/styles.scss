@@ -13,8 +13,8 @@
 }
 
 $primar-color-hover: rgba($color: #06B6D4, $alpha: 0.1);
-$seondary-color: #1a1d2c;
-$seondary-color-hover: #1a1d2c39;
+$secondary-color: #1a1d2c;
+$secondary-color-hover: #1a1d2c39;
 
 
 
@@ -51,7 +51,7 @@ tr:nth-child(even) {
     background-color: #f3fdff;
 }
 
-tr:hover{
+tr:hover {
     background-color: #daf6fb;
 }
 
@@ -82,7 +82,7 @@ tr:hover{
 }
 
 .bg-secondary-color {
-    background-color: $seondary-color;
+    background-color: $secondary-color;
 }
 
 .text-primary-color {
@@ -128,4 +128,8 @@ tr:hover{
     min-width: 40px;
     width: auto;
     height: 40px;
+}
+
+.p-dropdown-item, .p-dropdown-empty-message {
+    padding: 7px 7px 7px 18px !important;
 }

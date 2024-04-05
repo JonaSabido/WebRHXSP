@@ -60,6 +60,10 @@ export class EmployeeLeaveComponent extends Crud<EmployeeLeaveRequest, EmployeeL
     }
   }
 
+  protected restoreFilters(){
+    
+  }
+
   ngOnInit(): void {
 
   }

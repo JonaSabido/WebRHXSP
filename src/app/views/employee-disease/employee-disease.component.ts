@@ -58,6 +58,10 @@ export class EmployeeDiseaseComponent extends Crud<EmployeeDiseaseRequest, Emplo
     }
   }
 
+  protected restoreFilters(){
+    
+  }
+
   ngOnInit(): void {
 
   }

@@ -60,6 +60,10 @@ export class EmployeeReentryComponent extends Crud<EmployeeReentryRequest, Emplo
     }
   }
 
+  protected restoreFilters(){
+    
+  }
+
   ngOnInit(): void {
 
   }

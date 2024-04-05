@@ -59,6 +59,10 @@ export class RecommendationComponent extends Crud<RecommendationRequest, Recomme
     }
   }
 
+  protected restoreFilters(){
+    
+  }
+
   ngOnInit(): void {
 
   }

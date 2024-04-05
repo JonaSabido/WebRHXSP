@@ -58,6 +58,10 @@ export class DepartmentComponent extends Crud<DepartmentRequest, DepartmentRespo
     }
   }
 
+  protected restoreFilters(){
+    
+  }
+
   ngOnInit(): void {
   }
 }

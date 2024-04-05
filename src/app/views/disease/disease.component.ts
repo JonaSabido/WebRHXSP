@@ -57,6 +57,10 @@ export class DiseaseComponent extends Crud<DiseaseRequest, DiseaseResponse> impl
     }
   }
 
+  protected restoreFilters(){
+    
+  }
+
   ngOnInit(): void {
   }
 }
