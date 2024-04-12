@@ -7,21 +7,24 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DepartmentDialogComponent } from '../../dialogs/department-dialog/department-dialog.component';
 import { Crud } from '../../../../shared/helpers/crud';
-import { DepartmentRequest, DepartmentResponse } from '../../interfaces/department';
+import { DepartmentQueryFilter, DepartmentRequest, DepartmentResponse } from '../../interfaces/department';
 import { DepartmentService } from '../../core/services/department.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @Component({
   selector: 'app-department',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule, DropdownModule, InputTextModule, FormsModule],
   providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './department.component.html',
   styleUrl: './department.component.scss'
 })
-export class DepartmentComponent extends Crud<DepartmentRequest, DepartmentResponse> implements OnInit {
+export class DepartmentComponent extends Crud<DepartmentRequest, DepartmentResponse, DepartmentQueryFilter> implements OnInit {
   module = 'Departamentos'
   icon = 'pi-building'
   prevLinks = ['Home', 'Empresa']
@@ -46,6 +49,7 @@ export class DepartmentComponent extends Crud<DepartmentRequest, DepartmentRespo
         '640px': '90vw'
       },
     }
+    this.selectedOption = 'name'
   }
 
   protected getRefDialog() {
@@ -58,8 +62,14 @@ export class DepartmentComponent extends Crud<DepartmentRequest, DepartmentRespo
     }
   }
 
-  protected restoreFilters(){
-    
+  protected restoreFilters() {
+    this.filters = {
+      name: {
+        property: 'name',
+        label: 'Nombre',
+        value: ''
+      },
+    }
   }
 
   ngOnInit(): void {

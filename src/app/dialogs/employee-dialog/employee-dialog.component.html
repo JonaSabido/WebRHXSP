@@ -148,57 +148,63 @@
     <div class="container-fluid p-0 mb-5">
         <div class="row">
             <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Acta de nacimiento" [model]="menuItems"
+                <p-splitButton label="Acta de nacimiento" [model]="menuItems[0]"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                <input type="file" id="input_birth_certificate" (change)="getFile($event, 'birth_certificate')"
+                    [hidden]="true" accept=".pdf">
+                <label class="roboto fs-small">{{fileNames.birth_certificate}}</label>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <p-splitButton label="Identificación Oficial" [model]="menuItems[1]"
+                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                <input type="file" id="input_identification" (change)="getFile($event, 'identification')" [hidden]="true"
+                    accept=".pdf">
+                <label class="roboto fs-small">{{fileNames.identification}}</label>
+            </div>
+            <div class="col-12 col-lg-4 mt-3">
+                <p-splitButton label="CURP" [model]="menuItems[2]"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Identificación Oficial" [model]="menuItems"
+                <p-splitButton label="NSS" [model]="menuItems[3]"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="CURP" [model]="menuItems"
+                <p-splitButton label="Comprobante domiciliario" [model]="menuItems[4]"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="NSS" [model]="menuItems"
+                <p-splitButton label="Comprobante de estudios" [model]="menuItems[5]"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Comprobante domiciliario" [model]="menuItems"
+                <p-splitButton label="Comprobante fiscal" [model]="menuItems[6]"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Comprobante de estudios" [model]="menuItems"
+                <p-splitButton label="Cartilla militar" [model]="menuItems[7]"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Comprobante fiscal" [model]="menuItemsForNull"
+                <p-splitButton label="Antecedentes penales" [model]="menuItems[8]"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Cartilla militar" [model]="menuItemsForNull"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-            </div>
-            <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Antecedentes penales" [model]="menuItemsForNull"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-            </div>
-            <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Certificado médico" [model]="menuItemsForNull"
+                <p-splitButton label="Certificado médico" [model]="menuItems[9]"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
             <div class="col-12 col-lg-4 mt-3 mb-3">
-                <p-splitButton label="Seguro de vida" [model]="menuItemsForNull"
+                <p-splitButton label="Seguro de vida" [model]="menuItems[10]"
                     styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
             </div>
@@ -212,7 +218,7 @@
             (click)="closeDialog()"></p-button>
         <p-button icon="pi pi-save" label="Guardar" [text]="true" [disabled]="(formPersonal.invalid ?? false) || 
         (formContact.invalid ?? false) || 
-        (formEnterprise.invalid ?? false)" (click)="save(config.data.entity)"></p-button>
+        (formEnterprise.invalid ?? false)" (click)="save(config.data.entity, saveUploads())"></p-button>
         <!-- <p-button icon="pi pi-times" label="Cancelar" severity="secondary" size="small" (click)="closeDialog()"></p-button>
         <p-button icon="pi pi-save" label="Guardar" size="small" styleClass="ms-2"></p-button> -->
     </div>

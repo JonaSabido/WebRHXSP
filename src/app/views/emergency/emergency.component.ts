@@ -7,31 +7,38 @@ import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { EmergencyDialogComponent } from '../../dialogs/emergency-dialog/emergency-dialog.component';
 import { Crud } from '../../../../shared/helpers/crud';
-import { EmergencyRequest, EmergencyResponse } from '../../interfaces/emergency';
+import { EmergencyQueryFilter, EmergencyRequest, EmergencyResponse } from '../../interfaces/emergency';
 import { EmergencyService } from '../../core/services/emergency.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { EmployeeService } from '../../core/services/employee.service';
+import { EmployeeResponse } from '../../interfaces/employee';
 
 @Component({
   selector: 'app-emergency',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule, DropdownModule, InputTextModule, FormsModule],
   providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './emergency.component.html',
   styleUrl: './emergency.component.scss'
 })
-export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse> implements OnInit {
+export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse, EmergencyQueryFilter> implements OnInit {
   module = 'Números de emergencia'
   icon = 'pi-phone'
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Números de emergencia'
   dialogConfig: DynamicDialogConfig;
+  employees: EmployeeResponse[]
 
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
     public service: EmergencyService,
     public messageService: MessageService,
+    private employeeService: EmployeeService
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
@@ -45,6 +52,8 @@ export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse
         '640px': '90vw'
       },
     }
+    this.selectedOption = 'id_employee'
+    this.employees = []
   }
 
   protected getRefDialog() {
@@ -60,11 +69,27 @@ export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse
     }
   }
 
-  protected restoreFilters(){
-    
+  protected restoreFilters() {
+    this.filters = {
+      id_employee: {
+        property: 'id_employee',
+        label: 'Empleado',
+        value: null
+      },
+      reference_name: {
+        property: 'reference_name',
+        label: 'Familiar',
+        value: null
+      },
+      type: {
+        property: 'type',
+        label: 'Parentesco',
+        value: ''
+      },
+    }
   }
 
   ngOnInit(): void {
-
+    this.employeeService.all().subscribe(response => this.employees = response.data)
   }
 }

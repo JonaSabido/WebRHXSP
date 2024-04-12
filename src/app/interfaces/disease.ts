@@ -1,3 +1,4 @@
+import { ObjectFilter } from "../../../shared/interfaces/object-filter";
 import { EntityBase } from "./entity-base";
 
 export interface DiseaseRequest {
@@ -6,4 +7,8 @@ export interface DiseaseRequest {
 
 export interface DiseaseResponse extends EntityBase{
     name: string
+}
+
+export interface DiseaseQueryFilter {
+    name: ObjectFilter<DiseaseQueryFilter>
 }

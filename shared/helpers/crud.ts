@@ -14,20 +14,32 @@ export abstract class Crud<T = null, U = null, V = null> extends View {
     public filters: V | any;
     public filterOptions: ObjectFilter<V>[];
     public selectedOption: keyof V | undefined;
+    public showFilters: boolean;
 
     constructor(
         public dialogService$: DialogService,
         public refDialog$: DynamicDialogRef,
-        public service$?: ApiCrudService<T, U>,
+        public service$?: ApiCrudService<T, U, V>,
         private messageService$?: MessageService,
     ) {
         super();
         this.entities = []
         this.filterOptions = []
+        this.showFilters = false;
         this.reload();
         this.restore();
         this.restoreFilters();
         this.generateFilterOptions();
+    }
+
+    public switchShowFilters() {
+        this.showFilters = !this.showFilters
+        if (!this.showFilters) {
+            this.filterOptions = []
+            this.restoreFilters()
+            this.generateFilterOptions()
+            this.reload()
+        }
     }
 
     public openDialog(
@@ -78,7 +90,7 @@ export abstract class Crud<T = null, U = null, V = null> extends View {
 
     public reload(): void {
         if (this.service$) {
-            this.service$.all().subscribe(
+            this.service$.all(this.filterOptions).subscribe(
                 {
                     next: (response) => this.entities = response.data,
                     error: (e) => {

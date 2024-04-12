@@ -1,15 +1,15 @@
 <div class="card-payment">
     @switch (payment.status) {
-    @case("Próximo a pagar"){
-    <p-tag [value]="payment.status" severity="warning"
+    @case(1){
+    <p-tag [value]="'Próximo a pagar'" severity="warning"
         styleClass="p-2 text-center w-100 letter-spacing-large fs-medium"></p-tag>
     }
-    @case("Pagado"){
-    <p-tag [value]="payment.status" severity="success"
+    @case(2){
+    <p-tag [value]="'Pagado'" severity="success"
         styleClass="p-2 text-center w-100 letter-spacing-large fs-medium"></p-tag>
     }
-    @case("Cancelado"){
-    <p-tag [value]="payment.status" severity="danger"
+    @case(2){
+    <p-tag [value]="'Cancelado'" severity="danger"
         styleClass="p-2 text-center w-100 letter-spacing-large fs-medium"></p-tag>
     }
     }
@@ -20,7 +20,8 @@
                 <p class="roboto-bold fs-small m-1">Beneficiario: </p>
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-end">
-                <p-tag [value]="payment.employee" severity="primary" styleClass="ms-1"></p-tag>
+                <p-tag [value]="payment.employee.name + ' ' + payment.employee.last_name" severity="primary"
+                    styleClass="ms-1"></p-tag>
             </div>
         </div>
         <div class="row mt-1">
@@ -28,7 +29,7 @@
                 <p class="roboto-bold fs-small m-1">Fecha de pago: </p>
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-end">
-                <p-tag [value]="payment.date" severity="primary" styleClass="ms-1"></p-tag>
+                <p-tag [value]="payment.payment_date" severity="primary" styleClass="ms-1"></p-tag>
             </div>
         </div>
         <div class="row mt-1">
@@ -36,7 +37,7 @@
                 <p class="roboto-bold fs-small m-1">Monto a pagar: </p>
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-end">
-                <p-tag [value]="'$'+payment.amount" severity="primary" styleClass="ms-1"></p-tag>
+                <p-tag [value]="'$'+payment.recommendation.amount" severity="primary" styleClass="ms-1"></p-tag>
             </div>
         </div>
     </div>

@@ -1,3 +1,4 @@
+import { ObjectFilter } from "../../../shared/interfaces/object-filter";
 import { EmployeeResponse } from "./employee";
 import { EntityBase } from "./entity-base";
 
@@ -12,4 +13,11 @@ export interface EmployeeLeaveResponse extends EntityBase {
     leave_date: string | Date,
     description: string
     employee?: EmployeeResponse
+}
+
+export interface EmployeeLeaveQueryFilter {
+    id_employee: ObjectFilter<EmployeeLeaveQueryFilter>
+    year: ObjectFilter<EmployeeLeaveQueryFilter>
+    start_date: ObjectFilter<EmployeeLeaveQueryFilter>
+    end_date: ObjectFilter<EmployeeLeaveQueryFilter>
 }

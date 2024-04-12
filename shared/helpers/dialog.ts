@@ -11,9 +11,12 @@ export abstract class DialogCrud {
     closeDialog() {
         this.ref$.close()
     }
-    
-    save(entity: any){
+
+    save(entity: any, callback?: any) {
         this.ref$.close(entity)
+        if (callback) {
+            callback()
+        }
     }
 
 }

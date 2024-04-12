@@ -7,20 +7,23 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TypeAbsenceDialogComponent } from '../../dialogs/type-absence-dialog/type-absence-dialog.component';
 import { Crud } from '../../../../shared/helpers/crud';
-import { TypeAbsenceRequest, TypeAbsenceResponse } from '../../interfaces/type-absence';
+import { TypeAbsenceQueryFilter, TypeAbsenceRequest, TypeAbsenceResponse } from '../../interfaces/type-absence';
 import { TypeAbsenceService } from '../../core/services/type-absence.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-type-absence',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, ToastModule, DropdownModule, InputTextModule, FormsModule],
   providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './type-absence.component.html',
   styleUrl: './type-absence.component.scss'
 })
-export class TypeAbsenceComponent extends Crud<TypeAbsenceRequest, TypeAbsenceResponse> implements OnInit {
+export class TypeAbsenceComponent extends Crud<TypeAbsenceRequest, TypeAbsenceResponse, TypeAbsenceQueryFilter> implements OnInit {
   module = 'Tipos de faltas'
   icon = 'pi-stopwatch'
   prevLinks = ['Home', 'Empresa']
@@ -45,6 +48,7 @@ export class TypeAbsenceComponent extends Crud<TypeAbsenceRequest, TypeAbsenceRe
         '640px': '90vw'
       },
     }
+    this.selectedOption = 'name'
   }
 
   protected getRefDialog() {
@@ -58,7 +62,13 @@ export class TypeAbsenceComponent extends Crud<TypeAbsenceRequest, TypeAbsenceRe
   }
 
   protected restoreFilters() {
-
+    this.filters = {
+      name: {
+        property: 'name',
+        label: 'Nombre',
+        value: ''
+      },
+    }
   }
 
   ngOnInit(): void {

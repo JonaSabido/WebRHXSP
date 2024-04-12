@@ -1,3 +1,4 @@
+import { ObjectFilter } from "../../../shared/interfaces/object-filter"
 import { EmployeeResponse } from "./employee"
 import { EntityBase } from "./entity-base"
 
@@ -13,4 +14,15 @@ export interface ContractResponse extends EntityBase {
     start_date: Date | string,
     end_date: Date | string,
     status: boolean,
+}
+
+export interface ContractQueryFilter {
+    id_employee: ObjectFilter<ContractQueryFilter>
+    status: ObjectFilter<ContractQueryFilter>
+    start_year: ObjectFilter<ContractQueryFilter>
+    end_year: ObjectFilter<ContractQueryFilter>
+    start_start_date: ObjectFilter<ContractQueryFilter>
+    start_end_date: ObjectFilter<ContractQueryFilter>
+    end_start_date: ObjectFilter<ContractQueryFilter>
+    end_end_date: ObjectFilter<ContractQueryFilter>
 }

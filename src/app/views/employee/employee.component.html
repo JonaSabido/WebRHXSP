@@ -23,17 +23,17 @@
                     pTooltip="XLS" tooltipPosition="bottom"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning" pTooltip="PDF"
                     tooltipPosition="bottom"></button>
-                <!-- <button type="button" pButton pRipple icon="pi pi-filter" class="p-button-info ms-auto"
+                <!-- <button type="button" pButton pRipple [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" class="p-button-info ms-auto"
                     pTooltip="Selection Only" tooltipPosition="bottom"></button> -->
             </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th pSortableColumn="code">Código <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="fullname">Nombre <p-sortIcon field="fullname"></p-sortIcon></th>
+                <th pSortableColumn="full_name">Nombre <p-sortIcon field="full_name"></p-sortIcon></th>
                 <!-- <th pSortableColumn="area">Area <p-sortIcon field="area"></p-sortIcon></th> -->
-                <th pSortableColumn="job">Puesto <p-sortIcon field="job"></p-sortIcon></th>
-                <th pSortableColumn="department">Dpto. <p-sortIcon field="department"></p-sortIcon></th>
+                <th pSortableColumn="job.name">Puesto <p-sortIcon field="job"></p-sortIcon></th>
+                <th pSortableColumn="department.name">Dpto. <p-sortIcon field="department"></p-sortIcon></th>
                 <th pSortableColumn="entry_date">Fecha alta <p-sortIcon field="entry_date"></p-sortIcon></th>
                 <th pSortableColumn="entry_month">Mes alta <p-sortIcon field="entry_month"></p-sortIcon></th>
                 <th pSortableColumn="entry_year">Año alta <p-sortIcon field="entry_year"></p-sortIcon></th>
@@ -54,7 +54,7 @@
                     @if(entity.status){
                     <p-tag [value]="'Alta'" severity="success" styleClass="big-tag"></p-tag>
                     }
-                    @else if(entity.status === 'Baja'){
+                    @else if(!entity.status){
                     <p-tag [value]="'Baja'" severity="danger" styleClass="big-tag"></p-tag>
                     }
                 </td>

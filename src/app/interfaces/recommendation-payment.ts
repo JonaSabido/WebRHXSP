@@ -1,0 +1,25 @@
+import { EmployeeResponse } from "./employee"
+import { EntityBase } from "./entity-base"
+import { RecommendationResponse } from "./recommendation"
+
+export interface RecommendationPaymentRequest {
+    id_recommendation: number,
+    id_paying_employee: number,
+    payment_date: string,
+    status: number,
+}
+
+export interface RecommendationPaymentResponse extends EntityBase {
+    id_recommendation: number,
+    id_paying_employee: number,
+    payment_date: string,
+    status: number,
+    employee: EmployeeResponse,
+    recommendation: RecommendationResponse
+}
+
+export interface RecommendationPaymentQueryFilter{
+    id_paying_employee: number,
+    payment_date: string,
+    status: number,
+}

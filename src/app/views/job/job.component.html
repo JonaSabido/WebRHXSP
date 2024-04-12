@@ -2,34 +2,44 @@
 <div class="bg-white rounded mt-4 p-4">
     <div class="d-flex align-items-center justify-content-between">
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
-        <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"></p-button>
+        <div class="d-flex justify-content-between">
+            <p-button [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" (click)="switchShowFilters()"
+                [rounded]="true" size="small" severity="secondary"></p-button>
+            <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"
+                styleClass="ms-2"></p-button>
+        </div>
     </div>
-    <div class="container-fluid mt-4">
+    @if(showFilters){
+    <form role="form" #form="ngForm" (ngSubmit)="reload()" class="container-fluid mt-4">
         <div class="row p-0">
             <div class="col-md-2 p-0">
-                <p-dropdown [options]="filterOptions" [(ngModel)]="selectedOption" optionLabel="label"
-                    optionValue="property" placeholder="Selecciona" styleClass="w-100">
+                <p-dropdown [options]="filterOptions" [(ngModel)]="selectedOption" id="selectOption" name="selectOption"
+                    optionLabel="label" optionValue="property" placeholder="Selecciona"
+                    styleClass="w-100 dropdown-filters-options">
                 </p-dropdown>
             </div>
             <div class="col-md-9 p-0">
                 @switch (selectedOption) {
                 @case ("name") {
-                <input pInputText type="text" id="name" name="name" placeholder="Escriba el nombre" class="w-100"
-                    severity="info" [(ngModel)]="filters[selectedOption].value" />
+                <input pInputText type="text" id="name" name="name" placeholder="Escriba el nombre"
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
                 }
                 @case("id_area"){
-                <p-dropdown [options]="areas" [(ngModel)]="filters[selectedOption].value" optionLabel="name"
-                    optionValue="id" [filter]="true" filterBy="name" placeholder="Seleccione un area"
-                    emptyFilterMessage="No se encontraron resultados" styleClass="w-100">
+                <p-dropdown [options]="areas" id="id_area" name="id_area" optionLabel="name" optionValue="id"
+                    [filter]="true" filterBy="name" placeholder="Seleccione un area"
+                    emptyFilterMessage="No se encontraron resultados" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters[selectedOption].value">
                 </p-dropdown>
                 }
                 }
             </div>
             <div class="col-md-1 p-0">
-                <p-button icon="pi pi-search" severity="info" styleClass="w-100"></p-button>
+                <p-button icon="pi pi-search" severity="info" styleClass="w-100 button-filters"
+                    (click)="this.reload()"></p-button>
             </div>
         </div>
-    </div>
+    </form>
+    }
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" scrollHeight="800px"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

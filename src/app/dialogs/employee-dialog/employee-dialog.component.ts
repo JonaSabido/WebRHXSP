@@ -13,6 +13,8 @@ import { DepartmentResponse } from '../../interfaces/department';
 import { JobResponse } from '../../interfaces/job';
 import { DepartmentService } from '../../core/services/department.service';
 import { JobService } from '../../core/services/job.service';
+import { EmployeeService } from '../../core/services/employee.service';
+import { FileName } from '../../interfaces/file-name';
 
 
 @Component({
@@ -28,21 +30,39 @@ export class EmployeeDialogComponent extends DialogCrud {
   @ViewChild('formEnterprise') formEnterprise: NgForm = {} as NgForm;
 
   stepItems: MenuItem[] = [];
-  menuItems: MenuItem[] = [];
+  menuItems: MenuItem[][] = [];
   menuItemsForNull: MenuItem[] = [];
   departments: DepartmentResponse[];
   jobs: JobResponse[]
   activeIndex: number = 0;
+  formData: FormData = new FormData()
+  fileNames: FileName | any;
+
 
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private departmentService: DepartmentService,
     private jobService: JobService,
+    private employeeService: EmployeeService,
   ) {
     super(ref, config)
     this.departments = []
     this.jobs = []
+    this.fileNames = {
+      birth_certificate: '',
+      identification: '',
+      curp: '',
+      nss: '',
+      address_certification: '',
+      studies_certification: '',
+      type_studies_certification: '',
+      tax_certificate: '',
+      smn: '',
+      no_criminal_certificate: '',
+      health_certificate: '',
+      sv: '',
+    }
   }
 
   onActiveIndexChange(event: number) {
@@ -67,36 +87,40 @@ export class EmployeeDialogComponent extends DialogCrud {
       }
     ];
 
-    this.menuItems = [
-      {
-        label: 'Ver',
-        icon: 'pi pi-eye',
-        command: () => {
-          // this.update();
-        }
-      },
-      {
-        label: 'Cambiar',
-        icon: 'pi pi-refresh',
-        command: () => {
-          // this.delete();
-        }
-      },
-      {
-        label: 'Descargar',
-        icon: 'pi pi-download',
-        command: () => {
-          // this.delete();
-        }
-      },
-      {
-        label: 'Eliminar',
-        icon: 'pi pi-trash',
-        command: () => {
-          // this.delete();
-        }
-      },
-    ];
+    for (const key in this.fileNames) {
+      this.menuItems.push(
+        [
+          {
+            label: 'Ver',
+            icon: 'pi pi-eye',
+            command: () => {
+              this.openFile(this.config.data.entity[`path_${key}`])
+            }
+          },
+          {
+            label: 'Subir',
+            icon: 'pi pi-upload',
+            command: () => {
+              var fileInput = document.getElementById(`input_${key}`);
+              fileInput?.click();
+            }
+          },
+          {
+            label: 'Descargar',
+            icon: 'pi pi-download',
+            command: () => {
+            }
+          },
+          // {
+          //   label: 'Eliminar',
+          //   icon: 'pi pi-trash',
+          //   command: () => {
+          //     // this.delete();
+          //   }
+          // },
+        ]
+      )
+    }
 
     this.menuItemsForNull = [
       {
@@ -107,6 +131,28 @@ export class EmployeeDialogComponent extends DialogCrud {
         }
       }
     ];
+  }
+
+  openFile(path: string) {
+    console.log(path)
+    window.open(path, '_blank');
+  }
+
+  getFile(event: Event, fileName: string) {
+    const target = event.target as HTMLInputElement
+
+    const files: FileList | null = target.files
+
+    if (files!.length > 0 && files != null) {
+      Array.prototype.forEach.call(files, (file: File) => {
+        this.formData.append(fileName, file)
+        this.fileNames[fileName] = file.name
+      })
+    }
+  }
+
+  saveUploads() {
+    this.employeeService.uploadFiles(this.config.data.entity.id, this.formData).subscribe(response => console.log(response))
   }
 
 

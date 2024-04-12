@@ -55,6 +55,7 @@ export interface EmployeeResponse extends EntityBase {
     cp: string
     qr_image: string
     status: boolean
+    path_birth_certificate: string
     department: DepartmentResponse
     job: JobResponse
 }

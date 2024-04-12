@@ -2,12 +2,52 @@
 <div class="bg-white rounded mt-4 p-4">
     <div class="d-flex align-items-center justify-content-between">
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
-        <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"></p-button>
+        <div class="d-flex justify-content-between">
+            <p-button [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" (click)="switchShowFilters()" [rounded]="true" size="small"
+                severity="secondary"></p-button>
+            <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"
+                styleClass="ms-2"></p-button>
+        </div>
     </div>
+    @if(showFilters){
+    <form role="form" #form="ngForm" (ngSubmit)="reload()" class="container-fluid mt-4">
+        <div class="row p-0">
+            <div class="col-md-2 p-0">
+                <p-dropdown [options]="filterOptions" [(ngModel)]="selectedOption" id="selectOption" name="selectOption"
+                    optionLabel="label" optionValue="property" placeholder="Selecciona"
+                    styleClass="w-100 dropdown-filters-options">
+                </p-dropdown>
+            </div>
+            <div class="col-md-9 p-0">
+                @switch (selectedOption) {
+                @case ("id_employee") {
+                <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name"
+                    [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
+                    placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+                @case ("start_year") {
+                <input pInputText type="number" id="start_year" name="start_year" placeholder="Escriba el año de inicio"
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
+                }
+                @case ("end_year") {
+                <input pInputText type="number" id="end_year" name="end_year" placeholder="Escriba el año final"
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
+                }
+                }
+            </div>
+            <div class="col-md-1 p-0">
+                <p-button icon="pi pi-search" severity="info" styleClass="w-100 button-filters"
+                    (click)="this.reload()"></p-button>
+            </div>
+        </div>
+    </form>
+    }
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" scrollHeight="800px"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        styleClass="p-datatable-striped mt-3 custom-table">
+        styleClass="p-datatable-striped mt-5 custom-table">
         <ng-template pTemplate="caption">
             <div class="d-flex">
                 <!-- <p-button icon="pi pi-file" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
@@ -23,7 +63,7 @@
                     pTooltip="XLS" tooltipPosition="bottom"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning" pTooltip="PDF"
                     tooltipPosition="bottom"></button>
-                <!-- <button type="button" pButton pRipple icon="pi pi-filter" class="p-button-info ms-auto"
+                <!-- <button type="button" pButton pRipple [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" class="p-button-info ms-auto"
                     pTooltip="Selection Only" tooltipPosition="bottom"></button> -->
             </div>
         </ng-template>
