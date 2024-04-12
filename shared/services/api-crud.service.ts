@@ -11,7 +11,7 @@ export abstract class ApiCrudService<T, U, V = null> {
     constructor(protected http: HttpClient) { }
 
     protected get uri(): string {
-        return `${environment.urlApiBase}${this.root()}/`;
+        return `${environment.urlApiBase}/${this.root()}/`;
     }
 
     /**
