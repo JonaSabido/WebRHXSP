@@ -112,33 +112,59 @@
     <span class="roboto-bold fs-medium text-secondary">Datos de empresa</span>
     <div class="container-fluid p-0">
         <div class="row">
-            <div class="col-12 col-lg-4 mt-3">
+            <div class="col-12 col-lg-3 mt-3">
                 <label for="user" class="robotobold fs-small">Código</label>
                 <input pInputText type="text" id="code" name="code" class="p-inputtext-sm roboto w-100 fs-small"
                     [(ngModel)]="config.data.entity.code" />
             </div>
-            <div class="col-12 col-lg-4 mt-3">
+            <div class="col-12 col-lg-3 mt-3">
+                <label for="user" class="robotobold fs-small">Fecha de ingreso</label>
+                <input pInputText type="date" id="entry_date" name="entry_date"
+                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.entry_date" />
+            </div>
+            <div class="col-12 col-lg-3 mt-3">
                 <label for="user" class="robotobold fs-small">Departamento</label>
                 <p-dropdown id="id_department" name="id_department" [options]="departments" optionLabel="name"
                     optionValue="id" [showClear]="true" placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
                     [(ngModel)]="config.data.entity.id_department"></p-dropdown>
             </div>
-            <div class="col-12 col-lg-4 mt-3">
+            <div class="col-12 col-lg-3 mt-3">
                 <label for="user" class="robotobold fs-small">Trabajo</label>
                 <p-dropdown id="id_job" name="id_job" [options]="jobs" optionLabel="name" optionValue="id"
                     [showClear]="true" placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
                     [(ngModel)]="config.data.entity.id_job"></p-dropdown>
             </div>
-            <div class="col-12 col-lg-4 mt-3">
-                <label for="user" class="robotobold fs-small">Fecha de ingreso</label>
-                <input pInputText type="date" id="entry_date" name="entry_date"
-                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.entry_date" />
-            </div>
-            <div class="col-12 col-lg-12 mt-3">
-                <label for="user" class="robotobold fs-small">Imagen QR</label>
-                <p-fileUpload mode="advanced" chooseLabel="Choose" name="demo[]" accept="image/*"
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-6 mt-3">
+                <label for="employee_image" class="robotobold fs-small">Imagen Empleado</label>
+                <input type="file" id="input_employee_image" name="employee_image" accept="image/*"
+                    class="form-control reset-border-box-shadow py-2 mt-2" (change)="getFile($event, 'employee_image')">
+                @if(fileNames['employee_image'] || config.data.entity.files.employee_image){
+                <div class="d-flex justify-content-center">
+                    <div id="employee-preview" class="image-preview mt-4"
+                        [style.background-image]="'url(' + config.data.entity.files.employee_image + ')'"></div>
+                </div>
+                }
+
+                <!-- <p-fileUpload mode="advanced" chooseLabel="Subir" cancelLabel="Cancelar" name="demo[]" accept="image/*"
                     [maxFileSize]="1000000" chooseIcon="pi pi-upload" styleClass="custom-file-upload"
-                    [showUploadButton]="false"></p-fileUpload>
+                    [showUploadButton]="false" [previewWidth]="130"></p-fileUpload> -->
+            </div>
+            <div class="col-12 col-lg-6 mt-3">
+                <label for="qr_image" class="robotobold fs-small">Imagen QR</label>
+                <input type="file" id="input_qr_image" name="qr_image" accept="image/*"
+                    class="form-control reset-border-box-shadow py-2 mt-2" (change)="getFile($event, 'qr_image')">
+                @if(fileNames['qr_image'] || config.data.entity.files.qr_image){
+                <div class="d-flex justify-content-center">
+                    <div id="qr-preview" class="image-preview mt-4"
+                        [style.background-image]="'url(' + config.data.entity.files.qr_image + ')'"></div>
+                </div>
+                }
+
+                <!-- <p-fileUpload mode="advanced" chooseLabel="Subir" cancelLabel="Cancelar" name="demo[]" accept="image/*"
+                    [maxFileSize]="1000000" chooseIcon="pi pi-upload" styleClass="custom-file-upload"
+                    [showUploadButton]="false" [previewWidth]="130"></p-fileUpload> -->
             </div>
         </div>
     </div>
@@ -149,64 +175,87 @@
         <div class="row">
             <div class="col-12 col-lg-4 mt-3">
                 <p-splitButton label="Acta de nacimiento" [model]="menuItems[0]"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.birth_certificate ? ' p-button-primary' : ' p-button-secondary')"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
                 <input type="file" id="input_birth_certificate" (change)="getFile($event, 'birth_certificate')"
                     [hidden]="true" accept=".pdf">
-                <label class="roboto fs-small">{{fileNames.birth_certificate}}</label>
+                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.birth_certificate}}</p>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <p-splitButton label="Identificación Oficial" [model]="menuItems[1]"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.identification ? ' p-button-primary' : ' p-button-secondary')"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-                <input type="file" id="input_identification" (change)="getFile($event, 'identification')" [hidden]="true"
-                    accept=".pdf">
-                <label class="roboto fs-small">{{fileNames.identification}}</label>
+                <input type="file" id="input_identification" (change)="getFile($event, 'identification')"
+                    [hidden]="true" accept=".pdf">
+                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.identification}}</p>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <p-splitButton label="CURP" [model]="menuItems[2]"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.curp ? ' p-button-primary' : ' p-button-secondary')"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                <input type="file" id="input_curp" (change)="getFile($event, 'curp')" [hidden]="true" accept=".pdf">
+                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.curp}}</p>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <p-splitButton label="NSS" [model]="menuItems[3]"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.nss ? ' p-button-primary' : ' p-button-secondary')"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                <input type="file" id="input_nss" (change)="getFile($event, 'nss')" [hidden]="true" accept=".pdf">
+                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.nss}}</p>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <p-splitButton label="Comprobante domiciliario" [model]="menuItems[4]"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.address_certification ? ' p-button-primary' : ' p-button-secondary')"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                <input type="file" id="input_address_certification" (change)="getFile($event, 'address_certification')"
+                    [hidden]="true" accept=".pdf">
+                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.address_certification}}</p>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <p-splitButton label="Comprobante de estudios" [model]="menuItems[5]"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.studies_certification ? ' p-button-primary' : ' p-button-secondary')"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                <input type="file" id="input_studies_certification" (change)="getFile($event, 'studies_certification')"
+                    [hidden]="true" accept=".pdf">
+                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.studies_certification}}</p>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <p-splitButton label="Comprobante fiscal" [model]="menuItems[6]"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.tax_certificate ? ' p-button-primary' : ' p-button-secondary')"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                <input type="file" id="input_tax_certificate" (change)="getFile($event, 'tax_certificate')"
+                    [hidden]="true" accept=".pdf">
+                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.tax_certificate}}</p>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <p-splitButton label="Cartilla militar" [model]="menuItems[7]"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.smn ? ' p-button-primary' : ' p-button-secondary')"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                <input type="file" id="input_smn" (change)="getFile($event, 'smn')" [hidden]="true" accept=".pdf">
+                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.smn}}</p>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <p-splitButton label="Antecedentes penales" [model]="menuItems[8]"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.no_criminal_certificate ? ' p-button-primary' : ' p-button-secondary')"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                <input type="file" id="input_no_criminal_certificate"
+                    (change)="getFile($event, 'no_criminal_certificate')" [hidden]="true" accept=".pdf">
+                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.no_criminal_certificate}}</p>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <p-splitButton label="Certificado médico" [model]="menuItems[9]"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.health_certificate ? ' p-button-primary' : ' p-button-secondary')"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                <input type="file" id="input_health_certificate" (change)="getFile($event, 'health_certificate')"
+                    [hidden]="true" accept=".pdf">
+                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.health_certificate}}</p>
             </div>
             <div class="col-12 col-lg-4 mt-3 mb-3">
                 <p-splitButton label="Seguro de vida" [model]="menuItems[10]"
-                    styleClass="p-button-raised p-button-secondary p-button-text mr-2 mb-2 w-100"
+                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.sv ? ' p-button-primary' : ' p-button-secondary')"
                     menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                <input type="file" id="input_sv" (change)="getFile($event, 'sv')" [hidden]="true" accept=".pdf">
+                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.sv}}</p>
             </div>
         </div>
     </div>
@@ -218,7 +267,7 @@
             (click)="closeDialog()"></p-button>
         <p-button icon="pi pi-save" label="Guardar" [text]="true" [disabled]="(formPersonal.invalid ?? false) || 
         (formContact.invalid ?? false) || 
-        (formEnterprise.invalid ?? false)" (click)="save(config.data.entity, saveUploads())"></p-button>
+        (formEnterprise.invalid ?? false)" (click)="generateFormData()"></p-button>
         <!-- <p-button icon="pi pi-times" label="Cancelar" severity="secondary" size="small" (click)="closeDialog()"></p-button>
         <p-button icon="pi pi-save" label="Guardar" size="small" styleClass="ms-2"></p-button> -->
     </div>

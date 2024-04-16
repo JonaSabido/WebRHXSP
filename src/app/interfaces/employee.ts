@@ -1,5 +1,6 @@
 import { DepartmentResponse } from "./department"
 import { EntityBase } from "./entity-base"
+import { FileName } from "./file-name"
 import { JobResponse } from "./job"
 
 export interface EmployeeRequest {
@@ -24,7 +25,7 @@ export interface EmployeeRequest {
     has_children: boolean
     address: string
     cp: string
-    qr_image: string
+    files: FileName
     status: boolean
 }
 
@@ -55,7 +56,7 @@ export interface EmployeeResponse extends EntityBase {
     cp: string
     qr_image: string
     status: boolean
-    path_birth_certificate: string
+    files: FileName
     department: DepartmentResponse
     job: JobResponse
 }

@@ -157,3 +157,21 @@ tr:hover {
     border-bottom-right-radius: 0px !important;
     border-top-right-radius: 0px !important;
 }
+
+.reset-border-box-shadow {
+
+    &:focus,
+    &:hover {
+        border-color: #E5E7EB !important;
+        box-shadow: none !important;
+    }
+}
+
+.image-preview {
+    width: 230px;
+    height: 230px;
+    border-radius: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

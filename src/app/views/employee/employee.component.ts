@@ -11,11 +11,13 @@ import { EmployeeRequest, EmployeeResponse } from '../../interfaces/employee';
 import { EmployeeService } from '../../core/services/employee.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { AvatarModule } from 'primeng/avatar';
+import { BadgeModule } from 'primeng/badge';
 
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule, AvatarModule, BadgeModule],
   providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss'
@@ -74,13 +76,27 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse> i
       has_children: true,
       address: "",
       cp: "",
-      qr_image: "",
-      status: true
+      status: true,
+      files: {
+        birth_certificate: '',
+        identification: '',
+        curp: '',
+        nss: '',
+        address_certification: '',
+        studies_certification: '',
+        tax_certificate: '',
+        smn: '',
+        no_criminal_certificate: '',
+        health_certificate: '',
+        sv: '',
+        qr_image: '',
+        employee_image: '',
+      }
     }
   }
 
-  protected restoreFilters(){
-    
+  protected restoreFilters() {
+
   }
 
   ngOnInit(): void {

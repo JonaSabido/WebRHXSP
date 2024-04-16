@@ -56,12 +56,13 @@ export class EmployeeDialogComponent extends DialogCrud {
       nss: '',
       address_certification: '',
       studies_certification: '',
-      type_studies_certification: '',
       tax_certificate: '',
       smn: '',
       no_criminal_certificate: '',
       health_certificate: '',
       sv: '',
+      qr_image: '',
+      employee_image: '',
     }
   }
 
@@ -88,38 +89,39 @@ export class EmployeeDialogComponent extends DialogCrud {
     ];
 
     for (const key in this.fileNames) {
-      this.menuItems.push(
-        [
+      const items: MenuItem[] = []
+      if (this.config.data.entity.files[`${key}`]) {
+        items.push(
           {
             label: 'Ver',
             icon: 'pi pi-eye',
             command: () => {
-              this.openFile(this.config.data.entity[`path_${key}`])
+              this.openFile(this.config.data.entity.files[`${key}`])
             }
-          },
-          {
-            label: 'Subir',
-            icon: 'pi pi-upload',
-            command: () => {
-              var fileInput = document.getElementById(`input_${key}`);
-              fileInput?.click();
-            }
-          },
+          }
+        )
+      }
+      items.push(
+        {
+          label: 'Subir',
+          icon: 'pi pi-upload',
+          command: () => {
+            var fileInput = document.getElementById(`input_${key}`);
+            fileInput?.click();
+          }
+        },
+      )
+      if (this.config.data.entity.files[`${key}`]) {
+        items.push(
           {
             label: 'Descargar',
             icon: 'pi pi-download',
             command: () => {
             }
           },
-          // {
-          //   label: 'Eliminar',
-          //   icon: 'pi pi-trash',
-          //   command: () => {
-          //     // this.delete();
-          //   }
-          // },
-        ]
-      )
+        )
+      }
+      this.menuItems.push(items)
     }
 
     this.menuItemsForNull = [
@@ -134,7 +136,6 @@ export class EmployeeDialogComponent extends DialogCrud {
   }
 
   openFile(path: string) {
-    console.log(path)
     window.open(path, '_blank');
   }
 
@@ -145,14 +146,50 @@ export class EmployeeDialogComponent extends DialogCrud {
 
     if (files!.length > 0 && files != null) {
       Array.prototype.forEach.call(files, (file: File) => {
+        this.formData.delete(fileName)
         this.formData.append(fileName, file)
         this.fileNames[fileName] = file.name
+
+        if (fileName == 'employee_image') {
+          const reader = new FileReader();
+
+          reader.onload = () => {
+            const previewDiv = document.getElementById('employee-preview');
+            if (previewDiv) {
+              previewDiv.style.backgroundImage = `url('${reader.result}')`;
+            }
+          };
+
+          reader.readAsDataURL(file);
+        }
+
+        else if (fileName == 'qr_image') {
+          const reader = new FileReader();
+
+          reader.onload = () => {
+            const previewDiv = document.getElementById('qr-preview');
+            if (previewDiv) {
+              previewDiv.style.backgroundImage = `url('${reader.result}')`;
+            }
+          };
+
+          reader.readAsDataURL(file);
+        }
+
+
       })
     }
   }
 
   saveUploads() {
     this.employeeService.uploadFiles(this.config.data.entity.id, this.formData).subscribe(response => console.log(response))
+  }
+
+  generateFormData() {
+    Object.entries(this.config.data.entity).forEach(([key, value]) => {
+      this.formData.append(key, value as string);
+    });
+    this.save(this.formData)
   }
 
 

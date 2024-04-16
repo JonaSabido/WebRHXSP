@@ -23,4 +23,8 @@ export class EmployeeService extends ApiCrudService<EmployeeRequest, EmployeeRes
   public uploadFiles(id: number, e: FormData): Observable<SingleEntity<string>> {
     return this.http.post<SingleEntity<string>>(`${this.uri}files/${id}`, e);
   }
+
+  override store(e: FormData): Observable<SingleEntity<EmployeeResponse>> {
+    return this.http.post<SingleEntity<EmployeeResponse>>(this.uri, e);
+}
 }

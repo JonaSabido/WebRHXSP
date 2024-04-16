@@ -43,19 +43,22 @@ export abstract class Crud<T = null, U = null, V = null> extends View {
     }
 
     public openDialog(
-        temporal?: U
+        temporal?: U,
+        newHeader?: string
     ) {
+        this.dialogConfig.header = newHeader ?? 'Editando'
+
         const dialogData: DialogData<T, U> = {
             entity: temporal ? { ...temporal as U } : this.entity,
             type_action: temporal ? 'Update' : 'Create'
         }
         this.dialogConfig.data = dialogData
         this.refDialog$ = this.getRefDialog()
-        this.refDialog$.onClose.subscribe((result: T | undefined) => {
+        this.refDialog$.onClose.subscribe((result: T | undefined | FormData) => {
             if (result) {
                 if (dialogData.type_action === 'Create') {
                     if (this.service$) {
-                        this.service$.store(dialogData.entity as T).subscribe({
+                        this.service$.store(result).subscribe({
                             next: (response) => {
                                 this.messageService$?.add({ key: 'br', severity: 'success', summary: 'Correcto', detail: 'Datos creados correctamente' });
                                 this.reload()
@@ -71,7 +74,7 @@ export abstract class Crud<T = null, U = null, V = null> extends View {
                 else if (dialogData.type_action === 'Update') {
                     if (this.service$) {
                         const data = dialogData.entity as any
-                        this.service$.update(data['id'], dialogData.entity as T).subscribe({
+                        this.service$.update(data['id'], result).subscribe({
                             next: (response) => {
                                 this.messageService$?.add({ key: 'br', severity: 'success', summary: 'Correcto', detail: 'Datos actualizados correctamente' });
                                 this.reload()

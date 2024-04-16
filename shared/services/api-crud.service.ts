@@ -30,11 +30,11 @@ export abstract class ApiCrudService<T, U, V = null> {
         return this.http.get<SingleEntity<U>>(`${this.uri}${id}`);
     }
 
-    public store(e: T): Observable<SingleEntity<U>> {
+    public store(e: T | FormData): Observable<SingleEntity<U>> {
         return this.http.post<SingleEntity<U>>(this.uri, e);
     }
 
-    public update(id: number, e: T): Observable<SingleEntity<T>> {
+    public update(id: number, e: T | FormData): Observable<SingleEntity<T>> {
         return this.http.put<SingleEntity<T>>(`${this.uri}${id}`, e);
     }
 

@@ -5,7 +5,7 @@
         <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"></p-button>
     </div>
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
-        [scrollable]="true" scrollHeight="800px"
+        [scrollable]="true" 
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-3 custom-table">
         <ng-template pTemplate="caption">
@@ -41,9 +41,14 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-entity let-columns>
-            <tr class="clickeable" (click)="openDialog(entity)">
+            <tr class="clickeable" (click)="openDialog(entity, entity.full_name)">
                 <td>{{entity.code}}</td>
-                <td>{{entity.full_name}}</td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <p-avatar [image]="entity.files.employee_image" shape="circle"></p-avatar>
+                        <span class="ms-3">{{entity.full_name}}</span>
+                    </div>
+                </td>
                 <!-- <td>{{entity.area.name}}</td> -->
                 <td>{{entity.job.name}}</td>
                 <td>{{entity.department.name}}</td>
