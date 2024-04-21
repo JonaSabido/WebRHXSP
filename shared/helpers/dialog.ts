@@ -19,4 +19,9 @@ export abstract class DialogCrud {
         }
     }
 
+
+    setDialogHeight(value: string) {
+        this.config$.height = value
+    }
+
 }

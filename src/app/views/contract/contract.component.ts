@@ -43,8 +43,8 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nuevo contrato',
-      closeOnEscape: false,
-      closable: false,
+      closeOnEscape: true,
+      closable: true,
       width: '50%',
       modal: true,
       breakpoints: {

@@ -36,8 +36,8 @@ export class RecommendationComponent extends Crud<RecommendationRequest, Recomme
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nueva recomendación',
-      closeOnEscape: false,
-      closable: false,
+      closeOnEscape: true,
+      closable: true,
       width: '50%',
       modal: true,
       breakpoints: {

@@ -40,8 +40,8 @@ export class DepartmentComponent extends Crud<DepartmentRequest, DepartmentRespo
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nuevo departamento',
-      closeOnEscape: false,
-      closable: false,
+      closeOnEscape: true,
+      closable: true,
       width: '50%',
       modal: true,
       breakpoints: {

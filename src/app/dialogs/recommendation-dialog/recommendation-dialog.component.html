@@ -11,7 +11,8 @@
         <br>
         <p-dropdown [options]="employees" id="id_recommended_employee" name="id_recommended_employee"
             optionLabel="full_name" optionValue="id" [showClear]="true" placeholder="Selecciona el empleado"
-            styleClass="w-100 roboto" [(ngModel)]="config.data.entity.id_recommended_employee" [required]="true"
+            styleClass="w-100 roboto" [(ngModel)]="config.data.entity.id_recommended_employee"
+            (onClick)="setDialogHeight('550px')" (onHide)="setDialogHeight('auto')" [required]="true"
             #id_recommended_employee="ngModel"></p-dropdown>
     </div>
     <div class="mt-3">

@@ -63,8 +63,8 @@ export class EmployeeVacationComponent extends Crud {
     super(dialogService, refDialog)
     this.dialogConfig = {
       header: 'Nueva vacación',
-      closeOnEscape: false,
-      closable: false,
+      closeOnEscape: true,
+      closable: true,
       width: '50%',
       modal: true,
       breakpoints: {

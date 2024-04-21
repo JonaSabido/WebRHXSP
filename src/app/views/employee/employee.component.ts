@@ -38,8 +38,8 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse> i
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nuevo empleado',
-      closeOnEscape: false,
-      closable: false,
+      closeOnEscape: true,
+      closable: true,
       width: '90%',
       modal: true,
       breakpoints: {

@@ -33,8 +33,8 @@ export class RecommendationPaymentComponent extends Crud<RecommendationPaymentRe
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       showHeader: false,
-      closeOnEscape: false,
-      closable: false,
+      closeOnEscape: true,
+      closable: true,
       contentStyle: { 'padding': '0px', 'border-radius': '10px' },
       style: { 'border-radius': '10px' },
       width: '40%',

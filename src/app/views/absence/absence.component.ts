@@ -58,8 +58,8 @@ export class AbsenceComponent extends Crud {
     
     this.dialogConfig = {
       header: 'Nueva falta',
-      closeOnEscape: false,
-      closable: false,
+      closeOnEscape: true,
+      closable: true,
       width: '50%',
       modal: true,
       breakpoints: {

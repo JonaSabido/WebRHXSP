@@ -39,8 +39,8 @@ export class AreaComponent extends Crud<AreaRequest, AreaResponse, AreaQueryFilt
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nueva area',
-      closeOnEscape: false,
-      closable: false,
+      closeOnEscape: true,
+      closable: true,
       width: '50%',
       modal: true,
       breakpoints: {

@@ -10,7 +10,8 @@
         <br>
         <p-dropdown id="id_area" name="id_area" [options]="areas" optionLabel="name" optionValue="id" [showClear]="true"
             placeholder="Selecciona el area a la que pertenece" styleClass="w-100 roboto"
-            [(ngModel)]="config.data.entity.id_area" #id_area="ngModel" [required]="true"></p-dropdown>
+            [(ngModel)]="config.data.entity.id_area" (onClick)="setDialogHeight('450px')"
+            (onHide)="setDialogHeight('auto')" #id_area="ngModel" [required]="true"></p-dropdown>
     </div>
 </form>
 <div class="d-flex justify-content-end">

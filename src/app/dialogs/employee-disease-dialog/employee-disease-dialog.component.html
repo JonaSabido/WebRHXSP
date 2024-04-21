@@ -11,7 +11,8 @@
         <br>
         <p-dropdown [options]="diseases" id="id_disease" name="id_disease" optionLabel="name" optionValue="id"
             [showClear]="true" placeholder="Selecciona la enfermedad" styleClass="w-100 roboto"
-            [(ngModel)]="config.data.entity.id_disease" [required]="true" #id_disease="ngModel"></p-dropdown>
+            [(ngModel)]="config.data.entity.id_disease" (onClick)="setDialogHeight('550px')"
+            (onHide)="setDialogHeight('auto')" [required]="true" #id_disease="ngModel"></p-dropdown>
     </div>
 </form>
 <div class="d-flex justify-content-end mt-5">

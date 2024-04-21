@@ -45,8 +45,8 @@ export class EmployeeLeaveComponent extends Crud<EmployeeLeaveRequest, EmployeeL
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nueva baja',
-      closeOnEscape: false,
-      closable: false,
+      closeOnEscape: true,
+      closable: true,
       width: '50%',
       modal: true,
       breakpoints: {

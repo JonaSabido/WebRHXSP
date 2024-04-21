@@ -14,9 +14,11 @@
     </div>
     <div class="mt-3">
         <label for="user" class="roboto fs-small">Parentesco</label>
-        <p-dropdown id="type" name="type" [options]="[{name: 'Padre'}, {name: 'Madre'}, {name: 'Hijo'}, {name: 'Esposa'}]" optionLabel="name"
-            optionValue="name" [showClear]="true" placeholder="Selecciona el parentezco" styleClass="w-100 roboto"
-            [(ngModel)]="config.data.entity.type" [required]="true" #type="ngModel"></p-dropdown>
+        <p-dropdown id="type" name="type"
+            [options]="[{name: 'Padre'}, {name: 'Madre'}, {name: 'Hijo'}, {name: 'Esposa'}, {name: 'Hijo'}, {name: 'Esposa'}]"
+            optionLabel="name" optionValue="name" [showClear]="true" placeholder="Selecciona el parentezco"
+            styleClass="w-100 roboto" [(ngModel)]="config.data.entity.type" (onClick)="setDialogHeight('600px')"
+            (onHide)="setDialogHeight('auto')" [required]="true" #type="ngModel"></p-dropdown>
     </div>
     <div class="mt-3">
         <label for="user" class="roboto fs-small">Número telefónico</label>

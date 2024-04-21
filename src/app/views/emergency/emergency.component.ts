@@ -43,8 +43,8 @@ export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nuevo número de emergencia',
-      closeOnEscape: false,
-      closable: false,
+      closeOnEscape: true,
+      closable: true,
       width: '50%',
       modal: true,
       breakpoints: {

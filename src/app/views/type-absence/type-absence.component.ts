@@ -39,8 +39,8 @@ export class TypeAbsenceComponent extends Crud<TypeAbsenceRequest, TypeAbsenceRe
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
       header: 'Nuevo tipo de falta',
-      closeOnEscape: false,
-      closable: false,
+      closeOnEscape: true,
+      closable: true,
       width: '50%',
       modal: true,
       breakpoints: {
