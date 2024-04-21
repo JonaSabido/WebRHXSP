@@ -7,6 +7,7 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
 import { MessageService } from 'primeng/api';
 import { RecommendationPaymentService } from '../../core/services/recommendation-payment.service';
 import { RecommendationDialogComponent } from '../../dialogs/recommendation-dialog/recommendation-dialog.component';
+import { RecomendationPaymentDialogComponent } from '../../dialogs/recomendation-payment-dialog/recomendation-payment-dialog.component';
 
 @Component({
   selector: 'app-recommendation-payment',
@@ -31,11 +32,12 @@ export class RecommendationPaymentComponent extends Crud<RecommendationPaymentRe
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nueva recomendación',
+      showHeader: false,
       closeOnEscape: false,
       closable: false,
-      width: '50%',
-      modal: true,
+      contentStyle: { 'padding': '0px', 'border-radius': '10px' },
+      style: { 'border-radius': '10px' },
+      width: '40%',
       breakpoints: {
         '960px': '75vw',
         '640px': '90vw'
@@ -44,7 +46,7 @@ export class RecommendationPaymentComponent extends Crud<RecommendationPaymentRe
   }
 
   protected getRefDialog() {
-    return this.dialogService.open(RecommendationDialogComponent, this.dialogConfig)
+    return this.dialogService.open(RecomendationPaymentDialogComponent, this.dialogConfig)
   }
 
   protected restore() {

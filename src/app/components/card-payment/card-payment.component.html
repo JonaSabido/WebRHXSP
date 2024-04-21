@@ -8,7 +8,7 @@
     <p-tag [value]="'Pagado'" severity="success"
         styleClass="p-2 text-center w-100 letter-spacing-large fs-medium"></p-tag>
     }
-    @case(2){
+    @case(3){
     <p-tag [value]="'Cancelado'" severity="danger"
         styleClass="p-2 text-center w-100 letter-spacing-large fs-medium"></p-tag>
     }
@@ -16,27 +16,27 @@
 
     <div class="card-payment-body p-3">
         <div class="row mt-1">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-sm-6">
                 <p class="roboto-bold fs-small m-1">Beneficiario: </p>
             </div>
-            <div class="col-12 col-md-6 d-flex justify-content-end">
+            <div class="col-12 col-sm-6 d-sm-flex justify-content-end">
                 <p-tag [value]="payment.employee.name + ' ' + payment.employee.last_name" severity="primary"
                     styleClass="ms-1"></p-tag>
             </div>
         </div>
         <div class="row mt-1">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-sm-6">
                 <p class="roboto-bold fs-small m-1">Fecha de pago: </p>
             </div>
-            <div class="col-12 col-md-6 d-flex justify-content-end">
+            <div class="col-12 col-sm-6 d-sm-flex justify-content-end">
                 <p-tag [value]="payment.payment_date" severity="primary" styleClass="ms-1"></p-tag>
             </div>
         </div>
         <div class="row mt-1">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-sm-6">
                 <p class="roboto-bold fs-small m-1">Monto a pagar: </p>
             </div>
-            <div class="col-12 col-md-6 d-flex justify-content-end">
+            <div class="col-12 col-sm-6 d-sm-flex justify-content-end">
                 <p-tag [value]="'$'+payment.recommendation.amount" severity="primary" styleClass="ms-1"></p-tag>
             </div>
         </div>

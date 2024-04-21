@@ -46,7 +46,9 @@ export abstract class Crud<T = null, U = null, V = null> extends View {
         temporal?: U,
         newHeader?: string
     ) {
-        this.dialogConfig.header = newHeader ?? 'Editando'
+        if (newHeader) {
+            this.dialogConfig.header = newHeader
+        }
 
         const dialogData: DialogData<T, U> = {
             entity: temporal ? { ...temporal as U } : this.entity,

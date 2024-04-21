@@ -7,7 +7,7 @@
         <div class="row">
             @for(entity of entities; track entity){
             <div class="col-12 col-md-6 col-lg-4 mt-4">
-                <app-card-payment [payment]="entity"></app-card-payment>
+                <app-card-payment [payment]="entity" class="clickeable" (click)="openDialog(entity)"></app-card-payment>
             </div>
             }
         </div>
