@@ -1,0 +1,52 @@
+<app-breadcrumb [icon]="icon" [module]="module" [prevLinks]="prevLinks" [activeLink]="activeLink"></app-breadcrumb>
+<div class="bg-white rounded mt-4 p-4">
+    <div class="d-flex align-items-center justify-content-between">
+        <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
+        <div class="d-flex justify-content-between">
+            <p-button [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" (click)="switchShowFilters()"
+                [rounded]="true" size="small" severity="secondary"></p-button>
+            <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"
+                styleClass="ms-2"></p-button>
+        </div>
+    </div>
+    @if(showFilters){
+    <form role="form" #form="ngForm" (ngSubmit)="reload()" class="container-fluid mt-4">
+        <div class="row p-0">
+            <div class="col-md-2 p-0">
+                <p-dropdown [options]="filterOptions" [(ngModel)]="selectedOption" id="selectOption" name="selectOption"
+                    optionLabel="label" optionValue="property" placeholder="Selecciona"
+                    styleClass="w-100 dropdown-filters-options">
+                </p-dropdown>
+            </div>
+            <div class="col-md-9 p-0">
+                @switch (selectedOption) {
+                @case ("id_employee") {
+                <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name"
+                    [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
+                    placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+                }
+            </div>
+            <div class="col-md-1 p-0">
+                <p-button icon="pi pi-search" severity="info" styleClass="w-100 button-filters"
+                    (click)="this.reload()"></p-button>
+            </div>
+        </div>
+    </form>
+    }
+    <div class="container-fluid p-0">
+        <div class="row">
+            @for(entity of entities; track entity){
+            <div class="col-12 col-md-6 col-lg-4 mt-4">
+                <app-card-employee-file [cardTitle]="'Capacitación'" [id]="entity.id"
+                    [image]="entity.employee.files.employee_image" [name]="entity.employee.full_name"
+                    [date]="entity.createdAt.slice(0,10)" class="clickeable"
+                    (click)="openDialog(entity, 'Folio: ' + entity.id.toString())"></app-card-employee-file>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+<p-toast position="bottom-right" key="br"></p-toast>

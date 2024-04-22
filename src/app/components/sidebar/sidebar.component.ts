@@ -63,19 +63,19 @@ export class SidebarComponent {
         {
           icon: 'ticket',
           title: 'Antidopings',
-          path: '',
+          path: 'antidopings',
           isActive: false
         },
         {
           icon: 'tablet',
           title: 'Capacitaciones',
-          path: '',
+          path: 'capacitaciones',
           isActive: false
         },
         {
           icon: 'clock',
           title: 'Tiempos Extra',
-          path: '',
+          path: 'tiempos-extra',
           isActive: false
         },
       ]
@@ -166,6 +166,12 @@ export class SidebarComponent {
           icon: 'stopwatch',
           title: 'Tipos de faltas',
           path: 'tipos-de-faltas',
+          isActive: false
+        },
+        {
+          icon: 'share-alt',
+          title: 'Métodos de reclutamiento',
+          path: 'metodos-de-reclutamiento',
           isActive: false
         },
       ]

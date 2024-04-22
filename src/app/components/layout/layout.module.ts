@@ -22,6 +22,10 @@ import { RecommendationComponent } from '../../views/recommendation/recommendati
 import { RecommendationPaymentComponent } from '../../views/recommendation-payment/recommendation-payment.component';
 import { EmployeeVacationChartComponent } from '../../views/employee-vacation-chart/employee-vacation-chart.component';
 import { AuthGuard } from '../../helpers/guards/auth-guard';
+import { AntidopingComponent } from '../../views/antidoping/antidoping.component';
+import { TrainingComponent } from '../../views/training/training.component';
+import { ExtraTimeComponent } from '../../views/extra-time/extra-time.component';
+import { RecruitmentMethodComponent } from '../../views/recruitment-method/recruitment-method.component';
 
 const routes: Routes = [
     {
@@ -58,6 +62,10 @@ const routes: Routes = [
                 component: TypeAbsenceComponent
             },
             {
+                path: 'metodos-de-reclutamiento',
+                component: RecruitmentMethodComponent
+            },
+            {
                 path: 'empleadosenfermedades',
                 component: EmployeeDiseaseComponent
             },
@@ -76,6 +84,18 @@ const routes: Routes = [
             {
                 path: 'contratos',
                 component: ContractComponent
+            },
+            {
+                path: 'antidopings',
+                component: AntidopingComponent
+            },
+            {
+                path: 'capacitaciones',
+                component: TrainingComponent
+            },
+            {
+                path: 'tiempos-extra',
+                component: ExtraTimeComponent
             },
             {
                 path: 'faltas',

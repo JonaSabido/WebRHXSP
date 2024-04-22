@@ -57,6 +57,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse> i
     this.entity = {
       id_department: 0,
       id_job: 0,
+      id_recruitment_method: 0,
       code: 0,
       name: "",
       sure_name: "",
@@ -76,6 +77,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse> i
       has_children: true,
       address: "",
       cp: "",
+      comments: "",
       status: true,
       files: {
         birth_certificate: '',

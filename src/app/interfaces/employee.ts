@@ -2,10 +2,12 @@ import { DepartmentResponse } from "./department"
 import { EntityBase } from "./entity-base"
 import { FileName } from "./file-name"
 import { JobResponse } from "./job"
+import { RecruitmentMethodResponse } from "./recruitment-method"
 
 export interface EmployeeRequest {
     id_department: number
     id_job: number
+    id_recruitment_method: number
     code: number
     name: string
     sure_name: string
@@ -25,6 +27,7 @@ export interface EmployeeRequest {
     has_children: boolean
     address: string
     cp: string
+    comments: string
     files: FileName
     status: boolean
 }
@@ -32,6 +35,7 @@ export interface EmployeeRequest {
 export interface EmployeeResponse extends EntityBase {
     id_department: number
     id_job: number
+    id_recruitment_method: number
     code: number
     full_name: string
     name: string
@@ -54,9 +58,11 @@ export interface EmployeeResponse extends EntityBase {
     has_children: boolean
     address: string
     cp: string
+    comments: string
     qr_image: string
     status: boolean
     files: FileName
     department: DepartmentResponse
     job: JobResponse
+    recruitment_method: RecruitmentMethodResponse
 }

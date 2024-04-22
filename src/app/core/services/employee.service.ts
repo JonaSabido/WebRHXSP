@@ -26,5 +26,5 @@ export class EmployeeService extends ApiCrudService<EmployeeRequest, EmployeeRes
 
   override store(e: FormData): Observable<SingleEntity<EmployeeResponse>> {
     return this.http.post<SingleEntity<EmployeeResponse>>(this.uri, e);
-}
+  }
 }

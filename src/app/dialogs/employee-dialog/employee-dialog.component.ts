@@ -15,6 +15,8 @@ import { DepartmentService } from '../../core/services/department.service';
 import { JobService } from '../../core/services/job.service';
 import { EmployeeService } from '../../core/services/employee.service';
 import { FileName } from '../../interfaces/file-name';
+import { RecruitmentMethodResponse } from '../../interfaces/recruitment-method';
+import { RecruitmentMethodService } from '../../core/services/recruitment-method.service';
 
 
 @Component({
@@ -34,6 +36,7 @@ export class EmployeeDialogComponent extends DialogCrud {
   menuItemsForNull: MenuItem[] = [];
   departments: DepartmentResponse[];
   jobs: JobResponse[]
+  recruitmentMethods: RecruitmentMethodResponse[]
   activeIndex: number = 0;
   formData: FormData = new FormData()
   fileNames: FileName | any;
@@ -45,10 +48,12 @@ export class EmployeeDialogComponent extends DialogCrud {
     private departmentService: DepartmentService,
     private jobService: JobService,
     private employeeService: EmployeeService,
+    private recruitmentMethodService: RecruitmentMethodService,
   ) {
     super(ref, config)
     this.departments = []
     this.jobs = []
+    this.recruitmentMethods = []
     this.fileNames = {
       birth_certificate: '',
       identification: '',
@@ -73,6 +78,8 @@ export class EmployeeDialogComponent extends DialogCrud {
   ngOnInit() {
     this.departmentService.all().subscribe(response => this.departments = response.data)
     this.jobService.all().subscribe(response => this.jobs = response.data)
+    this.recruitmentMethodService.all().subscribe(response => this.recruitmentMethods = response.data)
+
     this.stepItems = [
       {
         label: 'Personal',
@@ -179,10 +186,6 @@ export class EmployeeDialogComponent extends DialogCrud {
 
       })
     }
-  }
-
-  saveUploads() {
-    this.employeeService.uploadFiles(this.config.data.entity.id, this.formData).subscribe(response => console.log(response))
   }
 
   generateFormData() {

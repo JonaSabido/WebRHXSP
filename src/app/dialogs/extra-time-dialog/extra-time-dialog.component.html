@@ -1,0 +1,41 @@
+<form role="form" #form="ngForm" class="mb-5">
+    <div>
+        <label for="id_employee" class="roboto fs-small">Empleado</label>
+        <br>
+        <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name" optionValue="id"
+            [showClear]="true" placeholder="Selecciona el empleado" styleClass="w-100 roboto"
+            [(ngModel)]="config.data.entity.id_employee" (onClick)="setDialogHeight('450px')"
+            (onHide)="setDialogHeight('auto')" [required]="true" #id_employee="ngModel"></p-dropdown>
+    </div>
+    <div class="mt-3">
+        <label for="date" class="roboto fs-small">Fecha</label>
+        <br>
+        <input pInputText type="date" id="date" name="date" class="p-inputtext-sm roboto w-100 fs-small"
+            [(ngModel)]="config.data.entity.date" required #date="ngModel" />
+    </div>
+    <div class="mt-3">
+        <label for="input_evidence" class="robotobold fs-small">Archivo</label>
+        @switch (config.data.type_action) {
+        @case('Create'){
+        <input type="file" id="input_evidence" name="input_evidence" accept=".pdf"
+            class="form-control reset-border-box-shadow py-2 mt-2" (change)="getFile($event, 'evidence')"
+            [required]="true" #evidence="ngModel" [(ngModel)]="config.data.entity.files.evidence">
+        }
+        @case('Update'){
+        <br>
+        <p-button label="Ver archivo" [text]="true" [raised]="true" severity="secondary" size="small"
+            (click)="openFile(config.data.entity.files.evidence)" styleClass="mt-2"></p-button>
+        }
+        }
+    </div>
+</form>
+<div class="d-flex justify-content-end mt-5">
+    <div class="footer-dialog">
+        <p-button icon="pi pi-times" label="Cancelar" [text]="true" severity="secondary"
+            (click)="closeDialog()"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" [text]="true" [disabled]="form.invalid ?? false"
+            (click)="generateFormData()"></p-button>
+        <!-- <p-button icon="pi pi-times" label="Cancelar" severity="secondary" size="small" (click)="closeDialog()"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" size="small" styleClass="ms-2"></p-button> -->
+    </div>
+</div>

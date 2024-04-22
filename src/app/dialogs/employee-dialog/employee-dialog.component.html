@@ -137,6 +137,17 @@
         </div>
         <div class="row">
             <div class="col-12 col-lg-6 mt-3">
+                <label for="comments" class="robotobold fs-small">Comentarios</label>
+                <textarea pInputText type="text" id="comments" name="comments"
+                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.comments"></textarea>
+            </div>
+            <div class="col-12 col-lg-6 mt-3">
+                <label for="comments" class="robotobold fs-small">Método de reclutamiento</label>
+                <p-dropdown id="id_recruitment_method" name="id_recruitment_method" [options]="recruitmentMethods"
+                    optionLabel="name" optionValue="id" [showClear]="true" placeholder="Selecciona la ocpión"
+                    styleClass="w-100 roboto" [(ngModel)]="config.data.entity.id_recruitment_method"></p-dropdown>
+            </div>
+            <div class="col-12 col-lg-6 mt-3">
                 <label for="employee_image" class="robotobold fs-small">Imagen Empleado</label>
                 <input type="file" id="input_employee_image" name="employee_image" accept="image/*"
                     class="form-control reset-border-box-shadow py-2 mt-2" (change)="getFile($event, 'employee_image')">
@@ -166,6 +177,7 @@
                     [maxFileSize]="1000000" chooseIcon="pi pi-upload" styleClass="custom-file-upload"
                     [showUploadButton]="false" [previewWidth]="130"></p-fileUpload> -->
             </div>
+
         </div>
     </div>
 </form>
