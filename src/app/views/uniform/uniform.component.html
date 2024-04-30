@@ -27,13 +27,26 @@
                     [(ngModel)]="filters[selectedOption].value">
                 </p-dropdown>
                 }
-                @case ("start_year") {
-                <input pInputText type="number" id="start_year" name="start_year" placeholder="Escriba el año de inicio"
+                @case ("type") {
+                <p-dropdown [options]="types" id="type" name="type" optionLabel="name"
+                    emptyFilterMessage="No se encontraron resultados" optionValue="value"
+                    placeholder="Selecciona el tipo" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+                @case ("year") {
+                <input pInputText type="number" id="year" name="year" placeholder="Escriba el año"
                     class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
                 }
-                @case ("end_year") {
-                <input pInputText type="number" id="end_year" name="end_year" placeholder="Escriba el año final"
-                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
+                @case("start_date"){
+                <p-calendar id="start_date" name="start_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                }
+                @case("end_date"){
+                <p-calendar id="end_date" name="end_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
                 }
                 }
             </div>
@@ -69,28 +82,35 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th pSortableColumn="status">Status<p-sortIcon field="status"></p-sortIcon></th>
                 <th pSortableColumn="employee">Empleado <p-sortIcon field="employee"></p-sortIcon></th>
-                <th pSortableColumn="start_date">Fecha de inicio <p-sortIcon field="start_date"></p-sortIcon></th>
-                <th pSortableColumn="end_date">Fecha de finalización <p-sortIcon field="end_date"></p-sortIcon></th>
+                <th pSortableColumn="employee">Tipo <p-sortIcon field="type"></p-sortIcon></th>
+                <th pSortableColumn="delivered_date">Fecha de entrega <p-sortIcon field="delivered_date"></p-sortIcon>
+                </th>
                 <th>Opciones</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-entity let-columns>
-            <tr class="clickeable" (click)="openDialog(entity)">
+            <tr>
+                <td>{{entity.employee.name}} {{entity.employee.sure_name}} {{entity.employee.last_name}}</td>
                 <td>
-                    @if(entity.status){
-                    <p-tag [value]="'Vigente'" severity="success" styleClass="big-tag"></p-tag>
+                    @switch (entity.type) {
+                    @case (1) {
+                    Nuevo
                     }
-                    @else{
-                    <p-tag [value]="'Finalizado'" severity="warning" styleClass="big-tag"></p-tag>
+                    @case (2) {
+                    Reaprovechamiento
+                    }
                     }
                 </td>
-                <td>{{entity.employee.name}} {{entity.employee.sure_name}} {{entity.employee.last_name}}</td>
-                <td>{{entity.start_date}}</td>
-                <td>{{entity.end_date}}</td>
+
+                <td>
+                    <p-tag [value]="entity.delivered_date" severity="primary" styleClass="ms-1 big-tag"></p-tag>
+                </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
+                        <p-button icon="pi pi-pencil" severity="info" [rounded]="true" size="small"
+                            (click)="openDialog(entity)"></p-button>
+
                         <p-button icon="pi pi-trash" severity="danger" [rounded]="true" size="small" styleClass="ms-2"
                             (click)="delete(entity.id)"></p-button>
                     </div>

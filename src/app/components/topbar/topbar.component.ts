@@ -10,5 +10,13 @@ import { BadgeModule } from 'primeng/badge';
   styleUrl: './topbar.component.scss'
 })
 export class TopbarComponent {
+  showNotifications: boolean
 
+  constructor() {
+    this.showNotifications = false
+  }
+
+  switchShowNotifications() {
+    this.showNotifications = !this.showNotifications
+  }
 }

@@ -5,7 +5,7 @@
         <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"></p-button>
     </div>
     <p-table [value]="data" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }" [scrollable]="true"
-        scrollHeight="800px" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-3 custom-table">
         <ng-template pTemplate="caption">
             <div class="d-flex">

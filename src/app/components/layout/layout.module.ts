@@ -26,6 +26,7 @@ import { AntidopingComponent } from '../../views/antidoping/antidoping.component
 import { TrainingComponent } from '../../views/training/training.component';
 import { ExtraTimeComponent } from '../../views/extra-time/extra-time.component';
 import { RecruitmentMethodComponent } from '../../views/recruitment-method/recruitment-method.component';
+import { UniformComponent } from '../../views/uniform/uniform.component';
 
 const routes: Routes = [
     {
@@ -84,6 +85,10 @@ const routes: Routes = [
             {
                 path: 'contratos',
                 component: ContractComponent
+            },
+            {
+                path: 'uniformes',
+                component: UniformComponent
             },
             {
                 path: 'antidopings',

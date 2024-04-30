@@ -1,32 +1,46 @@
-<form class="mb-5">
+<form role="form" #form="ngForm" class="mb-5">
     <div>
         <label for="user" class="roboto fs-small">Empleado</label>
         <br>
-        <p-dropdown [options]="employees" optionLabel="fullname" [showClear]="true" placeholder="Selecciona el empleado"
-            styleClass="w-100 roboto"></p-dropdown>
+        <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name" optionValue="id"
+            [showClear]="true" placeholder="Selecciona el empleado" styleClass="w-100 roboto"
+            [(ngModel)]="config.data.entity.id_employee" [required]="true" #id_employee="ngModel"></p-dropdown>
     </div>
+    @if(config.data.type_action === 'Update'){
     <div class="mt-3">
-        <label for="user" class="roboto fs-small">Fecha</label>
+        <label for="user" class="roboto fs-small">Trabajo del empleado</label>
         <br>
-        <input pInputText type="date" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small" />
+        <input pInputText type="text" id="job" name="job" class="p-inputtext-sm roboto w-100 fs-small"
+            [(ngModel)]="config.data.entity.job.name" [disabled]="true" />
     </div>
+    }
     <div class="mt-3">
         <label for="user" class="roboto fs-small">Tipo de falta</label>
         <br>
-        <p-dropdown [options]="types" optionLabel="name" [showClear]="true" placeholder="Selecciona el tipo de falta"
-            styleClass="w-100 roboto"></p-dropdown>
+        <p-dropdown [options]="typeAbsences" id="id_type_absence" name="id_type_absence" optionLabel="name"
+            optionValue="id" [showClear]="true" placeholder="Selecciona el tipo de falta" styleClass="w-100 roboto"
+            [(ngModel)]="config.data.entity.id_type_absence" [required]="true" #id_type_absence="ngModel"></p-dropdown>
+    </div>
+    <div class="mt-3">
+        <label for="user" class="roboto fs-small">Fecha de la falta</label>
+        <br>
+        <input pInputText type="date" id="date" name="date" class="p-inputtext-sm roboto w-100 fs-small"
+            [(ngModel)]="config.data.entity.date" required #date="ngModel" />
     </div>
     <div class="mt-3 pb-5">
         <label for="user" class="roboto fs-small">Descripción</label>
         <br>
-        <textarea pInputText type="text" id="user" name="user" class="p-inputtext-sm roboto w-100 fs-small"></textarea>
+        <textarea pInputText type="text" id="description" name="description"
+            class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.description" required
+            #description="ngModel"></textarea>
     </div>
 </form>
 <div class="d-flex justify-content-end mt-5">
     <div class="footer-dialog">
         <p-button icon="pi pi-times" label="Cancelar" [text]="true" severity="secondary"
             (click)="closeDialog()"></p-button>
-        <p-button icon="pi pi-save" label="Guardar" [text]="true"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" [text]="true" [disabled]="form.invalid ?? false"
+            (click)="save(config.data.entity)"></p-button>
         <!-- <p-button icon="pi pi-times" label="Cancelar" severity="secondary" size="small" (click)="closeDialog()"></p-button>
         <p-button icon="pi pi-save" label="Guardar" size="small" styleClass="ms-2"></p-button> -->
     </div>

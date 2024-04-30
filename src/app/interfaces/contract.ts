@@ -2,11 +2,17 @@ import { ObjectFilter } from "../../../shared/interfaces/object-filter"
 import { EmployeeResponse } from "./employee"
 import { EntityBase } from "./entity-base"
 
+export interface ContractFileName {
+    evidence: string
+}
+
 export interface ContractRequest {
     id_employee: number,
     start_date: Date | string,
     end_date: Date | string,
     status: boolean,
+    files: ContractFileName
+
 }
 
 export interface ContractResponse extends EntityBase {
@@ -14,6 +20,7 @@ export interface ContractResponse extends EntityBase {
     start_date: Date | string,
     end_date: Date | string,
     status: boolean,
+    files: ContractFileName,
 }
 
 export interface ContractQueryFilter {

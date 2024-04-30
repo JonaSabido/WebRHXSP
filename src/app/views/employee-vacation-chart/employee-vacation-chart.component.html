@@ -1,6 +1,6 @@
 <app-breadcrumb [icon]="icon" [module]="module" [prevLinks]="prevLinks" [activeLink]="activeLink"></app-breadcrumb>
-<div class="bg-white rounded mt-4 p-5">
-    <div class="calendar">
+<div class="bg-white rounded mt-4 py-5 px-4">
+    <!-- <div class="calendar">
         <div class="days-of-week pb-2 border-bottom">
             @for (day of daysOfWeek; track day) {
             <div class="day day-active roboto-bold">{{ day }}</div>
@@ -14,5 +14,62 @@
             </div>
             }
         </div>
+    </div> -->
+    <div class="container-fluid ">
+        <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name" [filter]="true"
+            filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
+            placeholder="Selecciona el empleado" styleClass="w-100" [(ngModel)]="employeeId" (ngModelChange)="generateCalendars()">
+        </p-dropdown>
+        @if(dataGenerated){
+        <div class="d-block d-md-flex justify-content-center align-items-center mt-4">
+            <h3 class="roboto-bold text-secondary-color my-2 mx-3 text-center">PERIODO</h3>
+            <p-dropdown [options]="[{id: 1, name: '2022-2023'}, {id: 2, name: '2023-2024'}]" id="selectOption"
+                name="selectOption" optionLabel="name" optionValue="id" placeholder="Selecciona" styleClass="w-100"
+                [(ngModel)]="periodValue">
+            </p-dropdown>
+        </div>
+        <div class="d-block d-md-flex justify-content-center align-items-center mt-4">
+            <div class="mx-md-5 my-1 text-center">
+                <h5 class="roboto-bold text-muted fs-medium">Correspondientes</h5>
+                <p-tag [value]="'12'" severity="primary" styleClass="xl-tag"></p-tag>
+            </div>
+            <div class="mx-md-5 my-1 text-center">
+                <h5 class="roboto-bold text-muted fs-medium">Días Disponibles</h5>
+                <p-tag [value]="'2'" severity="warning" styleClass="xl-tag"></p-tag>
+            </div>
+            <div class="mx-md-5 my-1 text-center">
+                <h5 class="roboto-bold text-muted fs-medium">Días Utilizados</h5>
+                <p-tag [value]="'10'" severity="success" styleClass="xl-tag"></p-tag>
+            </div>
+        </div>
+        <div class="row mt-4">
+            @for(calendar of calendarMonths; track calendar.month){
+            <!-- <div class="col-12 col-md-4">
+                    <p-calendar [responsiveOptions]="responsiveOptions" [inline]="true" [readonlyInput]="true"
+                        [defaultDate]="calendar.startDate" view="date"></p-calendar>
+                </div> -->
+            <div class="col-12 col-md-6 col-lg-4 mt-4 ">
+                <div class="calendar border overflow-x-auto">
+                    <p class="text-primary-color roboto-bold fs-medium text-center w-100 border p-2">
+                        {{calendar.textDisplay}}</p>
+                    <div class="days-of-week border-bottom pb-2 px-2">
+                        @for (day of daysOfWeek; track day) {
+                        <div class="day day-active roboto-bold">{{ day }}</div>
+                        }
+                    </div>
+                    <div class="days text-center pt-2 px-2">
+                        @for (day of calendar.daysInMonth; track day.value) {
+                        <div class="day roboto"
+                            [ngClass]="{'day-active': day.currentMonth, 'day-inactive': !day.currentMonth, 'bg-primary-color text-white roboto-bold fs-medium p-3': day.selected, 'fs-small': !day.selected }">
+                            {{ day.value }}
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        }
     </div>
+
 </div>

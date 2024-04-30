@@ -42,7 +42,7 @@ export abstract class ApiCrudService<T, U, V = null> {
         return this.http.delete<RowsDeleted>(`${this.uri}${id}`);
     }
 
-    private getParams(filters: ObjectFilter<V>[]): HttpParams {
+    protected getParams(filters: ObjectFilter<V>[]): HttpParams {
         let httpParams: HttpParams = new HttpParams();
         filters.forEach(element => {
             console.log(element)

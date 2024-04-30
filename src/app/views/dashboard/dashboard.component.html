@@ -1,1 +1,152 @@
 <app-breadcrumb [icon]="icon" [module]="module" [prevLinks]="prevLinks" [activeLink]="activeLink"></app-breadcrumb>
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-md-6 col-lg-3 mt-2">
+            <div class="card-dashboard card-data d-flex align-items-center px-3">
+                <p-tag icon="pi pi-user" styleClass="xl-tag" severity="info"></p-tag>
+                <div class="divider bg-primary mx-3"></div>
+                <div class="info-content">
+                    <span class="info-title">Empleados</span>
+                    <p class="info-data text-primary">300</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mt-2">
+            <div class="card-dashboard card-data d-flex align-items-center px-3">
+                <p-tag icon="pi pi-home" styleClass="xl-tag" severity="warning"></p-tag>
+                <div class="divider bg-warning mx-3"></div>
+                <div class="info-content">
+                    <span class="info-title">Areas</span>
+                    <p class="info-data text-warning">2</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mt-2">
+            <div class="card-dashboard card-data d-flex align-items-center px-3">
+                <p-tag icon="pi pi-briefcase" styleClass="xl-tag" severity="danger"></p-tag>
+                <div class="divider bg-danger mx-3"></div>
+                <div class="info-content">
+                    <span class="info-title">Puestos</span>
+                    <p class="info-data text-danger">30</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mt-2">
+            <div class="card-dashboard card-data d-flex align-items-center px-3">
+                <p-tag icon="pi pi-building" styleClass="xl-tag" severity="success"></p-tag>
+                <div class="divider bg-success mx-3"></div>
+                <div class="info-content">
+                    <span class="info-title">Departamentos</span>
+                    <p class="info-data text-success">10</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <!-- <div class="col-12 col-lg-5 mt-2">
+            <div class="card-dashboard card-info p-4">
+                <div class="card-title pe-2">
+                    <h5 class="poppins fw-bold fs-5">Reminders</h5>
+                    <span class="material-symbols-outlined text-light-color fs-4 clickeable">
+                        more_horiz
+                    </span>
+                </div>
+                <div class="card-info-content">
+                    <div class="mt-1 mb-5">
+                        <div class="picker-reminder bg-primary-picker-reminder">16 June, 2024
+                        </div>
+                        <p class="content-reminder mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit,
+                            sed do eiusmod</p>
+                    </div>
+                    <hr>
+                    <div class="mt-1 mb-5">
+                        <div class="picker-reminder bg-secondary-picker-reminder">16 June, 2024
+                        </div>
+                        <p class="content-reminder mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit,
+                            sed do eiusmod</p>
+                    </div>
+                    <hr>
+                    <div class="mt-1 mb-5">
+                        <div class="picker-reminder bg-third-picker-reminder">16 June, 2024
+                        </div>
+                        <p class="content-reminder mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit,
+                            sed do eiusmod</p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="col-12 col-lg-7 mt-2">
+            <div class="card-dashboard card-info p-4">
+                <div class="card-title pe-2">
+                    <h5 class="roboto-bold fs-5">Eventos del Mes</h5>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <p class="text-primary-color roboto-bold fs-medium w-100 p-2 text-center">
+                        {{titleCalendar}}</p>
+                </div>
+                <div class="card-info-content px-md-2">
+                    <div class="calendar overflow-x-auto">
+                        <div class="days-of-week border-bottom pb-2 px-2">
+                            @for (day of daysOfWeek; track day) {
+                            <div class="day day-active roboto-bold text-muted fs-5">{{ day }}</div>
+                            }
+                        </div>
+                        <div class="days text-center pt-2 px-2">
+                            @for (day of daysInMonth; track day.value) {
+                            @if(!day.isToday){
+                            <div class="day roboto fs-medium" [ngClass]="{
+                                        'day-active': day.currentMonth, 'day-inactive': !day.currentMonth, 
+                                        'bg-primary-color text-white roboto-bold fs-large p-3': day.selected, 'fs-medium': !day.selected,
+                                        'text-white': day.isToday, 'bg-secondary-color': day.isToday, }">
+                                {{ day.value }}
+                            </div>
+                            }
+                            @else{
+
+                            <div class="day">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="icon-tag icon-tag-small icon-tag-birthday">
+                                        <i class="pi pi-gift"></i>
+                                    </div>
+                                    <div class="icon-tag icon-tag-small icon-tag-payment ms-negative">
+                                        <i class="pi pi-dollar"></i>
+                                    </div>
+                                    <div class="icon-tag icon-tag-small icon-tag-contract ms-negative">
+                                        <i class="pi pi-book"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+
+                            }
+                        </div>
+                        <div class="d-block d-md-flex justify-content-between align-items-center mt-5">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-tag icon-tag-medium icon-tag-birthday">
+                                    <i class="pi pi-gift"></i>
+                                </div>
+                                <span class="roboto-bold text-muted fs-small ms-1">Cumpleaños</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="icon-tag icon-tag-medium icon-tag-payment">
+                                    <i class="pi pi-dollar"></i>
+                                </div>
+                                <span class="roboto-bold text-muted fs-small ms-1">Pago recom.</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="icon-tag icon-tag-medium icon-tag-contract">
+                                    <i class="pi pi-book"></i>
+                                </div>
+                                <span class="roboto-bold text-muted fs-small ms-1">Venc. contrato</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

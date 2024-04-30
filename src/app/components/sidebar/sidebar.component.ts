@@ -21,6 +21,18 @@ export class SidebarComponent {
 
   sidebarModuleItems: SidebarModuleItem[] = [
     {
+      title: 'Home',
+      visible: true,
+      subitems: [
+        {
+          icon: 'home',
+          title: 'Dashboard',
+          path: 'dashboard',
+          isActive: false
+        },
+      ]
+    },
+    {
       title: 'EMPLEADOS',
       visible: true,
       subitems: [
@@ -58,6 +70,12 @@ export class SidebarComponent {
           icon: 'book',
           title: 'Contratos',
           path: 'contratos',
+          isActive: false
+        },
+        {
+          icon: 'gift',
+          title: 'Uniformes',
+          path: 'uniformes',
           isActive: false
         },
         {
