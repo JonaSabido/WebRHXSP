@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { EmployeeResponse } from '../../interfaces/employee';
 import { EmployeeService } from '../../core/services/employee.service';
 import { TagModule } from 'primeng/tag';
+import { VacationTimeResponse } from '../../interfaces/vacation-time';
+import { VacationTimeService } from '../../core/services/vacation-time.service';
 
 @Component({
   selector: 'app-employee-vacation-chart',
@@ -129,19 +131,31 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
     }
   ];
   employees: EmployeeResponse[]
+  vacationTimesByEmployee: VacationTimeResponse[]
+  select_id_employee: number
+  select_id_vacation_time: number
+  select_vacation_time: VacationTimeResponse
+  severityByAvailableDays: 'info' | 'warning' | 'danger'
   selectedDates = ['2024-03-25', '2024-03-26', '2024-04-30', '2024-05-01', '2024-08-21', '2024-10-15', '2024-10-15', '2024-10-16', '2024-10-17', '2024-10-18', '2024-10-19',]
 
   constructor(
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private vacationTimeService: VacationTimeService,
   ) {
     super()
     this.employees = []
+    this.vacationTimesByEmployee = []
+    this.select_id_employee = 0
+    this.select_id_vacation_time = 0
+    this.select_vacation_time = this.vacationTimeRestore()
+    this.severityByAvailableDays = 'info'
   }
 
 
   ngOnInit(): void {
     this.employeeService.all().subscribe(response => this.employees = response.data)
     this.generateCalendar();
+    this.generateCalendars()
   }
 
   generateCalendar() {
@@ -184,7 +198,6 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
   }
 
   generateCalendars() {
-    this.dataGenerated = false;
 
     this.calendarMonths.forEach(element => {
       const today = new Date();
@@ -229,6 +242,44 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
       element.textDisplay = `${monthName} ${currentYear}`;
     });
     this.dataGenerated = true;
+  }
+
+  vacationTimeRestore(): VacationTimeResponse {
+    return {
+      id: 0,
+      id_employee: 0,
+      start_date: '',
+      end_date: '',
+      period: '',
+      days: 0,
+      available_days: 0,
+      take_days: 0,
+      createdAt: '',
+      updatedAt: ''
+    }
+  }
+
+  onChangeEmployee() {
+    this.vacationTimeService.all([{ label: 'Empleado', property: 'id_employee', value: this.select_id_employee }]).subscribe({
+      next: (response) => { this.vacationTimesByEmployee = response.data },
+      error: (e) => { this.vacationTimesByEmployee = [] }}
+    )
+    this.select_id_vacation_time = 0;
+    this.onChangeVacationTime()
+  }
+
+  onChangeVacationTime() {
+    this.select_vacation_time = this.vacationTimesByEmployee.find(x => x.id == this.select_id_vacation_time) ?? this.vacationTimeRestore()
+
+    if (this.select_vacation_time.available_days >= 6) {
+      this.severityByAvailableDays = 'info'
+    }
+    else if (this.select_vacation_time.available_days <= 5 && this.select_vacation_time.available_days >= 1) {
+      this.severityByAvailableDays = 'warning'
+    }
+    else {
+      this.severityByAvailableDays = 'danger'
+    }
   }
 
 

@@ -5,8 +5,7 @@
         <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"></p-button>
     </div>
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
-        [scrollable]="true" 
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [scrollable]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-3 custom-table">
         <ng-template pTemplate="caption">
             <div class="d-flex">
@@ -52,7 +51,7 @@
                 <!-- <td>{{entity.area.name}}</td> -->
                 <td>{{entity.job.name}}</td>
                 <td>{{entity.department.name}}</td>
-                <td>{{entity.entry_date}}</td>
+                <td>{{entity.entry_date_formatted}}</td>
                 <td>{{entity.entry_month}}</td>
                 <td>{{entity.entry_year}}</td>
                 <td>

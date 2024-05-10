@@ -13,12 +13,13 @@ export interface RecommendationPaymentResponse extends EntityBase {
     id_recommendation: number,
     id_paying_employee: number,
     payment_date: string,
+    payment_date_formatted: string,
     status: number,
     employee: EmployeeResponse,
     recommendation: RecommendationResponse
 }
 
-export interface RecommendationPaymentQueryFilter{
+export interface RecommendationPaymentQueryFilter {
     id_paying_employee: number,
     payment_date: string,
     status: number,

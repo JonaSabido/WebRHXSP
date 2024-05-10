@@ -24,8 +24,9 @@ export interface UniformResponse extends EntityBase {
     id_employee: number,
     type: number,
     delivered_date: string | Date,
+    delivered_date_formatted: string,
     comments: string
-    employee?: EmployeeResponse
+    employee: EmployeeResponse
 }
 
 export interface UniformQueryFilter {

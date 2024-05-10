@@ -56,7 +56,7 @@
             <div class="col-12 col-md-6 col-lg-4 mt-4">
                 <app-card-employee-file [cardTitle]="'Tiempo extra'" [id]="entity.id"
                     [image]="entity.employee.files.employee_image" [name]="entity.employee.full_name"
-                    [date]="entity.date.slice(0,10)" class="clickeable"
+                    [date]="entity.date_formatted" class="clickeable"
                     (click)="openDialog(entity, 'Folio: ' + entity.id.toString())"></app-card-employee-file>
             </div>
             }

@@ -9,4 +9,5 @@ export abstract class ApiService {
     protected get uri(): string {
         return `${environment.urlApiBase}/${this.root()}`;
     }
+    
 }

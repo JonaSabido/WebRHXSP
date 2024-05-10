@@ -11,8 +11,9 @@ export interface EmployeeReentryRequest {
 export interface EmployeeReentryResponse extends EntityBase {
     id_employee: number,
     reentry_date: string | Date,
+    reentry_date_formatted: string,
     description: string
-    employee?: EmployeeResponse
+    employee: EmployeeResponse
 }
 
 export interface EmployeeReentryQueryFilter {

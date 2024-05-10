@@ -42,6 +42,7 @@ export interface EmployeeResponse extends EntityBase {
     sure_name: string
     last_name: string
     entry_date: string
+    entry_date_formatted: string
     entry_month: string
     entry_year: string
     gender: string

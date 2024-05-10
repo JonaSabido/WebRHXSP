@@ -58,8 +58,7 @@
     </form>
     }
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
-        [scrollable]="true" 
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [scrollable]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-5 custom-table">
         <ng-template pTemplate="caption">
             <div class="d-flex">
@@ -70,12 +69,12 @@
                 <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
                     tooltipPosition="bottom" class="" severity="warning"></p-button> -->
 
-                <button type="button" pButton pRipple icon="pi pi-file" class="p-button-secondary me-2" pTooltip="CSV"
-                    tooltipPosition="bottom"></button>
+                <!-- <button type="button" pButton pRipple icon="pi pi-file" class="p-button-secondary me-2" pTooltip="CSV"
+                    tooltipPosition="bottom"></button> -->
                 <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success me-2"
-                    pTooltip="XLS" tooltipPosition="bottom"></button>
+                    pTooltip="XLS" tooltipPosition="bottom" (click)="xlsx()"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning" pTooltip="PDF"
-                    tooltipPosition="bottom"></button>
+                    tooltipPosition="bottom" (click)="pdf()"></button>
                 <!-- <button type="button" pButton pRipple [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" class="p-button-info ms-auto"
                     pTooltip="Selection Only" tooltipPosition="bottom"></button> -->
             </div>
@@ -102,10 +101,7 @@
                     }
                     }
                 </td>
-
-                <td>
-                    <p-tag [value]="entity.delivered_date" severity="primary" styleClass="ms-1 big-tag"></p-tag>
-                </td>
+                <td class="text-primary-color fw-bold">{{entity.delivered_date_formatted}}</td>
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
                         <p-button icon="pi pi-pencil" severity="info" [rounded]="true" size="small"

@@ -15,7 +15,8 @@ export interface AntidopingRequest {
 export interface AntidopingResponse extends EntityBase {
     id_employee: number,
     files: AntidopingFileName,
-    employee: EmployeeResponse
+    employee: EmployeeResponse,
+    createdAt_formatted: string
 }
 
 export interface AntidopingQueryFilter {

@@ -20,6 +20,12 @@
             </div>
             <div class="col-md-9 p-0">
                 @switch (selectedOption) {
+                @case ("status") {
+                <p-dropdown [options]="[{name: 'Vigente', value: 1}, {name: 'Finalizado', value: 0}, ]" id="status"
+                    name="status" optionLabel="name" optionValue="value" placeholder="Selecciona el status"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
                 @case ("id_employee") {
                 <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name"
                     [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
@@ -31,9 +37,29 @@
                 <input pInputText type="number" id="start_year" name="start_year" placeholder="Escriba el año de inicio"
                     class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
                 }
+                @case("start_start_date"){
+                <p-calendar id="start_start_date" name="start_start_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                }
+                @case("start_end_date"){
+                <p-calendar id="start_end_date" name="start_end_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                }
                 @case ("end_year") {
                 <input pInputText type="number" id="end_year" name="end_year" placeholder="Escriba el año final"
                     class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
+                }
+                @case("end_start_date"){
+                <p-calendar id="end_start_date" name="end_start_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                }
+                @case("end_end_date"){
+                <p-calendar id="end_end_date" name="end_end_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
                 }
                 }
             </div>
@@ -45,8 +71,7 @@
     </form>
     }
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
-        [scrollable]="true" 
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [scrollable]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-5 custom-table">
         <ng-template pTemplate="caption">
             <div class="d-flex">
@@ -56,28 +81,30 @@
                     tooltipPosition="bottom" class="me-2" severity="info"></p-button>
                 <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
                     tooltipPosition="bottom" class="" severity="warning"></p-button> -->
-
-                <button type="button" pButton pRipple icon="pi pi-file" class="p-button-secondary me-2" pTooltip="CSV"
-                    tooltipPosition="bottom"></button>
+                <!-- <button type="button" pButton pRipple icon="pi pi-file" class="p-button-secondary me-2" pTooltip="CSV"
+                    tooltipPosition="bottom"></button> -->
                 <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success me-2"
-                    pTooltip="XLS" tooltipPosition="bottom"></button>
+                    pTooltip="XLS" tooltipPosition="bottom" (click)="xlsx()"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning" pTooltip="PDF"
-                    tooltipPosition="bottom"></button>
+                    tooltipPosition="bottom" (click)="pdf()"></button>
                 <!-- <button type="button" pButton pRipple [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" class="p-button-info ms-auto"
                     pTooltip="Selection Only" tooltipPosition="bottom"></button> -->
             </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th pSortableColumn="status">Status<p-sortIcon field="status"></p-sortIcon></th>
                 <th pSortableColumn="employee">Empleado <p-sortIcon field="employee"></p-sortIcon></th>
-                <th pSortableColumn="start_date">Fecha de inicio <p-sortIcon field="start_date"></p-sortIcon></th>
-                <th pSortableColumn="end_date">Fecha de finalización <p-sortIcon field="end_date"></p-sortIcon></th>
+                <th pSortableColumn="start_date">Inicio de Contrato <p-sortIcon field="start_date"></p-sortIcon></th>
+                <th pSortableColumn="end_date">Finalización de Contrato <p-sortIcon field="end_date"></p-sortIcon></th>
+                <th pSortableColumn="status">Status<p-sortIcon field="status"></p-sortIcon></th>
                 <th>Opciones</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-entity let-columns>
             <tr class="clickeable" (click)="openDialog(entity)">
+                <td>{{entity.employee.name}} {{entity.employee.sure_name}} {{entity.employee.last_name}}</td>
+                <td class="text-primary-color fw-bold">{{entity.start_date_formatted}}</td>
+                <td class="text-primary-color fw-bold">{{entity.end_date_formatted}}</td>
                 <td>
                     @if(entity.status){
                     <p-tag [value]="'Vigente'" severity="success" styleClass="big-tag"></p-tag>
@@ -86,9 +113,6 @@
                     <p-tag [value]="'Finalizado'" severity="warning" styleClass="big-tag"></p-tag>
                     }
                 </td>
-                <td>{{entity.employee.name}} {{entity.employee.sure_name}} {{entity.employee.last_name}}</td>
-                <td>{{entity.start_date}}</td>
-                <td>{{entity.end_date}}</td>
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
                         <p-button icon="pi pi-trash" severity="danger" [rounded]="true" size="small" styleClass="ms-2"

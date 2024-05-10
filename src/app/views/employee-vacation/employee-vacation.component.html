@@ -4,8 +4,8 @@
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
         <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"></p-button>
     </div>
-    <p-table [value]="data" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }" [scrollable]="true"
-         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
+        [scrollable]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-3 custom-table">
         <ng-template pTemplate="caption">
             <div class="d-flex">
@@ -37,17 +37,14 @@
         </ng-template>
         <ng-template pTemplate="body" let-entity let-columns>
             <tr>
-                <td>{{entity.employee}}</td>
-                <td>{{entity.start_date}}</td>
-                <td>{{entity.end_date}}</td>
+                <td>{{entity.employee.full_name}}</td>
+                <td class="text-primary-color fw-bold">{{entity.start_date_formatted}}</td>
+                <td class="text-primary-color fw-bold">{{entity.end_date_formatted}}</td>
                 <td>
-                    <p-tag [value]="entity.period" severity="info"></p-tag>
+                    <p-tag [value]="entity.vacation_time.period" severity="info"></p-tag>
                 </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
-
-                        <p-button icon="pi pi-list" severity="info" [rounded]="true" size="small"
-                            (click)="openDialog(entity)"></p-button>
 
                         <p-button icon="pi pi-trash" severity="danger" [rounded]="true" size="small" styleClass="ms-2"
                             (click)="delete(entity.id)"></p-button>
@@ -57,3 +54,4 @@
         </ng-template>
     </p-table>
 </div>
+<p-toast position="bottom-right" key="br"></p-toast>

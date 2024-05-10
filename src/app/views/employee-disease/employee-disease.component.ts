@@ -17,6 +17,9 @@ import { DiseaseService } from '../../core/services/disease.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
+import { CellXSLX, ColumnXSLX } from '../../interfaces/report';
+import { ReportService } from '../../../../shared/services/report.service';
+import { DateService } from '../../../../shared/services/date.service';
 
 @Component({
   selector: 'app-employee-disease',
@@ -35,13 +38,48 @@ export class EmployeeDiseaseComponent extends Crud<EmployeeDiseaseRequest, Emplo
   employees: EmployeeResponse[]
   diseases: DiseaseResponse[]
 
+  columnCellsXLSX: ColumnXSLX[] = [
+    { column: 1, width: 15 },
+    { column: 2, width: 40 },
+    { column: 3, width: 40 },
+  ]
+
+  tableColumnsXLSX: Array<any> = [
+    { name: '#', filterButton: true, },
+    { name: 'Empleado', filterButton: true },
+    { name: 'Enfermedad', filterButton: true },
+  ]
+
+  tableColumnsPDF: Array<any> = [
+    {
+      header: '#',
+    },
+    {
+      header: 'Empleado',
+    },
+    {
+      header: 'Enfermedad',
+    },
+  ]
+
+  filterColumnsPDF: Array<any> = [
+    {
+      header: 'Empleado',
+    },
+    {
+      header: 'Enfermedad',
+    }
+  ]
+
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
     public service: EmployeeDiseaseService,
     public messageService: MessageService,
     private employeeService: EmployeeService,
-    private diseaseService: DiseaseService
+    private diseaseService: DiseaseService,
+    private reportService: ReportService,
+    private dateService: DateService
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
@@ -90,5 +128,60 @@ export class EmployeeDiseaseComponent extends Crud<EmployeeDiseaseRequest, Emplo
   ngOnInit(): void {
     this.employeeService.all().subscribe(response => this.employees = response.data)
     this.diseaseService.all().subscribe(response => this.diseases = response.data)
+  }
+
+  xlsx() {
+
+    const filterCellsXLSX: CellXSLX[] = [
+      { cell: 'A3', value: 'Empleado:', bold: true },
+      { cell: 'A4', value: 'Enfermedad:', bold: true },
+      { cell: 'B3', value: `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B4', value: `${document.getElementById('id_disease')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+    ]
+
+    const rows: Array<any> = [];
+    this.entities.forEach((item, index) => {
+      rows.push([
+        index + 1,
+        `${item.employee.name} ${item.employee.sure_name} ${item.employee.last_name}`,
+        item.disease.name
+      ])
+    })
+
+    this.reportService.generateXLSX(
+      'Enfermedades',
+      'A1:C1',
+      'Enfermedades',
+      filterCellsXLSX,
+      this.columnCellsXLSX,
+      'C2',
+      'A6',
+      this.tableColumnsXLSX,
+      rows
+    );
+  }
+
+  pdf() {
+
+    let dataFilters = [
+      [
+        `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`,
+        `${document.getElementById('id_disease')?.textContent ?? 'Sin seleccionar'}`,
+      ]
+    ]
+
+    let index = 1;
+
+    let dataTable = this.entities.map(getDataTable);
+    function getDataTable(datos: any) {
+
+      return [
+        index++,
+        `${datos.employee.name} ${datos.employee.sure_name} ${datos.employee.last_name}`,
+        datos.disease.name,
+      ];
+    }
+
+    this.reportService.generatePDF('Enfermedades', 'Enfermedades', this.filterColumnsPDF, dataFilters, this.tableColumnsPDF, dataTable)
   }
 }

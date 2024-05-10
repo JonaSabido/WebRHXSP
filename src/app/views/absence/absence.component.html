@@ -64,8 +64,7 @@
     </form>
     }
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
-        [scrollable]="true" 
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [scrollable]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-5 custom-table">
         <ng-template pTemplate="caption">
             <div class="d-flex">
@@ -89,8 +88,8 @@
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th pSortableColumn="employee">Empleado <p-sortIcon field="employee"></p-sortIcon></th>
+                <th pSortableColumn="job">Trabajo al momento de la falta<p-sortIcon field="job"></p-sortIcon></th>
                 <th pSortableColumn="date">Fecha<p-sortIcon field="date"></p-sortIcon></th>
-                <th pSortableColumn="job">Trabajo del empleado<p-sortIcon field="job"></p-sortIcon></th>
                 <th pSortableColumn="type_absence">Tipo de falta<p-sortIcon field="type_absence"></p-sortIcon></th>
                 <th>Opciones</th>
             </tr>
@@ -98,8 +97,8 @@
         <ng-template pTemplate="body" let-entity let-columns>
             <tr>
                 <td>{{entity.employee.name}} {{entity.employee.sure_name}} {{entity.employee.last_name}}</td>
-                <td>{{entity.date}}</td>
                 <td>{{entity.job.name}}</td>
+                <td class="text-primary-color fw-bold">{{entity.date_formatted}}</td>
                 <td>
                     <p-tag [value]="entity.type_absence.name" severity="info"></p-tag>
                 </td>

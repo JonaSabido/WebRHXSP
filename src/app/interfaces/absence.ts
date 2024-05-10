@@ -14,6 +14,7 @@ export interface AbsenceResponse extends EntityBase {
     id_employee: number,
     id_type_absence: number,
     date: string | Date,
+    date_formatted: string,
     description: string
     employee?: EmployeeResponse,
     type_absence?: TypeAbsenceResponse

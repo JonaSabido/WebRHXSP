@@ -111,7 +111,6 @@ export abstract class Crud<T = null, U = null, V = null> extends View {
     public delete(id: number) {
         this.service$?.destroy(id).subscribe({
             next: (response) => {
-                console.log(response)
                 this.messageService$?.add({ key: 'br', severity: 'success', summary: 'Correcto', detail: 'Dato eliminado correctamente' });
                 this.reload()
             },

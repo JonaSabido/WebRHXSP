@@ -142,7 +142,11 @@ tr:hover {
     letter-spacing: 3px;
 }
 
-
+.small-tag {
+    font-size: .7em;
+    min-width: 20px;
+    width: auto;
+}
 
 .big-tag {
     font-size: .9em;
@@ -216,7 +220,7 @@ tr:hover {
 .calendar {
     width: 100%;
     padding: 10px;
-    min-height: 330px !important;
+    min-height: 335px !important;
 }
 
 .days-of-week {

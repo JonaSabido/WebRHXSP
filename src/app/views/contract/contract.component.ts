@@ -16,11 +16,15 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { EmployeeResponse } from '../../interfaces/employee';
 import { EmployeeService } from '../../core/services/employee.service';
+import { CalendarModule } from 'primeng/calendar';
+import { CellXSLX, ColumnXSLX } from '../../interfaces/report';
+import { ReportService } from '../../../../shared/services/report.service';
+import { DateService } from '../../../../shared/services/date.service';
 
 @Component({
   selector: 'app-contract',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule, DropdownModule, InputTextModule, FormsModule],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule, DropdownModule, InputTextModule, FormsModule, CalendarModule],
   providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './contract.component.html',
   styleUrl: './contract.component.scss'
@@ -33,12 +37,82 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
   dialogConfig: DynamicDialogConfig;
   employees: EmployeeResponse[]
 
+  columnCellsXLSX: ColumnXSLX[] = [
+    { column: 1, width: 20 },
+    { column: 2, width: 40 },
+    { column: 3, width: 30 },
+    { column: 4, width: 30 },
+    { column: 5, width: 20 },
+  ]
+
+  tableColumnsXLSX: Array<any> = [
+    { name: '#', filterButton: true, },
+    { name: 'Empleado', filterButton: true },
+    { name: 'Inicio de contrato', filterButton: true },
+    { name: 'Finalización de contrato', filterButton: true },
+    { name: 'Status', filterButton: true },
+  ]
+
+  tableColumnsPDF: Array<any> = [
+    {
+      header: '#',
+      dataKey: 'id',
+    },
+    {
+      header: 'Empleado',
+      dataKey: 'employee.name',
+    },
+    {
+      header: 'Inicio de contrato',
+      dataKey: 'start_date_formatted',
+    },
+    {
+      header: 'Finalización de contrato',
+      dataKey: 'end_date_formatted',
+    },
+    {
+      header: 'Status',
+      dataKey: 'status',
+    }
+  ]
+
+
+  filterColumnsPDF: Array<any> = [
+    {
+      header: 'Empleado',
+    },
+    {
+      header: 'IC (Año)',
+    },
+    {
+      header: 'IC (Fecha inicio)',
+    },
+    {
+      header: 'IC (Fecha final)',
+    },
+    {
+      header: 'FC (Año)',
+    },
+    {
+      header: 'FC (Fecha inicio)',
+    },
+    {
+      header: 'FC (Fecha final)',
+    },
+    {
+      header: 'Status',
+    },
+  ]
+
+
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
     public service: ContractService,
     public messageService: MessageService,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private reportService: ReportService,
+    private dateService: DateService
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
@@ -79,14 +153,39 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
         label: 'Empleado',
         value: null
       },
+      status: {
+        property: 'status',
+        label: 'Status',
+        value: null
+      },
       start_year: {
         property: 'start_year',
-        label: 'Año inicio',
+        label: 'IC (Año)',
+        value: null
+      },
+      start_start_date: {
+        property: 'start_start_date',
+        label: 'IC (Fecha Inicio)',
+        value: null
+      },
+      start_end_date: {
+        property: 'start_end_date',
+        label: 'IC (Fecha Final)',
         value: null
       },
       end_year: {
         property: 'end_year',
-        label: 'Año final',
+        label: 'FC (Año)',
+        value: null
+      },
+      end_start_date: {
+        property: 'end_start_date',
+        label: 'FC (Fecha Inicio)',
+        value: null
+      },
+      end_end_date: {
+        property: 'end_end_date',
+        label: 'FC (Fecha Final)',
         value: null
       },
     }
@@ -94,5 +193,83 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
 
   ngOnInit(): void {
     this.employeeService.all().subscribe(response => this.employees = response.data)
+  }
+
+  xlsx() {
+
+    const filterCellsXLSX: CellXSLX[] = [
+      { cell: 'A3', value: 'Empleado:', bold: true },
+      { cell: 'A4', value: 'IC (Año):', bold: true },
+      { cell: 'A5', value: 'IC (Fecha inicio):', bold: true },
+      { cell: 'A6', value: 'IC (Fecha final):', bold: true },
+      { cell: 'B3', value: `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B4', value: `${this.filters['start_year'].value ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B5', value: `${this.filters['start_start_date'].value ? this.dateService.dateFormatted(this.filters['start_start_date'].value) : 'Sin seleccionar'}`, bold: false },
+      { cell: 'B6', value: `${this.filters['start_end_date'].value ? this.dateService.dateFormatted(this.filters['start_end_date'].value) : 'Sin seleccionar'}`, bold: false },
+      { cell: 'C3', value: 'Status:', bold: true },
+      { cell: 'C4', value: 'FC (Año):', bold: true },
+      { cell: 'C5', value: 'FC (Fecha inicio):', bold: true },
+      { cell: 'C6', value: 'FC (Fecha final):', bold: true },
+      { cell: 'D3', value: `${document.getElementById('status')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'D4', value: `${this.filters['end_year'].value ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'D5', value: `${this.filters['end_start_date'].value ? this.dateService.dateFormatted(this.filters['end_start_date'].value) : 'Sin seleccionar'}`, bold: false },
+      { cell: 'D6', value: `${this.filters['end_end_date'].value ? this.dateService.dateFormatted(this.filters['end_end_date'].value) : 'Sin seleccionar'}`, bold: false },
+
+    ]
+
+    const rows: Array<any> = [];
+    this.entities.forEach((item, index) => {
+      rows.push([
+        index + 1,
+        `${item.employee.name} ${item.employee.sure_name} ${item.employee.last_name}`,
+        item.start_date_formatted,
+        item.end_date_formatted,
+        item.status ? 'Vigente' : 'Finalizado'
+      ])
+    })
+
+    this.reportService.generateXLSX(
+      'Contratos',
+      'A1:E1',
+      'Contratos',
+      filterCellsXLSX,
+      this.columnCellsXLSX,
+      'E2',
+      'A8',
+      this.tableColumnsXLSX,
+      rows
+    );
+  }
+
+  pdf() {
+
+    let dataFilters = [
+      [
+        `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.filters['start_year'].value ?? 'Sin seleccionar'}`,
+        `${this.filters['start_start_date'].value ? this.dateService.dateFormatted(this.filters['start_start_date'].value) : 'Sin seleccionar'}`,
+        `${this.filters['start_end_date'].value ? this.dateService.dateFormatted(this.filters['start_end_date'].value) : 'Sin seleccionar'}`,
+        `${this.filters['end_year'].value ?? 'Sin seleccionar'}`,
+        `${this.filters['end_start_date'].value ? this.dateService.dateFormatted(this.filters['end_start_date'].value) : 'Sin seleccionar'}`,
+        `${this.filters['end_end_date'].value ? this.dateService.dateFormatted(this.filters['end_end_date'].value) : 'Sin seleccionar'}`,
+        `${document.getElementById('status')?.textContent ?? 'Sin seleccionar'}`,
+      ]
+    ]
+
+    let index = 1;
+
+    let dataTable = this.entities.map(getDataTable);
+    function getDataTable(datos: any) {
+
+      return [
+        index++,
+        `${datos.employee.name} ${datos.employee.sure_name} ${datos.employee.last_name}`,
+        datos.start_date_formatted,
+        datos.end_date_formatted,
+        datos.status == 1 ? 'Vigente' : 'Finalizado',
+      ];
+    }
+
+    this.reportService.generatePDF('Contratos', 'Contratos', this.filterColumnsPDF, dataFilters, this.tableColumnsPDF, dataTable, 'l')
   }
 }

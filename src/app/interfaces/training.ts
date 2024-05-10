@@ -15,6 +15,7 @@ export interface TrainingResponse extends EntityBase {
     id_employee: number,
     files: TrainingFileName,
     employee: EmployeeResponse
+    createdAt_formatted: string
 }
 
 export interface TrainingQueryFilter {

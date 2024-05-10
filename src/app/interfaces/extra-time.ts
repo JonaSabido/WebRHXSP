@@ -15,8 +15,10 @@ export interface ExtraTimeRequest {
 export interface ExtraTimeResponse extends EntityBase {
     id_employee: number,
     date: string,
+    date_formatted: string,
     files: ExtraTimeFileName,
     employee: EmployeeResponse
+    createdAt_formatted: string
 }
 
 export interface ExtraTimeQueryFilter {

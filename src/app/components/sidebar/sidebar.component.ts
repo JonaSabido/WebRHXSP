@@ -21,7 +21,7 @@ export class SidebarComponent {
 
   sidebarModuleItems: SidebarModuleItem[] = [
     {
-      title: 'Home',
+      title: 'HOME',
       visible: true,
       subitems: [
         {

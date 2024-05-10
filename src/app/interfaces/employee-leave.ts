@@ -11,8 +11,9 @@ export interface EmployeeLeaveRequest {
 export interface EmployeeLeaveResponse extends EntityBase {
     id_employee: number,
     leave_date: string | Date,
+    leave_date_formatted: string,
     description: string
-    employee?: EmployeeResponse
+    employee: EmployeeResponse
 }
 
 export interface EmployeeLeaveQueryFilter {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Crud } from '../../../../shared/helpers/crud';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EmployeeVacationDialogComponent } from '../../dialogs/employee-vacation-dialog/employee-vacation-dialog.component';
@@ -7,60 +7,38 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { TagModule } from 'primeng/tag';
+import { EmployeeVacationQueryFilter, EmployeeVacationRequest, EmployeeVacationResponse } from '../../interfaces/employee-vacation';
+import { EmployeeResponse } from '../../interfaces/employee';
+import { MessageService } from 'primeng/api';
+import { EmployeeVacationService } from '../../core/services/employee-vacation.service';
+import { EmployeeService } from '../../core/services/employee.service';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-employee-vacation',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule],
-  providers: [DialogService, DynamicDialogRef],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule],
+  providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './employee-vacation.component.html',
   styleUrl: './employee-vacation.component.scss'
 })
-export class EmployeeVacationComponent extends Crud {
+export class EmployeeVacationComponent extends Crud<EmployeeVacationRequest, EmployeeVacationResponse, EmployeeVacationQueryFilter> implements OnInit {
   module = 'Vacaciones'
   icon = 'pi-list'
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Vacaciones'
   dialogConfig: DynamicDialogConfig;
-  data = [
-    {
-      employee: 'Juan Olmo',
-      start_date: '24 Febrero 2024',
-      end_date: '28 Febrero 2024',
-      period: '2024-2025'
-    },
-    {
-      employee: 'Maria Rodriguez',
-      start_date: '14 Febrero 2024',
-      end_date: '18 Febrero 2024',
-      period: '2024-2025'
-
-    },
-    {
-      employee: 'Maria Rodriguez',
-      start_date: '04 Enero 2022',
-      end_date: '18 Enero 2022',
-      period: '2022-2023'
-    },
-    {
-      employee: 'Luis Martinez',
-      start_date: '30 Marzo 2022',
-      end_date: '05 Abril 2022',
-      period: '2022-2023'
-    },
-    {
-      employee: 'Luis Martinez',
-      start_date: '31 Agosto 2020',
-      end_date: '08 Septiembre 2020',
-      period: '2020-2021'
-    }
-  ]
+  employees: EmployeeResponse[]
 
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
+    public service: EmployeeVacationService,
+    public messageService: MessageService,
+    private employeeService: EmployeeService
   ) {
-    super(dialogService, refDialog)
+    super(dialogService, refDialog, service, messageService)
+
     this.dialogConfig = {
       header: 'Nueva vacación',
       closeOnEscape: true,
@@ -72,18 +50,29 @@ export class EmployeeVacationComponent extends Crud {
         '640px': '90vw'
       },
     }
+    // this.selectedOption = 'id_employee'
+    this.employees = []
   }
 
   protected getRefDialog() {
     return this.dialogService.open(EmployeeVacationDialogComponent, this.dialogConfig)
   }
 
-  protected restore(){
-    
+  protected restore() {
+    this.entity = {
+      id_vacation_time: 0,
+      start_date: '',
+      end_date: ''
+    }
   }
 
   protected restoreFilters(){
     
   }
+
+  ngOnInit(): void {
+    this.employeeService.all().subscribe(response => this.employees = response.data)
+  }
+
 
 }

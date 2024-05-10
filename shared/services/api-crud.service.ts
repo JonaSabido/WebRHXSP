@@ -45,8 +45,7 @@ export abstract class ApiCrudService<T, U, V = null> {
     protected getParams(filters: ObjectFilter<V>[]): HttpParams {
         let httpParams: HttpParams = new HttpParams();
         filters.forEach(element => {
-            console.log(element)
-            if (element.value !== 0 && element.value !== '' && element.value !== null && element.value !== undefined) {
+            if (element.value !== '' && element.value !== null && element.value !== undefined) {
                 httpParams = httpParams.set(element.property as string, element.value)
             }
         });

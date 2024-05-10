@@ -18,28 +18,33 @@
     <div class="container-fluid ">
         <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name" [filter]="true"
             filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
-            placeholder="Selecciona el empleado" styleClass="w-100" [(ngModel)]="employeeId" (ngModelChange)="generateCalendars()">
+            placeholder="Selecciona el empleado" styleClass="w-100" [(ngModel)]="select_id_employee"
+            (ngModelChange)="onChangeEmployee()">
         </p-dropdown>
-        @if(dataGenerated){
+        @if(select_id_employee > 0){
         <div class="d-block d-md-flex justify-content-center align-items-center mt-4">
             <h3 class="roboto-bold text-secondary-color my-2 mx-3 text-center">PERIODO</h3>
-            <p-dropdown [options]="[{id: 1, name: '2022-2023'}, {id: 2, name: '2023-2024'}]" id="selectOption"
-                name="selectOption" optionLabel="name" optionValue="id" placeholder="Selecciona" styleClass="w-100"
-                [(ngModel)]="periodValue">
-            </p-dropdown>
+            <p-dropdown [options]="vacationTimesByEmployee" id="id_vacation_time" name="id_vacation_time"
+                optionLabel="period" optionValue="id" [showClear]="true" placeholder="Selecciona el periodo"
+                styleClass="w-100 roboto" [(ngModel)]="select_id_vacation_time" (ngModelChange)="onChangeVacationTime()"
+                [required]="true" #id_vacation_time="ngModel"></p-dropdown>
         </div>
+        }
+        @if(select_id_vacation_time > 0){
         <div class="d-block d-md-flex justify-content-center align-items-center mt-4">
             <div class="mx-md-5 my-1 text-center">
                 <h5 class="roboto-bold text-muted fs-medium">Correspondientes</h5>
-                <p-tag [value]="'12'" severity="primary" styleClass="xl-tag"></p-tag>
+                <p-tag [value]="select_vacation_time.days.toString()" severity="primary" styleClass="xl-tag"></p-tag>
             </div>
             <div class="mx-md-5 my-1 text-center">
                 <h5 class="roboto-bold text-muted fs-medium">Días Disponibles</h5>
-                <p-tag [value]="'2'" severity="warning" styleClass="xl-tag"></p-tag>
+                <p-tag [value]="select_vacation_time.available_days.toString()" [severity]="severityByAvailableDays"
+                    styleClass="xl-tag"></p-tag>
             </div>
             <div class="mx-md-5 my-1 text-center">
                 <h5 class="roboto-bold text-muted fs-medium">Días Utilizados</h5>
-                <p-tag [value]="'10'" severity="success" styleClass="xl-tag"></p-tag>
+                <p-tag [value]="select_vacation_time.take_days.toString()" severity="success"
+                    styleClass="xl-tag"></p-tag>
             </div>
         </div>
         <div class="row mt-4">
@@ -49,8 +54,8 @@
                         [defaultDate]="calendar.startDate" view="date"></p-calendar>
                 </div> -->
             <div class="col-12 col-md-6 col-lg-4 mt-4 ">
-                <div class="calendar border overflow-x-auto">
-                    <p class="text-primary-color roboto-bold fs-medium text-center w-100 border p-2">
+                <div class="calendar border rounded overflow-x-auto">
+                    <p class="text-primary-color roboto-bold fs-medium text-center w-100 border rounded p-2">
                         {{calendar.textDisplay}}</p>
                     <div class="days-of-week border-bottom pb-2 px-2">
                         @for (day of daysOfWeek; track day) {
@@ -59,8 +64,8 @@
                     </div>
                     <div class="days text-center pt-2 px-2">
                         @for (day of calendar.daysInMonth; track day.value) {
-                        <div class="day roboto"
-                            [ngClass]="{'day-active': day.currentMonth, 'day-inactive': !day.currentMonth, 'bg-primary-color text-white roboto-bold fs-medium p-3': day.selected, 'fs-small': !day.selected }">
+                        <div class="day roboto fs-small"
+                            [ngClass]="{'day-active': day.currentMonth, 'day-inactive': !day.currentMonth, 'bg-primary-color text-white roboto-bold': day.selected, 'fs-small': !day.selected }">
                             {{ day.value }}
                         </div>
                         }
