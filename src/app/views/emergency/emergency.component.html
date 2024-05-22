@@ -34,7 +34,7 @@
                 }
                 @case("type"){
                 <p-dropdown id="type" name="type"
-                    [options]="[{name: 'Padre'}, {name: 'Madre'}, {name: 'Hijo'}, {name: 'Esposa'}, {name: 'Conyugue'}]"
+                    [options]="[{name: 'Padre'}, {name: 'Madre'}, {name:'Hermano/a'}, {name: 'Hijo/a'}, {name: 'Esposa/o'},{name:'Pareja'}, {name:'Cuñado/a'}, {name:'Vecino/a'}, {name:'Conyugue'}]"
                     optionLabel="name" optionValue="name" [showClear]="true" placeholder="Selecciona el parentesco"
                     styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value"></p-dropdown>
                 }
