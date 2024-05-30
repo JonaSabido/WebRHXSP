@@ -11,6 +11,8 @@ import { EmployeeService } from '../../core/services/employee.service';
 import { TagModule } from 'primeng/tag';
 import { VacationTimeResponse } from '../../interfaces/vacation-time';
 import { VacationTimeService } from '../../core/services/vacation-time.service';
+import { EmployeeVacationService } from '../../core/services/employee-vacation.service';
+import { EmployeeVacationChart } from '../../interfaces/employee-vacation';
 
 @Component({
   selector: 'app-employee-vacation-chart',
@@ -30,92 +32,7 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
   periodValue: number = 1
   dataGenerated: boolean = false
   employeeId: number = 0
-  calendarMonths: CalendarMonth[] = [
-    {
-      year: 2024,
-      month: 1,
-      startDate: new Date(2024, 1, 0),
-      daysInMonth: [],
-      textDisplay: ''
-    },
-    {
-      year: 2024,
-      month: 2,
-      startDate: new Date(2024, 2, 0),
-      daysInMonth: [],
-      textDisplay: ''
-    },
-    {
-      year: 2024,
-      month: 3,
-      startDate: new Date(2024, 3, 0),
-      daysInMonth: [],
-      textDisplay: ''
-    },
-    {
-      year: 2024,
-      month: 4,
-      startDate: new Date(2024, 4, 0),
-      daysInMonth: [],
-      textDisplay: ''
-    },
-    {
-      year: 2024,
-      month: 5,
-      startDate: new Date(2024, 5, 0),
-      daysInMonth: [],
-      textDisplay: ''
-    },
-    {
-      year: 2024,
-      month: 6,
-      startDate: new Date(2024, 6, 0),
-      daysInMonth: [],
-      textDisplay: ''
-    },
-    {
-      year: 2024,
-      month: 7,
-      startDate: new Date(2024, 7, 0),
-      daysInMonth: [],
-      textDisplay: ''
-    },
-    {
-      year: 2024,
-      month: 8,
-      startDate: new Date(2024, 8, 0),
-      daysInMonth: [],
-      textDisplay: ''
-    },
-    {
-      year: 2024,
-      month: 9,
-      startDate: new Date(2024, 9, 0),
-      daysInMonth: [],
-      textDisplay: ''
-    },
-    {
-      year: 2024,
-      month: 10,
-      startDate: new Date(2024, 10, 0),
-      daysInMonth: [],
-      textDisplay: ''
-    },
-    {
-      year: 2024,
-      month: 11,
-      startDate: new Date(2024, 11, 0),
-      daysInMonth: [],
-      textDisplay: ''
-    },
-    {
-      year: 2024,
-      month: 12,
-      startDate: new Date(2024, 12, 0),
-      daysInMonth: [],
-      textDisplay: ''
-    },
-  ]
+  calendarMonths: CalendarMonth[] = []
   responsiveOptions = [
     {
       breakpoint: '1024px',
@@ -141,6 +58,8 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private vacationTimeService: VacationTimeService,
+    private employeeVacationService: EmployeeVacationService,
+
   ) {
     super()
     this.employees = []
@@ -154,55 +73,18 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
 
   ngOnInit(): void {
     this.employeeService.all().subscribe(response => this.employees = response.data)
-    this.generateCalendar();
-    this.generateCalendars()
   }
 
-  generateCalendar() {
-    // const today = new Date();
-    // const currentYear = this.currentDate.getFullYear();
-    // const currentMonth = this.currentDate.getMonth();
+  generateCalendars(employeeVacationCharts: EmployeeVacationChart[]) {
+    this.dataGenerated = false;
 
-    // const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-    // const firstDayOfWeek = firstDayOfMonth.getDay(); // 0: Sunday, 1: Monday, ..., 6: Saturday
+    // Reset the calendarMonths array
+    this.calendarMonths = [];
 
-    // const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
-    // const lastDateOfMonth = lastDayOfMonth.getDate();
-
-    // const days: CalendarDay[] = [];
-
-    // // Determinar el número de días del mes anterior
-    // const lastDayOfPreviousMonth = new Date(currentYear, currentMonth, 0);
-    // const daysInPreviousMonth = lastDayOfPreviousMonth.getDate();
-
-    // // Insertar los días del mes anterior que se muestran en la misma semana que el primer día del mes actual
-    // for (let i = firstDayOfWeek - 1; i >= 0; i--) {
-    //   days.push({ value: daysInPreviousMonth - i, currentMonth: false, isToday: false });
-    // }
-
-    // // Insertar los números de los días del mes actual
-    // for (let i = 1; i <= lastDateOfMonth; i++) {
-    //   const isToday = i === today.getDate() && currentYear === today.getFullYear() && currentMonth === today.getMonth();
-    //   days.push({ value: i, currentMonth: true, isToday });
-    // }
-
-    // // Determinar el número de días del próximo mes
-    // const remainingDays = 7 - (days.length % 7);
-
-    // // Insertar los días del próximo mes que se muestran en la misma semana que el último día del mes actual
-    // for (let i = 1; i <= remainingDays; i++) {
-    //   days.push({ value: i, currentMonth: false, isToday: false });
-    // }
-
-    // this.daysInMonth = days;
-  }
-
-  generateCalendars() {
-
-    this.calendarMonths.forEach(element => {
-      const today = new Date();
-      const currentYear = element.startDate.getFullYear();
-      const currentMonth = element.startDate.getMonth();
+    // Iterar sobre cada EmployeeVacationChart
+    employeeVacationCharts.forEach(chart => {
+      const currentYear = chart.year;
+      const currentMonth = chart.month - 1; // Ajuste porque los meses en Date son 0-indexados
 
       const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
       const firstDayOfWeek = firstDayOfMonth.getDay(); // 0: Sunday, 1: Monday, ..., 6: Saturday
@@ -223,9 +105,10 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
 
       // Insertar los números de los días del mes actual
       for (let i = 1; i <= lastDateOfMonth; i++) {
+        const today = new Date();
         const isToday = i === today.getDate() && currentYear === today.getFullYear() && currentMonth === today.getMonth();
-        const currentDate = new Date(currentYear, currentMonth, i).toISOString().split('T')[0]
-        const isSelected = this.selectedDates.find(x => currentDate === x) ? true : false
+        const currentDate = new Date(currentYear, currentMonth, i).toISOString().split('T')[0];
+        const isSelected = chart.dates.includes(currentDate);
         days.push({ value: i, currentMonth: true, isToday, selected: isSelected });
       }
 
@@ -237,10 +120,18 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
         days.push({ value: i, currentMonth: false, isToday: false, selected: false });
       }
 
-      element.daysInMonth = days;
-      const monthName = element.startDate.toLocaleString('es-ES', { month: 'long' }).toUpperCase();
-      element.textDisplay = `${monthName} ${currentYear}`;
+      const monthName = firstDayOfMonth.toLocaleString('es-ES', { month: 'long' }).toUpperCase();
+      const calendarMonth: CalendarMonth = {
+        year: currentYear,
+        month: currentMonth + 1, // Ajuste porque los meses en Date son 0-indexados
+        startDate: firstDayOfMonth,
+        daysInMonth: days,
+        textDisplay: `${monthName} ${currentYear}`
+      };
+
+      this.calendarMonths.push(calendarMonth);
     });
+
     this.dataGenerated = true;
   }
 
@@ -262,7 +153,8 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
   onChangeEmployee() {
     this.vacationTimeService.all([{ label: 'Empleado', property: 'id_employee', value: this.select_id_employee }]).subscribe({
       next: (response) => { this.vacationTimesByEmployee = response.data },
-      error: (e) => { this.vacationTimesByEmployee = [] }}
+      error: (e) => { this.vacationTimesByEmployee = [] }
+    }
     )
     this.select_id_vacation_time = 0;
     this.onChangeVacationTime()
@@ -280,6 +172,15 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
     else {
       this.severityByAvailableDays = 'danger'
     }
+
+    if (this.select_id_vacation_time > 0) {
+      this.employeeVacationService.getGroupedByMonth(this.select_id_vacation_time).subscribe({
+        next: (response) => { this.generateCalendars(response.data) },
+        error: (e) => { this.vacationTimesByEmployee = [], this.calendarMonths = [] }
+      }
+      )
+    }
+
   }
 
 

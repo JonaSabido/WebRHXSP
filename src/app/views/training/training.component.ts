@@ -32,6 +32,7 @@ export class TrainingComponent extends Crud<TrainingRequest, TrainingResponse, T
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Capacitaciones'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nuevo Capacitación';
   employees: EmployeeResponse[]
 
 
@@ -45,7 +46,6 @@ export class TrainingComponent extends Crud<TrainingRequest, TrainingResponse, T
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nueva capacitación',
       closeOnEscape: true,
       closable: true,
       width: '50%',

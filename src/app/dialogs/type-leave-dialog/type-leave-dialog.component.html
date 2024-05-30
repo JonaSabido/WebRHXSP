@@ -1,0 +1,15 @@
+<form role="form" #form="ngForm" class="mb-5">
+    <div>
+        <label for="name" class="roboto fs-small">Nombre</label>
+        <input pInputText type="text" id="name" name="name" class="p-inputtext-sm roboto w-100"
+            placeholder="Escriba el nombre" [(ngModel)]="config.data.entity.name" required #name="ngModel" />
+    </div>
+</form>
+<div class="d-flex justify-content-end">
+    <div class="footer-dialog">
+        <p-button icon="pi pi-times" label="Cancelar" [text]="true" severity="secondary"
+            (click)="closeDialog()"></p-button>
+        <p-button icon="pi pi-save" label="Guardar" [text]="true" [disabled]="form.invalid ?? false"
+            (click)="save(config.data.entity)"></p-button>
+    </div>
+</div>

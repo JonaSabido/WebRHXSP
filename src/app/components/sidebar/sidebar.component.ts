@@ -187,9 +187,27 @@ export class SidebarComponent {
           isActive: false
         },
         {
+          icon: 'angle-double-down',
+          title: 'Tipos de bajas',
+          path: 'tipos-de-bajas',
+          isActive: false
+        },
+        {
           icon: 'share-alt',
           title: 'Métodos de reclutamiento',
           path: 'metodos-de-reclutamiento',
+          isActive: false
+        },
+      ]
+    },
+    {
+      title: 'SISTEMA',
+      visible: true,
+      subitems: [
+        {
+          icon: 'users',
+          title: 'Usuarios',
+          path: 'usuarios',
           isActive: false
         },
       ]

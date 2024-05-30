@@ -29,6 +29,7 @@ export class TypeAbsenceComponent extends Crud<TypeAbsenceRequest, TypeAbsenceRe
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Tipos de faltas'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nuevo Tipo de Falta';
 
   constructor(
     public dialogService: DialogService,

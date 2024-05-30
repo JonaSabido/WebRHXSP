@@ -29,6 +29,7 @@ export class AreaComponent extends Crud<AreaRequest, AreaResponse, AreaQueryFilt
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Areas'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nueva Area';
 
   constructor(
     public dialogService: DialogService,
@@ -38,7 +39,6 @@ export class AreaComponent extends Crud<AreaRequest, AreaResponse, AreaQueryFilt
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nueva area',
       closeOnEscape: true,
       closable: true,
       width: '50%',

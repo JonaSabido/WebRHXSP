@@ -28,6 +28,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse> i
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Registros'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nuevo Empleado';
 
   constructor(
     public dialogService: DialogService,
@@ -37,7 +38,6 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse> i
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nuevo empleado',
       closeOnEscape: true,
       closable: true,
       width: '90%',

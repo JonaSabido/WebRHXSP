@@ -23,6 +23,7 @@ export class RecommendationPaymentComponent extends Crud<RecommendationPaymentRe
   prevLinks = ['Home', 'Recomendaciones']
   activeLink = 'Pagos'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nuevo Pago de Recomendación';
 
   constructor(
     public dialogService: DialogService,

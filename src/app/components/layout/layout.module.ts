@@ -27,6 +27,8 @@ import { TrainingComponent } from '../../views/training/training.component';
 import { ExtraTimeComponent } from '../../views/extra-time/extra-time.component';
 import { RecruitmentMethodComponent } from '../../views/recruitment-method/recruitment-method.component';
 import { UniformComponent } from '../../views/uniform/uniform.component';
+import { UserComponent } from '../../views/user/user.component';
+import { TypeLeaveComponent } from '../../views/type-leave/type-leave.component';
 
 const routes: Routes = [
     {
@@ -61,6 +63,10 @@ const routes: Routes = [
             {
                 path: 'tipos-de-faltas',
                 component: TypeAbsenceComponent
+            },
+            {
+                path: 'tipos-de-bajas',
+                component: TypeLeaveComponent
             },
             {
                 path: 'metodos-de-reclutamiento',
@@ -125,6 +131,10 @@ const routes: Routes = [
             {
                 path: 'recomendaciones-pagos',
                 component: RecommendationPaymentComponent
+            },
+            {
+                path: 'usuarios',
+                component: UserComponent
             }
 
         ]

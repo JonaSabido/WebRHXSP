@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ApiCrudService } from '../../../../shared/services/api-crud.service';
-import { RecommendationRequest, RecommendationResponse } from '../../interfaces/recommendation';
+import { RecommendationQueryFilter, RecommendationRequest, RecommendationResponse } from '../../interfaces/recommendation';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RecommendationService extends ApiCrudService<RecommendationRequest, RecommendationResponse> {
+export class RecommendationService extends ApiCrudService<RecommendationRequest, RecommendationResponse, RecommendationQueryFilter> {
 
 
   constructor(

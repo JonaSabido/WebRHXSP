@@ -1,6 +1,7 @@
 import { ObjectFilter } from "../../../shared/interfaces/object-filter";
 import { EmployeeResponse } from "./employee";
 import { EntityBase } from "./entity-base";
+import { JobResponse } from "./job";
 import { TypeAbsenceResponse } from "./type-absence";
 
 export interface AbsenceRequest {
@@ -16,8 +17,9 @@ export interface AbsenceResponse extends EntityBase {
     date: string | Date,
     date_formatted: string,
     description: string
-    employee?: EmployeeResponse,
-    type_absence?: TypeAbsenceResponse
+    employee: EmployeeResponse,
+    job: JobResponse
+    type_absence: TypeAbsenceResponse
 }
 
 export interface AbsenceChartResponse {

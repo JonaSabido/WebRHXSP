@@ -36,6 +36,7 @@ export class UniformComponent extends Crud<UniformRequest, UniformResponse, Unif
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Uniformes'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nuevo Uniforme';
   employees: EmployeeResponse[]
   types = UniformTypes
 
@@ -100,7 +101,6 @@ export class UniformComponent extends Crud<UniformRequest, UniformResponse, Unif
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nuevo uniforme',
       closeOnEscape: true,
       closable: true,
       width: '50%',

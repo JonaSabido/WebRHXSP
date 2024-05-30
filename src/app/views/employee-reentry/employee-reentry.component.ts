@@ -36,6 +36,7 @@ export class EmployeeReentryComponent extends Crud<EmployeeReentryRequest, Emplo
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Reingresos'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nuevo Reingreso';
   employees: EmployeeResponse[]
 
   columnCellsXLSX: ColumnXSLX[] = [
@@ -91,7 +92,6 @@ export class EmployeeReentryComponent extends Crud<EmployeeReentryRequest, Emplo
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nuevo reingreso',
       closeOnEscape: true,
       closable: true,
       width: '50%',
@@ -197,7 +197,7 @@ export class EmployeeReentryComponent extends Crud<EmployeeReentryRequest, Emplo
 
     let dataTable = this.entities.map(getDataTable);
     function getDataTable(datos: any) {
-      
+
       return [
         index++,
         `${datos.employee.name} ${datos.employee.sure_name} ${datos.employee.last_name}`,

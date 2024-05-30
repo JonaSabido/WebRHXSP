@@ -36,6 +36,8 @@ export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse
   activeLink = 'Números de emergencia'
   dialogConfig: DynamicDialogConfig;
   employees: EmployeeResponse[]
+  defaultHeader: string = 'Nuevo Número de Emergencia';
+
 
   columnCellsXLSX: ColumnXSLX[] = [
     { column: 1, width: 15 },
@@ -96,7 +98,6 @@ export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nuevo número de emergencia',
       closeOnEscape: true,
       closable: true,
       width: '50%',

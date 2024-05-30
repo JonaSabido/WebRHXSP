@@ -30,6 +30,7 @@ export class DepartmentComponent extends Crud<DepartmentRequest, DepartmentRespo
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Departamentos'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nuevo Departamento';
 
   constructor(
     public dialogService: DialogService,
@@ -39,7 +40,6 @@ export class DepartmentComponent extends Crud<DepartmentRequest, DepartmentRespo
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nuevo departamento',
       closeOnEscape: true,
       closable: true,
       width: '50%',

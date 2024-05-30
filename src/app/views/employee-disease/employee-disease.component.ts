@@ -37,6 +37,7 @@ export class EmployeeDiseaseComponent extends Crud<EmployeeDiseaseRequest, Emplo
   dialogConfig: DynamicDialogConfig;
   employees: EmployeeResponse[]
   diseases: DiseaseResponse[]
+  defaultHeader: string = 'Nueva Enfermedad de Empleado';
 
   columnCellsXLSX: ColumnXSLX[] = [
     { column: 1, width: 15 },
@@ -83,7 +84,6 @@ export class EmployeeDiseaseComponent extends Crud<EmployeeDiseaseRequest, Emplo
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nuevo enfermedad de empleado',
       closeOnEscape: true,
       closable: true,
       width: '50%',

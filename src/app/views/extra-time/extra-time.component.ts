@@ -34,7 +34,7 @@ export class ExtraTimeComponent extends Crud<ExtraTimeRequest, ExtraTimeResponse
   activeLink = 'Tiempos Extra'
   dialogConfig: DynamicDialogConfig;
   employees: EmployeeResponse[]
-
+  defaultHeader: string = 'Nuevo Tiempo Extra';
 
   constructor(
     public dialogService: DialogService,
@@ -46,7 +46,6 @@ export class ExtraTimeComponent extends Crud<ExtraTimeRequest, ExtraTimeResponse
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nueva capacitación',
       closeOnEscape: true,
       closable: true,
       width: '50%',

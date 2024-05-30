@@ -8,6 +8,14 @@
             [required]="true" #id_employee="ngModel"></p-dropdown>
     </div>
     <div class="mt-3">
+        <label for="user" class="roboto fs-small">Tipo de baja</label>
+        <br>
+        <p-dropdown [options]="typeLeaves" id="id_type_leave" name="id_type_leave" optionLabel="name" optionValue="id"
+            [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" [showClear]="true"
+            placeholder="Selecciona el tipo de baja" styleClass="w-100 roboto"
+            [(ngModel)]="config.data.entity.id_type_leave" [required]="true" #id_type_leave="ngModel"></p-dropdown>
+    </div>
+    <div class="mt-3">
         <label for="user" class="roboto fs-small">Fecha de baja</label>
         <br>
         <input pInputText type="date" id="leave_date" name="leave_date" class="p-inputtext-sm roboto w-100 fs-small"

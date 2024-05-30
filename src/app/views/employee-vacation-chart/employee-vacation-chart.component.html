@@ -48,11 +48,12 @@
             </div>
         </div>
         <div class="row mt-4">
+            @if(calendarMonths.length > 0){
             @for(calendar of calendarMonths; track calendar.month){
             <!-- <div class="col-12 col-md-4">
-                    <p-calendar [responsiveOptions]="responsiveOptions" [inline]="true" [readonlyInput]="true"
-                        [defaultDate]="calendar.startDate" view="date"></p-calendar>
-                </div> -->
+                            <p-calendar [responsiveOptions]="responsiveOptions" [inline]="true" [readonlyInput]="true"
+                                [defaultDate]="calendar.startDate" view="date"></p-calendar>
+                        </div> -->
             <div class="col-12 col-md-6 col-lg-4 mt-4 ">
                 <div class="calendar border rounded overflow-x-auto">
                     <p class="text-primary-color roboto-bold fs-medium text-center w-100 border rounded p-2">
@@ -72,6 +73,10 @@
                     </div>
                 </div>
             </div>
+            }
+            }
+            @else{
+            <p class="text-center text-muted roboto fs-small">Sin fechas</p>
             }
         </div>
         }

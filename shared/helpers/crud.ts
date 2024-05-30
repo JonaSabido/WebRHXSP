@@ -7,6 +7,7 @@ import { ObjectFilter } from "../interfaces/object-filter";
 
 export abstract class Crud<T = null, U = null, V = null> extends View {
     abstract dialogConfig: DynamicDialogConfig;
+    abstract defaultHeader: string
 
     public entity: T | undefined;
     public temporal: T | undefined;
@@ -46,9 +47,7 @@ export abstract class Crud<T = null, U = null, V = null> extends View {
         temporal?: U,
         newHeader?: string
     ) {
-        if (newHeader) {
-            this.dialogConfig.header = newHeader
-        }
+        this.dialogConfig.header = newHeader ?? this.defaultHeader
 
         const dialogData: DialogData<T, U> = {
             entity: temporal ? { ...temporal as U } : this.entity,

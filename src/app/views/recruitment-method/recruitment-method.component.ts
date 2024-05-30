@@ -29,6 +29,7 @@ export class RecruitmentMethodComponent extends Crud<RecruitmentMethodRequest, R
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Métodos de Reclutamiento'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nuevo Método de Reclutamiento';
 
   constructor(
     public dialogService: DialogService,
@@ -38,7 +39,6 @@ export class RecruitmentMethodComponent extends Crud<RecruitmentMethodRequest, R
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nuevo método de reclutamiento',
       closeOnEscape: true,
       closable: true,
       width: '50%',

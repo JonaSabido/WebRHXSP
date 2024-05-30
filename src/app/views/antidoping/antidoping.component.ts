@@ -32,6 +32,7 @@ export class AntidopingComponent extends Crud<AntidopingRequest, AntidopingRespo
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Antidopings'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nuevo Antidoping';
   employees: EmployeeResponse[]
 
 
@@ -45,7 +46,6 @@ export class AntidopingComponent extends Crud<AntidopingRequest, AntidopingRespo
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nuevo antidoping',
       closeOnEscape: true,
       closable: true,
       width: '50%',

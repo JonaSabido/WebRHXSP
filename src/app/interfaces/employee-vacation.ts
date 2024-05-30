@@ -20,7 +20,19 @@ export interface EmployeeVacationResponse extends EntityBase {
     employee: EmployeeResponse
 }
 
+export interface EmployeeVacationChart {
+    year: number;
+    month: number;
+    dates: string[]
+}
+
 export interface EmployeeVacationQueryFilter {
     id_employee: ObjectFilter<EmployeeVacationQueryFilter>,
     id_vacation_time: ObjectFilter<EmployeeVacationQueryFilter>,
+    start_year: ObjectFilter<EmployeeVacationQueryFilter>
+    start_start_date: ObjectFilter<EmployeeVacationQueryFilter>
+    start_end_date: ObjectFilter<EmployeeVacationQueryFilter>
+    end_year: ObjectFilter<EmployeeVacationQueryFilter>
+    end_start_date: ObjectFilter<EmployeeVacationQueryFilter>
+    end_end_date: ObjectFilter<EmployeeVacationQueryFilter>
 }

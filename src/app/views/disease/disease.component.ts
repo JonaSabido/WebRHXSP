@@ -29,6 +29,8 @@ export class DiseaseComponent extends Crud<DiseaseRequest, DiseaseResponse, Dise
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Enfermedades'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nueva Enfermedad';
+
 
   constructor(
     public dialogService: DialogService,
@@ -38,7 +40,6 @@ export class DiseaseComponent extends Crud<DiseaseRequest, DiseaseResponse, Dise
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nueva enfermedad',
       closeOnEscape: true,
       closable: true,
       width: '50%',

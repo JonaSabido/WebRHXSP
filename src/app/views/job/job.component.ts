@@ -31,6 +31,8 @@ export class JobComponent extends Crud<JobRequest, JobResponse, JobQueryFilter> 
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Puestos'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nuevo Trabajo';
+
   areas: AreaResponse[];
 
   constructor(
@@ -42,7 +44,6 @@ export class JobComponent extends Crud<JobRequest, JobResponse, JobQueryFilter> 
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nuevo trabajo',
       closeOnEscape: true,
       closable: true,
       width: '50%',

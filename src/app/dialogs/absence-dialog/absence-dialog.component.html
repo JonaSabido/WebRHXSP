@@ -18,7 +18,8 @@
         <label for="user" class="roboto fs-small">Tipo de falta</label>
         <br>
         <p-dropdown [options]="typeAbsences" id="id_type_absence" name="id_type_absence" optionLabel="name"
-            optionValue="id" [showClear]="true" placeholder="Selecciona el tipo de falta" styleClass="w-100 roboto"
+            [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
+            [showClear]="true" placeholder="Selecciona el tipo de falta" styleClass="w-100 roboto"
             [(ngModel)]="config.data.entity.id_type_absence" [required]="true" #id_type_absence="ngModel"></p-dropdown>
     </div>
     <div class="mt-3">

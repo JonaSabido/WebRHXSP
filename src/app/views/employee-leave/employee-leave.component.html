@@ -22,9 +22,16 @@
                 @switch (selectedOption) {
                 @case ("id_employee") {
                 <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name"
-                    [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
-                    placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
+                    [filter]="true" filterBy="full_name" emptyFilterMessage="No se encontraron resultados"
+                    optionValue="id" placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
                     [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+                @case ("id_type_leave") {
+                <p-dropdown [options]="typeLeaves" id="id_type_leave" name="id_type_leave" optionLabel="name"
+                    [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
+                    emptyFilterMessage="No se encontraron resultados" placeholder="Selecciona el tipo"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
                 </p-dropdown>
                 }
                 @case ("year") {
@@ -75,6 +82,7 @@
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th pSortableColumn="employee">Empleado <p-sortIcon field="employee"></p-sortIcon></th>
+                <th pSortableColumn="type_leave">Tipo de baja<p-sortIcon field="type_leave"></p-sortIcon></th>
                 <th pSortableColumn="leave_date">Fecha de baja <p-sortIcon field="leave_date"></p-sortIcon></th>
                 <th>Opciones</th>
             </tr>
@@ -82,6 +90,9 @@
         <ng-template pTemplate="body" let-entity let-columns>
             <tr>
                 <td>{{entity.employee.name}} {{entity.employee.sure_name}} {{entity.employee.last_name}}</td>
+                <td>
+                    <p-tag [value]="entity.type_leave.name" severity="info"></p-tag>
+                </td>
                 <td class="text-primary-color fw-bold">{{entity.leave_date_formatted}}</td>
                 <td>
                     <div class="d-flex align-items-center justify-content-start">

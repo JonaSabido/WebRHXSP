@@ -35,6 +35,8 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Contratos'
   dialogConfig: DynamicDialogConfig;
+  defaultHeader: string = 'Nuevo Contrato';
+
   employees: EmployeeResponse[]
 
   columnCellsXLSX: ColumnXSLX[] = [
@@ -116,7 +118,6 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
-      header: 'Nuevo contrato',
       closeOnEscape: true,
       closable: true,
       width: '50%',
