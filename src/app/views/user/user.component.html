@@ -5,8 +5,8 @@
         <div class="d-flex justify-content-between">
             <p-button [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" (click)="switchShowFilters()"
                 [rounded]="true" size="small" severity="secondary"></p-button>
-            <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true"
-                size="small" styleClass="ms-2"></p-button>
+            <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"
+                styleClass="ms-2"></p-button>
         </div>
     </div>
     @if(showFilters){
@@ -58,8 +58,10 @@
                         <p-button icon="pi pi-pencil" severity="info" [rounded]="true" size="small"
                             (click)="openDialog(entity, entity.name)"></p-button>
 
+                        @if(entity.id !== 1){
                         <p-button icon="pi pi-trash" severity="danger" [rounded]="true" size="small" styleClass="ms-2"
                             (click)="delete(entity.id)"></p-button>
+                        }
                     </div>
                 </td>
             </tr>

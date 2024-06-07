@@ -142,10 +142,11 @@
                 <th pSortableColumn="entry_month">Mes alta <p-sortIcon field="entry_month"></p-sortIcon></th>
                 <th pSortableColumn="entry_year">Año alta <p-sortIcon field="entry_year"></p-sortIcon></th>
                 <th pSortableColumn="status">Estatus <p-sortIcon field="status"></p-sortIcon></th>
+                <th pSortableColumn="status">Opciones</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-entity let-columns>
-            <tr class="clickeable" (click)="openDialog(entity, entity.full_name)">
+            <tr class="clickeable">
                 <td>{{entity.code}}</td>
                 <td>
                     <div class="d-flex align-items-center">
@@ -166,6 +167,14 @@
                     @else if(!entity.status){
                     <p-tag [value]="'Baja'" severity="danger" styleClass="big-tag"></p-tag>
                     }
+                </td>
+                <td>
+                    <div class="d-flex align-items-center justify-content-start">
+                        <p-button icon="pi pi-list" severity="info" [rounded]="true" size="small"
+                            (click)="openDialog(entity, entity.full_name)"></p-button>
+                        <p-button icon="pi pi-trash" severity="danger" [rounded]="true" size="small" styleClass="ms-2"
+                            (click)="delete(entity.id)"></p-button>
+                    </div>
                 </td>
 
             </tr>

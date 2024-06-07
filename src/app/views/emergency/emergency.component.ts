@@ -42,7 +42,7 @@ export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse
   columnCellsXLSX: ColumnXSLX[] = [
     { column: 1, width: 15 },
     { column: 2, width: 40 },
-    { column: 3, width: 25 },
+    { column: 3, width: 40 },
     { column: 4, width: 25 },
     { column: 5, width: 25 },
   ]

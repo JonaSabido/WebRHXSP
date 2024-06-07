@@ -58,7 +58,7 @@
                     tooltipPosition="bottom" class="me-2" severity="info"></p-button>
                 <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
                     tooltipPosition="bottom" class="" severity="warning"></p-button> -->
-<!-- 
+                <!-- 
                 <button type="button" pButton pRipple icon="pi pi-file" class="p-button-secondary me-2" pTooltip="CSV"
                     tooltipPosition="bottom"></button> -->
                 <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success me-2"
@@ -90,7 +90,7 @@
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
                         <p-button icon="pi pi-pencil" severity="info" [rounded]="true" size="small"
-                            (click)="openDialog(entity)"></p-button>
+                            (click)="openDialog(entity, 'Número de Emergencia: ' + entity.id)"></p-button>
 
                         <p-button icon="pi pi-trash" severity="danger" [rounded]="true" size="small" styleClass="ms-2"
                             (click)="delete(entity.id)"></p-button>

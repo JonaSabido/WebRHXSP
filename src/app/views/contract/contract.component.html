@@ -126,7 +126,7 @@
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
                         <p-button icon="pi pi-list" severity="info" [rounded]="true" size="small"
-                            (click)="openDialog(entity)"></p-button>
+                            (click)="openDialog(entity, 'Contrato: ' + entity.id )"></p-button>
                         <p-button icon="pi pi-trash" severity="danger" [rounded]="true" size="small" styleClass="ms-2"
                             (click)="delete(entity.id)"></p-button>
                     </div>
