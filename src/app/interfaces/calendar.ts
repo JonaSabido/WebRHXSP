@@ -18,7 +18,7 @@ export interface CalendarMonth {
 
 interface Month {
     name: string,
-    value: number,
+    value: string,
 }
 
 export const DaysOfWeek = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
@@ -26,50 +26,50 @@ export const DaysOfWeek = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
 export const months: Month[] = [
     {
         name: 'Enero',
-        value: 1
+        value: '01'
     },
     {
         name: 'Febrero',
-        value: 2
+        value: '02'
     },
     {
         name: 'Marzo',
-        value: 3
+        value: '03'
     },
     {
         name: 'Abril',
-        value: 4
+        value: '04'
     },
     {
         name: 'Mayo',
-        value: 5
+        value: '05'
     },
     {
         name: 'Junio',
-        value: 6
+        value: '06'
     },
     {
         name: 'Julio',
-        value: 7
+        value: '07'
     },
     {
         name: 'Agosto',
-        value: 8
+        value: '08'
     },
     {
         name: 'Septiembre',
-        value: 9
+        value: '09'
     },
     {
         name: 'Octubre',
-        value: 10
+        value: '10'
     },
     {
         name: 'Noviembre',
-        value: 11
+        value: '11'
     },
     {
         name: 'Diciembre',
-        value: 12
+        value: '12'
     }
 ];
