@@ -34,7 +34,7 @@ export class SidebarComponent {
     },
     {
       title: 'EMPLEADOS',
-      visible: true,
+      visible: false,
       subitems: [
         {
           icon: 'list',
@@ -100,7 +100,7 @@ export class SidebarComponent {
     },
     {
       title: 'FALTAS',
-      visible: true,
+      visible: false,
       subitems: [
         {
           icon: 'list',
@@ -118,7 +118,7 @@ export class SidebarComponent {
     },
     {
       title: 'VACACIONES',
-      visible: true,
+      visible: false,
       subitems: [
         {
           icon: 'list',
@@ -136,7 +136,7 @@ export class SidebarComponent {
     },
     {
       title: 'RECOMENDACIONES',
-      visible: true,
+      visible: false,
       subitems: [
         {
           icon: 'list',
@@ -154,7 +154,7 @@ export class SidebarComponent {
     },
     {
       title: 'EMPRESA',
-      visible: true,
+      visible: false,
       subitems: [
         {
           icon: 'home',
@@ -201,8 +201,50 @@ export class SidebarComponent {
       ]
     },
     {
+      title: 'REPORTES',
+      visible: false,
+      subitems: [
+        {
+          icon: 'check',
+          title: 'Validaciones',
+          path: 'validaciones',
+          isActive: false
+        },
+        {
+          icon: 'share-alt',
+          title: 'Métodos de Reclutamiento',
+          path: 'metodos-reclutamiento',
+          isActive: false
+        },
+        {
+          icon: 'angle-double-up',
+          title: 'Movimientos de Alta',
+          path: 'movimientos-alta',
+          isActive: false
+        },
+        {
+          icon: 'angle-double-down',
+          title: 'Movimientos de Baja',
+          path: 'movimientos-baja',
+          isActive: false
+        },
+        {
+          icon: 'angle-double-down',
+          title: 'Motivos de Baja',
+          path: 'motivos-baja',
+          isActive: false
+        },
+        {
+          icon: 'history',
+          title: 'Tiempos Activos',
+          path: 'tiempos-activos',
+          isActive: false
+        },
+      ]
+    },
+    {
       title: 'SISTEMA',
-      visible: true,
+      visible: false,
       subitems: [
         {
           icon: 'users',

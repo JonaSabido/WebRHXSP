@@ -42,14 +42,16 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
   columnCellsXLSX: ColumnXSLX[] = [
     { column: 1, width: 20 },
     { column: 2, width: 40 },
-    { column: 3, width: 30 },
+    { column: 3, width: 20 },
     { column: 4, width: 30 },
-    { column: 5, width: 20 },
+    { column: 5, width: 30 },
+    { column: 6, width: 20 },
   ]
 
   tableColumnsXLSX: Array<any> = [
     { name: '#', filterButton: true, },
     { name: 'Empleado', filterButton: true },
+    { name: 'Tipo', filterButton: true },
     { name: 'Inicio de contrato', filterButton: true },
     { name: 'Finalización de contrato', filterButton: true },
     { name: 'Status', filterButton: true },
@@ -63,6 +65,10 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
     {
       header: 'Empleado',
       dataKey: 'employee.name',
+    },
+    {
+      header: 'Tipo',
+      dataKey: 'type',
     },
     {
       header: 'Inicio de contrato',
@@ -82,6 +88,9 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
   filterColumnsPDF: Array<any> = [
     {
       header: 'Empleado',
+    },
+    {
+      header: 'Tipo',
     },
     {
       header: 'IC (Año)',
@@ -138,6 +147,7 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
   protected restore() {
     this.entity = {
       id_employee: 0,
+      type: 1,
       start_date: '',
       end_date: '',
       status: true,
@@ -152,6 +162,11 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
       id_employee: {
         property: 'id_employee',
         label: 'Empleado',
+        value: null
+      },
+      type: {
+        property: 'type',
+        label: 'Tipo',
         value: null
       },
       status: {
@@ -200,13 +215,15 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
 
     const filterCellsXLSX: CellXSLX[] = [
       { cell: 'A3', value: 'Empleado:', bold: true },
-      { cell: 'A4', value: 'IC (Año):', bold: true },
-      { cell: 'A5', value: 'IC (Fecha inicio):', bold: true },
-      { cell: 'A6', value: 'IC (Fecha final):', bold: true },
+      { cell: 'A4', value: 'Tipo:', bold: true },
+      { cell: 'A5', value: 'IC (Año):', bold: true },
+      { cell: 'A6', value: 'IC (Fecha inicio):', bold: true },
+      { cell: 'A7', value: 'IC (Fecha final):', bold: true },
       { cell: 'B3', value: `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'B4', value: `${this.filters['start_year'].value ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'B5', value: `${this.filters['start_start_date'].value ? this.dateService.dateFormatted(this.filters['start_start_date'].value) : 'Sin seleccionar'}`, bold: false },
-      { cell: 'B6', value: `${this.filters['start_end_date'].value ? this.dateService.dateFormatted(this.filters['start_end_date'].value) : 'Sin seleccionar'}`, bold: false },
+      { cell: 'B4', value: `${document.getElementById('type')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B5', value: `${this.filters['start_year'].value ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B6', value: `${this.filters['start_start_date'].value ? this.dateService.dateFormatted(this.filters['start_start_date'].value) : 'Sin seleccionar'}`, bold: false },
+      { cell: 'B7', value: `${this.filters['start_end_date'].value ? this.dateService.dateFormatted(this.filters['start_end_date'].value) : 'Sin seleccionar'}`, bold: false },
       { cell: 'C3', value: 'Status:', bold: true },
       { cell: 'C4', value: 'FC (Año):', bold: true },
       { cell: 'C5', value: 'FC (Fecha inicio):', bold: true },
@@ -215,7 +232,6 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
       { cell: 'D4', value: `${this.filters['end_year'].value ?? 'Sin seleccionar'}`, bold: false },
       { cell: 'D5', value: `${this.filters['end_start_date'].value ? this.dateService.dateFormatted(this.filters['end_start_date'].value) : 'Sin seleccionar'}`, bold: false },
       { cell: 'D6', value: `${this.filters['end_end_date'].value ? this.dateService.dateFormatted(this.filters['end_end_date'].value) : 'Sin seleccionar'}`, bold: false },
-
     ]
 
     const rows: Array<any> = [];
@@ -223,6 +239,7 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
       rows.push([
         index + 1,
         `${item.employee.name} ${item.employee.sure_name} ${item.employee.last_name}`,
+        item.type == 1 ? 'Determinado' : 'Indeterminado',
         item.start_date_formatted,
         item.end_date_formatted,
         item.status ? 'Vigente' : 'Finalizado'
@@ -236,7 +253,7 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
       filterCellsXLSX,
       this.columnCellsXLSX,
       'E2',
-      'A8',
+      'A9',
       this.tableColumnsXLSX,
       rows
     );
@@ -247,6 +264,7 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
     let dataFilters = [
       [
         `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`,
+        `${document.getElementById('type')?.textContent ?? 'Sin seleccionar'}`,
         `${this.filters['start_year'].value ?? 'Sin seleccionar'}`,
         `${this.filters['start_start_date'].value ? this.dateService.dateFormatted(this.filters['start_start_date'].value) : 'Sin seleccionar'}`,
         `${this.filters['start_end_date'].value ? this.dateService.dateFormatted(this.filters['start_end_date'].value) : 'Sin seleccionar'}`,
@@ -265,6 +283,7 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
       return [
         index++,
         `${datos.employee.name} ${datos.employee.sure_name} ${datos.employee.last_name}`,
+        datos.type == 1 ? 'Determinado' : 'Indeterminado',
         datos.start_date_formatted,
         datos.end_date_formatted,
         datos.status == 1 ? 'Vigente' : 'Finalizado',

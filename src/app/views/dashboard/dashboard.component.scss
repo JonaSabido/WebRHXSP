@@ -13,7 +13,8 @@
 }
 
 .card-info {
-    height: 550px;
+    min-height: 500px;
+    height: auto;
 }
 
 .card-title {
@@ -30,7 +31,6 @@
 
 .card-info-content {
     height: 430px;
-    overflow-y: auto;
 }
 
 .divider {

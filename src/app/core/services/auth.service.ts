@@ -22,7 +22,7 @@ export class AuthService extends ApiService {
   }
 
   public login(body: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.uri}/login`, body);
+    return this.http.post<LoginResponse>(`${this.uri}login`, body);
   }
 
   public getTokenOnStorage(): string {

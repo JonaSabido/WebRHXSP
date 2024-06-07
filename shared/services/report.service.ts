@@ -64,13 +64,14 @@ export class ReportService {
         });
     }
 
-    generatePDF(fileName: string, title: string, filterColumns: Array<any>, dataFilters: any, tableColumns: Array<any>, dataTable: any, orientation: 'l' | 'p' = 'p') {
+    generatePDF(fileName: string, title: string, filterColumns: Array<any>, dataFilters: any, tableColumns: Array<any>, dataTable: any, orientation: 'l' | 'p' = 'p', big: boolean = false) {
         const date = new Date();
         const options = { timeZone: 'America/Mexico_City' };
         date.toLocaleString('es-MX', options);
 
         const doc = new jspdf({
-            orientation: orientation
+            orientation: orientation,
+            format: big ? [700, 210] : ''
         });
 
         var topbarLogo = document.getElementById('topbar-logo') as HTMLCanvasElement;

@@ -13,23 +13,26 @@
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Apellido Paterno</label>
                 <input pInputText type="text" id="sure_name" name="sure_name"
-                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.sure_name" />
+                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.sure_name" required
+                    #sure_name="ngModel" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Apellido Materno</label>
                 <input pInputText type="text" id="last_name" name="last_name"
-                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.last_name" />
+                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.last_name" required
+                    #last_name="ngModel" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Fecha de nacimiento</label>
                 <input pInputText type="date" id="natal_date" name="natal_date"
-                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.natal_date" />
+                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.natal_date" required
+                    #natal_date="ngModel" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Genero</label>
                 <br>
                 <p-dropdown id="gender" name="gender"
-                    [options]="[{name: 'Masculino', value: 'Male'}, {name: 'Femenino', value: 'Femen'}, {name: 'Otro', value: 'otro'}]"
+                    [options]="[{name: 'Masculino', value: 'Male'}, {name: 'Femenino', value: 'Femenino'}, {name: 'Otro', value: 'Otro'}]"
                     optionLabel="name" optionValue="value" [showClear]="true" placeholder="Selecciona el género"
                     styleClass="w-100 roboto fs-small" [(ngModel)]="config.data.entity.gender"></p-dropdown>
             </div>
@@ -50,12 +53,14 @@
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Talla de pantalón</label>
                 <input pInputText type="number" id="pants_size" name="pants_size"
-                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.pants_size" />
+                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.pants_size" required
+                    #pants_size="ngModel" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Talla de zapatos</label>
                 <input pInputText type="number" id="shoe_size" name="shoe_size"
-                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.shoe_size" />
+                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.shoe_size" required
+                    #shoe_size="ngModel" />
             </div>
         </div>
     </div>
@@ -67,37 +72,37 @@
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Teléfono</label>
                 <input pInputText type="text" id="phone" name="phone" class="p-inputtext-sm roboto w-100 fs-small"
-                    [(ngModel)]="config.data.entity.phone" />
+                    [(ngModel)]="config.data.entity.phone" required #phone="ngModel" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Email</label>
                 <input pInputText type="text" id="email" name="email" class="p-inputtext-sm roboto w-100 fs-small"
-                    [(ngModel)]="config.data.entity.email" />
+                    [(ngModel)]="config.data.entity.email" required #email="ngModel" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Domicilio</label>
                 <input pInputText type="text" id="address" name="address" class="p-inputtext-sm roboto w-100 fs-small"
-                    [(ngModel)]="config.data.entity.address" />
+                    [(ngModel)]="config.data.entity.address" required #address="ngModel" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Código Postal</label>
                 <input pInputText type="text" id="cp" name="cp" class="p-inputtext-sm roboto w-100 fs-small"
-                    [(ngModel)]="config.data.entity.cp" />
+                    [(ngModel)]="config.data.entity.cp" required #cp="ngModel" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">RFC</label>
                 <input pInputText type="text" id="rfc" name="rfc" class="p-inputtext-sm roboto w-100 fs-small"
-                    [(ngModel)]="config.data.entity.rfc" />
+                    [(ngModel)]="config.data.entity.rfc" required #rfc="ngModel" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">CURP</label>
                 <input pInputText type="text" id="curp" name="curp" class="p-inputtext-sm roboto w-100 fs-small"
-                    [(ngModel)]="config.data.entity.curp" />
+                    [(ngModel)]="config.data.entity.curp" required #curp="ngModel" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">NSS</label>
                 <input pInputText type="text" id="nss" name="nss" class="p-inputtext-sm roboto w-100 fs-small"
-                    [(ngModel)]="config.data.entity.nss" />
+                    [(ngModel)]="config.data.entity.nss" required #nss="ngModel" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">¿Dado de alta en SSP?</label>
@@ -115,18 +120,19 @@
             <div class="col-12 col-lg-3 mt-3">
                 <label for="user" class="robotobold fs-small">Código</label>
                 <input pInputText type="text" id="code" name="code" class="p-inputtext-sm roboto w-100 fs-small"
-                    [(ngModel)]="config.data.entity.code" />
+                    [(ngModel)]="config.data.entity.code" required #code="ngModel" />
             </div>
             <div class="col-12 col-lg-3 mt-3">
                 <label for="user" class="robotobold fs-small">Fecha de ingreso</label>
                 <input pInputText type="date" id="entry_date" name="entry_date"
-                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.entry_date" />
+                    class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.entry_date" required
+                    #entry_date="ngModel" />
             </div>
             <div class="col-12 col-lg-3 mt-3">
                 <label for="user" class="robotobold fs-small">Departamento</label>
                 <p-dropdown id="id_department" name="id_department" [options]="departments" optionLabel="name"
                     optionValue="id" [showClear]="true" placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
-                    [(ngModel)]="config.data.entity.id_department"></p-dropdown>
+                    [(ngModel)]="config.data.entity.id_department" [required]="true"></p-dropdown>
             </div>
             <div class="col-12 col-lg-3 mt-3">
                 <label for="user" class="robotobold fs-small">Trabajo</label>

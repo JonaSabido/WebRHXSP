@@ -1,0 +1,31 @@
+<app-breadcrumb [icon]="icon" [module]="module" [prevLinks]="prevLinks" [activeLink]="activeLink"></app-breadcrumb>
+<div class="bg-white rounded mt-4 py-4 px-4">
+    <div class="container-fluid">
+        <p class="roboto-bold text-secondary fs-4 mt-3 text-center">REPORTE MENSUAL DE MOTIVOS DE BAJA</p>
+        <div class="row p-0 justify-content-center">
+            <div class="col-md-3 p-0">
+                <p-dropdown [options]="months" id="month" name="month" optionLabel="name" [filter]="true"
+                    filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="value"
+                    placeholder="Selecciona el mes" styleClass="w-100 dropdown-filters-options"
+                    [(ngModel)]="select_month"></p-dropdown>
+            </div>
+            <div class="col-md-3 p-0">
+                <input pInputText type="number" id="year" name="year" placeholder="Escriba el año"
+                    class="w-100 input-filters" severity="info" [(ngModel)]="select_year" />
+            </div>
+            <div class="col-md-1 p-0">
+                <p-button icon="pi pi-search" severity="info" styleClass="w-100 button-filters"
+                    (click)="getData()"></p-button>
+            </div>
+        </div>
+        @if(dataChart.length == 0){
+        <p class="text-center my-5 py-5 roboto fs-small text-muted">
+            {{message}}
+        </p>
+        }
+        <div class="card-chart-content mt-3">
+            <canvas #chart></canvas>
+        </div>
+    </div>
+
+</div>

@@ -10,11 +10,13 @@ import { AreaDialogComponent } from '../../dialogs/area-dialog/area-dialog.compo
 import { CalendarDay, CalendarMonth, DaysOfWeek } from '../../interfaces/calendar';
 import { CommonModule } from '@angular/common';
 import { TagModule } from 'primeng/tag';
+import { AnalyticService } from '../../core/services/analytic.service';
+import { EventMonth, TotalData } from '../../interfaces/analytic';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, RippleModule, TooltipModule, AreaDialogComponent, CommonModule, TagModule, ],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, RippleModule, TooltipModule, AreaDialogComponent, CommonModule, TagModule,],
   providers: [DialogService, DynamicDialogRef,],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
@@ -30,17 +32,47 @@ export class DashboardComponent extends View {
   daysInMonth: CalendarDay[]
   daysOfWeek = DaysOfWeek
   titleCalendar: string
+  eventMonths: EventMonth[]
+  totalData: TotalData
 
   constructor(
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    private analyticService: AnalyticService,
   ) {
     super()
     this.daysInMonth = []
+    this.eventMonths = []
+    this.totalData = {
+      total_employees: 0,
+      total_areas: 0,
+      total_departments: 0,
+      total_jobs: 0
+    }
     this.titleCalendar = ''
   }
 
   ngOnInit() {
-    this.generateCalendar()
+    this.analyticService.getTotalData().subscribe({
+      next: (response) => this.totalData = response.data,
+      error: (e) => {
+        this.totalData = {
+          total_employees: 0,
+          total_areas: 0,
+          total_departments: 0,
+          total_jobs: 0
+        }
+      }
+    })
+    
+    this.analyticService.getEventsByMonth().subscribe({
+      next: (response) => {
+        this.eventMonths = response.data
+        this.generateCalendar()
+      },
+      error: (e) => {
+        this.eventMonths = []
+      }
+    })
   }
 
   generateCalendar() {
@@ -62,13 +94,16 @@ export class DashboardComponent extends View {
 
     // Insertar los días del mes anterior que se muestran en la misma semana que el primer día del mes actual
     for (let i = firstDayOfWeek - 1; i >= 0; i--) {
-      days.push({ value: daysInPreviousMonth - i, currentMonth: false, isToday: false, selected: false });
+      days.push({ value: daysInPreviousMonth - i, currentMonth: false, isToday: false, selected: false, isBirthDay: false, isPayment: false, isContract: false });
     }
 
     // Insertar los números de los días del mes actual
     for (let i = 1; i <= lastDateOfMonth; i++) {
+      const paddedMonth = (currentMonth + 1).toString().padStart(2, '0'); // Asegurar que el mes tenga dos dígitos
+      const paddedDay = i.toString().padStart(2, '0'); // Asegurar que el día tenga dos dígitos
+      const date = `${currentYear}-${paddedMonth}-${paddedDay}`;
       const isToday = i === today.getDate() && currentYear === today.getFullYear() && currentMonth === today.getMonth();
-      days.push({ value: i, currentMonth: true, isToday, selected: false });
+      days.push({ value: i, currentMonth: true, isToday, selected: false, isBirthDay: this.checkIsEvent(date, 1), isPayment: this.checkIsEvent(date, 2), isContract: this.checkIsEvent(date, 3) });
     }
 
     // Determinar el número de días del próximo mes
@@ -76,12 +111,18 @@ export class DashboardComponent extends View {
 
     // Insertar los días del próximo mes que se muestran en la misma semana que el último día del mes actual
     for (let i = 1; i <= remainingDays; i++) {
-      days.push({ value: i, currentMonth: false, isToday: false, selected: false });
+      days.push({ value: i, currentMonth: false, isToday: false, selected: false, isBirthDay: false, isPayment: false, isContract: false });
     }
 
     this.daysInMonth = days;
     const monthName = this.currentDate.toLocaleString('es-ES', { month: 'long' }).toUpperCase();
     this.titleCalendar = `${monthName} ${currentYear}`;
+    console.log(days)
+  }
+
+  checkIsEvent(date: string, type: number): boolean {
+    console.log(date)
+    return this.eventMonths.some(x => x.date == date && x.type == type)
   }
 
 }

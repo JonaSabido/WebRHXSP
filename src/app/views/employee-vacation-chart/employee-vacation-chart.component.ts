@@ -100,7 +100,7 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
 
       // Insertar los días del mes anterior que se muestran en la misma semana que el primer día del mes actual
       for (let i = firstDayOfWeek - 1; i >= 0; i--) {
-        days.push({ value: daysInPreviousMonth - i, currentMonth: false, isToday: false, selected: false });
+        days.push({ value: daysInPreviousMonth - i, currentMonth: false, isToday: false, selected: false, isBirthDay: false, isPayment: false, isContract: false });
       }
 
       // Insertar los números de los días del mes actual
@@ -109,7 +109,7 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
         const isToday = i === today.getDate() && currentYear === today.getFullYear() && currentMonth === today.getMonth();
         const currentDate = new Date(currentYear, currentMonth, i).toISOString().split('T')[0];
         const isSelected = chart.dates.includes(currentDate);
-        days.push({ value: i, currentMonth: true, isToday, selected: isSelected });
+        days.push({ value: i, currentMonth: true, isToday, selected: isSelected, isBirthDay: false, isPayment: false, isContract: false });
       }
 
       // Determinar el número de días del próximo mes
@@ -117,7 +117,7 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
 
       // Insertar los días del próximo mes que se muestran en la misma semana que el último día del mes actual
       for (let i = 1; i <= remainingDays; i++) {
-        days.push({ value: i, currentMonth: false, isToday: false, selected: false });
+        days.push({ value: i, currentMonth: false, isToday: false, selected: false, isBirthDay: false, isPayment: false, isContract: false });
       }
 
       const monthName = firstDayOfMonth.toLocaleString('es-ES', { month: 'long' }).toUpperCase();

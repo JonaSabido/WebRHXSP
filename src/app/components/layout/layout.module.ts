@@ -29,6 +29,12 @@ import { RecruitmentMethodComponent } from '../../views/recruitment-method/recru
 import { UniformComponent } from '../../views/uniform/uniform.component';
 import { UserComponent } from '../../views/user/user.component';
 import { TypeLeaveComponent } from '../../views/type-leave/type-leave.component';
+import { ReportValidationComponent } from '../../views/report-validation/report-validation.component';
+import { ReportRecruitmentMethodComponent } from '../../views/report-recruitment-method/report-recruitment-method.component';
+import { ReportEntryComponent } from '../../views/report-entry/report-entry.component';
+import { ReportLeaveComponent } from '../../views/report-leave/report-leave.component';
+import { ReportTypeLeaveComponent } from '../../views/report-type-leave/report-type-leave.component';
+import { ReportActiveTimeComponent } from '../../views/report-active-time/report-active-time.component';
 
 const routes: Routes = [
     {
@@ -135,6 +141,30 @@ const routes: Routes = [
             {
                 path: 'usuarios',
                 component: UserComponent
+            },
+            {
+                path: 'validaciones',
+                component: ReportValidationComponent
+            },
+            {
+                path: 'metodos-reclutamiento',
+                component: ReportRecruitmentMethodComponent
+            },
+            {
+                path: 'movimientos-alta',
+                component: ReportEntryComponent
+            },
+            {
+                path: 'movimientos-baja',
+                component: ReportLeaveComponent
+            },
+            {
+                path: 'motivos-baja',
+                component: ReportTypeLeaveComponent
+            },
+            {
+                path: 'tiempos-activos',
+                component: ReportActiveTimeComponent
             }
 
         ]

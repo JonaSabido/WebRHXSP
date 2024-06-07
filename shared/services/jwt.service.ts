@@ -1,6 +1,7 @@
 import { AuthService } from "../../src/app/core/services/auth.service";
 import { Injectable } from "@angular/core";
 import { jwtDecode } from "jwt-decode";
+import { UserResponse } from "../../src/app/interfaces/user";
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +23,15 @@ export class JwtService {
         catch (e) {
             return false
         }
+    }
 
+    public getDataToken(): any {
+        try {
+            const decodedToken = jwtDecode(this.authService.getTokenOnStorage())
+            return decodedToken
+        }
+        catch (e) {
+            return false
+        }
     }
 }

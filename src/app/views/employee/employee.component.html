@@ -2,11 +2,119 @@
 <div class="bg-white rounded mt-4 p-4">
     <div class="d-flex align-items-center justify-content-between">
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
-        <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"></p-button>
+        <div class="d-flex justify-content-between">
+            <p-button [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" (click)="switchShowFilters()"
+                [rounded]="true" size="small" severity="secondary"></p-button>
+            <p-button icon="pi pi-plus" label="Nuevo" (click)="openDialog()" [rounded]="true" size="small"
+                styleClass="ms-2"></p-button>
+        </div>
     </div>
+    @if(showFilters){
+    <form role="form" #form="ngForm" (ngSubmit)="reload()" class="container-fluid mt-4">
+        <div class="row p-0">
+            <div class="col-md-2 p-0">
+                <p-dropdown [options]="filterOptions" [(ngModel)]="selectedOption" id="selectOption" name="selectOption"
+                    optionLabel="label" optionValue="property" placeholder="Selecciona"
+                    styleClass="w-100 dropdown-filters-options">
+                </p-dropdown>
+            </div>
+            <div class="col-md-9 p-0">
+                @switch (selectedOption) {
+
+                @case ("id_department") {
+                <p-dropdown [options]="departments" id="id_department" name="id_department" optionLabel="name"
+                    [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
+                    placeholder="Selecciona el departamento" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+                @case ("id_job") {
+                <p-dropdown [options]="jobs" id="id_job" name="id_job" optionLabel="name" [filter]="true"
+                    filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
+                    placeholder="Selecciona el trabajo" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+                @case ("id_recruitment_method") {
+                <p-dropdown [options]="recruitments" id="id_recruitment_method" name="id_recruitment_method"
+                    optionLabel="name" [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados"
+                    optionValue="id" placeholder="Selecciona el método de reclutamiento"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+                @case ("code") {
+                <input pInputText type="text" id="code" name="code" placeholder="Escriba el código"
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
+                }
+                @case ("name") {
+                <input pInputText type="text" id="name" name="name" placeholder="Escriba el nombre"
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
+                }
+                @case ("sure_name") {
+                <input pInputText type="text" id="sure_name" name="sure_name" placeholder="Escriba el apellido paterno"
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
+                }
+                @case ("last_name") {
+                <input pInputText type="text" id="last_name" name="last_name" placeholder="Escriba el apellido materno"
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
+                }
+                @case("entry_start_date"){
+                <p-calendar id="entry_start_date" name="entry_start_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                }
+                @case("entry_end_date"){
+                <p-calendar id="entry_end_date" name="entry_end_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                }
+                @case ("status") {
+                <p-dropdown [options]="[{name: 'Alta', value: 1}, {name: 'Baja', value: 0}, ]" id="status" name="status"
+                    optionLabel="name" optionValue="value" placeholder="Selecciona el status"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+                @case ("gender") {
+                <p-dropdown
+                    [options]="[{name: 'Masculino', value: 'Male'}, {name: 'Femenino', value: 'Femenino'}, {name: 'Otro', value: 'Otro'}]"
+                    id="gender" name="gender" optionLabel="name" optionValue="value" placeholder="Selecciona el género"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+                @case ("ssp") {
+                <p-dropdown [options]="[{name: 'Si', value: true}, {name: 'No', value: false}]" id="ssp" name="ssp"
+                    optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+                @case ("has_children") {
+                <p-dropdown [options]="[{name: 'Si', value: true}, {name: 'No', value: false}]" id="has_children"
+                    name="has_children" optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+                @case("natal_start_date"){
+                <p-calendar id="natal_start_date" name="natal_start_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                }
+                @case("natal_end_date"){
+                <p-calendar id="natal_end_date" name="natal_end_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                }
+                }
+            </div>
+            <div class="col-md-1 p-0">
+                <p-button icon="pi pi-search" severity="info" styleClass="w-100 button-filters"
+                    (click)="this.reload()"></p-button>
+            </div>
+        </div>
+    </form>
+    }
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        styleClass="p-datatable-striped mt-3 custom-table">
+        styleClass="p-datatable-striped mt-5 custom-table">
         <ng-template pTemplate="caption">
             <div class="d-flex">
                 <!-- <p-button icon="pi pi-file" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
@@ -15,13 +123,10 @@
                     tooltipPosition="bottom" class="me-2" severity="info"></p-button>
                 <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
                     tooltipPosition="bottom" class="" severity="warning"></p-button> -->
-
-                <button type="button" pButton pRipple icon="pi pi-file" class="p-button-secondary me-2" pTooltip="CSV"
-                    tooltipPosition="bottom"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success me-2"
-                    pTooltip="XLS" tooltipPosition="bottom"></button>
+                    pTooltip="XLS" tooltipPosition="bottom" (click)="xlsx()"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning" pTooltip="PDF"
-                    tooltipPosition="bottom"></button>
+                    tooltipPosition="bottom" (click)="pdf()"></button>
                 <!-- <button type="button" pButton pRipple [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" class="p-button-info ms-auto"
                     pTooltip="Selection Only" tooltipPosition="bottom"></button> -->
             </div>

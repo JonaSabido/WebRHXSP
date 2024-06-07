@@ -7,7 +7,7 @@
                 <div class="divider bg-primary mx-3"></div>
                 <div class="info-content">
                     <span class="info-title">Empleados</span>
-                    <p class="info-data text-primary">300</p>
+                    <p class="info-data text-primary">{{totalData.total_employees}}</p>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
                 <div class="divider bg-warning mx-3"></div>
                 <div class="info-content">
                     <span class="info-title">Areas</span>
-                    <p class="info-data text-warning">2</p>
+                    <p class="info-data text-warning">{{totalData.total_areas}}</p>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                 <div class="divider bg-danger mx-3"></div>
                 <div class="info-content">
                     <span class="info-title">Puestos</span>
-                    <p class="info-data text-danger">30</p>
+                    <p class="info-data text-danger">{{totalData.total_jobs}}</p>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
                 <div class="divider bg-success mx-3"></div>
                 <div class="info-content">
                     <span class="info-title">Departamentos</span>
-                    <p class="info-data text-success">10</p>
+                    <p class="info-data text-success">{{totalData.total_departments}}</p>
                 </div>
             </div>
         </div>
@@ -96,31 +96,45 @@
                         </div>
                         <div class="days text-center pt-2 px-2">
                             @for (day of daysInMonth; track day.value) {
-                            @if(!day.isToday){
-                            <div class="day roboto fs-medium" [ngClass]="{
-                                        'day-active': day.currentMonth, 'day-inactive': !day.currentMonth, 
-                                        'bg-primary-color text-white roboto-bold fs-large p-3': day.selected, 'fs-medium': !day.selected,
-                                        'text-white': day.isToday, 'bg-secondary-color': day.isToday, }">
-                                {{ day.value }}
-                            </div>
-                            }
-                            @else{
-
                             <div class="day">
                                 <div class="d-flex justify-content-center align-items-center">
+                                    <!-- @if(!day.isToday){
+                                    <div class="day roboto fs-medium" [ngClass]="{
+                                                    'day-active': day.currentMonth, 'day-inactive': !day.currentMonth, 
+                                                    'bg-primary-color text-white roboto-bold fs-large p-3': day.selected, 'fs-medium': !day.selected,
+                                                    'text-white': day.isToday, 'bg-secondary-color': day.isToday, }">
+                                        {{ day.value }}
+                                    </div>
+                                    }
+                                    @else{
+
+                                    } -->
+                                    @if(day.isBirthDay){
                                     <div class="icon-tag icon-tag-small icon-tag-birthday">
                                         <i class="pi pi-gift"></i>
                                     </div>
+                                    }
+                                    @if(day.isPayment){
                                     <div class="icon-tag icon-tag-small icon-tag-payment ms-negative">
                                         <i class="pi pi-dollar"></i>
                                     </div>
+                                    }
+                                    @if(day.isContract){
                                     <div class="icon-tag icon-tag-small icon-tag-contract ms-negative">
                                         <i class="pi pi-book"></i>
                                     </div>
+                                    }
+                                    @if(!day.isBirthDay && !day.isPayment && !day.isContract){
+                                    <div class="day roboto fs-medium" [ngClass]="{
+                                            'day-active': day.currentMonth, 'day-inactive': !day.currentMonth, 
+                                            'bg-primary-color text-white roboto-bold fs-large p-3': day.selected, 'fs-medium': !day.selected,
+                                            'text-white': day.isToday, 'bg-secondary-color': day.isToday, }">
+                                        {{ day.value }}
+                                    </div>
+                                    }
+
                                 </div>
                             </div>
-                            }
-
                             }
                         </div>
                         <div class="d-block d-sm-flex justify-content-between align-items-center mt-5">

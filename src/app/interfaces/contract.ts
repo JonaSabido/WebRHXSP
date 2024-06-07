@@ -8,6 +8,7 @@ export interface ContractFileName {
 
 export interface ContractRequest {
     id_employee: number,
+    type: number,
     start_date: Date | string,
     end_date: Date | string,
     status: boolean,
@@ -17,6 +18,7 @@ export interface ContractRequest {
 
 export interface ContractResponse extends EntityBase {
     id_employee: number,
+    type: number,
     start_date: Date | string,
     start_date_formatted: string,
     end_date: Date | string,
@@ -28,6 +30,7 @@ export interface ContractResponse extends EntityBase {
 
 export interface ContractQueryFilter {
     id_employee: ObjectFilter<ContractQueryFilter>
+    type: ObjectFilter<ContractQueryFilter>
     status: ObjectFilter<ContractQueryFilter>
     start_year: ObjectFilter<ContractQueryFilter>
     start_start_date: ObjectFilter<ContractQueryFilter>
