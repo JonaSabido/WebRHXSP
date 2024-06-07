@@ -8,11 +8,18 @@ import { MessageService } from 'primeng/api';
 import { RecommendationPaymentService } from '../../core/services/recommendation-payment.service';
 import { RecommendationDialogComponent } from '../../dialogs/recommendation-dialog/recommendation-dialog.component';
 import { RecomendationPaymentDialogComponent } from '../../dialogs/recomendation-payment-dialog/recomendation-payment-dialog.component';
+import { ButtonModule } from 'primeng/button';
+import { FormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { EmployeeResponse } from '../../interfaces/employee';
+import { EmployeeService } from '../../core/services/employee.service';
 
 @Component({
   selector: 'app-recommendation-payment',
   standalone: true,
-  imports: [BreadcrumbComponent, CardPaymentComponent],
+  imports: [BreadcrumbComponent, CardPaymentComponent, ButtonModule, FormsModule, CalendarModule, InputTextModule, DropdownModule],
   providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './recommendation-payment.component.html',
   styleUrl: './recommendation-payment.component.scss'
@@ -24,12 +31,14 @@ export class RecommendationPaymentComponent extends Crud<RecommendationPaymentRe
   activeLink = 'Pagos'
   dialogConfig: DynamicDialogConfig;
   defaultHeader: string = 'Nuevo Pago de Recomendación';
+  employees: EmployeeResponse[]
 
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
     public service: RecommendationPaymentService,
     public messageService: MessageService,
+    private empployeeService: EmployeeService
   ) {
     super(dialogService, refDialog, service, messageService)
     this.dialogConfig = {
@@ -44,6 +53,8 @@ export class RecommendationPaymentComponent extends Crud<RecommendationPaymentRe
         '640px': '90vw'
       },
     }
+    this.employees = []
+    this.selectedOption = 'id_paying_employee'
   }
 
   protected getRefDialog() {
@@ -59,7 +70,32 @@ export class RecommendationPaymentComponent extends Crud<RecommendationPaymentRe
     }
   }
 
-  protected restoreFilters() {
+  ngOnInit() {
+    this.empployeeService.all().subscribe(response => this.employees = response.data)
+  }
 
+  protected restoreFilters() {
+    this.filters = {
+      id_paying_employee: {
+        property: 'id_paying_employee',
+        label: 'Beneficiario',
+        value: null
+      },
+      status: {
+        property: 'status',
+        label: 'Estatus',
+        value: null
+      },
+      start_date: {
+        property: 'start_date',
+        label: 'Fecha Inicio',
+        value: ''
+      },
+      end_date: {
+        property: 'end_date',
+        label: 'Fecha Final',
+        value: ''
+      },
+    }
   }
 }

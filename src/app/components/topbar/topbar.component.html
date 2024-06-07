@@ -21,8 +21,8 @@
         <div class="d-flex justify-content-end">
             <div class="bg-white border container-notifications">
                 @for(entity of notifications; track entity.id){
-                <div class="d-flex align-items-center w-100 p-4 border-bottom"
-                    [ngClass]="{'bg-primary-color-light': entity.status == false}">
+                <div class="d-flex align-items-center w-100 p-4 border-bottom clickeable"
+                    [ngClass]="{'bg-primary-color-light': entity.status == false}" (click)="changeStatus(entity)">
                     @switch (entity.notification.id_notification_type) {
                     @case(1){
                     <div class="icon-tag icon-tag-large icon-tag-birthday">
@@ -52,28 +52,6 @@
                     </div>
                 </div>
                 }
-                <div class="d-flex align-items-center w-100 p-4 border-bottom">
-
-                    <div class="w-100">
-                        <div class="d-flex justify-content-between">
-                            <span class="roboto-bold text-muted fs-medium mx-2 p-0">Javier de Jesus Calderon Yam</span>
-                            <p class="roboto text-muted fs-xsmall my-0 p-0">30 Abril 2024</p>
-                        </div>
-                        <p class="roboto text-muted fs-small mx-2 my-0 p-0">Pago por recomendación el 10 de Mayo 2024
-                        </p>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center w-100 p-4 border-bottom">
-
-                    <div class="w-100">
-                        <div class="d-flex justify-content-between">
-                            <span class="roboto-bold text-muted fs-medium mx-2 p-0">Edwin Mizael Pool Moreno</span>
-                            <p class="roboto text-muted fs-xsmall my-0 p-0">30 Abril 2024</p>
-                        </div>
-                        <p class="roboto text-muted fs-small mx-2 my-0 p-0">Vencimiento de contrato el 06 de Mayo 2024
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
         }

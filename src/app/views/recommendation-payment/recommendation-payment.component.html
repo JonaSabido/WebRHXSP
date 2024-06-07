@@ -2,8 +2,57 @@
 <div class="bg-white rounded mt-4 p-4">
     <div class="d-flex align-items-center justify-content-between">
         <span class="roboto-bold text-secondary fs-5 mt-3">Datos</span>
+        <div class="d-flex justify-content-between">
+            <p-button [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" (click)="switchShowFilters()"
+                [rounded]="true" size="small" severity="secondary"></p-button>
+        </div>
     </div>
     <div class="container-fluid p-0">
+        @if(showFilters){
+        <form role="form" #form="ngForm" (ngSubmit)="reload()" class="container-fluid mt-4">
+            <div class="row p-0">
+                <div class="col-md-2 p-0">
+                    <p-dropdown [options]="filterOptions" [(ngModel)]="selectedOption" id="selectOption"
+                        name="selectOption" optionLabel="label" optionValue="property" placeholder="Selecciona"
+                        styleClass="w-100 dropdown-filters-options">
+                    </p-dropdown>
+                </div>
+                <div class="col-md-9 p-0">
+                    @switch (selectedOption) {
+                    @case ("id_paying_employee") {
+                    <p-dropdown [options]="employees" id="id_paying_employee" name="id_paying_employee" optionLabel="full_name"
+                        [filter]="true" filterBy="full_name" emptyFilterMessage="No se encontraron resultados"
+                        optionValue="id" placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
+                        [(ngModel)]="filters[selectedOption].value">
+                    </p-dropdown>
+                    }
+                    @case ("status") {
+                    <p-dropdown
+                        [options]="[{name: 'Próximo a pagar', value: 1}, {name: 'Pagado', value: 2}, {name: 'Cancelado', value: 3}]"
+                        id="status" name="status" optionLabel="name" emptyFilterMessage="No se encontraron resultados"
+                        optionValue="value" placeholder="Selecciona el estatus" styleClass="w-100 input-filters"
+                        [(ngModel)]="filters[selectedOption].value">
+                    </p-dropdown>
+                    }
+                    @case("start_date"){
+                    <p-calendar id="start_date" name="start_date" [iconDisplay]="'input'" [showIcon]="true"
+                        inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                        [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                    }
+                    @case("end_date"){
+                    <p-calendar id="end_date" name="end_date" [iconDisplay]="'input'" [showIcon]="true"
+                        inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                        [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                    }
+                    }
+                </div>
+                <div class="col-md-1 p-0">
+                    <p-button icon="pi pi-search" severity="info" styleClass="w-100 button-filters"
+                        (click)="this.reload()"></p-button>
+                </div>
+            </div>
+        </form>
+        }
         <div class="row">
             @for(entity of entities; track entity){
             <div class="col-12 col-md-6 col-lg-4 mt-4">

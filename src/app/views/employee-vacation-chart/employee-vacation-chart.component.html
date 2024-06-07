@@ -17,7 +17,7 @@
     </div> -->
     <div class="container-fluid ">
         <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name" [filter]="true"
-            filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
+            filterBy="full_name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
             placeholder="Selecciona el empleado" styleClass="w-100" [(ngModel)]="select_id_employee"
             (ngModelChange)="onChangeEmployee()">
         </p-dropdown>
@@ -25,6 +25,7 @@
         <div class="d-block d-md-flex justify-content-center align-items-center mt-4">
             <h3 class="roboto-bold text-secondary-color my-2 mx-3 text-center">PERIODO</h3>
             <p-dropdown [options]="vacationTimesByEmployee" id="id_vacation_time" name="id_vacation_time"
+                [filter]="true" filterBy="period" emptyFilterMessage="No se encontraron resultados"
                 optionLabel="period" optionValue="id" [showClear]="true" placeholder="Selecciona el periodo"
                 styleClass="w-100 roboto" [(ngModel)]="select_id_vacation_time" (ngModelChange)="onChangeVacationTime()"
                 [required]="true" #id_vacation_time="ngModel"></p-dropdown>

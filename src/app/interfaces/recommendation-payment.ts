@@ -1,3 +1,4 @@
+import { ObjectFilter } from "../../../shared/interfaces/object-filter";
 import { EmployeeResponse } from "./employee"
 import { EntityBase } from "./entity-base"
 import { RecommendationResponse } from "./recommendation"
@@ -20,7 +21,8 @@ export interface RecommendationPaymentResponse extends EntityBase {
 }
 
 export interface RecommendationPaymentQueryFilter {
-    id_paying_employee: number,
-    payment_date: string,
-    status: number,
+    id_paying_employee: ObjectFilter<RecommendationPaymentQueryFilter>;
+    start_date: ObjectFilter<RecommendationPaymentQueryFilter>;
+    end_date: ObjectFilter<RecommendationPaymentQueryFilter>
+    status: ObjectFilter<RecommendationPaymentQueryFilter>;
 }

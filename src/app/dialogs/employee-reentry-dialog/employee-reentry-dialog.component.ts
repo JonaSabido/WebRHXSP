@@ -30,7 +30,7 @@ export class EmployeeReentryDialogComponent extends DialogCrud {
   }
 
   ngOnInit() {
-    this.employeeService.all().subscribe(response => this.employees = response.data)
+    this.employeeService.all([{ label: 'Empleado', property: 'status', value: 0 }]).subscribe(response => this.employees = response.data)
   }
 
 }

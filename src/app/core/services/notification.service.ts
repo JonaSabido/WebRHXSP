@@ -25,6 +25,6 @@ export class NotificationService extends ApiService {
   }
 
   public changeStatus(id: number, status: boolean): Observable<NotificationUserResponse> {
-    return this.http.put<NotificationUserResponse>(`${this.uri}/${id}`, { status: status });
+    return this.http.put<NotificationUserResponse>(`${this.uri}${id}`, { status: status });
   }
 }

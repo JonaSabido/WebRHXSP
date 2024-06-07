@@ -28,16 +28,16 @@
                 }
                 @case ("id_employee") {
                 <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name"
-                    [filter]="true" filterBy="full_name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
-                    placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
+                    [filter]="true" filterBy="full_name" emptyFilterMessage="No se encontraron resultados"
+                    optionValue="id" placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
                     [(ngModel)]="filters[selectedOption].value">
                 </p-dropdown>
                 }
                 @case ("type"){
                 <p-dropdown id="type" name="type"
                     [options]="[{name: 'Determinado', value: 1}, {name: 'Indeterminado', value: 2}]" optionLabel="name"
-                    optionValue="value" [showClear]="true" placeholder="Selecciona el tipo"
-                    styleClass="w-100 roboto" [(ngModel)]="filters[selectedOption].value" #type="ngModel"></p-dropdown>
+                    optionValue="value" [showClear]="true" placeholder="Selecciona el tipo" styleClass="w-100 roboto"
+                    [(ngModel)]="filters[selectedOption].value" #type="ngModel"></p-dropdown>
                 }
                 @case ("start_year") {
                 <input pInputText type="number" id="start_year" name="start_year" placeholder="Escriba el año de inicio"
@@ -108,7 +108,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-entity let-columns>
-            <tr class="clickeable" (click)="openDialog(entity)">
+            <tr class="clickeable">
                 <td>{{entity.employee.name}} {{entity.employee.sure_name}} {{entity.employee.last_name}}</td>
                 <td class="text-primary-color fw-bold">{{entity.start_date_formatted}}</td>
                 <td class="text-primary-color fw-bold">{{entity.end_date_formatted}}</td>
@@ -125,6 +125,8 @@
                 </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-start">
+                        <p-button icon="pi pi-list" severity="info" [rounded]="true" size="small"
+                            (click)="openDialog(entity)"></p-button>
                         <p-button icon="pi pi-trash" severity="danger" [rounded]="true" size="small" styleClass="ms-2"
                             (click)="delete(entity.id)"></p-button>
                     </div>

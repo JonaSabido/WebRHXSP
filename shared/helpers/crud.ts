@@ -4,6 +4,7 @@ import { DialogData } from "../../src/app/interfaces/dialog-data";
 import { ApiCrudService } from "../services/api-crud.service";
 import { MessageService } from "primeng/api";
 import { ObjectFilter } from "../interfaces/object-filter";
+import { Confirm } from "../alerts";
 
 export abstract class Crud<T = null, U = null, V = null> extends View {
     abstract dialogConfig: DynamicDialogConfig;
@@ -108,15 +109,32 @@ export abstract class Crud<T = null, U = null, V = null> extends View {
     }
 
     public delete(id: number) {
-        this.service$?.destroy(id).subscribe({
-            next: (response) => {
-                this.messageService$?.add({ key: 'br', severity: 'success', summary: 'Correcto', detail: 'Dato eliminado correctamente' });
-                this.reload()
-            },
-            error: (e) => {
-                this.messageService$?.add({ key: 'br', severity: 'error', summary: 'Error', detail: 'Ocurrió algún error al eliminar' });
+        const msgtitle = '¿Estás seguro?';
+        const msgtext = 'No será capaz de revertir esto';
+        const btnConfirm = 'Confirmar';
+        const btnCancel = 'Cancelar';
+        Confirm.fire({
+            title: msgtitle,
+            text: msgtext,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: btnConfirm,
+            cancelButtonText: btnCancel,
+            reverseButtons: true,
+        }).then(result => {
+            if (result.value) {
+                this.service$?.destroy(id).subscribe({
+                    next: (response) => {
+                        this.messageService$?.add({ key: 'br', severity: 'success', summary: 'Correcto', detail: 'Dato eliminado correctamente' });
+                        this.reload()
+                    },
+                    error: (e) => {
+                        this.messageService$?.add({ key: 'br', severity: 'error', summary: 'Error', detail: 'Ocurrió algún error al eliminar' });
+                    }
+                })
             }
-        })
+        });
+
     }
 
     protected abstract getRefDialog(): DynamicDialogRef;

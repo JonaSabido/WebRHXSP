@@ -47,4 +47,13 @@ export class TopbarComponent {
     })
   }
 
+  changeStatus(entity: NotificationUserResponse) {
+    this.notificationService.changeStatus(entity.id, true).subscribe({
+      next: (response) => {
+        entity.status = true
+        this.unreadNotifications = this.notifications.filter(x => x.status == false).length
+      }
+    })
+  }
+
 }

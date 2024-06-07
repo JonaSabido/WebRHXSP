@@ -36,9 +36,8 @@ export class EmployeeLeaveDialogComponent extends DialogCrud {
   }
 
   ngOnInit() {
-    this.employeeService.all().subscribe(response => this.employees = response.data)
+    this.employeeService.all([{ label: 'Empleado', property: 'status', value: 1 }]).subscribe(response => this.employees = response.data)
     this.typeLeaveService.all().subscribe(response => this.typeLeaves = response.data)
-
   }
 
 
