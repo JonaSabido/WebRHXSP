@@ -86,7 +86,7 @@
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Código Postal</label>
-                <input pInputText type="text" id="cp" name="cp" class="p-inputtext-sm roboto w-100 fs-small"
+                <input pInputText type="number" id="cp" name="cp" class="p-inputtext-sm roboto w-100 fs-small"
                     [(ngModel)]="config.data.entity.cp" required #cp="ngModel" />
             </div>
             <div class="col-12 col-lg-4 mt-3">
@@ -131,27 +131,31 @@
             <div class="col-12 col-lg-3 mt-3">
                 <label for="user" class="robotobold fs-small">Departamento</label>
                 <p-dropdown id="id_department" name="id_department" [options]="departments" optionLabel="name"
-                    optionValue="id" [showClear]="true" placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
+                    optionValue="id" [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados"
+                    [showClear]="true" placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
                     [(ngModel)]="config.data.entity.id_department" [required]="true"></p-dropdown>
             </div>
             <div class="col-12 col-lg-3 mt-3">
                 <label for="user" class="robotobold fs-small">Trabajo</label>
                 <p-dropdown id="id_job" name="id_job" [options]="jobs" optionLabel="name" optionValue="id"
-                    [showClear]="true" placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
-                    [(ngModel)]="config.data.entity.id_job"></p-dropdown>
+                    [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" [showClear]="true"
+                    placeholder="Selecciona la ocpión" styleClass="w-100 roboto" [(ngModel)]="config.data.entity.id_job"
+                    [required]="true"></p-dropdown>
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-lg-6 mt-3">
+                <label for="comments" class="robotobold fs-small">Método de reclutamiento</label>
+                <p-dropdown id="id_recruitment_method" name="id_recruitment_method" [options]="recruitmentMethods"
+                    optionLabel="name" optionValue="id" [filter]="true" filterBy="name"
+                    emptyFilterMessage="No se encontraron resultados" [showClear]="true"
+                    placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
+                    [(ngModel)]="config.data.entity.id_recruitment_method" [required]="true"></p-dropdown>
+            </div>
+            <div class="col-12 col-lg-6 mt-3">
                 <label for="comments" class="robotobold fs-small">Comentarios</label>
                 <textarea pInputText type="text" id="comments" name="comments"
                     class="p-inputtext-sm roboto w-100 fs-small" [(ngModel)]="config.data.entity.comments"></textarea>
-            </div>
-            <div class="col-12 col-lg-6 mt-3">
-                <label for="comments" class="robotobold fs-small">Método de reclutamiento</label>
-                <p-dropdown id="id_recruitment_method" name="id_recruitment_method" [options]="recruitmentMethods"
-                    optionLabel="name" optionValue="id" [showClear]="true" placeholder="Selecciona la ocpión"
-                    styleClass="w-100 roboto" [(ngModel)]="config.data.entity.id_recruitment_method"></p-dropdown>
             </div>
             <div class="col-12 col-lg-6 mt-3">
                 <label for="employee_image" class="robotobold fs-small">Imagen Empleado</label>
@@ -188,92 +192,140 @@
     </div>
 </form>
 <form class="my-5 p-3" [hidden]="activeIndex !== 3">
-    <span class="roboto-bold fs-medium text-secondary">Archivos</span>
+    <div class="d-block d-md-flex align-items-center">
+        <span class="roboto-bold fs-medium text-secondary">Archivos </span>
+        <span class="roboto fs-small fst-italic text-secondary ms-md-2">
+            <i class="pi pi-exclamation-circle fs-small text-secondary"></i>
+            Marque las casillas los documentos que posee el empleado, independientemente del archivo digital</span>
+    </div>
     <div class="container-fluid p-0 mb-5">
         <div class="row">
-            <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Acta de nacimiento" [model]="menuItems[0]"
-                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.birth_certificate ? ' p-button-primary' : ' p-button-secondary')"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-                <input type="file" id="input_birth_certificate" (change)="getFile($event, 'birth_certificate')"
-                    [hidden]="true" accept=".pdf">
-                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.birth_certificate}}</p>
+            <div class="col-12 col-lg-4 mt-3 d-flex align-items-center justify-content-between">
+                <p-checkbox [(ngModel)]="config.data.entity.has_birth_certificate" [binary]="true"
+                    name="has_birth_certificate" inputId="binary_birth_certificate" />
+                <div class="w-100 ms-3">
+                    <p-splitButton label="Acta de nacimiento" [model]="menuItems[0]"
+                        [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.birth_certificate ? ' p-button-primary' : ' p-button-secondary')"
+                        menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                    <input type="file" id="input_birth_certificate" (change)="getFile($event, 'birth_certificate')"
+                        [hidden]="true" accept=".pdf">
+                    <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.birth_certificate}}</p>
+                </div>
             </div>
-            <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Identificación Oficial" [model]="menuItems[1]"
-                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.identification ? ' p-button-primary' : ' p-button-secondary')"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-                <input type="file" id="input_identification" (change)="getFile($event, 'identification')"
-                    [hidden]="true" accept=".pdf">
-                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.identification}}</p>
+            <div class="col-12 col-lg-4 mt-3 d-flex align-items-center justify-content-between">
+                <p-checkbox [(ngModel)]="config.data.entity.has_identification" [binary]="true"
+                    name="has_identification" inputId="binary_identification" />
+                <div class="w-100 ms-3">
+                    <p-splitButton label="Identificación Oficial" [model]="menuItems[1]"
+                        [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.identification ? ' p-button-primary' : ' p-button-secondary')"
+                        menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                    <input type="file" id="input_identification" (change)="getFile($event, 'identification')"
+                        [hidden]="true" accept=".pdf">
+                    <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.identification}}</p>
+                </div>
             </div>
-            <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="CURP" [model]="menuItems[2]"
-                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.curp ? ' p-button-primary' : ' p-button-secondary')"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-                <input type="file" id="input_curp" (change)="getFile($event, 'curp')" [hidden]="true" accept=".pdf">
-                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.curp}}</p>
+            <div class="col-12 col-lg-4 mt-3 d-flex align-items-center justify-content-between">
+                <p-checkbox [(ngModel)]="config.data.entity.has_curp" [binary]="true" name="has_curp"
+                    inputId="binary_curp" />
+                <div class="w-100 ms-3">
+                    <p-splitButton label="CURP" [model]="menuItems[2]"
+                        [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.curp ? ' p-button-primary' : ' p-button-secondary')"
+                        menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                    <input type="file" id="input_curp" (change)="getFile($event, 'curp')" [hidden]="true" accept=".pdf">
+                    <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.curp}}</p>
+                </div>
             </div>
-            <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="NSS" [model]="menuItems[3]"
-                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.nss ? ' p-button-primary' : ' p-button-secondary')"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-                <input type="file" id="input_nss" (change)="getFile($event, 'nss')" [hidden]="true" accept=".pdf">
-                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.nss}}</p>
+            <div class="col-12 col-lg-4 mt-3 d-flex align-items-center justify-content-between">
+                <p-checkbox [(ngModel)]="config.data.entity.has_nss" [binary]="true" name="has_nss"
+                    inputId="binary_nss" />
+                <div class="w-100 ms-3">
+                    <p-splitButton label="NSS" [model]="menuItems[3]"
+                        [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.nss ? ' p-button-primary' : ' p-button-secondary')"
+                        menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                    <input type="file" id="input_nss" (change)="getFile($event, 'nss')" [hidden]="true" accept=".pdf">
+                    <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.nss}}</p>
+                </div>
             </div>
-            <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Comprobante domiciliario" [model]="menuItems[4]"
-                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.address_certification ? ' p-button-primary' : ' p-button-secondary')"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-                <input type="file" id="input_address_certification" (change)="getFile($event, 'address_certification')"
-                    [hidden]="true" accept=".pdf">
-                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.address_certification}}</p>
+            <div class="col-12 col-lg-4 mt-3 d-flex align-items-center justify-content-between">
+                <p-checkbox [(ngModel)]="config.data.entity.has_address_certification" [binary]="true"
+                    name="has_address_certification" inputId="binary_address_certification" />
+                <div class="w-100 ms-3">
+                    <p-splitButton label="Comprobante domiciliario" [model]="menuItems[4]"
+                        [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.address_certification ? ' p-button-primary' : ' p-button-secondary')"
+                        menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                    <input type="file" id="input_address_certification"
+                        (change)="getFile($event, 'address_certification')" [hidden]="true" accept=".pdf">
+                    <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.address_certification}}</p>
+                </div>
             </div>
-            <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Comprobante de estudios" [model]="menuItems[5]"
-                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.studies_certification ? ' p-button-primary' : ' p-button-secondary')"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-                <input type="file" id="input_studies_certification" (change)="getFile($event, 'studies_certification')"
-                    [hidden]="true" accept=".pdf">
-                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.studies_certification}}</p>
+            <div class="col-12 col-lg-4 mt-3 d-flex align-items-center justify-content-between">
+                <p-checkbox [(ngModel)]="config.data.entity.has_studies_certification" [binary]="true"
+                    name="has_studies_certification" inputId="binary_studies_certification" />
+                <div class="w-100 ms-3">
+                    <p-splitButton label="Comprobante de estudios" [model]="menuItems[5]"
+                        [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.studies_certification ? ' p-button-primary' : ' p-button-secondary')"
+                        menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                    <input type="file" id="input_studies_certification"
+                        (change)="getFile($event, 'studies_certification')" [hidden]="true" accept=".pdf">
+                    <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.studies_certification}}</p>
+                </div>
             </div>
-            <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Comprobante fiscal" [model]="menuItems[6]"
-                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.tax_certificate ? ' p-button-primary' : ' p-button-secondary')"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-                <input type="file" id="input_tax_certificate" (change)="getFile($event, 'tax_certificate')"
-                    [hidden]="true" accept=".pdf">
-                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.tax_certificate}}</p>
+            <div class="col-12 col-lg-4 mt-3 d-flex align-items-center justify-content-between">
+                <p-checkbox [(ngModel)]="config.data.entity.has_tax_certificate" [binary]="true"
+                    name="has_tax_certificate" inputId="binary_tax_certificate" />
+                <div class="w-100 ms-3">
+                    <p-splitButton label="Comprobante fiscal" [model]="menuItems[6]"
+                        [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.tax_certificate ? ' p-button-primary' : ' p-button-secondary')"
+                        menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                    <input type="file" id="input_tax_certificate" (change)="getFile($event, 'tax_certificate')"
+                        [hidden]="true" accept=".pdf">
+                    <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.tax_certificate}}</p>
+                </div>
             </div>
-            <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Cartilla militar" [model]="menuItems[7]"
-                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.smn ? ' p-button-primary' : ' p-button-secondary')"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-                <input type="file" id="input_smn" (change)="getFile($event, 'smn')" [hidden]="true" accept=".pdf">
-                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.smn}}</p>
+            <div class="col-12 col-lg-4 mt-3 d-flex align-items-center justify-content-between">
+                <p-checkbox [(ngModel)]="config.data.entity.has_smn" [binary]="true" name="has_smn"
+                    inputId="binary_smn" />
+                <div class="w-100 ms-3">
+                    <p-splitButton label="Cartilla militar" [model]="menuItems[7]"
+                        [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.smn ? ' p-button-primary' : ' p-button-secondary')"
+                        menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                    <input type="file" id="input_smn" (change)="getFile($event, 'smn')" [hidden]="true" accept=".pdf">
+                    <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.smn}}</p>
+                </div>
             </div>
-            <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Antecedentes penales" [model]="menuItems[8]"
-                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.no_criminal_certificate ? ' p-button-primary' : ' p-button-secondary')"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-                <input type="file" id="input_no_criminal_certificate"
-                    (change)="getFile($event, 'no_criminal_certificate')" [hidden]="true" accept=".pdf">
-                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.no_criminal_certificate}}</p>
+            <div class="col-12 col-lg-4 mt-3 d-flex align-items-center justify-content-between">
+                <p-checkbox [(ngModel)]="config.data.entity.has_no_criminal_certificate" [binary]="true"
+                    name="has_no_criminal_certificate" inputId="binary_no_criminal_certificate" />
+                <div class="w-100 ms-3">
+                    <p-splitButton label="Antecedentes penales" [model]="menuItems[8]"
+                        [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.no_criminal_certificate ? ' p-button-primary' : ' p-button-secondary')"
+                        menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                    <input type="file" id="input_no_criminal_certificate"
+                        (change)="getFile($event, 'no_criminal_certificate')" [hidden]="true" accept=".pdf">
+                    <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.no_criminal_certificate}}</p>
+                </div>
             </div>
-            <div class="col-12 col-lg-4 mt-3">
-                <p-splitButton label="Certificado médico" [model]="menuItems[9]"
-                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.health_certificate ? ' p-button-primary' : ' p-button-secondary')"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-                <input type="file" id="input_health_certificate" (change)="getFile($event, 'health_certificate')"
-                    [hidden]="true" accept=".pdf">
-                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.health_certificate}}</p>
+            <div class="col-12 col-lg-4 mt-3 d-flex align-items-center justify-content-between">
+                <p-checkbox [(ngModel)]="config.data.entity.has_health_certificate" [binary]="true"
+                    name="has_health_certificate" inputId="binary_health_certificate" />
+                <div class="w-100 ms-3">
+                    <p-splitButton label="Certificado médico" [model]="menuItems[9]"
+                        [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.health_certificate ? ' p-button-primary' : ' p-button-secondary')"
+                        menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                    <input type="file" id="input_health_certificate" (change)="getFile($event, 'health_certificate')"
+                        [hidden]="true" accept=".pdf">
+                    <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.health_certificate}}</p>
+                </div>
             </div>
-            <div class="col-12 col-lg-4 mt-3 mb-3">
-                <p-splitButton label="Seguro de vida" [model]="menuItems[10]"
-                    [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.sv ? ' p-button-primary' : ' p-button-secondary')"
-                    menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
-                <input type="file" id="input_sv" (change)="getFile($event, 'sv')" [hidden]="true" accept=".pdf">
-                <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.sv}}</p>
+            <div class="col-12 col-lg-4 mt-3 d-flex align-items-center justify-content-between">
+                <p-checkbox [(ngModel)]="config.data.entity.has_sv" [binary]="true" name="has_sv" inputId="binary_sv" />
+                <div class="w-100 ms-3">
+                    <p-splitButton label="Seguro de vida" [model]="menuItems[10]"
+                        [styleClass]="'p-button-raised p-button-text mr-2 mb-2 w-100' + (config.data.entity.files.sv ? ' p-button-primary' : ' p-button-secondary')"
+                        menuStyleClass="p-0 m-0 fs-small"></p-splitButton>
+                    <input type="file" id="input_sv" (change)="getFile($event, 'sv')" [hidden]="true" accept=".pdf">
+                    <p class="roboto fs-small text-truncate m-0 p-0">{{fileNames.sv}}</p>
+                </div>
             </div>
         </div>
     </div>

@@ -44,6 +44,8 @@ export class ReportService {
 
         columnCells.forEach(element => {
             worksheet.getColumn(element.column).width = element.width
+            worksheet.getColumn(element.column).style = element.style ?? {}
+
         });
 
         worksheet.addTable({

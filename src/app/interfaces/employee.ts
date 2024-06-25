@@ -1,73 +1,97 @@
-import { ObjectFilter } from "../../../shared/interfaces/object-filter"
-import { DepartmentResponse } from "./department"
-import { EntityBase } from "./entity-base"
-import { FileName } from "./file-name"
-import { JobResponse } from "./job"
-import { RecruitmentMethodResponse } from "./recruitment-method"
+import { ObjectFilter } from "../../../shared/interfaces/object-filter";
+import { AntidopingResponse } from "./antidoping";
+import { DepartmentResponse } from "./department";
+import { EntityBase } from "./entity-base";
+import { FileName } from "./file-name";
+import { JobResponse } from "./job";
+import { RecruitmentMethodResponse } from "./recruitment-method";
 
 export interface EmployeeRequest {
-    id_department: number
-    id_job: number
-    id_recruitment_method: number
-    code: number
-    name: string
-    sure_name: string
-    last_name: string
-    entry_date: string
-    gender: string
-    nss: string
-    rfc: string
-    curp: string
-    ssp: boolean
-    natal_date: string
-    email: string
-    phone: string
-    shirt_size: string
-    pants_size: string
-    shoe_size: string
-    has_children: boolean
-    address: string
-    cp: string
-    comments: string
-    files: FileName
-    status: boolean
+    id_department: number;
+    id_job: number;
+    id_recruitment_method: number;
+    code: number;
+    name: string;
+    sure_name: string;
+    last_name: string;
+    entry_date: string;
+    gender: string;
+    nss: string;
+    rfc: string;
+    curp: string;
+    ssp: boolean;
+    natal_date: string;
+    email: string;
+    phone: string;
+    shirt_size: string;
+    pants_size: string;
+    shoe_size: string;
+    has_children: boolean;
+    address: string;
+    cp: string;
+    comments: string;
+    has_birth_certificate: boolean;  
+    has_identification: boolean;  
+    has_curp: boolean;  
+    has_nss: boolean;  
+    has_address_certification: boolean;  
+    has_studies_certification: boolean;  
+    has_tax_certificate: boolean;  
+    has_smn: boolean;  
+    has_no_criminal_certificate: boolean;  
+    has_health_certificate: boolean;  
+    has_sv: boolean;  
+    files: FileName;
+    status: boolean;
 }
 
 export interface EmployeeResponse extends EntityBase {
-    id_department: number
-    id_job: number
-    id_recruitment_method: number
-    code: number
-    full_name: string
-    name: string
-    sure_name: string
-    last_name: string
-    entry_date: string
-    entry_date_formatted: string
-    entry_month: string
-    entry_year: string
-    gender: string
-    nss: string
-    rfc: string
-    curp: string
-    ssp: boolean
-    natal_date: string
-    natal_date_formatted: string
-    email: string
-    phone: string
-    shirt_size: string
-    pants_size: number
-    shoe_size: number
-    has_children: boolean
-    address: string
-    cp: string
-    comments: string
-    qr_image: string
-    status: boolean
-    files: FileName
-    department: DepartmentResponse
-    job: JobResponse
-    recruitment_method: RecruitmentMethodResponse
+    id_department: number;
+    id_job: number;
+    id_recruitment_method: number;
+    code: number;
+    full_name: string;
+    name: string;
+    sure_name: string;
+    last_name: string;
+    entry_date: string;
+    entry_date_formatted: string;
+    entry_month: string;
+    entry_year: string;
+    gender: string;
+    nss: string;
+    rfc: string;
+    curp: string;
+    ssp: boolean;
+    natal_date: string;
+    natal_date_formatted: string;
+    email: string;
+    phone: string;
+    shirt_size: string;
+    pants_size: number;
+    shoe_size: number;
+    has_children: boolean;
+    address: string;
+    cp: string;
+    comments: string;
+    has_birth_certificate: boolean;  
+    has_identification: boolean;  
+    has_curp: boolean;  
+    has_nss: boolean;  
+    has_address_certification: boolean;  
+    has_studies_certification: boolean;  
+    has_tax_certificate: boolean;  
+    has_smn: boolean;  
+    has_no_criminal_certificate: boolean;  
+    has_health_certificate: boolean;  
+    has_sv: boolean;  
+    qr_image: string;
+    status: boolean;
+    files: FileName;
+    department: DepartmentResponse;
+    job: JobResponse;
+    recruitment_method: RecruitmentMethodResponse;
+    antidoping?: AntidopingResponse
 }
 
 export interface EmployeeQueryFilter {
@@ -86,4 +110,15 @@ export interface EmployeeQueryFilter {
     natal_start_date: ObjectFilter<EmployeeQueryFilter>;
     natal_end_date: ObjectFilter<EmployeeQueryFilter>;
     has_children: ObjectFilter<EmployeeQueryFilter>;
+    has_birth_certificate: ObjectFilter<EmployeeQueryFilter>;  
+    has_identification: ObjectFilter<EmployeeQueryFilter>;  
+    has_curp: ObjectFilter<EmployeeQueryFilter>;  
+    has_nss: ObjectFilter<EmployeeQueryFilter>;  
+    has_address_certification: ObjectFilter<EmployeeQueryFilter>;  
+    has_studies_certification: ObjectFilter<EmployeeQueryFilter>;  
+    has_tax_certificate: ObjectFilter<EmployeeQueryFilter>;  
+    has_smn: ObjectFilter<EmployeeQueryFilter>;  
+    has_no_criminal_certificate: ObjectFilter<EmployeeQueryFilter>;  
+    has_health_certificate: ObjectFilter<EmployeeQueryFilter>;  
+    has_sv: ObjectFilter<EmployeeQueryFilter>;  
 }

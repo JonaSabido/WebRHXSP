@@ -27,6 +27,20 @@
                     [(ngModel)]="filters[selectedOption].value">
                 </p-dropdown>
                 }
+                @case ("year") {
+                <input pInputText type="number" id="year" name="year" placeholder="Escriba el año"
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
+                }
+                @case("start_date"){
+                <p-calendar id="start_date" name="start_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                }
+                @case("end_date"){
+                <p-calendar id="end_date" name="end_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                }
                 }
             </div>
             <div class="col-md-1 p-0">

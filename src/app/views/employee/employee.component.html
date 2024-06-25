@@ -82,13 +82,13 @@
                 </p-dropdown>
                 }
                 @case ("ssp") {
-                <p-dropdown [options]="[{name: 'Si', value: true}, {name: 'No', value: false}]" id="ssp" name="ssp"
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="ssp" name="ssp"
                     optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
                     styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
                 </p-dropdown>
                 }
                 @case ("has_children") {
-                <p-dropdown [options]="[{name: 'Si', value: true}, {name: 'No', value: false}]" id="has_children"
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_children"
                     name="has_children" optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
                     styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
                 </p-dropdown>
@@ -103,6 +103,89 @@
                     inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
                     [(ngModel)]="filters[selectedOption].value"></p-calendar>
                 }
+                @case("has_birth_certificate") {
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_birth_certificate"
+                    name="has_birth_certificate" optionLabel="name" optionValue="value"
+                    placeholder="Selecciona una opción" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+
+                @case("has_identification") {
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_identification"
+                    name="has_identification" optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+
+                @case("has_curp") {
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_curp" name="has_curp"
+                    optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+
+                @case("has_nss") {
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_nss" name="has_nss"
+                    optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+
+                @case("has_address_certification") {
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_address_certification"
+                    name="has_address_certification" optionLabel="name" optionValue="value"
+                    placeholder="Selecciona una opción" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+
+                @case("has_studies_certification") {
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_studies_certification"
+                    name="has_studies_certification" optionLabel="name" optionValue="value"
+                    placeholder="Selecciona una opción" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+
+                @case("has_tax_certificate") {
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_tax_certificate"
+                    name="has_tax_certificate" optionLabel="name" optionValue="value"
+                    placeholder="Selecciona una opción" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+
+                @case("has_smn") {
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_smn" name="has_smn"
+                    optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+
+                @case("has_no_criminal_certificate") {
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]"
+                    id="has_no_criminal_certificate" name="has_no_criminal_certificate" optionLabel="name"
+                    optionValue="value" placeholder="Selecciona una opción" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+
+                @case("has_health_certificate") {
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_health_certificate"
+                    name="has_health_certificate" optionLabel="name" optionValue="value"
+                    placeholder="Selecciona una opción" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+
+                @case("has_sv") {
+                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_sv" name="has_sv"
+                    optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+
                 }
             </div>
             <div class="col-md-1 p-0">
@@ -146,7 +229,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-entity let-columns>
-            <tr class="clickeable">
+            <tr>
                 <td>{{entity.code}}</td>
                 <td>
                     <div class="d-flex align-items-center">

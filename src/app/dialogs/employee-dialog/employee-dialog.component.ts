@@ -17,12 +17,13 @@ import { EmployeeService } from '../../core/services/employee.service';
 import { FileName } from '../../interfaces/file-name';
 import { RecruitmentMethodResponse } from '../../interfaces/recruitment-method';
 import { RecruitmentMethodService } from '../../core/services/recruitment-method.service';
+import { CheckboxModule } from 'primeng/checkbox';
 
 
 @Component({
   selector: 'app-employee-dialog',
   standalone: true,
-  imports: [StepsModule, InputTextModule, FileUploadModule, SplitButtonModule, DropdownModule, CalendarModule, FormsModule],
+  imports: [StepsModule, InputTextModule, FileUploadModule, SplitButtonModule, DropdownModule, CalendarModule, FormsModule, CheckboxModule],
   templateUrl: './employee-dialog.component.html',
   styleUrl: './employee-dialog.component.scss'
 })
@@ -119,14 +120,14 @@ export class EmployeeDialogComponent extends DialogCrud {
         },
       )
       if (this.config.data.entity.files[`${key}`]) {
-        items.push(
-          {
-            label: 'Descargar',
-            icon: 'pi pi-download',
-            command: () => {
-            }
-          },
-        )
+        // items.push(
+        //   {
+        //     label: 'Descargar',
+        //     icon: 'pi pi-download',
+        //     command: () => {
+        //     }
+        //   },
+        // )
       }
       this.menuItems.push(items)
     }
@@ -190,6 +191,7 @@ export class EmployeeDialogComponent extends DialogCrud {
 
   generateFormData() {
     Object.entries(this.config.data.entity).forEach(([key, value]) => {
+      console.log(key, '=>', value)
       this.formData.append(key, value as string);
     });
     this.save(this.formData)

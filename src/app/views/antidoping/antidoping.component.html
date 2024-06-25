@@ -27,6 +27,26 @@
                     [(ngModel)]="filters[selectedOption].value">
                 </p-dropdown>
                 }
+                @case ("result") {
+                <p-dropdown [options]="[{name: 'Positivo'}, {name: 'Negativo'}]" id="result" name="result"
+                    optionLabel="name" optionValue="name" placeholder="Selecciona una opción"
+                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                </p-dropdown>
+                }
+                @case ("year") {
+                <input pInputText type="number" id="year" name="year" placeholder="Escriba el año"
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
+                }
+                @case("start_date"){
+                <p-calendar id="start_date" name="start_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                }
+                @case("end_date"){
+                <p-calendar id="end_date" name="end_date" [iconDisplay]="'input'" [showIcon]="true"
+                    inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
+                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
+                }
                 }
             </div>
             <div class="col-md-1 p-0">
@@ -37,6 +57,20 @@
     </form>
     }
     <div class="container-fluid p-0">
+        <div class="d-flex mt-3">
+            <!-- <p-button icon="pi pi-file" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
+                tooltipPosition="bottom" class="me-2"></p-button>
+            <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
+                tooltipPosition="bottom" class="me-2" severity="info"></p-button>
+            <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
+                tooltipPosition="bottom" class="" severity="warning"></p-button> -->
+            <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success me-2" pTooltip="XLS"
+                tooltipPosition="bottom" (click)="xlsx()"></button>
+            <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning" pTooltip="PDF"
+                tooltipPosition="bottom" (click)="pdf()"></button>
+            <!-- <button type="button" pButton pRipple [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" class="p-button-info ms-auto"
+                pTooltip="Selection Only" tooltipPosition="bottom"></button> -->
+        </div>
         <div class="row">
             @for(entity of entities; track entity){
             <div class="col-12 col-md-6 col-lg-4 mt-4">

@@ -47,17 +47,17 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
   recruitments: RecruitmentMethodResponse[]
 
   columnCellsXLSX: ColumnXSLX[] = [
-    { column: 1, width: 20 },
-    { column: 2, width: 15 },
+    { column: 1, width: 30 },
+    { column: 2, width: 20 },
     { column: 3, width: 25 },
     { column: 4, width: 20 },
     { column: 5, width: 20 },
     { column: 6, width: 25 },
-    { column: 7, width: 20 },
-    { column: 8, width: 20 },
-    { column: 9, width: 20 },
+    { column: 7, width: 28 },
+    { column: 8, width: 25 },
+    { column: 9, width: 30 },
     { column: 10, width: 20 },
-    { column: 11, width: 10 },
+    { column: 11, width: 20 },
     { column: 12, width: 25 },
     { column: 13, width: 40 },
     { column: 14, width: 90 },
@@ -70,6 +70,20 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
     { column: 21, width: 25 },
     { column: 22, width: 25 },
     { column: 23, width: 25 },
+    { column: 24, width: 25 },
+    { column: 25, width: 50 },
+    { column: 26, width: 25, style: { alignment: { horizontal: 'center' } } },
+    { column: 27, width: 25, style: { alignment: { horizontal: 'center' } } },
+    { column: 28, width: 29, style: { alignment: { horizontal: 'center' } } },
+    { column: 29, width: 29, style: { alignment: { horizontal: 'center' } } },
+    { column: 30, width: 25, style: { alignment: { horizontal: 'center' } } },
+    { column: 31, width: 25, style: { alignment: { horizontal: 'center' } } },
+    { column: 32, width: 25, style: { alignment: { horizontal: 'center' } } },
+    { column: 33, width: 25, style: { alignment: { horizontal: 'center' } } },
+    { column: 34, width: 25, style: { alignment: { horizontal: 'center' } } },
+    { column: 35, width: 25, style: { alignment: { horizontal: 'center' } } },
+    { column: 36, width: 25, style: { alignment: { horizontal: 'center' } } },
+
   ]
 
   tableColumnsXLSX: Array<any> = [
@@ -96,6 +110,19 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
     { name: 'Departamento', filterButton: true },
     { name: 'Trabajo', filterButton: true },
     { name: 'Método de reclutamiento', filterButton: true },
+    { name: 'Resultado de Antidoping', filterButton: true },
+    { name: 'Comentarios de Antidoping', filterButton: true },
+    { name: '¿Acta de nacimiento?', filterButton: true },
+    { name: '¿Identificación Oficial?', filterButton: true },
+    { name: '¿CURP?', filterButton: true },
+    { name: '¿NSS?', filterButton: true },
+    { name: '¿Comprobante domiciliario?', filterButton: true },
+    { name: '¿Comprobante de estudios?', filterButton: true },
+    { name: '¿Comprobante fiscal?', filterButton: true },
+    { name: '¿Cartilla militar?', filterButton: true },
+    { name: '¿Antecedentes penales?', filterButton: true },
+    { name: '¿Certificado médico?', filterButton: true },
+    { name: '¿Seguro de vida?', filterButton: true },
   ]
 
   tableColumnsPDF: Array<any> = [
@@ -122,6 +149,19 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
     { header: 'Departamento', dataKey: 'department' },
     { header: 'Trabajo', dataKey: 'job' },
     { header: 'Método de reclutamiento', dataKey: 'recruitment_method' },
+    { header: 'Resultados Antidoping', dataKey: 'antidoping?.result' },
+    { header: 'Comentarios Antidoping', dataKey: 'antidoping?.comments' },
+    // { header: 'Acta de nacimiento', dataKey: 'has_birth_certificate' },
+    // { header: 'Identificación Oficial', dataKey: 'has_identification' },
+    // { header: 'CURP', dataKey: 'has_curp' },
+    // { header: 'NSS', dataKey: 'has_nss' },
+    // { header: 'Comprobante domiciliario', dataKey: 'has_address_certification' },
+    // { header: 'Comprobante de estudios', dataKey: 'has_studies_certification' },
+    // { header: 'Comprobante fiscal', dataKey: 'has_tax_certificate' },
+    // { header: 'Cartilla militar', dataKey: 'has_smn' },
+    // { header: 'Antecedentes penales', dataKey: 'has_no_criminal_certificate' },
+    // { header: 'Certificado médico', dataKey: 'has_health_certificate' },
+    // { header: 'Seguro de vida', dataKey: 'has_sv' },
   ];
 
   filterColumnsPDF: Array<any> = [
@@ -160,7 +200,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
     this.dialogConfig = {
       closeOnEscape: true,
       closable: true,
-      width: '90%',
+      width: '95%',
       modal: true,
       breakpoints: {
         '960px': '75vw',
@@ -188,17 +228,28 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
       nss: "",
       rfc: "",
       curp: "",
-      ssp: true,
+      ssp: false,
       natal_date: "",
       email: "",
       phone: "",
       shirt_size: "",
       pants_size: "",
       shoe_size: "",
-      has_children: true,
+      has_children: false,
       address: "",
       cp: "",
       comments: "",
+      has_birth_certificate: false,
+      has_identification: false,
+      has_curp: false,
+      has_nss: false,
+      has_address_certification: false,
+      has_studies_certification: false,
+      has_tax_certificate: false,
+      has_smn: false,
+      has_no_criminal_certificate: false,
+      has_health_certificate: false,
+      has_sv: false,
       status: true,
       files: {
         birth_certificate: '',
@@ -216,6 +267,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
         employee_image: '',
       }
     }
+
   }
 
   protected restoreFilters() {
@@ -295,7 +347,61 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
         label: 'Nacimiento (FF)',
         value: null
       },
-
+      has_birth_certificate: {
+        property: 'has_birth_certificate',
+        label: 'Acta de nacimiento',
+        value: null
+      },
+      has_identification: {
+        property: 'has_identification',
+        label: 'Identificación Oficial',
+        value: null
+      },
+      has_curp: {
+        property: 'has_curp',
+        label: 'CURP',
+        value: null
+      },
+      has_nss: {
+        property: 'has_nss',
+        label: 'NSS',
+        value: null
+      },
+      has_address_certification: {
+        property: 'has_address_certification',
+        label: 'Comprobante domiciliario',
+        value: null
+      },
+      has_studies_certification: {
+        property: 'has_studies_certification',
+        label: 'Comprobante de estudios',
+        value: null
+      },
+      has_tax_certificate: {
+        property: 'has_tax_certificate',
+        label: 'Comprobante fiscal',
+        value: null
+      },
+      has_smn: {
+        property: 'has_smn',
+        label: 'Cartilla militar',
+        value: null
+      },
+      has_no_criminal_certificate: {
+        property: 'has_no_criminal_certificate',
+        label: 'Antecedentes penales',
+        value: null
+      },
+      has_health_certificate: {
+        property: 'has_health_certificate',
+        label: 'Certificado médico',
+        value: null
+      },
+      has_sv: {
+        property: 'has_sv',
+        label: 'Seguro de vida',
+        value: null
+      }
     }
   }
 
@@ -309,35 +415,57 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
   xlsx() {
     const filterCellsXLSX: CellXSLX[] = [
       { cell: 'A3', value: 'Departamento:', bold: true },
-      { cell: 'A4', value: 'Trabajo:', bold: true },
-      { cell: 'A5', value: 'Método de Reclutamiento:', bold: true },
-      { cell: 'A6', value: 'Código:', bold: true },
-      { cell: 'A7', value: 'Nombre:', bold: true },
-      { cell: 'A8', value: 'Apellido Paterno:', bold: true },
-      { cell: 'A9', value: 'Apellido Materno:', bold: true },
-      { cell: 'C3', value: 'Ingreso (FI):', bold: true },
-      { cell: 'C4', value: 'Ingreso (FF):', bold: true },
-      { cell: 'C5', value: 'Estatus:', bold: true },
-      { cell: 'C6', value: 'Género:', bold: true },
-      { cell: 'C7', value: 'SSP:', bold: true },
-      { cell: 'C8', value: 'Tiene Hijos:', bold: true },
-      { cell: 'C9', value: 'Nacimiento (FI):', bold: true },
-      { cell: 'C10', value: 'Nacimiento (FF):', bold: true },
       { cell: 'B3', value: `${document.getElementById('id_department')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'A4', value: 'Trabajo:', bold: true },
       { cell: 'B4', value: `${document.getElementById('id_job')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'A5', value: 'Método de Reclutamiento:', bold: true },
       { cell: 'B5', value: `${document.getElementById('id_recruitment_method')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'A6', value: 'Código:', bold: true },
       { cell: 'B6', value: `${this.filters['code'].value ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'A7', value: 'Nombre:', bold: true },
       { cell: 'B7', value: `${this.filters['name'].value ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'B8', value: `${this.filters['sure_name'].value ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'B9', value: `${this.filters['last_name'].value ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'D3', value: `${this.filters['entry_start_date'].value ? this.dateService.dateFormatted(this.filters['entry_start_date'].value) : 'Sin seleccionar'}`, bold: false },
-      { cell: 'D4', value: `${this.filters['entry_end_date'].value ? this.dateService.dateFormatted(this.filters['entry_end_date'].value) : 'Sin seleccionar'}`, bold: false },
-      { cell: 'D5', value: `${document.getElementById('status')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'D6', value: `${document.getElementById('gender')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'D7', value: `${document.getElementById('ssp')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'D8', value: `${document.getElementById('has_children')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'D9', value: `${this.filters['natal_start_date'].value ? this.dateService.dateFormatted(this.filters['natal_start_date'].value) : 'Sin seleccionar'}`, bold: false },
-      { cell: 'D10', value: `${this.filters['natal_end_date'].value ? this.dateService.dateFormatted(this.filters['natal_end_date'].value) : 'Sin seleccionar'}`, bold: false }
+      { cell: 'C3', value: 'Apellido Paterno:', bold: true },
+      { cell: 'D3', value: `${this.filters['sure_name'].value ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'C4', value: 'Apellido Materno:', bold: true },
+      { cell: 'D4', value: `${this.filters['last_name'].value ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'C5', value: 'Ingreso (FI):', bold: true },
+      { cell: 'D5', value: `${this.filters['entry_start_date'].value ? this.dateService.dateFormatted(this.filters['entry_start_date'].value) : 'Sin seleccionar'}`, bold: false },
+      { cell: 'C6', value: 'Ingreso (FF):', bold: true },
+      { cell: 'D6', value: `${this.filters['entry_end_date'].value ? this.dateService.dateFormatted(this.filters['entry_end_date'].value) : 'Sin seleccionar'}`, bold: false },
+      { cell: 'C7', value: 'Género:', bold: true },
+      { cell: 'D7', value: `${document.getElementById('gender')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'E3', value: 'SSP:', bold: true },
+      { cell: 'F3', value: `${document.getElementById('ssp')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'E4', value: 'Nacimiento (FI):', bold: true },
+      { cell: 'F4', value: `${this.filters['natal_start_date'].value ? this.dateService.dateFormatted(this.filters['natal_start_date'].value) : 'Sin seleccionar'}`, bold: false },
+      { cell: 'E5', value: 'Nacimiento (FF):', bold: true },
+      { cell: 'F5', value: `${this.filters['natal_end_date'].value ? this.dateService.dateFormatted(this.filters['natal_end_date'].value) : 'Sin seleccionar'}`, bold: false },
+      { cell: 'E6', value: 'Estatus:', bold: true },
+      { cell: 'F6', value: `${document.getElementById('status')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'E7', value: '¿Tiene Hijos?:', bold: true },
+      { cell: 'F7', value: `${document.getElementById('has_children')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'G3', value: 'Acta de nacimiento', bold: true },
+      { cell: 'H3', value: `${document.getElementById('has_birth_certificate')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'G4', value: 'Identificación Oficial', bold: true },
+      { cell: 'H4', value: `${document.getElementById('has_identification')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'G5', value: 'CURP', bold: true },
+      { cell: 'H5', value: `${document.getElementById('has_curp')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'G6', value: 'NSS', bold: true },
+      { cell: 'H6', value: `${document.getElementById('has_nss')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'G7', value: 'Comprobante domiciliario', bold: true },
+      { cell: 'H7', value: `${document.getElementById('has_address_certification')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'I3', value: 'Comprobante de estudios', bold: true },
+      { cell: 'J3', value: `${document.getElementById('has_studies_certification')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'I4', value: 'Comprobante fiscal', bold: true },
+      { cell: 'J4', value: `${document.getElementById('has_tax_certificate')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'I5', value: 'Cartilla militar', bold: true },
+      { cell: 'J5', value: `${document.getElementById('has_smn')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'I6', value: 'Antecedentes penales', bold: true },
+      { cell: 'J6', value: `${document.getElementById('has_no_criminal_certificate')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'I7', value: 'Certificado médico', bold: true },
+      { cell: 'J7', value: `${document.getElementById('has_health_certificate')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'K3', value: 'Seguro de vida', bold: true },
+      { cell: 'L3', value: `${document.getElementById('has_sv')?.textContent ?? 'Sin seleccionar'}`, bold: false },
     ];
 
     const rows: Array<any> = [];
@@ -361,12 +489,26 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
         item.rfc,
         item.curp,
         item.nss,
-        item.ssp == true ? 'Sí' : 'No',
+        item.ssp == true ? 'Si' : 'No',
         item.entry_date_formatted,
         item.department.name,
         item.job.name,
-        item.recruitment_method.name
-      ])
+        item.recruitment_method.name,
+        item.antidoping?.result,
+        item.antidoping?.comments,
+        item.has_birth_certificate == true ? 'X' : '-',
+        item.has_identification == true ? 'X' : '-',
+        item.has_curp == true ? 'X' : '-',
+        item.has_nss == true ? 'X' : '-',
+        item.has_address_certification == true ? 'X' : '-',
+        item.has_studies_certification == true ? 'X' : '-',
+        item.has_tax_certificate == true ? 'X' : '-',
+        item.has_smn == true ? 'X' : '-',
+        item.has_no_criminal_certificate == true ? 'X' : '-',
+        item.has_health_certificate == true ? 'X' : '-',
+        item.has_sv == true ? 'X' : '-',
+      ]);
+
     })
 
     this.reportService.generateXLSX(
@@ -376,7 +518,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
       filterCellsXLSX,
       this.columnCellsXLSX,
       'M2',
-      'A12',
+      'A10',
       this.tableColumnsXLSX,
       rows
     );
@@ -432,7 +574,9 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
         datos.entry_date_formatted,
         datos.department.name,
         datos.job.name,
-        datos.recruitment_method.name
+        datos.recruitment_method.name,
+        datos.antidoping?.result,
+        datos.antidoping?.comments,
       ];
     }
 

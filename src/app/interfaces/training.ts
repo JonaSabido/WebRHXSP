@@ -19,7 +19,10 @@ export interface TrainingResponse extends EntityBase {
 }
 
 export interface TrainingQueryFilter {
-    id_employee: ObjectFilter<TrainingQueryFilter>
+    id_employee: ObjectFilter<TrainingQueryFilter>,
+    year: ObjectFilter<TrainingQueryFilter>
+    start_date: ObjectFilter<TrainingQueryFilter>
+    end_date: ObjectFilter<TrainingQueryFilter>
 }
 
 

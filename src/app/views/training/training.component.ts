@@ -17,11 +17,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { EmployeeResponse } from '../../interfaces/employee';
 import { EmployeeService } from '../../core/services/employee.service';
 import { CardEmployeeFileComponent } from '../../components/card-employee-file/card-employee-file.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
   selector: 'app-training',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule, DropdownModule, InputTextModule, FormsModule, CardEmployeeFileComponent],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule, DropdownModule, InputTextModule, FormsModule, CardEmployeeFileComponent, CalendarModule],
   providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './training.component.html',
   styleUrl: './training.component.scss'
@@ -78,6 +79,21 @@ export class TrainingComponent extends Crud<TrainingRequest, TrainingResponse, T
         property: 'id_employee',
         label: 'Empleado',
         value: null
+      },
+      year: {
+        property: 'year',
+        label: 'Año',
+        value: null
+      },
+      start_date: {
+        property: 'start_date',
+        label: 'Fecha Inicio',
+        value: ''
+      },
+      end_date: {
+        property: 'end_date',
+        label: 'Fecha Final',
+        value: ''
       },
     }
   }

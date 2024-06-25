@@ -17,11 +17,15 @@ import { InputTextModule } from 'primeng/inputtext';
 import { EmployeeResponse } from '../../interfaces/employee';
 import { EmployeeService } from '../../core/services/employee.service';
 import { CardEmployeeFileComponent } from '../../components/card-employee-file/card-employee-file.component';
+import { CellXSLX, ColumnXSLX } from '../../interfaces/report';
+import { ReportService } from '../../../../shared/services/report.service';
+import { DateService } from '../../../../shared/services/date.service';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
   selector: 'app-antidoping',
   standalone: true,
-  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule, DropdownModule, InputTextModule, FormsModule, CardEmployeeFileComponent],
+  imports: [BreadcrumbComponent, TableModule, ButtonModule, TooltipModule, TagModule, ToastModule, DropdownModule, InputTextModule, FormsModule, CardEmployeeFileComponent, CalendarModule],
   providers: [DialogService, DynamicDialogRef, MessageService],
   templateUrl: './antidoping.component.html',
   styleUrl: './antidoping.component.scss'
@@ -35,13 +39,72 @@ export class AntidopingComponent extends Crud<AntidopingRequest, AntidopingRespo
   defaultHeader: string = 'Nuevo Antidoping';
   employees: EmployeeResponse[]
 
+  columnCellsXLSX: ColumnXSLX[] = [
+    { column: 1, width: 15 },
+    { column: 2, width: 40 },
+    { column: 3, width: 30 },
+    { column: 4, width: 75 },
+    { column: 5, width: 30 },
+  ]
+
+  tableColumnsXLSX: Array<any> = [
+    { name: '#', filterButton: true, },
+    { name: 'Empleado', filterButton: true },
+    { name: 'Resultado', filterButton: true },
+    { name: 'Comentarios', filterButton: true },
+    { name: 'Fecha', filterButton: true },
+  ]
+
+  tableColumnsPDF: Array<any> = [
+    {
+      header: '#',
+      dataKey: 'id',
+    },
+    {
+      header: 'Empleado',
+      dataKey: 'employee.name',
+    },
+    {
+      header: 'Resultado',
+      dataKey: 'result',
+    },
+    {
+      header: 'Comentarios',
+      dataKey: 'comments',
+    },
+    {
+      header: 'Fecha',
+      dataKey: 'createdAt_formatted',
+    }
+  ]
+
+  filterColumnsPDF: Array<any> = [
+    {
+      header: 'Empleado',
+    },
+    {
+      header: 'Resultado',
+    },
+    {
+      header: 'Año',
+    },
+    {
+      header: 'Fecha Inicio',
+    },
+    {
+      header: 'Fecha Final',
+    },
+  ]
+
 
   constructor(
     public dialogService: DialogService,
     public refDialog: DynamicDialogRef,
     public service: AntidopingService,
     public messageService: MessageService,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private reportService: ReportService,
+    private dateService: DateService
 
   ) {
     super(dialogService, refDialog, service, messageService)
@@ -66,6 +129,8 @@ export class AntidopingComponent extends Crud<AntidopingRequest, AntidopingRespo
   protected restore() {
     this.entity = {
       id_employee: 0,
+      result: '',
+      comments: '',
       files: {
         photo: '',
         evidence: '',
@@ -80,10 +145,100 @@ export class AntidopingComponent extends Crud<AntidopingRequest, AntidopingRespo
         label: 'Empleado',
         value: null
       },
+      result: {
+        property: 'result',
+        label: 'Resultado',
+        value: null
+      },
+      year: {
+        property: 'year',
+        label: 'Año',
+        value: null
+      },
+      start_date: {
+        property: 'start_date',
+        label: 'Fecha Inicio',
+        value: ''
+      },
+      end_date: {
+        property: 'end_date',
+        label: 'Fecha Final',
+        value: ''
+      },
     }
   }
 
   ngOnInit(): void {
     this.employeeService.all().subscribe(response => this.employees = response.data)
   }
+
+  xlsx() {
+
+    const filterCellsXLSX: CellXSLX[] = [
+      { cell: 'A3', value: 'Empleado:', bold: true },
+      { cell: 'A4', value: 'Resultado:', bold: true },
+      { cell: 'C3', value: 'Año:', bold: true },
+      { cell: 'C4', value: 'Fecha Inicio:', bold: true },
+      { cell: 'C5', value: 'Fecha Final:', bold: true },
+      { cell: 'B3', value: `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B4', value: `${document.getElementById('result')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'D3', value: `${this.filters['year'].value ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'D4', value: `${this.filters['start_date'].value ? this.dateService.dateFormatted(this.filters['start_date'].value) : 'Sin seleccionar'}`, bold: false },
+      { cell: 'D5', value: `${this.filters['end_date'].value ? this.dateService.dateFormatted(this.filters['end_date'].value) : 'Sin seleccionar'}`, bold: false },
+    ]
+
+    const rows: Array<any> = [];
+    this.entities.forEach((item, index) => {
+      rows.push([
+        index + 1,
+        `${item.employee.name} ${item.employee.sure_name} ${item.employee.last_name}`,
+        item.result,
+        item.comments,
+        item.createdAt_formatted
+      ])
+    })
+
+    this.reportService.generateXLSX(
+      'Antidopings',
+      'A1:E1',
+      'Antidopings',
+      filterCellsXLSX,
+      this.columnCellsXLSX,
+      'E2',
+      'A7',
+      this.tableColumnsXLSX,
+      rows
+    );
+  }
+
+  pdf() {
+
+    let dataFilters = [
+      [
+        `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`,
+        `${document.getElementById('result')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.filters['year'].value ?? 'Sin seleccionar'}`,
+        `${this.filters['start_date'].value ? this.dateService.dateFormatted(this.filters['start_date'].value) : 'Sin seleccionar'}`,
+        `${this.filters['end_date'].value ? this.dateService.dateFormatted(this.filters['end_date'].value) : 'Sin seleccionar'}`,
+      ]
+    ]
+
+    let index = 1;
+
+    let dataTable = this.entities.map(getDataTable);
+    function getDataTable(datos: any) {
+
+      return [
+        index++,
+        `${datos.employee.name} ${datos.employee.sure_name} ${datos.employee.last_name}`,
+        datos.result,
+        datos.comments,
+        datos.createdAt_formatted
+      ];
+    }
+
+    this.reportService.generatePDF('Antidopings', 'Antidopings', this.filterColumnsPDF, dataFilters, this.tableColumnsPDF, dataTable)
+  }
+
+
 }
