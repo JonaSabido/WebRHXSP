@@ -47,7 +47,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
   recruitments: RecruitmentMethodResponse[]
   filterFileOptions = [{ name: 'Si', value: 1 }, { name: 'No', value: 0 }]
   filterStatusOptions = [{ name: 'Alta', value: 1 }, { name: 'Baja', value: 0 }]
-  filterGenderOptions = [{ name: 'Masculino', value: 'Male' }, { name: 'Femenino', value: 'Femenino' }, { name: 'Otro', value: 'Otro' }]
+  filterGenderOptions = [{ name: 'Masculino', value: 'Masculino' }, { name: 'Femenino', value: 'Femenino' }, { name: 'Otro', value: 'Otro' }]
 
   columnCellsXLSX: ColumnXSLX[] = [
     { column: 1, width: 30 },
