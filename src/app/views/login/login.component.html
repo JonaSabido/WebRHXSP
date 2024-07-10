@@ -1,4 +1,4 @@
-<div class="container-fluid h-100 position-absolute pt-3 pb-3">
+<div class="container-fluid h-100 position-absolute pt-3 pb-3 bg-secondary-color">
     <div class="row h-100">
         <div class="col-12">
             <div class="d-flex align-items-center justify-content-center h-100">
@@ -17,40 +17,42 @@
                                 </div> -->
                                 <div>
                                     <div class="mt-3 text-center">
-                                        <h2 class="roboto-bold fs-3 ">Bienvenido a RH-XSP</h2>
-                                        <span class="roboto">Inicia sesión para continuar</span>
+                                        <h2 class="roboto-bold text-secondary-color fs-4">Bienvenido a <span
+                                                class="text-primary-color">RH</span>XSP</h2>
+                                        <span class="roboto text-secondary-color fs-small">Inicia sesión para
+                                            continuar</span>
                                     </div>
                                     <form #login="ngForm" (ngSubmit)="onSubmit(login)">
                                         <div class="mt-4">
-                                            <label for="email" class="roboto fs-small">Email</label>
+                                            <label for="email" class="roboto-bold fs-small">Email</label>
                                             <span class="p-input-icon-left w-100">
                                                 <i class="pi pi-user text-primary-color"></i>
                                                 <input pInputText type="email" id="email" name="email"
-                                                    class="p-inputtext-sm roboto w-100"
+                                                    class="p-inputtext-sm roboto fs-small w-100"
                                                     placeholder="Escriba su correo electrónico" [(ngModel)]="body.email"
                                                     #email="ngModel" required />
                                             </span>
-                                            @if(email.invalid && (email.dirty || email.touched)){
+                                            <!-- @if(email.invalid && (email.dirty || email.touched)){
                                             @if(email.errors && email.errors['required']){
-                                            <span class="text-danger roboto fs-small">Por favor ingrese su correo</span>
+                                            <span class="text-danger roboto fs-small fw-bold">Por favor ingrese su correo</span>
                                             }
-                                            }
+                                            } -->
                                         </div>
                                         <div class="mt-4">
-                                            <label for="password" class="roboto fs-small">Contraseña</label>
+                                            <label for="password" class="roboto-bold fs-small">Contraseña</label>
                                             <span class="p-input-icon-left w-100">
                                                 <i class="pi pi-lock text-primary-color"></i>
                                                 <input pInputText type="password" id="password" name="password"
-                                                    class="p-inputtext-sm roboto w-100"
+                                                    class="p-inputtext-sm roboto fs-small w-100"
                                                     placeholder="Escriba su contraseña" [(ngModel)]="body.password"
                                                     #password="ngModel" required />
                                             </span>
-                                            @if(password.invalid && (password.dirty || password.touched)){
+                                            <!-- @if(password.invalid && (password.dirty || password.touched)){
                                             @if(password.errors && password.errors['required']){
-                                            <span class="text-danger poppins font-size-small">Por favor ingrese su
+                                            <span class="text-danger roboto fs-small fw-bold">Por favor ingrese su
                                                 contraseña</span>
                                             }
-                                            }
+                                            } -->
                                         </div>
                                         <div class="mt-4 w-100">
                                             <p-button label="Iniciar Sesión" styleClass="w-100 roboto-bold fs-5"

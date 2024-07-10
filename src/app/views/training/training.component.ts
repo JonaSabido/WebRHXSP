@@ -33,7 +33,7 @@ export class TrainingComponent extends Crud<TrainingRequest, TrainingResponse, T
   prevLinks = ['Home', 'Empleados']
   activeLink = 'Capacitaciones'
   dialogConfig: DynamicDialogConfig;
-  defaultHeader: string = 'Nuevo Capacitación';
+  defaultHeader: string = 'Nueva Capacitación';
   employees: EmployeeResponse[]
 
 

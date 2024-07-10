@@ -4,14 +4,16 @@ import { SidebarModule } from 'primeng/sidebar';
 import { AvatarModule } from 'primeng/avatar';
 import { RippleModule } from 'primeng/ripple';
 import { SidebarModuleItem } from '../../interfaces/sidebar';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SidebarService } from '../../../../shared/helpers/services/sidebar.service';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../../core/services/auth.service';
 
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [SidebarModule, ButtonModule, AvatarModule, RippleModule, RouterModule],
+  imports: [SidebarModule, ButtonModule, AvatarModule, RippleModule, RouterModule, CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
@@ -257,12 +259,19 @@ export class SidebarComponent {
   ]
 
   constructor(
-    public sidebarService: SidebarService
+    public sidebarService: SidebarService,
+    private authService: AuthService,
+    private router: Router,
   ) {
   }
 
   closeCallback($event: any) {
 
+  }
+
+  logOut(){
+    this.authService.removeTokenOnStorage()
+    this.router.navigate(['/'])
   }
 
   changeVisibilityToModuleItem(moduleItem: SidebarModuleItem) {

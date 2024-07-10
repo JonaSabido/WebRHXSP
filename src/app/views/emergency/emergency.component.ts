@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { EmergencyDialogComponent } from '../../dialogs/emergency-dialog/emergency-dialog.component';
 import { Crud } from '../../../../shared/helpers/crud';
-import { EmergencyQueryFilter, EmergencyRequest, EmergencyResponse } from '../../interfaces/emergency';
+import { EmergencyQueryFilter, EmergencyRequest, EmergencyResponse, typeOptions } from '../../interfaces/emergency';
 import { EmergencyService } from '../../core/services/emergency.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
@@ -37,6 +37,8 @@ export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse
   dialogConfig: DynamicDialogConfig;
   employees: EmployeeResponse[]
   defaultHeader: string = 'Nuevo Número de Emergencia';
+  typeOptions = typeOptions
+
 
 
   columnCellsXLSX: ColumnXSLX[] = [
@@ -154,9 +156,9 @@ export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse
       { cell: 'A3', value: 'Empleado:', bold: true },
       { cell: 'A4', value: 'Familiar:', bold: true },
       { cell: 'A5', value: 'Parentesco:', bold: true },
-      { cell: 'B3', value: `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B3', value: `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`, bold: false },
       { cell: 'B4', value: `${this.filters['reference_name'].value ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'B5', value: `${document.getElementById('type')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B5', value: `${this.typeOptions.find(x => x.name == this.filters['type'].value) ? this.typeOptions.find(x => x.name == this.filters['type'].value)?.name : 'Sin seleccionar'}`, bold: false },
     ]
 
     const rows: Array<any> = [];
@@ -188,9 +190,9 @@ export class EmergencyComponent extends Crud<EmergencyRequest, EmergencyResponse
 
     let dataFilters = [
       [
-        `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`,
         `${this.filters['reference_name'].value ?? 'Sin seleccionar'}`,
-        `${document.getElementById('type')?.textContent ?? 'Sin seleccionar'}`
+        `${this.typeOptions.find(x => x.name == this.filters['type'].value) ? this.typeOptions.find(x => x.name == this.filters['type'].value)?.name : 'Sin seleccionar'}`
       ]
     ]
 

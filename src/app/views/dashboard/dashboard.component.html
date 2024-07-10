@@ -96,7 +96,7 @@
                         </div>
                         <div class="days text-center pt-2 px-2">
                             @for (day of daysInMonth; track day.value) {
-                            <div class="day">
+                            <div class="day" [title]="day.value">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <!-- @if(!day.isToday){
                                     <div class="day roboto fs-medium" [ngClass]="{
@@ -128,7 +128,7 @@
                                     <div class="day roboto fs-medium" [ngClass]="{
                                             'day-active': day.currentMonth, 'day-inactive': !day.currentMonth, 
                                             'bg-primary-color text-white roboto-bold fs-large p-3': day.selected, 'fs-medium': !day.selected,
-                                            'text-white': day.isToday, 'bg-secondary-color': day.isToday, }">
+                                            'text-white': day.isToday, 'bg-primary-color': day.isToday, }">
                                         {{ day.value }}
                                     </div>
                                     }

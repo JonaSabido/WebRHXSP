@@ -19,35 +19,29 @@
                 </p-dropdown>
             </div>
             <div class="col-md-9 p-0">
-                @switch (selectedOption) {
-                @case ("id_employee") {
                 <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name"
                     [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
                     placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
+                    [(ngModel)]="filters['id_employee'].value" [hidden]="selectedOption !== 'id_employee'">
                 </p-dropdown>
-                }
-                @case ("result") {
-                <p-dropdown [options]="[{name: 'Positivo'}, {name: 'Negativo'}]" id="result" name="result"
-                    optionLabel="name" optionValue="name" placeholder="Selecciona una opción"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+
+                <p-dropdown [options]="filterResultOptions" id="result" name="result" optionLabel="name"
+                    optionValue="name" placeholder="Selecciona una opción" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters['result'].value" [hidden]="selectedOption !== 'result'">
                 </p-dropdown>
-                }
-                @case ("year") {
+
                 <input pInputText type="number" id="year" name="year" placeholder="Escriba el año"
-                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
-                }
-                @case("start_date"){
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters['year'].value"
+                    [hidden]="selectedOption !== 'year'" />
+
                 <p-calendar id="start_date" name="start_date" [iconDisplay]="'input'" [showIcon]="true"
                     inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
-                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
-                }
-                @case("end_date"){
+                    [(ngModel)]="filters['start_date'].value" [hidden]="selectedOption !== 'start_date'"></p-calendar>
+
                 <p-calendar id="end_date" name="end_date" [iconDisplay]="'input'" [showIcon]="true"
                     inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
-                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
-                }
-                }
+                    [(ngModel)]="filters['end_date'].value" [hidden]="selectedOption !== 'end_date'"></p-calendar>
+
             </div>
             <div class="col-md-1 p-0">
                 <p-button icon="pi pi-search" severity="info" styleClass="w-100 button-filters"
@@ -56,31 +50,38 @@
         </div>
     </form>
     }
+    @if(entities.length > 0){
     <div class="container-fluid p-0">
         <div class="d-flex mt-3">
             <!-- <p-button icon="pi pi-file" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
-                tooltipPosition="bottom" class="me-2"></p-button>
-            <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
-                tooltipPosition="bottom" class="me-2" severity="info"></p-button>
-            <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
-                tooltipPosition="bottom" class="" severity="warning"></p-button> -->
+                    tooltipPosition="bottom" class="me-2"></p-button>
+                <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
+                    tooltipPosition="bottom" class="me-2" severity="info"></p-button>
+                <p-button icon="pi pi-file-excel" [rounded]="true" [outlined]="true" size="small" pTooltip="CSV"
+                    tooltipPosition="bottom" class="" severity="warning"></p-button> -->
             <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success me-2" pTooltip="XLS"
                 tooltipPosition="bottom" (click)="xlsx()"></button>
             <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-button-warning" pTooltip="PDF"
                 tooltipPosition="bottom" (click)="pdf()"></button>
             <!-- <button type="button" pButton pRipple [icon]="showFilters ? 'pi pi-filter-slash' : 'pi pi-filter'" class="p-button-info ms-auto"
-                pTooltip="Selection Only" tooltipPosition="bottom"></button> -->
+                    pTooltip="Selection Only" tooltipPosition="bottom"></button> -->
         </div>
         <div class="row">
             @for(entity of entities; track entity){
             <div class="col-12 col-md-6 col-lg-4 mt-4">
                 <app-card-employee-file [cardTitle]="'Antidoping'" [id]="entity.id"
                     [image]="entity.employee.files.employee_image" [name]="entity.employee.full_name"
-                    [date]="entity.createdAt_formatted" class="clickeable"
-                    (click)="openDialog(entity, 'Folio: ' + entity.id.toString())"></app-card-employee-file>
+                    [date]="entity.createdAt_formatted"
+                    [openFunction]="openDialog.bind(this, entity, 'Folio: ' + entity.id.toString())"
+                    [deleteFunction]="delete.bind(this, entity.id)" class="clickeable"></app-card-employee-file>
             </div>
             }
         </div>
     </div>
+    }
+    @else{
+    <p class="roboto fs-small fst-italic text-muted text-center mt-5">Sin resultados de busqueda...</p>
+    }
+
 </div>
 <p-toast position="bottom-right" key="br"></p-toast>

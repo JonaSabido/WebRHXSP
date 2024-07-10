@@ -33,7 +33,7 @@ export class AuthService extends ApiService {
     localStorage.setItem(this.tokenName, tokenValue)
   }
 
-  public removeTokenOnStorage(tokenValue: string): void {
+  public removeTokenOnStorage(): void {
     localStorage.removeItem(this.tokenName)
   }
   

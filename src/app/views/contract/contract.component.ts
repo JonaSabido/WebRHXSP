@@ -38,6 +38,8 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
   defaultHeader: string = 'Nuevo Contrato';
 
   employees: EmployeeResponse[]
+  filterStatusOptions = [{ name: 'Vigente', value: 1 }, { name: 'Finalizado', value: 0 }]
+  filterTypeOptions = [{ name: 'Determinado', value: 1 }, { name: 'Indeterminado', value: 2 }]
 
   columnCellsXLSX: ColumnXSLX[] = [
     { column: 1, width: 20 },
@@ -219,8 +221,8 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
       { cell: 'A5', value: 'IC (Año):', bold: true },
       { cell: 'A6', value: 'IC (Fecha inicio):', bold: true },
       { cell: 'A7', value: 'IC (Fecha final):', bold: true },
-      { cell: 'B3', value: `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'B4', value: `${document.getElementById('type')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B3', value: `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`, bold: false },
+      { cell: 'B4', value: `${this.filterTypeOptions.find(x => x.value == this.filters['type'].value) ? this.filterTypeOptions.find(x => x.value == this.filters['type'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'B5', value: `${this.filters['start_year'].value ?? 'Sin seleccionar'}`, bold: false },
       { cell: 'B6', value: `${this.filters['start_start_date'].value ? this.dateService.dateFormatted(this.filters['start_start_date'].value) : 'Sin seleccionar'}`, bold: false },
       { cell: 'B7', value: `${this.filters['start_end_date'].value ? this.dateService.dateFormatted(this.filters['start_end_date'].value) : 'Sin seleccionar'}`, bold: false },
@@ -228,7 +230,7 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
       { cell: 'C4', value: 'FC (Año):', bold: true },
       { cell: 'C5', value: 'FC (Fecha inicio):', bold: true },
       { cell: 'C6', value: 'FC (Fecha final):', bold: true },
-      { cell: 'D3', value: `${document.getElementById('status')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'D3', value: `${this.filterStatusOptions.find(x => x.value == this.filters['status'].value) ? this.filterStatusOptions.find(x => x.value == this.filters['status'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'D4', value: `${this.filters['end_year'].value ?? 'Sin seleccionar'}`, bold: false },
       { cell: 'D5', value: `${this.filters['end_start_date'].value ? this.dateService.dateFormatted(this.filters['end_start_date'].value) : 'Sin seleccionar'}`, bold: false },
       { cell: 'D6', value: `${this.filters['end_end_date'].value ? this.dateService.dateFormatted(this.filters['end_end_date'].value) : 'Sin seleccionar'}`, bold: false },
@@ -263,15 +265,15 @@ export class ContractComponent extends Crud<ContractRequest, ContractResponse, C
 
     let dataFilters = [
       [
-        `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`,
-        `${document.getElementById('type')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`,
+        `${this.filterTypeOptions.find(x => x.value == this.filters['type'].value) ? this.filterTypeOptions.find(x => x.value == this.filters['type'].value)?.name : 'Sin seleccionar'}`,
         `${this.filters['start_year'].value ?? 'Sin seleccionar'}`,
         `${this.filters['start_start_date'].value ? this.dateService.dateFormatted(this.filters['start_start_date'].value) : 'Sin seleccionar'}`,
         `${this.filters['start_end_date'].value ? this.dateService.dateFormatted(this.filters['start_end_date'].value) : 'Sin seleccionar'}`,
         `${this.filters['end_year'].value ?? 'Sin seleccionar'}`,
         `${this.filters['end_start_date'].value ? this.dateService.dateFormatted(this.filters['end_start_date'].value) : 'Sin seleccionar'}`,
         `${this.filters['end_end_date'].value ? this.dateService.dateFormatted(this.filters['end_end_date'].value) : 'Sin seleccionar'}`,
-        `${document.getElementById('status')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.filterStatusOptions.find(x => x.value == this.filters['status'].value) ? this.filterStatusOptions.find(x => x.value == this.filters['status'].value)?.name : 'Sin seleccionar'}`,
       ]
     ]
 

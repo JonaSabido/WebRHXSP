@@ -6,7 +6,7 @@
             [filter]="true" filterBy="full_name" emptyFilterMessage="No se encontraron resultados" [showClear]="true"
             placeholder="Selecciona el empleado" styleClass="w-100 roboto" [(ngModel)]="select_id_employee"
             (ngModelChange)="onChangeEmployee()"
-            (onClick)="setDialogHeight( select_id_employee > 0 ? 'auto' : '400px' )" (onHide)="setDialogHeight('auto')"
+            (onClick)="setDialogHeight( select_id_employee > 0 ? 'auto' : '500px' )" (onHide)="setDialogHeight('auto')"
             [required]="true" #idEmployee="ngModel"></p-dropdown>
     </div>
     @if(select_id_employee > 0){
@@ -20,6 +20,7 @@
                         [filter]="true" filterBy="period" emptyFilterMessage="No se encontraron resultados"
                         optionLabel="period" optionValue="id" [showClear]="true" placeholder="Selecciona el periodo"
                         styleClass="w-100 roboto" [(ngModel)]="config.data.entity.id_vacation_time"
+                        (onClick)="setDialogHeight('800px')" (onHide)="setDialogHeight('auto')"
                         (ngModelChange)="onChangeVacationTime()" [required]="true"
                         #id_vacation_time="ngModel"></p-dropdown>
                 </div>

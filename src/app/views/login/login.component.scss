@@ -1,4 +1,5 @@
 #card-login {
+    box-shadow: 0px 0px 7px 1px var(--primary-color);
     border-radius: 15px;
     background: linear-gradient(180deg, var(--primary-color) 30%, rgba(33, 150, 243, 0) 40%);
     padding: 3px;
@@ -21,7 +22,7 @@
 /* Large screen */
 @media only screen and (min-width: 1025px) and (max-width: 1999px) {
     #card-login {
-        width: 40%;
+        width: 37%;
     }
 
     #content-login {

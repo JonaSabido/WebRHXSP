@@ -40,14 +40,14 @@
                 <label for="user" class="robotobold fs-small">¿Tiene hijos?</label>
                 <p-dropdown id="has_children" name="has_children"
                     [options]="[{name: 'Si', value: true}, {name: 'No', value: false}]" optionLabel="name"
-                    optionValue="value" [showClear]="true" placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
+                    optionValue="value" [showClear]="true" placeholder="Selecciona la opción" styleClass="w-100 roboto"
                     [(ngModel)]="config.data.entity.has_children"></p-dropdown>
             </div>
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">Talla de camisa</label>
                 <p-dropdown id="shirt_size" name="shirt_size"
                     [options]="[{name: 'CH'}, {name: 'M'},  {name: 'G'},  {name: 'EG'},  {name: '2EG'},  {name: '3EG'}]"
-                    optionLabel="name" optionValue="name" [showClear]="true" placeholder="Selecciona la ocpión"
+                    optionLabel="name" optionValue="name" [showClear]="true" placeholder="Selecciona la opción"
                     styleClass="w-100 roboto" [(ngModel)]="config.data.entity.shirt_size"></p-dropdown>
             </div>
             <div class="col-12 col-lg-4 mt-3">
@@ -107,7 +107,7 @@
             <div class="col-12 col-lg-4 mt-3">
                 <label for="user" class="robotobold fs-small">¿Dado de alta en SSP?</label>
                 <p-dropdown id="ssp" name="ssp" [options]="[{name: 'Si', value: true}, {name: 'No', value: false}]"
-                    optionLabel="name" optionValue="value" [showClear]="true" placeholder="Selecciona la ocpión"
+                    optionLabel="name" optionValue="value" [showClear]="true" placeholder="Selecciona la opción"
                     styleClass="w-100 roboto" [(ngModel)]="config.data.entity.ssp"></p-dropdown>
             </div>
         </div>
@@ -132,14 +132,14 @@
                 <label for="user" class="robotobold fs-small">Departamento</label>
                 <p-dropdown id="id_department" name="id_department" [options]="departments" optionLabel="name"
                     optionValue="id" [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados"
-                    [showClear]="true" placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
+                    [showClear]="true" placeholder="Selecciona la opción" styleClass="w-100 roboto"
                     [(ngModel)]="config.data.entity.id_department" [required]="true"></p-dropdown>
             </div>
             <div class="col-12 col-lg-3 mt-3">
                 <label for="user" class="robotobold fs-small">Trabajo</label>
                 <p-dropdown id="id_job" name="id_job" [options]="jobs" optionLabel="name" optionValue="id"
                     [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" [showClear]="true"
-                    placeholder="Selecciona la ocpión" styleClass="w-100 roboto" [(ngModel)]="config.data.entity.id_job"
+                    placeholder="Selecciona la opción" styleClass="w-100 roboto" [(ngModel)]="config.data.entity.id_job"
                     [required]="true"></p-dropdown>
             </div>
         </div>
@@ -149,7 +149,7 @@
                 <p-dropdown id="id_recruitment_method" name="id_recruitment_method" [options]="recruitmentMethods"
                     optionLabel="name" optionValue="id" [filter]="true" filterBy="name"
                     emptyFilterMessage="No se encontraron resultados" [showClear]="true"
-                    placeholder="Selecciona la ocpión" styleClass="w-100 roboto"
+                    placeholder="Selecciona la opción" styleClass="w-100 roboto"
                     [(ngModel)]="config.data.entity.id_recruitment_method" [required]="true"></p-dropdown>
             </div>
             <div class="col-12 col-lg-6 mt-3">

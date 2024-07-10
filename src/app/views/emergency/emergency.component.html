@@ -19,26 +19,22 @@
                 </p-dropdown>
             </div>
             <div class="col-md-9 p-0">
-                @switch (selectedOption) {
-                @case ("id_employee") {
                 <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name"
                     [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
                     placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
+                    [(ngModel)]="filters['id_employee'].value" [hidden]="selectedOption !== 'id_employee'">
                 </p-dropdown>
-                }
-                @case ("reference_name") {
+
                 <input pInputText type="text" id="reference_name" name="reference_name"
                     placeholder="Escriba el nombre del familiar" class="w-100 input-filters" severity="info"
-                    [(ngModel)]="filters[selectedOption].value" />
-                }
-                @case("type"){
-                <p-dropdown id="type" name="type"
-                    [options]="[{name: 'Padre'}, {name: 'Madre'}, {name:'Hermano/a'}, {name: 'Hijo/a'}, {name: 'Esposa/o'},{name: 'Suegro/a'}, {name: 'Compadre/Comadre'}, {name:'Pareja'},{name:'Primo/a'}, {name:'Sobrino/a'}, {name:'Tío/a'},{name:'Cuñado/a'}, {name:'Vecino/a'}, {name:'Conyugue'}, {name: 'Amigo/a'}]"
-                    optionLabel="name" optionValue="name" [showClear]="true" placeholder="Selecciona el parentesco"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value"></p-dropdown>
-                }
-                }
+                    [(ngModel)]="filters['reference_name'].value" [hidden]="selectedOption !== 'reference_name'" />
+
+                <p-dropdown id="type" name="type" [options]="typeOptions" optionLabel="name" [filter]="true"
+                    filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="name"
+                    [showClear]="true" placeholder="Selecciona el parentesco" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters['type'].value" [hidden]="selectedOption !== 'type'">
+                </p-dropdown>
+
             </div>
             <div class="col-md-1 p-0">
                 <p-button icon="pi pi-search" severity="info" styleClass="w-100 button-filters"
@@ -47,6 +43,7 @@
         </div>
     </form>
     }
+    @if(entities.length > 0){
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-5 custom-table">
@@ -99,5 +96,10 @@
             </tr>
         </ng-template>
     </p-table>
+    }
+    @else{
+    <p class="roboto fs-small fst-italic text-muted text-center mt-5">Sin resultados de busqueda...</p>
+    }
+
 </div>
 <p-toast position="bottom-right" key="br"></p-toast>

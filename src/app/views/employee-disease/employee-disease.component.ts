@@ -135,8 +135,8 @@ export class EmployeeDiseaseComponent extends Crud<EmployeeDiseaseRequest, Emplo
     const filterCellsXLSX: CellXSLX[] = [
       { cell: 'A3', value: 'Empleado:', bold: true },
       { cell: 'A4', value: 'Enfermedad:', bold: true },
-      { cell: 'B3', value: `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'B4', value: `${document.getElementById('id_disease')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B3', value: `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`, bold: false },
+      { cell: 'B4', value: `${this.diseases.find(x => x.id == this.filters['id_disease'].value) ? this.diseases.find(x => x.id == this.filters['id_disease'].value)?.name : 'Sin seleccionar'}`, bold: false },
     ]
 
     const rows: Array<any> = [];
@@ -165,8 +165,8 @@ export class EmployeeDiseaseComponent extends Crud<EmployeeDiseaseRequest, Emplo
 
     let dataFilters = [
       [
-        `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`,
-        `${document.getElementById('id_disease')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`,
+        `${this.diseases.find(x => x.id == this.filters['id_disease'].value) ? this.diseases.find(x => x.id == this.filters['id_disease'].value)?.name : 'Sin seleccionar'}`
       ]
     ]
 

@@ -150,18 +150,24 @@ export class EmployeeVacationChartComponent extends View implements OnInit {
     }
   }
 
-  onChangeEmployee() {
+  getVacationTimes() {
     this.vacationTimeService.all([{ label: 'Empleado', property: 'id_employee', value: this.select_id_employee }]).subscribe({
-      next: (response) => { this.vacationTimesByEmployee = response.data },
+      next: (response) => {
+        this.vacationTimesByEmployee = response.data
+        this.select_vacation_time = this.vacationTimesByEmployee.find(x => x.id == this.select_id_vacation_time) ?? this.vacationTimeRestore()
+      },
       error: (e) => { this.vacationTimesByEmployee = [] }
     }
     )
+  }
+  onChangeEmployee() {
+    this.getVacationTimes()
     this.select_id_vacation_time = 0;
     this.onChangeVacationTime()
   }
 
   onChangeVacationTime() {
-    this.select_vacation_time = this.vacationTimesByEmployee.find(x => x.id == this.select_id_vacation_time) ?? this.vacationTimeRestore()
+    this.getVacationTimes()
 
     if (this.select_vacation_time.available_days >= 6) {
       this.severityByAvailableDays = 'info'

@@ -117,11 +117,9 @@ export class DashboardComponent extends View {
     this.daysInMonth = days;
     const monthName = this.currentDate.toLocaleString('es-ES', { month: 'long' }).toUpperCase();
     this.titleCalendar = `${monthName} ${currentYear}`;
-    console.log(days)
   }
 
   checkIsEvent(date: string, type: number): boolean {
-    console.log(date)
     return this.eventMonths.some(x => x.date == date && x.type == type)
   }
 

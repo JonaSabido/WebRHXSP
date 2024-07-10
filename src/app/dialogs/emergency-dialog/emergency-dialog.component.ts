@@ -8,6 +8,7 @@ import { DialogCrud } from '../../../../shared/helpers/dialog';
 import { EmployeeResponse } from '../../interfaces/employee';
 import { FormsModule, NgForm } from '@angular/forms';
 import { EmployeeService } from '../../core/services/employee.service';
+import { typeOptions } from '../../interfaces/emergency';
 
 @Component({
   selector: 'app-emergency-dialog',
@@ -19,6 +20,8 @@ import { EmployeeService } from '../../core/services/employee.service';
 export class EmergencyDialogComponent extends DialogCrud {
   @ViewChild('form') form: NgForm = {} as NgForm;
   employees: EmployeeResponse[]
+  typeOptions = typeOptions
+  
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,

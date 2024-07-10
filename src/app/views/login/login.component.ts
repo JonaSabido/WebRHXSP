@@ -7,6 +7,7 @@ import { SidebarService } from '../../../../shared/helpers/services/sidebar.serv
 import { LoginRequest } from '../../interfaces/auth';
 import { AuthService } from '../../core/services/auth.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { JwtService } from '../../../../shared/services/jwt.service';
 
 @Component({
   selector: 'app-login',
@@ -19,11 +20,12 @@ export class LoginComponent {
   body: LoginRequest
   alertUnauthorized: boolean = false;
   loading: boolean = false;
-
+  returnUrl: string;
 
   constructor(
     private sidebarService: SidebarService,
     private authService: AuthService,
+    private jwtService: JwtService,
     public route: ActivatedRoute,
     public router: Router
   ) {
@@ -31,10 +33,14 @@ export class LoginComponent {
       email: '',
       password: ''
     }
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
   }
 
   ngOnInit() {
     this.sidebarService.setOnStorage(true)
+    if(this.jwtService.tokenIsValid()){
+      this.router.navigate([this.returnUrl]);
+    }
   }
 
   onSubmit(form: NgForm) {

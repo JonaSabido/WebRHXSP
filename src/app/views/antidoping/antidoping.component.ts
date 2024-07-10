@@ -38,6 +38,7 @@ export class AntidopingComponent extends Crud<AntidopingRequest, AntidopingRespo
   dialogConfig: DynamicDialogConfig;
   defaultHeader: string = 'Nuevo Antidoping';
   employees: EmployeeResponse[]
+  filterResultOptions = [{ name: 'Positivo' }, { name: 'Negativo' }]
 
   columnCellsXLSX: ColumnXSLX[] = [
     { column: 1, width: 15 },
@@ -180,8 +181,8 @@ export class AntidopingComponent extends Crud<AntidopingRequest, AntidopingRespo
       { cell: 'C3', value: 'Año:', bold: true },
       { cell: 'C4', value: 'Fecha Inicio:', bold: true },
       { cell: 'C5', value: 'Fecha Final:', bold: true },
-      { cell: 'B3', value: `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'B4', value: `${document.getElementById('result')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B3', value: `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`, bold: false },
+      { cell: 'B4', value: `${this.filterResultOptions.find(x => x.name == this.filters['result'].value) ? this.filterResultOptions.find(x => x.name == this.filters['result'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'D3', value: `${this.filters['year'].value ?? 'Sin seleccionar'}`, bold: false },
       { cell: 'D4', value: `${this.filters['start_date'].value ? this.dateService.dateFormatted(this.filters['start_date'].value) : 'Sin seleccionar'}`, bold: false },
       { cell: 'D5', value: `${this.filters['end_date'].value ? this.dateService.dateFormatted(this.filters['end_date'].value) : 'Sin seleccionar'}`, bold: false },
@@ -215,8 +216,8 @@ export class AntidopingComponent extends Crud<AntidopingRequest, AntidopingRespo
 
     let dataFilters = [
       [
-        `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`,
-        `${document.getElementById('result')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`,
+        `${this.filterResultOptions.find(x => x.name == this.filters['result'].value) ? this.filterResultOptions.find(x => x.name == this.filters['result'].value)?.name : 'Sin seleccionar'}`,
         `${this.filters['year'].value ?? 'Sin seleccionar'}`,
         `${this.filters['start_date'].value ? this.dateService.dateFormatted(this.filters['start_date'].value) : 'Sin seleccionar'}`,
         `${this.filters['end_date'].value ? this.dateService.dateFormatted(this.filters['end_date'].value) : 'Sin seleccionar'}`,

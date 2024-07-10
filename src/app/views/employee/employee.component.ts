@@ -45,6 +45,9 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
   departments: DepartmentResponse[]
   jobs: JobResponse[]
   recruitments: RecruitmentMethodResponse[]
+  filterFileOptions = [{ name: 'Si', value: 1 }, { name: 'No', value: 0 }]
+  filterStatusOptions = [{ name: 'Alta', value: 1 }, { name: 'Baja', value: 0 }]
+  filterGenderOptions = [{ name: 'Masculino', value: 'Male' }, { name: 'Femenino', value: 'Femenino' }, { name: 'Otro', value: 'Otro' }]
 
   columnCellsXLSX: ColumnXSLX[] = [
     { column: 1, width: 30 },
@@ -108,7 +111,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
     { name: '¿Alta en SSP?', filterButton: true },
     { name: 'Fecha Ingreso', filterButton: true },
     { name: 'Departamento', filterButton: true },
-    { name: 'Trabajo', filterButton: true },
+    { name: 'Puesto', filterButton: true },
     { name: 'Método de reclutamiento', filterButton: true },
     { name: 'Resultado de Antidoping', filterButton: true },
     { name: 'Comentarios de Antidoping', filterButton: true },
@@ -147,7 +150,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
     { header: '¿Alta en SSP?', dataKey: 'ssp' },
     { header: 'Fecha Ingreso', dataKey: 'entry_date' },
     { header: 'Departamento', dataKey: 'department' },
-    { header: 'Trabajo', dataKey: 'job' },
+    { header: 'Puesto', dataKey: 'job' },
     { header: 'Método de reclutamiento', dataKey: 'recruitment_method' },
     { header: 'Resultados Antidoping', dataKey: 'antidoping?.result' },
     { header: 'Comentarios Antidoping', dataKey: 'antidoping?.comments' },
@@ -166,7 +169,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
 
   filterColumnsPDF: Array<any> = [
     { header: 'Departamento' },
-    { header: 'Trabajo' },
+    { header: 'Puesto' },
     { header: 'Método de Reclutamiento' },
     { header: 'Código' },
     { header: 'Nombre' },
@@ -201,6 +204,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
       closeOnEscape: true,
       closable: true,
       width: '95%',
+      height: '700px',
       modal: true,
       breakpoints: {
         '960px': '75vw',
@@ -279,7 +283,7 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
       },
       id_job: {
         property: 'id_job',
-        label: 'Trabajo',
+        label: 'Puesto',
         value: null
       },
       id_recruitment_method: {
@@ -415,11 +419,11 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
   xlsx() {
     const filterCellsXLSX: CellXSLX[] = [
       { cell: 'A3', value: 'Departamento:', bold: true },
-      { cell: 'B3', value: `${document.getElementById('id_department')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'A4', value: 'Trabajo:', bold: true },
-      { cell: 'B4', value: `${document.getElementById('id_job')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B3', value: `${this.departments.find(x => x.id == this.filters['id_department'].value) ? this.departments.find(x => x.id == this.filters['id_department'].value)?.name : 'Sin seleccionar'}`, bold: false },
+      { cell: 'A4', value: 'Puesto:', bold: true },
+      { cell: 'B4', value: `${this.jobs.find(x => x.id == this.filters['id_job'].value) ? this.jobs.find(x => x.id == this.filters['id_job'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'A5', value: 'Método de Reclutamiento:', bold: true },
-      { cell: 'B5', value: `${document.getElementById('id_recruitment_method')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B5', value: `${this.recruitments.find(x => x.id == this.filters['id_recruitment_method'].value) ? this.recruitments.find(x => x.id == this.filters['id_recruitment_method'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'A6', value: 'Código:', bold: true },
       { cell: 'B6', value: `${this.filters['code'].value ?? 'Sin seleccionar'}`, bold: false },
       { cell: 'A7', value: 'Nombre:', bold: true },
@@ -433,39 +437,39 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
       { cell: 'C6', value: 'Ingreso (FF):', bold: true },
       { cell: 'D6', value: `${this.filters['entry_end_date'].value ? this.dateService.dateFormatted(this.filters['entry_end_date'].value) : 'Sin seleccionar'}`, bold: false },
       { cell: 'C7', value: 'Género:', bold: true },
-      { cell: 'D7', value: `${document.getElementById('gender')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'D7', value: `${this.filterGenderOptions.find(x => x.value == this.filters['gender'].value) ? this.filterGenderOptions.find(x => x.value == this.filters['gender'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'E3', value: 'SSP:', bold: true },
-      { cell: 'F3', value: `${document.getElementById('ssp')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'F3', value: `${this.filterFileOptions.find(x => x.value == this.filters['ssp'].value) ? this.filterFileOptions.find(x => x.value == this.filters['ssp'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'E4', value: 'Nacimiento (FI):', bold: true },
       { cell: 'F4', value: `${this.filters['natal_start_date'].value ? this.dateService.dateFormatted(this.filters['natal_start_date'].value) : 'Sin seleccionar'}`, bold: false },
       { cell: 'E5', value: 'Nacimiento (FF):', bold: true },
       { cell: 'F5', value: `${this.filters['natal_end_date'].value ? this.dateService.dateFormatted(this.filters['natal_end_date'].value) : 'Sin seleccionar'}`, bold: false },
       { cell: 'E6', value: 'Estatus:', bold: true },
-      { cell: 'F6', value: `${document.getElementById('status')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'F6', value: `${this.filterStatusOptions.find(x => x.value == this.filters['status'].value) ? this.filterStatusOptions.find(x => x.value == this.filters['status'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'E7', value: '¿Tiene Hijos?:', bold: true },
-      { cell: 'F7', value: `${document.getElementById('has_children')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'F7', value: `${this.filterFileOptions.find(x => x.value == this.filters['has_children'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_children'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'G3', value: 'Acta de nacimiento', bold: true },
-      { cell: 'H3', value: `${document.getElementById('has_birth_certificate')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'H3', value: `${this.filterFileOptions.find(x => x.value == this.filters['has_birth_certificate'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_birth_certificate'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'G4', value: 'Identificación Oficial', bold: true },
-      { cell: 'H4', value: `${document.getElementById('has_identification')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'H4', value: `${this.filterFileOptions.find(x => x.value == this.filters['has_identification'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_identification'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'G5', value: 'CURP', bold: true },
-      { cell: 'H5', value: `${document.getElementById('has_curp')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'H5', value: `${this.filterFileOptions.find(x => x.value == this.filters['has_curp'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_curp'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'G6', value: 'NSS', bold: true },
-      { cell: 'H6', value: `${document.getElementById('has_nss')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'H6', value: `${this.filterFileOptions.find(x => x.value == this.filters['has_nss'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_nss'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'G7', value: 'Comprobante domiciliario', bold: true },
-      { cell: 'H7', value: `${document.getElementById('has_address_certification')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'H7', value: `${this.filterFileOptions.find(x => x.value == this.filters['has_address_certification'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_address_certification'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'I3', value: 'Comprobante de estudios', bold: true },
-      { cell: 'J3', value: `${document.getElementById('has_studies_certification')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'J3', value: `${this.filterFileOptions.find(x => x.value == this.filters['has_studies_certification'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_studies_certification'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'I4', value: 'Comprobante fiscal', bold: true },
-      { cell: 'J4', value: `${document.getElementById('has_tax_certificate')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'J4', value: `${this.filterFileOptions.find(x => x.value == this.filters['has_tax_certificate'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_tax_certificate'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'I5', value: 'Cartilla militar', bold: true },
-      { cell: 'J5', value: `${document.getElementById('has_smn')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'J5', value: `${this.filterFileOptions.find(x => x.value == this.filters['has_smn'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_smn'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'I6', value: 'Antecedentes penales', bold: true },
-      { cell: 'J6', value: `${document.getElementById('has_no_criminal_certificate')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'J6', value: `${this.filterFileOptions.find(x => x.value == this.filters['has_no_criminal_certificate'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_no_criminal_certificate'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'I7', value: 'Certificado médico', bold: true },
-      { cell: 'J7', value: `${document.getElementById('has_health_certificate')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'J7', value: `${this.filterFileOptions.find(x => x.value == this.filters['has_health_certificate'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_health_certificate'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'K3', value: 'Seguro de vida', bold: true },
-      { cell: 'L3', value: `${document.getElementById('has_sv')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'L3', value: `${this.filterFileOptions.find(x => x.value == this.filters['has_sv'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_sv'].value)?.name : 'Sin seleccionar'}`, bold: false }
     ];
 
     const rows: Array<any> = [];
@@ -528,19 +532,19 @@ export class EmployeeComponent extends Crud<EmployeeRequest, EmployeeResponse, E
 
     let dataFilters = [
       [
-        `${document.getElementById('id_department')?.textContent ?? 'Sin seleccionar'}`,
-        `${document.getElementById('id_job')?.textContent ?? 'Sin seleccionar'}`,
-        `${document.getElementById('id_recruitment_method')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.departments.find(x => x.id == this.filters['id_department'].value) ? this.departments.find(x => x.id == this.filters['id_department'].value)?.name : 'Sin seleccionar'}`,
+        `${this.jobs.find(x => x.id == this.filters['id_job'].value) ? this.jobs.find(x => x.id == this.filters['id_job'].value)?.name : 'Sin seleccionar'}`,
+        `${this.recruitments.find(x => x.id == this.filters['id_recruitment_method'].value) ? this.recruitments.find(x => x.id == this.filters['id_recruitment_method'].value)?.name : 'Sin seleccionar'}`,
         `${this.filters['code'].value ?? 'Sin seleccionar'}`,
         `${this.filters['name'].value ?? 'Sin seleccionar'}`,
         `${this.filters['sure_name'].value ?? 'Sin seleccionar'}`,
         `${this.filters['last_name'].value ?? 'Sin seleccionar'}`,
         `${this.filters['entry_start_date'].value ? this.dateService.dateFormatted(this.filters['entry_start_date'].value) : 'Sin seleccionar'}`,
         `${this.filters['entry_end_date'].value ? this.dateService.dateFormatted(this.filters['entry_end_date'].value) : 'Sin seleccionar'}`,
-        `${document.getElementById('status')?.textContent ?? 'Sin seleccionar'}`,
-        `${document.getElementById('gender')?.textContent ?? 'Sin seleccionar'}`,
-        `${document.getElementById('ssp')?.textContent ?? 'Sin seleccionar'}`,
-        `${document.getElementById('has_children')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.filterStatusOptions.find(x => x.value == this.filters['status'].value) ? this.filterStatusOptions.find(x => x.value == this.filters['status'].value)?.name : 'Sin seleccionar'}`,
+        `${this.filterGenderOptions.find(x => x.value == this.filters['gender'].value) ? this.filterGenderOptions.find(x => x.value == this.filters['gender'].value)?.name : 'Sin seleccionar'}`,
+        `${this.filterFileOptions.find(x => x.value == this.filters['ssp'].value) ? this.filterFileOptions.find(x => x.value == this.filters['ssp'].value)?.name : 'Sin seleccionar'}`,
+        `${this.filterFileOptions.find(x => x.value == this.filters['has_children'].value) ? this.filterFileOptions.find(x => x.value == this.filters['has_children'].value)?.name : 'Sin seleccionar'}`,
         `${this.filters['natal_start_date'].value ? this.dateService.dateFormatted(this.filters['natal_start_date'].value) : 'Sin seleccionar'}`,
         `${this.filters['natal_end_date'].value ? this.dateService.dateFormatted(this.filters['natal_end_date'].value) : 'Sin seleccionar'}`
       ]

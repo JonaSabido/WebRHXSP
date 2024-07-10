@@ -50,17 +50,24 @@
         </div>
     </form>
     }
+    @if(entities.length > 0){
     <div class="container-fluid p-0">
         <div class="row">
             @for(entity of entities; track entity){
             <div class="col-12 col-md-6 col-lg-4 mt-4">
                 <app-card-employee-file [cardTitle]="'Tiempo extra'" [id]="entity.id"
                     [image]="entity.employee.files.employee_image" [name]="entity.employee.full_name"
-                    [date]="entity.date_formatted" class="clickeable"
-                    (click)="openDialog(entity, 'Folio: ' + entity.id.toString())"></app-card-employee-file>
+                    [date]="entity.date_formatted"
+                    [openFunction]="openDialog.bind(this, entity, 'Folio: ' + entity.id.toString())"
+                    [deleteFunction]="delete.bind(this, entity.id)" class="clickeable"></app-card-employee-file>
             </div>
             }
         </div>
     </div>
+    }
+    @else{
+    <p class="roboto fs-small fst-italic text-muted text-center mt-5">Sin resultados de busqueda...</p>
+    }
+
 </div>
 <p-toast position="bottom-right" key="br"></p-toast>

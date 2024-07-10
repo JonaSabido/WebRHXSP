@@ -17,4 +17,21 @@ export class CardEmployeeFileComponent {
   @Input() name: string = ''
   @Input() date: string = ''
   @Input() id: number = 0
+  @Input() deleteFunction: Function = () => {};
+  @Input() openFunction: Function = () => {};
+
+
+  constructor() {}
+
+  onOpen() {
+    if (this.openFunction) {
+      this.openFunction(this.id); // Llamar a la función deleteFunction con el ID como parámetro
+    }
+  }
+
+  onDelete() {
+    if (this.deleteFunction) {
+      this.deleteFunction(this.id); // Llamar a la función deleteFunction con el ID como parámetro
+    }
+  }
 }

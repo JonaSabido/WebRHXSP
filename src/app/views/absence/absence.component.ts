@@ -54,7 +54,7 @@ export class AbsenceComponent extends Crud<AbsenceRequest, AbsenceResponse, Abse
   tableColumnsXLSX: Array<any> = [
     { name: '#', filterButton: true, },
     { name: 'Empleado', filterButton: true },
-    { name: 'Trabajo', filterButton: true },
+    { name: 'Puesto', filterButton: true },
     { name: 'Fecha', filterButton: true },
     { name: 'Tipo de falta', filterButton: true },
   ]
@@ -69,7 +69,7 @@ export class AbsenceComponent extends Crud<AbsenceRequest, AbsenceResponse, Abse
       dataKey: 'employee.name',
     },
     {
-      header: 'Trabajo',
+      header: 'Puesto',
       dataKey: 'job',
     },
     {
@@ -90,7 +90,7 @@ export class AbsenceComponent extends Crud<AbsenceRequest, AbsenceResponse, Abse
       header: 'Tipo de falta',
     },
     {
-      header: 'Trabajo',
+      header: 'Puesto',
     },
     {
       header: 'Año',
@@ -160,7 +160,7 @@ export class AbsenceComponent extends Crud<AbsenceRequest, AbsenceResponse, Abse
       },
       id_job: {
         property: 'id_job',
-        label: 'Trabajo del empleado',
+        label: 'Puesto del empleado',
         value: null
       },
       year: {
@@ -192,13 +192,13 @@ export class AbsenceComponent extends Crud<AbsenceRequest, AbsenceResponse, Abse
     const filterCellsXLSX: CellXSLX[] = [
       { cell: 'A3', value: 'Empleado:', bold: true },
       { cell: 'A4', value: 'Tipo de falta:', bold: true },
-      { cell: 'A5', value: 'Trabajo:', bold: true },
+      { cell: 'A5', value: 'Puesto:', bold: true },
       { cell: 'C3', value: 'Año:', bold: true },
       { cell: 'C4', value: 'Fecha Inicio:', bold: true },
       { cell: 'C5', value: 'Fecha Final:', bold: true },
-      { cell: 'B3', value: `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'B4', value: `${document.getElementById('id_type_absence')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'B5', value: `${document.getElementById('id_job')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B3', value: `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`, bold: false },
+      { cell: 'B4', value: `${this.typeAbsences.find(x => x.id == this.filters['id_type_absence'].value) ? this.typeAbsences.find(x => x.id == this.filters['id_type_absence'].value)?.name : 'Sin seleccionar'}`, bold: false },
+      { cell: 'B5', value: `${this.jobs.find(x => x.id == this.filters['id_job'].value) ? this.jobs.find(x => x.id == this.filters['id_job'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'D3', value: `${this.filters['year'].value ?? 'Sin seleccionar'}`, bold: false },
       { cell: 'D4', value: `${this.filters['start_date'].value ? this.dateService.dateFormatted(this.filters['start_date'].value) : 'Sin seleccionar'}`, bold: false },
       { cell: 'D5', value: `${this.filters['end_date'].value ? this.dateService.dateFormatted(this.filters['end_date'].value) : 'Sin seleccionar'}`, bold: false },
@@ -232,9 +232,9 @@ export class AbsenceComponent extends Crud<AbsenceRequest, AbsenceResponse, Abse
 
     let dataFilters = [
       [
-        `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`,
-        `${document.getElementById('id_type_absence')?.textContent ?? 'Sin seleccionar'}`,
-        `${document.getElementById('id_job')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`,
+        `${this.typeAbsences.find(x => x.id == this.filters['id_type_absence'].value) ? this.typeAbsences.find(x => x.id == this.filters['id_type_absence'].value)?.name : 'Sin seleccionar'}`,
+        `${this.jobs.find(x => x.id == this.filters['id_job'].value) ? this.jobs.find(x => x.id == this.filters['id_job'].value)?.name : 'Sin seleccionar'}`,
         `${this.filters['year'].value ?? 'Sin seleccionar'}`,
         `${this.filters['start_date'].value ? this.dateService.dateFormatted(this.filters['start_date'].value) : 'Sin seleccionar'}`,
         `${this.filters['end_date'].value ? this.dateService.dateFormatted(this.filters['end_date'].value) : 'Sin seleccionar'}`,

@@ -19,55 +19,50 @@
                 </p-dropdown>
             </div>
             <div class="col-md-9 p-0">
-                @switch (selectedOption) {
-                @case ("status") {
-                <p-dropdown [options]="[{name: 'Vigente', value: 1}, {name: 'Finalizado', value: 0}, ]" id="status"
-                    name="status" optionLabel="name" optionValue="value" placeholder="Selecciona el status"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
-                </p-dropdown>
-                }
-                @case ("id_employee") {
                 <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name"
                     [filter]="true" filterBy="full_name" emptyFilterMessage="No se encontraron resultados"
                     optionValue="id" placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
+                    [(ngModel)]="filters['id_employee'].value" [hidden]="selectedOption !== 'id_employee'">
                 </p-dropdown>
-                }
-                @case ("type"){
-                <p-dropdown id="type" name="type"
-                    [options]="[{name: 'Determinado', value: 1}, {name: 'Indeterminado', value: 2}]" optionLabel="name"
-                    optionValue="value" [showClear]="true" placeholder="Selecciona el tipo" styleClass="w-100 roboto"
-                    [(ngModel)]="filters[selectedOption].value" #type="ngModel"></p-dropdown>
-                }
-                @case ("start_year") {
+
+                <p-dropdown [options]="filterStatusOptions" id="status" name="status" optionLabel="name"
+                    optionValue="value" placeholder="Selecciona el status" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters['status'].value" [hidden]="selectedOption !== 'status'">
+                </p-dropdown>
+
+                <p-dropdown id="type" name="type" [options]="filterTypeOptions" optionLabel="name" optionValue="value"
+                    [showClear]="true" placeholder="Selecciona el tipo" styleClass="w-100 roboto"
+                    [(ngModel)]="filters['type'].value" [hidden]="selectedOption !== 'type'">
+                </p-dropdown>
+
                 <input pInputText type="number" id="start_year" name="start_year" placeholder="Escriba el año de inicio"
-                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
-                }
-                @case("start_start_date"){
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters['start_year'].value"
+                    [hidden]="selectedOption !== 'start_year'" />
+
                 <p-calendar id="start_start_date" name="start_start_date" [iconDisplay]="'input'" [showIcon]="true"
                     inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
-                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
-                }
-                @case("start_end_date"){
+                    [(ngModel)]="filters['start_start_date'].value" [hidden]="selectedOption !== 'start_start_date'">
+                </p-calendar>
+
                 <p-calendar id="start_end_date" name="start_end_date" [iconDisplay]="'input'" [showIcon]="true"
                     inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
-                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
-                }
-                @case ("end_year") {
+                    [(ngModel)]="filters['start_end_date'].value" [hidden]="selectedOption !== 'start_end_date'">
+                </p-calendar>
+
                 <input pInputText type="number" id="end_year" name="end_year" placeholder="Escriba el año final"
-                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
-                }
-                @case("end_start_date"){
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters['end_year'].value"
+                    [hidden]="selectedOption !== 'end_year'" />
+
                 <p-calendar id="end_start_date" name="end_start_date" [iconDisplay]="'input'" [showIcon]="true"
                     inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
-                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
-                }
-                @case("end_end_date"){
+                    [(ngModel)]="filters['end_start_date'].value" [hidden]="selectedOption !== 'end_start_date'">
+                </p-calendar>
+
                 <p-calendar id="end_end_date" name="end_end_date" [iconDisplay]="'input'" [showIcon]="true"
                     inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
-                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
-                }
-                }
+                    [(ngModel)]="filters['end_end_date'].value" [hidden]="selectedOption !== 'end_end_date'">
+                </p-calendar>
+
             </div>
             <div class="col-md-1 p-0">
                 <p-button icon="pi pi-search" severity="info" styleClass="w-100 button-filters"
@@ -76,6 +71,7 @@
         </div>
     </form>
     }
+    @if(entities.length > 0){
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-5 custom-table">
@@ -134,5 +130,10 @@
             </tr>
         </ng-template>
     </p-table>
+    }
+    @else{
+    <p class="roboto fs-small fst-italic text-muted text-center mt-5">Sin resultados de busqueda...</p>
+    }
+
 </div>
 <p-toast position="bottom-right" key="br"></p-toast>

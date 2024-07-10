@@ -19,22 +19,18 @@
                 </p-dropdown>
             </div>
             <div class="col-md-9 p-0">
-                @switch (selectedOption) {
-                @case ("id_employee") {
                 <p-dropdown [options]="employees" id="id_employee" name="id_employee" optionLabel="full_name"
                     [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
                     placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
+                    [(ngModel)]="filters['id_employee'].value" [hidden]="selectedOption !== 'id_employee'">
                 </p-dropdown>
-                }
-                @case ("id_disease") {
+
                 <p-dropdown [options]="diseases" id="id_disease" name="id_disease" optionLabel="name" [filter]="true"
                     filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
                     placeholder="Selecciona la enfermedad" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
+                    [(ngModel)]="filters['id_disease'].value" [hidden]="selectedOption !== 'id_disease'">
                 </p-dropdown>
-                }
-                }
+
             </div>
             <div class="col-md-1 p-0">
                 <p-button icon="pi pi-search" severity="info" styleClass="w-100 button-filters"
@@ -43,6 +39,7 @@
         </div>
     </form>
     }
+    @if(entities.length > 0){
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-5 custom-table">
@@ -86,5 +83,10 @@
             </tr>
         </ng-template>
     </p-table>
+    }
+    @else{
+    <p class="roboto fs-small fst-italic text-muted text-center mt-5">Sin resultados de busqueda...</p>
+    }
+
 </div>
 <p-toast position="bottom-right" key="br"></p-toast>

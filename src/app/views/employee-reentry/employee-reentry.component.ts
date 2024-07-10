@@ -153,7 +153,7 @@ export class EmployeeReentryComponent extends Crud<EmployeeReentryRequest, Emplo
       { cell: 'A4', value: 'Año:', bold: true },
       { cell: 'A5', value: 'Fecha Inicio:', bold: true },
       { cell: 'A6', value: 'Fecha Final:', bold: true },
-      { cell: 'B3', value: `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B3', value: `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`, bold: false },
       { cell: 'B4', value: `${this.filters['year'].value ?? 'Sin seleccionar'}`, bold: false },
       { cell: 'B5', value: `${this.filters['start_date'].value ? this.dateService.dateFormatted(this.filters['start_date'].value) : 'Sin seleccionar'}`, bold: false },
       { cell: 'B6', value: `${this.filters['end_date'].value ? this.dateService.dateFormatted(this.filters['end_date'].value) : 'Sin seleccionar'}`, bold: false },
@@ -186,7 +186,7 @@ export class EmployeeReentryComponent extends Crud<EmployeeReentryRequest, Emplo
 
     let dataFilters = [
       [
-        `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`,
         `${this.filters['year'].value ?? 'Sin seleccionar'}`,
         `${this.filters['start_date'].value ? this.dateService.dateFormatted(this.filters['start_date'].value) : 'Sin seleccionar'}`,
         `${this.filters['end_date'].value ? this.dateService.dateFormatted(this.filters['end_date'].value) : 'Sin seleccionar'}`,

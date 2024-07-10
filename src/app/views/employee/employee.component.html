@@ -19,174 +19,146 @@
                 </p-dropdown>
             </div>
             <div class="col-md-9 p-0">
-                @switch (selectedOption) {
-
-                @case ("id_department") {
                 <p-dropdown [options]="departments" id="id_department" name="id_department" optionLabel="name"
                     [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
                     placeholder="Selecciona el departamento" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
+                    [(ngModel)]="filters['id_department'].value" [hidden]="selectedOption !== 'id_department'">
                 </p-dropdown>
-                }
-                @case ("id_job") {
+
                 <p-dropdown [options]="jobs" id="id_job" name="id_job" optionLabel="name" [filter]="true"
                     filterBy="name" emptyFilterMessage="No se encontraron resultados" optionValue="id"
                     placeholder="Selecciona el trabajo" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
+                    [(ngModel)]="filters['id_job'].value" [hidden]="selectedOption !== 'id_job'">
                 </p-dropdown>
-                }
-                @case ("id_recruitment_method") {
+
                 <p-dropdown [options]="recruitments" id="id_recruitment_method" name="id_recruitment_method"
                     optionLabel="name" [filter]="true" filterBy="name" emptyFilterMessage="No se encontraron resultados"
                     optionValue="id" placeholder="Selecciona el método de reclutamiento"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                    styleClass="w-100 input-filters" [(ngModel)]="filters['id_recruitment_method'].value"
+                    [hidden]="selectedOption !== 'id_recruitment_method'">
                 </p-dropdown>
-                }
-                @case ("code") {
+
                 <input pInputText type="text" id="code" name="code" placeholder="Escriba el código"
-                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
-                }
-                @case ("name") {
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters['code'].value"
+                    [hidden]="selectedOption !== 'code'" />
+
                 <input pInputText type="text" id="name" name="name" placeholder="Escriba el nombre"
-                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
-                }
-                @case ("sure_name") {
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters['name'].value"
+                    [hidden]="selectedOption !== 'name'" />
+
                 <input pInputText type="text" id="sure_name" name="sure_name" placeholder="Escriba el apellido paterno"
-                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
-                }
-                @case ("last_name") {
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters['sure_name'].value"
+                    [hidden]="selectedOption !== 'sure_name'" />
+
                 <input pInputText type="text" id="last_name" name="last_name" placeholder="Escriba el apellido materno"
-                    class="w-100 input-filters" severity="info" [(ngModel)]="filters[selectedOption].value" />
-                }
-                @case("entry_start_date"){
+                    class="w-100 input-filters" severity="info" [(ngModel)]="filters['last_name'].value"
+                    [hidden]="selectedOption !== 'last_name'" />
+
                 <p-calendar id="entry_start_date" name="entry_start_date" [iconDisplay]="'input'" [showIcon]="true"
                     inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
-                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
-                }
-                @case("entry_end_date"){
+                    [(ngModel)]="filters['entry_start_date'].value"
+                    [hidden]="selectedOption !== 'entry_start_date'"></p-calendar>
+
                 <p-calendar id="entry_end_date" name="entry_end_date" [iconDisplay]="'input'" [showIcon]="true"
                     inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
-                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
-                }
-                @case ("status") {
-                <p-dropdown [options]="[{name: 'Alta', value: 1}, {name: 'Baja', value: 0}, ]" id="status" name="status"
-                    optionLabel="name" optionValue="value" placeholder="Selecciona el status"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                    [(ngModel)]="filters['entry_end_date'].value"
+                    [hidden]="selectedOption !== 'entry_end_date'"></p-calendar>
+
+                <p-dropdown [options]="filterStatusOptions" id="status" name="status" optionLabel="name"
+                    optionValue="value" placeholder="Selecciona el status" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters['status'].value" [hidden]="selectedOption !== 'status'">
                 </p-dropdown>
-                }
-                @case ("gender") {
-                <p-dropdown
-                    [options]="[{name: 'Masculino', value: 'Male'}, {name: 'Femenino', value: 'Femenino'}, {name: 'Otro', value: 'Otro'}]"
-                    id="gender" name="gender" optionLabel="name" optionValue="value" placeholder="Selecciona el género"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+
+                <p-dropdown [options]="filterGenderOptions" id="gender" name="gender" optionLabel="name"
+                    optionValue="value" placeholder="Selecciona el género" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters['gender'].value" [hidden]="selectedOption !== 'gender'">
                 </p-dropdown>
-                }
-                @case ("ssp") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="ssp" name="ssp"
-                    optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+
+                <p-dropdown [options]="filterFileOptions" id="ssp" name="ssp" optionLabel="name" optionValue="value"
+                    placeholder="Selecciona una opción" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters['ssp'].value" [hidden]="selectedOption !== 'ssp'">
                 </p-dropdown>
-                }
-                @case ("has_children") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_children"
-                    name="has_children" optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+
+                <p-dropdown [options]="filterFileOptions" id="has_children" name="has_children" optionLabel="name"
+                    optionValue="value" placeholder="Selecciona una opción" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters['has_children'].value" [hidden]="selectedOption !== 'has_children'">
                 </p-dropdown>
-                }
-                @case("natal_start_date"){
+
                 <p-calendar id="natal_start_date" name="natal_start_date" [iconDisplay]="'input'" [showIcon]="true"
                     inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
-                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
-                }
-                @case("natal_end_date"){
+                    [(ngModel)]="filters['natal_start_date'].value"
+                    [hidden]="selectedOption !== 'natal_start_date'"></p-calendar>
+
                 <p-calendar id="natal_end_date" name="natal_end_date" [iconDisplay]="'input'" [showIcon]="true"
                     inputStyleClass="w-100 input-filters" styleClass="w-100" [touchUI]="true"
-                    [(ngModel)]="filters[selectedOption].value"></p-calendar>
-                }
-                @case("has_birth_certificate") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_birth_certificate"
-                    name="has_birth_certificate" optionLabel="name" optionValue="value"
-                    placeholder="Selecciona una opción" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
-                </p-dropdown>
-                }
+                    [(ngModel)]="filters['natal_end_date'].value"
+                    [hidden]="selectedOption !== 'natal_end_date'"></p-calendar>
 
-                @case("has_identification") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_identification"
-                    name="has_identification" optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
-                </p-dropdown>
-                }
-
-                @case("has_curp") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_curp" name="has_curp"
+                <p-dropdown [options]="filterFileOptions" id="has_birth_certificate" name="has_birth_certificate"
                     optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                    styleClass="w-100 input-filters" [(ngModel)]="filters['has_birth_certificate'].value"
+                    [hidden]="selectedOption !== 'has_birth_certificate'">
                 </p-dropdown>
-                }
 
-                @case("has_nss") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_nss" name="has_nss"
+                <p-dropdown [options]="filterFileOptions" id="has_identification" name="has_identification"
                     optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                    styleClass="w-100 input-filters" [(ngModel)]="filters['has_identification'].value"
+                    [hidden]="selectedOption !== 'has_identification'">
                 </p-dropdown>
-                }
 
-                @case("has_address_certification") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_address_certification"
+                <p-dropdown [options]="filterFileOptions" id="has_curp" name="has_curp" optionLabel="name"
+                    optionValue="value" placeholder="Selecciona una opción" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters['has_curp'].value" [hidden]="selectedOption !== 'has_curp'">
+                </p-dropdown>
+
+                <p-dropdown [options]="filterFileOptions" id="has_nss" name="has_nss" optionLabel="name"
+                    optionValue="value" placeholder="Selecciona una opción" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters['has_nss'].value" [hidden]="selectedOption !== 'has_nss'">
+                </p-dropdown>
+
+                <p-dropdown [options]="filterFileOptions" id="has_address_certification"
                     name="has_address_certification" optionLabel="name" optionValue="value"
                     placeholder="Selecciona una opción" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
+                    [(ngModel)]="filters['has_address_certification'].value"
+                    [hidden]="selectedOption !== 'has_address_certification'">
                 </p-dropdown>
-                }
 
-                @case("has_studies_certification") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_studies_certification"
+                <p-dropdown [options]="filterFileOptions" id="has_studies_certification"
                     name="has_studies_certification" optionLabel="name" optionValue="value"
                     placeholder="Selecciona una opción" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
+                    [(ngModel)]="filters['has_studies_certification'].value"
+                    [hidden]="selectedOption !== 'has_studies_certification'">
                 </p-dropdown>
-                }
 
-                @case("has_tax_certificate") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_tax_certificate"
-                    name="has_tax_certificate" optionLabel="name" optionValue="value"
-                    placeholder="Selecciona una opción" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
-                </p-dropdown>
-                }
-
-                @case("has_smn") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_smn" name="has_smn"
+                <p-dropdown [options]="filterFileOptions" id="has_tax_certificate" name="has_tax_certificate"
                     optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                    styleClass="w-100 input-filters" [(ngModel)]="filters['has_tax_certificate'].value"
+                    [hidden]="selectedOption !== 'has_tax_certificate'">
                 </p-dropdown>
-                }
 
-                @case("has_no_criminal_certificate") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]"
-                    id="has_no_criminal_certificate" name="has_no_criminal_certificate" optionLabel="name"
+                <p-dropdown [options]="filterFileOptions" id="has_smn" name="has_smn" optionLabel="name"
                     optionValue="value" placeholder="Selecciona una opción" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
+                    [(ngModel)]="filters['has_smn'].value" [hidden]="selectedOption !== 'has_smn'">
                 </p-dropdown>
-                }
 
-                @case("has_health_certificate") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_health_certificate"
-                    name="has_health_certificate" optionLabel="name" optionValue="value"
+                <p-dropdown [options]="filterFileOptions" id="has_no_criminal_certificate"
+                    name="has_no_criminal_certificate" optionLabel="name" optionValue="value"
                     placeholder="Selecciona una opción" styleClass="w-100 input-filters"
-                    [(ngModel)]="filters[selectedOption].value">
+                    [(ngModel)]="filters['has_no_criminal_certificate'].value"
+                    [hidden]="selectedOption !== 'has_no_criminal_certificate'">
                 </p-dropdown>
-                }
 
-                @case("has_sv") {
-                <p-dropdown [options]="[{name: 'Si', value: 1}, {name: 'No', value: 0}]" id="has_sv" name="has_sv"
+                <p-dropdown [options]="filterFileOptions" id="has_health_certificate" name="has_health_certificate"
                     optionLabel="name" optionValue="value" placeholder="Selecciona una opción"
-                    styleClass="w-100 input-filters" [(ngModel)]="filters[selectedOption].value">
+                    styleClass="w-100 input-filters" [(ngModel)]="filters['has_health_certificate'].value"
+                    [hidden]="selectedOption !== 'has_health_certificate'">
                 </p-dropdown>
-                }
 
-                }
+                <p-dropdown [options]="filterFileOptions" id="has_sv" name="has_sv" optionLabel="name"
+                    optionValue="value" placeholder="Selecciona una opción" styleClass="w-100 input-filters"
+                    [(ngModel)]="filters['has_sv'].value" [hidden]="selectedOption !== 'has_sv'">
+                </p-dropdown>
+
             </div>
             <div class="col-md-1 p-0">
                 <p-button icon="pi pi-search" severity="info" styleClass="w-100 button-filters"
@@ -195,6 +167,8 @@
         </div>
     </form>
     }
+
+    @if(entities.length > 0){
     <p-table [value]="entities" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [scrollable]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         styleClass="p-datatable-striped mt-5 custom-table">
@@ -263,5 +237,10 @@
             </tr>
         </ng-template>
     </p-table>
+    }
+    @else{
+    <p class="roboto fs-small fst-italic text-muted text-center mt-5">Sin resultados de busqueda...</p>
+    }
+
 </div>
 <p-toast position="bottom-right" key="br"></p-toast>

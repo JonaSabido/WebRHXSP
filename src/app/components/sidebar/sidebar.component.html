@@ -1,5 +1,5 @@
-<p-sidebar #sidebarRef  [blockScroll]="true" [modal]="isMobile"
-    [dismissible]="true" [visible]="sidebarService.sidebarVisible" styleClass="bg-secondary-color" [closeOnEscape]="false"
+<p-sidebar #sidebarRef [blockScroll]="true" [modal]="isMobile" [dismissible]="true"
+    [visible]="sidebarService.sidebarVisible" styleClass="bg-secondary-color" [closeOnEscape]="false"
     [style]="{width: '280px'}" (onHide)="sidebarService.switchSidebarVisible()">
     <ng-template pTemplate="header">
         <img class="img-fluid" src="assets/images/logo-negativo-small.png">
@@ -14,7 +14,7 @@
                         class="p-2 d-flex align-items-center justify-content-between p-ripple clickeable"
                         (click)="changeVisibilityToModuleItem(sidebarModuleItem)">
                         <span class="text-primary-color roboto-bold fs-small">{{sidebarModuleItem.title}}</span>
-                        <i class="pi pi-chevron-down"></i>
+                        <i class="pi fs-small" [ngClass]="{'pi-chevron-down': sidebarModuleItem.visible, 'pi-chevron-right': !sidebarModuleItem.visible}"></i>
                     </div>
                     @if(sidebarModuleItem.visible){
                     <ul class="list-none p-0 m-0 overflow-hidden">
@@ -34,10 +34,13 @@
             }
         </div>
     </ng-template>
-    <!-- <ng-template pTemplate="footer">
-        <hr class="border-top-1 border-none surface-border" />
-    }
-    </ng-template> -->
+    <ng-template pTemplate="footer">
+        <hr>
+        <a pRipple class="d-flex align-items-center p-3 sidebar-item p-ripple" (click)="logOut()">
+            <i class="pi pi-sign-out fs-small fw-bold me-3"></i>
+            <span>Cerrar sesión</span>
+        </a>
+    </ng-template>
 </p-sidebar>
 <div id="container-button" class="d-flex align-items-center">
     <p-button (click)="sidebarService.switchSidebarVisible()" icon="pi pi-align-justify" styleClass="ms-2" [text]="true"

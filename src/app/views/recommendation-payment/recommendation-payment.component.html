@@ -20,9 +20,10 @@
                 <div class="col-md-9 p-0">
                     @switch (selectedOption) {
                     @case ("id_paying_employee") {
-                    <p-dropdown [options]="employees" id="id_paying_employee" name="id_paying_employee" optionLabel="full_name"
-                        [filter]="true" filterBy="full_name" emptyFilterMessage="No se encontraron resultados"
-                        optionValue="id" placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
+                    <p-dropdown [options]="employees" id="id_paying_employee" name="id_paying_employee"
+                        optionLabel="full_name" [filter]="true" filterBy="full_name"
+                        emptyFilterMessage="No se encontraron resultados" optionValue="id"
+                        placeholder="Selecciona el empleado" styleClass="w-100 input-filters"
                         [(ngModel)]="filters[selectedOption].value">
                     </p-dropdown>
                     }
@@ -53,6 +54,7 @@
             </div>
         </form>
         }
+        @if(entities.length > 0){
         <div class="row">
             @for(entity of entities; track entity){
             <div class="col-12 col-md-6 col-lg-4 mt-4">
@@ -60,5 +62,10 @@
             </div>
             }
         </div>
+        }
+        @else{
+        <p class="roboto fs-small fst-italic text-muted text-center mt-5">Sin resultados de busqueda...</p>
+        }
+
     </div>
 </div>

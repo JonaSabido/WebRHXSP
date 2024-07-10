@@ -31,7 +31,7 @@ export class JobComponent extends Crud<JobRequest, JobResponse, JobQueryFilter> 
   prevLinks = ['Home', 'Empresa']
   activeLink = 'Puestos'
   dialogConfig: DynamicDialogConfig;
-  defaultHeader: string = 'Nuevo Trabajo';
+  defaultHeader: string = 'Nuevo Puesto';
 
   areas: AreaResponse[];
 

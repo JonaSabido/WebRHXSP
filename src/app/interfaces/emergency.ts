@@ -22,3 +22,5 @@ export interface EmergencyQueryFilter {
     reference_name: ObjectFilter<EmergencyQueryFilter>
     type: ObjectFilter<EmergencyQueryFilter>
 }
+
+export const typeOptions = [{ name: 'Padre' }, { name: 'Madre' }, { name: 'Hermano/a' }, { name: 'Hijo/a' }, { name: 'Esposa/o' }, { name: 'Suegro/a' }, { name: 'Compadre/Comadre' }, { name: 'Pareja' }, { name: 'Primo/a' }, { name: 'Tío/a' }, { name: 'Sobrino/a' }, { name: 'Cuñado/a' }, { name: 'Vecino/a' }, { name: 'Conyugue' }, { name: 'Amigo/a' }]

@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [AvatarModule, BadgeModule, CommonModule],
+  imports: [AvatarModule, BadgeModule, CommonModule, ],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss'
 })
@@ -50,7 +50,7 @@ export class TopbarComponent {
   changeStatus(entity: NotificationUserResponse) {
     this.notificationService.changeStatus(entity.id, true).subscribe({
       next: (response) => {
-        entity.status = true
+        entity.status = !entity.status
         this.unreadNotifications = this.notifications.filter(x => x.status == false).length
       }
     })

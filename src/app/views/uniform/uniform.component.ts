@@ -170,8 +170,8 @@ export class UniformComponent extends Crud<UniformRequest, UniformResponse, Unif
       { cell: 'C3', value: 'Año:', bold: true },
       { cell: 'C4', value: 'Fecha Inicio:', bold: true },
       { cell: 'C5', value: 'Fecha Final:', bold: true },
-      { cell: 'B3', value: `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'B4', value: `${document.getElementById('type')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B3', value: `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`, bold: false },
+      { cell: 'B4', value: `${this.types.find(x => x.value == this.filters['type'].value) ? this.types.find(x => x.value == this.filters['type'].value)?.name : 'Sin seleccionar'}`, bold: false },
       { cell: 'D3', value: `${this.filters['year'].value ?? 'Sin seleccionar'}`, bold: false },
       { cell: 'D4', value: `${this.filters['start_date'].value ? this.dateService.dateFormatted(this.filters['start_date'].value) : 'Sin seleccionar'}`, bold: false },
       { cell: 'D5', value: `${this.filters['end_date'].value ? this.dateService.dateFormatted(this.filters['end_date'].value) : 'Sin seleccionar'}`, bold: false },
@@ -204,8 +204,8 @@ export class UniformComponent extends Crud<UniformRequest, UniformResponse, Unif
 
     let dataFilters = [
       [
-        `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`,
-        `${document.getElementById('type')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`,
+        `${this.types.find(x => x.value == this.filters['type'].value) ? this.types.find(x => x.value == this.filters['type'].value)?.name : 'Sin seleccionar'}`,
         `${this.filters['year'].value ?? 'Sin seleccionar'}`,
         `${this.filters['start_date'].value ? this.dateService.dateFormatted(this.filters['start_date'].value) : 'Sin seleccionar'}`,
         `${this.filters['end_date'].value ? this.dateService.dateFormatted(this.filters['end_date'].value) : 'Sin seleccionar'}`,

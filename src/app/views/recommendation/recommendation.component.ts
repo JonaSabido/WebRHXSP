@@ -145,8 +145,8 @@ export class RecommendationComponent extends Crud<RecommendationRequest, Recomme
       { cell: 'A3', value: 'Empleado que Recomendó:', bold: true },
       { cell: 'A4', value: 'Empleado Recomendado:', bold: true },
       { cell: 'A5', value: 'Monto:', bold: true },
-      { cell: 'B3', value: `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
-      { cell: 'B4', value: `${document.getElementById('id_recommended_employee')?.textContent ?? 'Sin seleccionar'}`, bold: false },
+      { cell: 'B3', value: `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`, bold: false },
+      { cell: 'B4', value: `${this.employees.find(x => x.id == this.filters['id_recommended_employee'].value) ? this.employees.find(x => x.id == this.filters['id_recommended_employee'].value)?.full_name : 'Sin seleccionar'}`, bold: false },
       { cell: 'B5', value: `${this.filters['amount'].value ?? 'Sin seleccionar'}`, bold: false },
 
     ]
@@ -179,8 +179,8 @@ export class RecommendationComponent extends Crud<RecommendationRequest, Recomme
 
     let dataFilters = [
       [
-        `${document.getElementById('id_employee')?.textContent ?? 'Sin seleccionar'}`,
-        `${document.getElementById('id_recommended_employee')?.textContent ?? 'Sin seleccionar'}`,
+        `${this.employees.find(x => x.id == this.filters['id_employee'].value) ? this.employees.find(x => x.id == this.filters['id_employee'].value)?.full_name : 'Sin seleccionar'}`,
+        `${this.employees.find(x => x.id == this.filters['id_recommended_employee'].value) ? this.employees.find(x => x.id == this.filters['id_recommended_employee'].value)?.full_name : 'Sin seleccionar'}`,
         `${this.filters['amount'].value ?? 'Sin seleccionar'}`
       ]
     ]
